@@ -4,78 +4,141 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The Teaching Shelf — board games, explained properly</title>
-<meta name="description" content="Long-form briefings that teach a board game to someone who has never played it — one game per page, plain English, no rulebook required.">
+<meta name="description" content="Pick a game off the shelf and learn it properly — long-form briefings that teach a board game to someone who has never opened the box.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎲</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;0,600;1,400&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Spectral:ital,wght@0,300;0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/library.css">
 </head>
 <body>
+
+<!-- icon set -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-players" viewBox="0 0 24 24">
+    <circle cx="9" cy="8" r="3.2"/><path d="M3.5 19c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/>
+    <circle cx="17.5" cy="9" r="2.4"/><path d="M16 14.4c2.6-.4 4.5 1.6 4.5 4.6"/>
+  </symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.6"/><path d="M12 7.2V12l3.2 2"/></symbol>
+  <symbol id="i-pages" viewBox="0 0 24 24"><path d="M4 5.4h6.2c1 0 1.8.8 1.8 1.8v11.4c0-1-.8-1.8-1.8-1.8H4zM20 5.4h-6.2c-1 0-1.8.8-1.8 1.8v11.4c0-1 .8-1.8 1.8-1.8H20z"/></symbol>
+  <symbol id="i-read" viewBox="0 0 24 24"><path d="M2.6 12S6 5.6 12 5.6 21.4 12 21.4 12 18 18.4 12 18.4 2.6 12 2.6 12Z"/><circle cx="12" cy="12" r="2.8"/></symbol>
+  <symbol id="i-hand" viewBox="0 0 24 24"><path d="M5 20V9.5a1.8 1.8 0 0 1 3.6 0V4.6a1.8 1.8 0 0 1 3.6 0v4.9m0 0V5.6a1.8 1.8 0 0 1 3.6 0v5.2m0-1.6a1.8 1.8 0 0 1 3.6 0V15c0 3.3-2.7 6-6 6H9.4"/></symbol>
+  <symbol id="i-lightbulb" viewBox="0 0 24 24"><path d="M9.4 18h5.2M10 21h4M12 3a6 6 0 0 0-3.6 10.8c.7.6 1.1 1.4 1.1 2.2h5c0-.8.4-1.6 1.1-2.2A6 6 0 0 0 12 3Z"/></symbol>
+  <symbol id="i-table" viewBox="0 0 24 24"><path d="M3 9h18M4.5 9V5.4h15V9M6.5 9v10M17.5 9v10"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5.5v13M5.5 12h13"/></symbol>
+  <symbol id="i-meeple" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+    <path d="M12 2.4a3 3 0 0 1 2.5 4.7c1.9.5 3.3 1.7 4.6 3.2.9 1 .3 2.4-1 2.4h-2.3l.9 6.6c.1.9-.6 1.7-1.5 1.7H8.8c-.9 0-1.6-.8-1.5-1.7l.9-6.6H5.9c-1.3 0-1.9-1.4-1-2.4C6.2 7.6 7.6 6.4 9.5 6a3 3 0 0 1 2.5-4.7Z"/>
+  </symbol>
+  <!-- game emblems -->
+  <symbol id="e-arkham" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round">
+    <path d="M12 2.8 14.6 9l6.6.4-5.1 4.2 1.7 6.4L12 16.5 6.2 20l1.7-6.4L2.8 9.4 9.4 9Z"/>
+    <circle cx="12" cy="11.6" r="1.5" fill="currentColor" stroke="none"/>
+  </symbol>
+  <symbol id="e-island" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+    <path d="M12 3.4c1.8 2.4 3 4.3 3 6a3 3 0 0 1-6 0c0-1.7 1.2-3.6 3-6Z"/>
+    <path d="M2.6 15.4c1.6 0 1.6 1.4 3.1 1.4s1.6-1.4 3.2-1.4 1.6 1.4 3.1 1.4 1.6-1.4 3.2-1.4 1.6 1.4 3.1 1.4 1.6-1.4 3.1-1.4"/>
+    <path d="M2.6 19.4c1.6 0 1.6 1.4 3.1 1.4s1.6-1.4 3.2-1.4 1.6 1.4 3.1 1.4 1.6-1.4 3.2-1.4 1.6 1.4 3.1 1.4 1.6-1.4 3.1-1.4"/>
+  </symbol>
+  <symbol id="e-troyes" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round">
+    <path d="M12 2.2 15.8 8v13H8.2V8Z"/><path d="M8.2 12H4.4v9h3.8M15.8 12h3.8v9h-3.8"/>
+    <path d="M12 12v4"/>
+  </symbol>
+</svg>
+
 <div class="wrap">
 
 <header class="masthead">
-  <div class="eyebrow">Board games, explained properly</div>
-  <h1>The Teaching Shelf<em>one game, one briefing</em></h1>
-  <div class="rule"></div>
-  <p>Rulebooks tell you what the rules <em>are</em>. These pages tell you what the game <em>is</em> — why each rule exists, what it feels like at the table, and which instincts will lose you your first game. Written for someone who has never opened the box.</p>
+  <div class="dice-row" aria-hidden="true">
+    <span class="die"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="2.6"/></svg></span>
+    <span class="die"><svg viewBox="0 0 24 24"><circle cx="7.5" cy="7.5" r="2.4"/><circle cx="16.5" cy="16.5" r="2.4"/></svg></span>
+    <span class="die"><svg viewBox="0 0 24 24"><circle cx="7.5" cy="7.5" r="2.2"/><circle cx="12" cy="12" r="2.2"/><circle cx="16.5" cy="16.5" r="2.2"/></svg></span>
+  </div>
+  <h1>The Teaching <span>Shelf</span></h1>
+  <p class="tagline">Pick one up · learn it properly · go play</p>
+  <p class="blurb">Rulebooks tell you what the rules <em>are</em>. These pages tell you what the game <em>is</em> — why each rule exists, what it feels like at the table, and which instincts will lose you your first game.</p>
+
+  <div class="howto">
+    <div><svg class="icon"><use href="#i-hand"/></svg><span>Read it in <b>one sitting</b></span></div>
+    <div><svg class="icon"><use href="#i-lightbulb"/></svg><span>Every rule gets a <b>why</b></span></div>
+    <div><svg class="icon"><use href="#i-table"/></svg><span>Then <b>teach the table</b></span></div>
+  </div>
 </header>
 
-<div class="shelf-label">On the shelf</div>
-
-<div class="shelf">
-
-  <a class="card t-arkham" href="games/arkham-horror-lcg.html">
-    <span class="tab">Co-op · campaign</span><span class="status">Complete</span>
-    <h2>Arkham Horror: The Card Game</h2>
-    <p class="deck">Friends versus the dark. A deck you build, a deck that hates you, and a bag full of bad luck.</p>
-    <div class="meta">
-      <span><b>1–4</b> players</span>
-      <span><b>~2 hrs</b> per scenario</span>
-      <span><b>15 of 15</b> points</span>
-      <span><b>~25 min</b> read</span>
-    </div>
-    <span class="go">Read the briefing →</span>
-  </a>
-
-  <a class="card t-island" href="games/spirit-island.html">
-    <span class="tab">Co-op · heavy</span><span class="status">Complete</span>
-    <h2>Spirit Island</h2>
-    <p class="deck">You are not the settler. You are the thing the map warns them about.</p>
-    <div class="meta">
-      <span><b>1–4</b> players</span>
-      <span><b>~90 min</b></span>
-      <span><b>12 of 12</b> pieces</span>
-      <span><b>~20 min</b> read</span>
-    </div>
-    <span class="go">Read the field guide →</span>
-  </a>
-
-  <a class="card t-troyes" href="games/troyes.html">
-    <span class="tab">Competitive · dice</span><span class="status">Complete</span>
-    <h2>Troyes</h2>
-    <p class="deck">Your dice sit in the open, and anyone at the table can buy them out from under you.</p>
-    <div class="meta">
-      <span><b>2–4</b> players</span>
-      <span><b>~90 min</b></span>
-      <span><b>14 of 14</b> chapters</span>
-      <span><b>~15 min</b> read</span>
-    </div>
-    <span class="go">Read the chronicle →</span>
-  </a>
-
+<div class="shelf-head">
+  <h2>On the shelf</h2>
+  <span class="count">3 games · 41 lessons</span>
 </div>
 
-<div class="shelf-label">Wanted</div>
-
 <div class="shelf">
-  <div class="card planned">
-    <span class="tab">Open slot</span>
-    <h2>Your game here</h2>
-    <p class="deck">Copy <code>games/_template.html</code>, write the points, add a card to this list. The house style is in the README.</p>
+
+  <a class="game" href="games/arkham-horror-lcg.html" style="--accent:#7A241E">
+    <div class="top">
+      <span class="emblem"><svg><use href="#e-arkham"/></svg></span>
+      <div class="text">
+        <span class="kicker">Co-op · campaign</span>
+        <h3>Arkham Horror: The Card Game</h3>
+      </div>
+    </div>
+    <p class="hook">Friends versus the dark. A deck you build, a deck that hates you, and a bag full of bad luck.</p>
+    <div class="specs">
+      <span class="chip"><svg class="icon"><use href="#i-players"/></svg><b>1–4</b></span>
+      <span class="chip"><svg class="icon"><use href="#i-clock"/></svg><b>2 hrs</b></span>
+      <span class="chip"><svg class="icon"><use href="#i-pages"/></svg><b>15</b> points</span>
+      <span class="chip"><svg class="icon"><use href="#i-read"/></svg><b>25 min</b> read</span>
+    </div>
+    <div class="cta"><span>Open the dossier <span class="arrow">→</span></span><span class="done">Complete</span></div>
+  </a>
+
+  <a class="game" href="games/spirit-island.html" style="--accent:#1E6B57">
+    <div class="top">
+      <span class="emblem"><svg><use href="#e-island"/></svg></span>
+      <div class="text">
+        <span class="kicker">Co-op · heavy</span>
+        <h3>Spirit Island</h3>
+      </div>
+    </div>
+    <p class="hook">You are not the settler. You are the thing the map warns them about.</p>
+    <div class="specs">
+      <span class="chip"><svg class="icon"><use href="#i-players"/></svg><b>1–4</b></span>
+      <span class="chip"><svg class="icon"><use href="#i-clock"/></svg><b>90 min</b></span>
+      <span class="chip"><svg class="icon"><use href="#i-pages"/></svg><b>12</b> pieces</span>
+      <span class="chip"><svg class="icon"><use href="#i-read"/></svg><b>20 min</b> read</span>
+    </div>
+    <div class="cta"><span>Open the field guide <span class="arrow">→</span></span><span class="done">Complete</span></div>
+  </a>
+
+  <a class="game" href="games/troyes.html" style="--accent:#2F4B3C">
+    <div class="top">
+      <span class="emblem"><svg><use href="#e-troyes"/></svg></span>
+      <div class="text">
+        <span class="kicker">Competitive · dice</span>
+        <h3>Troyes</h3>
+      </div>
+    </div>
+    <p class="hook">Your dice sit in the open, and anyone at the table can buy them out from under you.</p>
+    <div class="specs">
+      <span class="chip"><svg class="icon"><use href="#i-players"/></svg><b>2–4</b></span>
+      <span class="chip"><svg class="icon"><use href="#i-clock"/></svg><b>90 min</b></span>
+      <span class="chip"><svg class="icon"><use href="#i-pages"/></svg><b>14</b> chapters</span>
+      <span class="chip"><svg class="icon"><use href="#i-read"/></svg><b>15 min</b> read</span>
+    </div>
+    <div class="cta"><span>Open the chronicle <span class="arrow">→</span></span><span class="done">Complete</span></div>
+  </a>
+
+  <div class="slot">
+    <svg><use href="#i-plus"/></svg>
+    <h3>Empty slot</h3>
+    <p>Copy <code>games/_template.html</code>, write the points, add a box to this shelf.</p>
   </div>
+
 </div>
 
-<p class="foot">Built in the open · <a href="https://github.com/shaansen/board-game-teach">source on GitHub</a></p>
+<div class="plank"></div>
+
+<p class="foot">
+  <svg class="meeple"><use href="#i-meeple"/></svg>
+  Built in the open · <a href="https://github.com/shaansen/board-game-teach">source on GitHub</a>
+</p>
 
 </div>
 </body>
