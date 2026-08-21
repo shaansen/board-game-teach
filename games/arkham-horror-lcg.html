@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Arkham Horror: The Card Game — Field Notes for a New Investigator</title>
+<meta name="description" content="A plain-English briefing that teaches Arkham Horror: The Card Game to someone who has never played it.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;0,600;1,400&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/dossier.css">
+<style>
+/* theme: Miskatonic dossier, 1926 */
+:root{
+  --accent:#7A241E;
+  --accent-2:#A87C2E;
+  --display:"IM Fell English",Georgia,serif;
+  --body:"Spectral",Georgia,serif;
+  --mono:"Courier Prime","Courier New",monospace;
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<a class="backlink" href="../">← the shelf</a>
+
+<header class="cover">
+  <div class="stamp">Case open<br>Arkham, Mass.</div>
+  <div class="eyebrow">Miskatonic field notes · 1926</div>
+  <h1>Arkham Horror<em>The Card Game</em></h1>
+  <div class="rule"></div>
+  <p class="sub">A briefing for a new investigator · points 1–15</p>
+</header>
+
+<!-- ============ 1 ============ -->
+<section class="page">
+  <div class="tab">Point 01</div>
+  <h2>You're not playing <em>against</em> anyone</h2>
+  <p class="deck">There is no winner and no loser at the table. Everybody sits on the same side.</p>
+
+  <p>It's 1926 in Arkham, Massachusetts — a gloomy little New England town where things go bump in the night and nobody wants to talk about it. People are vanishing. Doors are opening that shouldn't open. The police have decided it's easier to look away.</p>
+
+  <p>You each play an <strong>investigator</strong>: one of the oddballs who <em>doesn't</em> look away. A jazz singer. A librarian who's read one book too many. A getaway driver with a wrench and bad decisions. You control that one character for the whole story.</p>
+
+  <p>So who are you playing against? <strong>The game itself.</strong> The box has a script, and the script wants you to fail. You either survive the night together, or you go down together.</p>
+
+  <div class="note"><span class="lab">The vibe</span>Friends versus the dark.</div>
+</section>
+
+<!-- ============ 2 ============ -->
+<section class="page">
+  <div class="tab">Point 02</div>
+  <h2>Your investigator card is your character sheet</h2>
+  <p class="deck">Pick one investigator. That card is <em>you</em> for the rest of the night, and everything about how you'll survive is printed on it.</p>
+
+  <figure>
+    <svg viewBox="0 0 680 410" role="img" xmlns="http://www.w3.org/2000/svg">
+      <title>Anatomy of an investigator card</title>
+      <desc>A card showing name, four skill values, health, sanity and a special ability, with labels.</desc>
+      <rect class="f-neutral" x="140" y="40" width="240" height="330" rx="10"/>
+      <text class="tt" x="260" y="72" text-anchor="middle" dominant-baseline="central">Roland Banks</text>
+      <text class="ts" x="260" y="90" text-anchor="middle" dominant-baseline="central">The federal agent</text>
+      <rect class="f-violet" x="156" y="105" width="208" height="28" rx="3"/>
+      <text class="ts" x="170" y="119" dominant-baseline="central">Willpower</text><text class="tt" x="350" y="119" text-anchor="end" dominant-baseline="central">3</text>
+      <rect class="f-violet" x="156" y="138" width="208" height="28" rx="3"/>
+      <text class="ts" x="170" y="152" dominant-baseline="central">Intellect</text><text class="tt" x="350" y="152" text-anchor="end" dominant-baseline="central">3</text>
+      <rect class="f-violet" x="156" y="171" width="208" height="28" rx="3"/>
+      <text class="ts" x="170" y="185" dominant-baseline="central">Combat</text><text class="tt" x="350" y="185" text-anchor="end" dominant-baseline="central">4</text>
+      <rect class="f-violet" x="156" y="204" width="208" height="28" rx="3"/>
+      <text class="ts" x="170" y="218" dominant-baseline="central">Agility</text><text class="tt" x="350" y="218" text-anchor="end" dominant-baseline="central">2</text>
+      <rect class="f-red" x="156" y="248" width="100" height="48" rx="5"/>
+      <text class="ts" x="206" y="266" text-anchor="middle" dominant-baseline="central">Health</text><text class="tt" x="206" y="284" text-anchor="middle" dominant-baseline="central">9</text>
+      <rect class="f-teal" x="264" y="248" width="100" height="48" rx="5"/>
+      <text class="ts" x="314" y="266" text-anchor="middle" dominant-baseline="central">Sanity</text><text class="tt" x="314" y="284" text-anchor="middle" dominant-baseline="central">5</text>
+      <rect class="f-brass" x="156" y="310" width="208" height="44" rx="5"/>
+      <text class="ts" x="260" y="332" text-anchor="middle" dominant-baseline="central">Special ability</text>
+      <path class="lead" d="M380 70 L430 60"/><circle cx="380" cy="70" r="2.5" fill="#8A7C5F" stroke="none"/>
+      <text class="tt" x="436" y="60" dominant-baseline="central">Who you are</text>
+      <text class="ts" x="436" y="78" dominant-baseline="central">name, background</text>
+      <path class="lead" d="M380 170 L430 150"/><circle cx="380" cy="170" r="2.5" fill="#8A7C5F" stroke="none"/>
+      <text class="tt" x="436" y="150" dominant-baseline="central">Four skills</text>
+      <text class="ts" x="436" y="168" dominant-baseline="central">what you're good at</text>
+      <path class="lead" d="M380 272 L430 252"/><circle cx="380" cy="272" r="2.5" fill="#8A7C5F" stroke="none"/>
+      <text class="tt" x="436" y="252" dominant-baseline="central">Health &amp; sanity</text>
+      <text class="ts" x="436" y="270" dominant-baseline="central">two ways to go down</text>
+      <path class="lead" d="M380 332 L430 332"/><circle cx="380" cy="332" r="2.5" fill="#8A7C5F" stroke="none"/>
+      <text class="tt" x="436" y="332" dominant-baseline="central">Special ability</text>
+      <text class="ts" x="436" y="350" dominant-baseline="central">your one unfair trick</text>
+    </svg>
+    <figcaption>Fig. 1 — every number you'll need is on one card</figcaption>
+  </figure>
+
+  <h3>The four skills</h3>
+  <p>These are the four ways to solve a problem. Every investigator is good at two and bad at two.</p>
+  <ul>
+    <li><strong>Willpower</strong> — nerve. Staring down a ghost and not running.</li>
+    <li><strong>Intellect</strong> — brains. Finding the clue, reading the cursed book.</li>
+    <li><strong>Combat</strong> — fists, guns, a well-swung wrench.</li>
+    <li><strong>Agility</strong> — speed and reflexes. Dodging, sneaking, escaping.</li>
+  </ul>
+  <p>A skill of <strong>3</strong> means you start that attempt with 3 points of effort. If the monster needs 4, you're already behind. So a 3 in Combat means you're <em>probably</em> fine, and a 2 in Agility means stop trying to jump out of windows.</p>
+
+  <h3>Two ways to lose</h3>
+  <p><strong>Health</strong> drops when something bites, claws or shoots you. <strong>Sanity</strong> drops when you see something a human brain wasn't built to look at.</p>
+  <div class="note"><span class="lab">The cruel part</span><em>Either</em> one hitting zero takes you out. Roland has 9 health but only 5 sanity — he's tough as nails, and he can absolutely be scared to death.</div>
+
+  <h3>The special ability</h3>
+  <p>One line of text that only your investigator has. Roland's is a cop thing: shoot a monster, and the shock of it makes you spot a clue you'd missed. That single line is the whole reason you'd pick him over anyone else.</p>
+  <div class="note"><span class="lab">Design lesson</span>There is no good-at-everything investigator. Whoever you pick, you are choosing <em>which kind of trouble you're bad at</em>.</div>
+</section>
+
+<!-- ============ 3 ============ -->
+<section class="page">
+  <div class="tab">Point 03</div>
+  <h2>Your deck is your character's stuff</h2>
+  <p class="deck">Your investigator card says who you are. Your deck — 30 cards, built before the game starts — says what you brought with you.</p>
+
+  <p>It's your backpack, your training and your guts, shuffled together. You draw a card each turn, and what comes up decides what you can actually do about the werewolf in the parlor.</p>
+
+  <figure>
+    <svg viewBox="0 0 680 170" role="img" xmlns="http://www.w3.org/2000/svg">
+      <title>The three card types</title>
+      <desc>Assets stay in play, events are used once, skills are committed during a test.</desc>
+      <rect class="f-teal" x="40" y="30" width="180" height="96" rx="6"/>
+      <text class="tt" x="130" y="56" text-anchor="middle" dominant-baseline="central">Asset</text>
+      <text class="ts" x="130" y="80" text-anchor="middle" dominant-baseline="central">stays on the table</text>
+      <text class="ts" x="130" y="100" text-anchor="middle" dominant-baseline="central">.45 automatic</text>
+      <rect class="f-red" x="250" y="30" width="180" height="96" rx="6"/>
+      <text class="tt" x="340" y="56" text-anchor="middle" dominant-baseline="central">Event</text>
+      <text class="ts" x="340" y="80" text-anchor="middle" dominant-baseline="central">used once, gone</text>
+      <text class="ts" x="340" y="100" text-anchor="middle" dominant-baseline="central">dynamite blast</text>
+      <rect class="f-brass" x="460" y="30" width="180" height="96" rx="6"/>
+      <text class="tt" x="550" y="56" text-anchor="middle" dominant-baseline="central">Skill</text>
+      <text class="ts" x="550" y="80" text-anchor="middle" dominant-baseline="central">thrown in mid-test</text>
+      <text class="ts" x="550" y="100" text-anchor="middle" dominant-baseline="central">unexpected courage</text>
+      <text class="ts" x="340" y="150" text-anchor="middle" dominant-baseline="central">difference between them: how long it sticks around</text>
+    </svg>
+    <figcaption>Fig. 2 — the only three kinds of card in your deck</figcaption>
+  </figure>
+
+  <div class="scroll"><table>
+    <tr><th>Type</th><th>Lifespan</th><th>Think of it as</th></tr>
+    <tr><td>Asset</td><td>Stays in play all game</td><td>An investment — costs a turn now, pays off every turn after</td></tr>
+    <tr><td>Event</td><td>Used once, then discarded</td><td>The emergency button — huge power, exactly once</td></tr>
+    <tr><td>Skill</td><td>Never played on your turn</td><td>The <em>nnngh, try harder</em> card</td></tr>
+  </table></div>
+
+  <p><strong>Skills</strong> are the sneaky one. You don't play them as an action at all — when you're attempting something and about to come up short, you throw them in from your hand as a last-second boost.</p>
+
+  <div class="note"><span class="lab">The core tension</span>Your hand is both your <strong>toolkit</strong> and your <strong>fuel</strong>. That skill card could save your life on a bad pull — or you could hold it forever and die with it unplayed.</div>
+
+  <h3>Classes — why you can't just take the best cards</h3>
+  <p>Each investigator belongs to a class, and you mostly build from your own class's cards.</p>
+  <ul>
+    <li><strong>Guardian</strong> — fighters, cops, soldiers</li>
+    <li><strong>Seeker</strong> — researchers, doctors, academics</li>
+    <li><strong>Rogue</strong> — chancers, thieves, gamblers</li>
+    <li><strong>Mystic</strong> — spell-slingers and fortune-tellers</li>
+    <li><strong>Survivor</strong> — scrappy underdogs who get by on luck</li>
+  </ul>
+  <p>Roland the cop can't cast spells. The librarian can't buy a shotgun. That restriction is what makes each character feel like a <strong>person</strong> instead of a pile of stats.</p>
+</section>
+
+<!-- ============ 4 ============ -->
+<section class="page">
+  <div class="tab">Point 04</div>
+  <h2>There's a second deck, and it's trying to kill you</h2>
+  <p class="deck">In the middle of the table sits the encounter deck. You didn't build it, didn't choose it, and don't get to look at it.</p>
+
+  <p>At the end of every round it takes a swing at you. That moment is called the <strong>mythos phase</strong>, and it's the heartbeat of the whole game.</p>
+
+  <figure>
+    <svg viewBox="0 0 680 306" role="img" xmlns="http://www.w3.org/2000/svg">
+      <title>The mythos phase</title>
+      <desc>Every round ends with each investigator drawing one encounter card: either an enemy or a treachery.</desc>
+      <defs><marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#8A7C5F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+      <rect class="f-neutral" x="240" y="30" width="200" height="44" rx="5"/>
+      <text class="tt" x="340" y="52" text-anchor="middle" dominant-baseline="central">Every round ends</text>
+      <path class="line" d="M340 74 L340 100" marker-end="url(#ar)"/>
+      <rect class="f-brass" x="210" y="106" width="260" height="56" rx="5"/>
+      <text class="tt" x="340" y="124" text-anchor="middle" dominant-baseline="central">draw 1 encounter card</text>
+      <text class="ts" x="340" y="144" text-anchor="middle" dominant-baseline="central">one each, face down</text>
+      <path class="line" d="M340 162 L340 186 L190 186 L190 206" marker-end="url(#ar)"/>
+      <path class="line" d="M340 162 L340 186 L490 186 L490 206" marker-end="url(#ar)"/>
+      <rect class="f-red" x="80" y="210" width="220" height="56" rx="5"/>
+      <text class="tt" x="190" y="228" text-anchor="middle" dominant-baseline="central">Enemy</text>
+      <text class="ts" x="190" y="248" text-anchor="middle" dominant-baseline="central">something hunts you</text>
+      <rect class="f-violet" x="380" y="210" width="220" height="56" rx="5"/>
+      <text class="tt" x="490" y="228" text-anchor="middle" dominant-baseline="central">Treachery</text>
+      <text class="ts" x="490" y="248" text-anchor="middle" dominant-baseline="central">something happens</text>
+    </svg>
+    <figcaption>Fig. 3 — the clock swings whether you're ready or not</figcaption>
+  </figure>
+
+  <div class="scroll"><table>
+    <tr><th>Card</th><th>What it is</th><th>How it behaves</th></tr>
+    <tr><td>Enemy</td><td>A ghoul, a cultist, a thing with too many arms</td><td>Appears in your room and <strong>attaches to you</strong>. Follows you and hits you every round until you kill it or shake it off.</td></tr>
+    <tr><td>Treachery</td><td>A whisper in the dark, a wave of doubt, frozen fear</td><td><strong>Happens to you, then vanishes.</strong> No monster on the table. You can't fight it — you just survive it.</td></tr>
+  </table></div>
+
+  <h3>The encounter deck is the story</h3>
+  <p>Each scenario has its own encounter deck, stuffed with the specific horrors of <em>that</em> night. On a train, it's derailments and things clinging to the outside of the car. In a museum, it's stolen artifacts waking up. So when you draw a card you're not just taking damage — you're turning a page.</p>
+
+  <div class="note"><span class="lab">The real pressure</span>That draw comes every round, no matter what. There is no turtling up and waiting until you're ready.</div>
+</section>
+
+<!-- ============ 5 ============ -->
+<section class="page">
+  <div class="tab">Point 05</div>
+  <h2>The chaos bag — the moment everything hinges on</h2>
+  <p class="deck">Every time you try something risky you make a skill test. And a skill test is a tiny four-step story.</p>
+
+  <figure>
+    <svg viewBox="0 0 680 160" role="img" xmlns="http://www.w3.org/2000/svg">
+      <title>How a skill test is calculated</title>
+      <desc>Your skill plus boosts, modified by a chaos token, compared to the difficulty.</desc>
+      <defs><marker id="ar2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#8A7C5F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+      <rect class="f-neutral" x="50" y="60" width="120" height="60" rx="5"/>
+      <text class="tt" x="110" y="82" text-anchor="middle" dominant-baseline="central">your skill</text>
+      <text class="ts" x="110" y="102" text-anchor="middle" dominant-baseline="central">combat 4</text>
+      <path class="line" d="M173 90 L199 90" marker-end="url(#ar2)"/>
+      <rect class="f-teal" x="203" y="60" width="120" height="60" rx="5"/>
+      <text class="tt" x="263" y="82" text-anchor="middle" dominant-baseline="central">boosts</text>
+      <text class="ts" x="263" y="102" text-anchor="middle" dominant-baseline="central">+1 cards</text>
+      <path class="line" d="M326 90 L352 90" marker-end="url(#ar2)"/>
+      <rect class="f-red" x="356" y="60" width="120" height="60" rx="5"/>
+      <text class="tt" x="416" y="82" text-anchor="middle" dominant-baseline="central">token</text>
+      <text class="ts" x="416" y="102" text-anchor="middle" dominant-baseline="central">you pull −2</text>
+      <path class="line" d="M479 90 L505 90" marker-end="url(#ar2)"/>
+      <rect class="f-brass" x="509" y="60" width="120" height="60" rx="5"/>
+      <text class="tt" x="569" y="82" text-anchor="middle" dominant-baseline="central">result</text>
+      <text class="ts" x="569" y="102" text-anchor="middle" dominant-baseline="central">3 vs 3 pass</text>
+    </svg>
+    <figcaption>Fig. 4 — skill, plus help, minus fate, against the difficulty</figcaption>
+  </figure>
+
+  <h3>There are no dice</h3>
+  <p>Instead there's a small cloth bag full of cardboard tokens, and you reach in without looking and pull one out. Most of the tokens are numbers, and almost all of those numbers are <strong>negative</strong>.</p>
+
+  <figure>
+    <svg viewBox="0 0 680 130" role="img" xmlns="http://www.w3.org/2000/svg">
+      <title>Tokens in the chaos bag</title>
+      <desc>A row of tokens: plus one, zero, and a run of negatives, plus an elder sign and an auto-fail.</desc>
+      <circle class="f-teal" cx="50" cy="50" r="26"/><text class="tt" x="50" y="50" text-anchor="middle" dominant-baseline="central">+1</text>
+      <circle class="f-neutral" cx="120" cy="50" r="26"/><text class="tt" x="120" y="50" text-anchor="middle" dominant-baseline="central">0</text>
+      <circle class="f-red" cx="190" cy="50" r="26"/><text class="tt" x="190" y="50" text-anchor="middle" dominant-baseline="central">−1</text>
+      <circle class="f-red" cx="260" cy="50" r="26"/><text class="tt" x="260" y="50" text-anchor="middle" dominant-baseline="central">−2</text>
+      <circle class="f-red" cx="330" cy="50" r="26"/><text class="tt" x="330" y="50" text-anchor="middle" dominant-baseline="central">−3</text>
+      <circle class="f-red" cx="400" cy="50" r="26"/><text class="tt" x="400" y="50" text-anchor="middle" dominant-baseline="central">−4</text>
+      <circle class="f-violet" cx="470" cy="50" r="26"/><text class="tt" x="470" y="50" text-anchor="middle" dominant-baseline="central">☠</text>
+      <circle class="f-brass" cx="540" cy="50" r="26"/>
+      <polygon points="540,36 543.5,45.1 553.3,45.7 545.7,51.9 548.2,61.3 540,56 531.8,61.3 534.3,51.9 526.7,45.7 536.5,45.1" fill="#A87C2E" stroke="#7A5A1E"/>
+      <circle class="f-red" cx="610" cy="50" r="26"/>
+      <path d="M598 60 C598 42, 622 42, 618 55 C616 62, 606 61, 607 53" fill="none" stroke="#7A241E" stroke-width="2.4" stroke-linecap="round"/>
+      <text class="ts" x="340" y="104" text-anchor="middle" dominant-baseline="central">mostly negatives · one elder sign · one auto-fail</text>
+    </svg>
+    <figcaption>Fig. 5 — the bag is not on your side</figcaption>
+  </figure>
+
+  <div class="note"><span class="lab">What that means</span>The universe is not neutral. On average, reaching into the bag makes you <em>worse</em> at what you were trying to do. Combat 4 against difficulty 3 is barely a coin flip — get well ahead <strong>before</strong> your hand goes in.</div>
+
+  <h3>The special tokens</h3>
+  <div class="scroll"><table>
+    <tr><th>Token</th><th>What it does</th></tr>
+    <tr><td>Auto-fail</td><td>You fail. Full stop — even with a skill of 40. Always in the bag, always possible.</td></tr>
+    <tr><td>Elder sign</td><td>The one genuinely good token, and it does something <strong>different for every investigator</strong></td></tr>
+    <tr><td>Symbols</td><td>Skull, cultist, tablet, elder thing — they mean whatever <em>this scenario</em> says they mean</td></tr>
+  </table></div>
+
+  <p>The elder sign is the elegant bit. Roland gets a bonus for standing on a clue he already found; a gambler might draw cards instead. Your elder sign is a tiny printed statement about what "a lucky break" means for <em>that specific person</em>.</p>
+
+  <div class="note"><span class="lab">Why this beats dice</span>A die is a machine. Reaching into a dark bag and feeling the shape of the thing in your fingers before you pull it out is a horror movie. That half-second where nobody at the table is breathing is the game working exactly as designed.</div>
+</section>
+
+<!-- ============ 6 ============ -->
+<section class="page">
+  <div class="tab">Point 06</div>
+  <h2>The map is made of cards, and clues are the treasure</h2>
+  <p class="deck">Location cards get laid out on the table as you discover them. That's your map, physically built from cards.</p>
+
+  <figure>
+    <svg viewBox="0 0 680 336" role="img" xmlns="http://www.w3.org/2000/svg">
+      <title>A location map made of cards</title>
+      <desc>Five connected rooms, each showing its shroud value and clue count.</desc>
+      <rect class="f-teal" x="260" y="40" width="160" height="56" rx="5"/>
+      <text class="tt" x="340" y="58" text-anchor="middle" dominant-baseline="central">Study</text>
+      <text class="ts" x="340" y="76" text-anchor="middle" dominant-baseline="central">you start here</text>
+      <path class="line" d="M340 96 L340 140"/>
+      <rect class="f-neutral" x="260" y="140" width="160" height="56" rx="5"/>
+      <text class="tt" x="340" y="158" text-anchor="middle" dominant-baseline="central">Hallway</text>
+      <text class="ts" x="340" y="176" text-anchor="middle" dominant-baseline="central">shroud 1 · 0 clues</text>
+      <path class="line" d="M340 196 L340 218 L120 218 L120 240"/>
+      <path class="line" d="M340 196 L340 240"/>
+      <path class="line" d="M340 196 L340 218 L560 218 L560 240"/>
+      <rect class="f-violet" x="40" y="240" width="160" height="56" rx="5"/>
+      <text class="tt" x="120" y="258" text-anchor="middle" dominant-baseline="central">Attic</text>
+      <text class="ts" x="120" y="276" text-anchor="middle" dominant-baseline="central">shroud 4 · 2 clues</text>
+      <rect class="f-violet" x="260" y="240" width="160" height="56" rx="5"/>
+      <text class="tt" x="340" y="258" text-anchor="middle" dominant-baseline="central">Cellar</text>
+      <text class="ts" x="340" y="276" text-anchor="middle" dominant-baseline="central">shroud 4 · 2 clues</text>
+      <rect class="f-brass" x="480" y="240" width="160" height="56" rx="5"/>
+      <text class="tt" x="560" y="258" text-anchor="middle" dominant-baseline="central">Parlor</text>
+      <text class="ts" x="560" y="276" text-anchor="middle" dominant-baseline="central">shroud 2 · 2 clues</text>
+    </svg>
+    <figcaption>Fig. 6 — the good stuff is always downstairs in the dark</figcaption>
+  </figure>
+
+  <div class="scroll"><table>
+    <tr><th>Number</th><th>What it is</th><th>Why you care</th></tr>
+    <tr><td>Clues</td><td>Tokens sitting on the location</td><td>Evidence, footprints, a torn page. <strong>Collecting these is how the story advances.</strong></td></tr>
+    <tr><td>Shroud</td><td>How hard the place is to search</td><td>The difficulty number for investigating there</td></tr>
+  </table></div>
+
+  <p>A well-lit hallway has shroud 1. A pitch-black cellar full of cobwebs has shroud 4. Same action, wildly different odds.</p>
+
+  <h3>Investigating</h3>
+  <p><strong>Investigate</strong> is a skill test: your Intellect against the location's shroud, chaos token and all. Succeed, and you take one clue off the location and put it on your own card. Fail, and you got nothing, the round moves on, and the encounter deck swings at you anyway.</p>
+
+  <div class="note"><span class="lab">The whole game in one line</span>The clues are always somewhere inconvenient, and the person best at getting them is usually the person least able to survive being there.</div>
+</section>
+
+<!-- ============ 7 ============ -->
+<section class="page">
+  <div class="tab">Point 07</div>
+  <h2>You only get three actions</h2>
+  <p class="deck">Three actions total on your turn — not three of each kind. Then the next player goes, and then the encounter deck comes for everybody.</p>
+
+  <div class="scroll"><table>
+    <tr><th>Action</th><th>What happens</th><th>Test</th></tr>
+    <tr><td>Move</td><td>Walk to a connected location</td><td>—</td></tr>
+    <tr><td>Investigate</td><td>Search for a clue where you stand</td><td>Intellect vs shroud</td></tr>
+    <tr><td>Fight</td><td>Swing at a monster in your room</td><td>Combat vs fight</td></tr>
+    <tr><td>Evade</td><td>Dodge past a monster so it can't follow</td><td>Agility vs evade</td></tr>
+    <tr><td>Play a card</td><td>Put down an asset, fire off an event</td><td>—</td></tr>
+    <tr><td>Draw a card</td><td>Pull one extra card from your deck</td><td>—</td></tr>
+    <tr><td>Take a resource</td><td>Pick up one dollar</td><td>—</td></tr>
+    <tr><td>Use an ability</td><td>Whatever the ⟳ arrow on a card allows</td><td>varies</td></tr>
+  </table></div>
+
+  <h3>Resources are money, and money is slow</h3>
+  <p>Cards cost resources to play — a shotgun might cost 5. You get one resource free at the end of each round, so if you want that shotgun <em>this decade</em>, you're spending actions picking up dollars instead of finding clues. Early rounds are almost always a slightly frustrating shopping trip.</p>
+
+  <h3>Evade is underrated</h3>
+  <p>New players ignore it, and it's often the smartest move on the board. You don't have to <em>kill</em> the thing — you can get past it. Evading knocks the monster over: it stops attacking, stops following, and you walk away. Killing a big monster might take four successful attacks. Evading it takes one.</p>
+
+  <h3>Now feel the pain</h3>
+  <figure>
+    <svg viewBox="0 0 680 170" role="img" xmlns="http://www.w3.org/2000/svg">
+      <title>Three actions spent</title>
+      <desc>A turn where playing a gun and shooting a ghoul uses up all three actions.</desc>
+      <rect class="f-teal" x="40" y="30" width="180" height="80" rx="6"/>
+      <text class="tt" x="130" y="58" text-anchor="middle" dominant-baseline="central">action 1</text>
+      <text class="ts" x="130" y="82" text-anchor="middle" dominant-baseline="central">play the gun</text>
+      <rect class="f-red" x="250" y="30" width="180" height="80" rx="6"/>
+      <text class="tt" x="340" y="58" text-anchor="middle" dominant-baseline="central">action 2</text>
+      <text class="ts" x="340" y="82" text-anchor="middle" dominant-baseline="central">shoot the ghoul</text>
+      <rect class="f-spent" x="460" y="30" width="180" height="80" rx="6"/>
+      <text class="tt" x="550" y="58" text-anchor="middle" dominant-baseline="central">action 3</text>
+      <text class="ts" x="550" y="82" text-anchor="middle" dominant-baseline="central">gone</text>
+      <text class="ts" x="340" y="146" text-anchor="middle" dominant-baseline="central">you never moved · you never found a clue · mythos phase now</text>
+    </svg>
+    <figcaption>Fig. 7 — a completely ordinary turn</figcaption>
+  </figure>
+
+  <div class="note"><span class="lab">The design</span>Three actions is never enough, and it isn't supposed to be. Every turn you're choosing which fire to leave burning. That's not a flaw — that <em>is</em> the game.</div>
+</section>
+
+<!-- ============ 8 ============ -->
+<section class="page">
+  <div class="tab">Point 08</div>
+  <h2>Two clocks are running, and only one is yours</h2>
+  <p class="deck">Next to the map sit two small decks, face up, one card of each showing at a time. This is what all those clues were <em>for</em>.</p>
+
+  <p>The <strong>act deck</strong> is your story. It says what you're trying to do right now — <em>"find a way into the cellar"</em> — and at the bottom it names the price, usually clues. Gather enough between everyone, hand them in, and you flip to the next act. That's you making progress.</p>
+
+  <p>The <strong>agenda deck</strong> is the <em>other</em> story: the one happening whether you show up or not. The ritual being completed. The thing waking up. Its price is <strong>doom</strong>, and doom arrives on its own — almost every round, one doom token drops onto the agenda. Nobody puts it there. Nobody can stop it. When there's enough, the agenda flips, and whatever's written on the back happens to you.</p>
+
+  <figure>
+    <svg viewBox="0 0 680 280" role="img" xmlns="http://www.w3.org/2000/svg">
+      <title>The act and agenda race</title>
+      <desc>Two parallel tracks: the agenda advances on doom toward defeat, the act advances on clues toward victory.</desc>
+      <defs><marker id="ar3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#8A7C5F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+      <text class="tt" x="40" y="58" dominant-baseline="central">Agenda</text>
+      <text class="ts" x="40" y="78" dominant-baseline="central">runs on doom</text>
+      <rect class="f-red" x="180" y="40" width="130" height="54" rx="5"/>
+      <text class="ts" x="245" y="67" text-anchor="middle" dominant-baseline="central">agenda 1</text>
+      <path class="line" d="M314 67 L336 67" marker-end="url(#ar3)"/>
+      <rect class="f-red" x="340" y="40" width="130" height="54" rx="5"/>
+      <text class="ts" x="405" y="67" text-anchor="middle" dominant-baseline="central">agenda 2</text>
+      <path class="line" d="M474 67 L496 67" marker-end="url(#ar3)"/>
+      <rect class="f-red" x="500" y="40" width="130" height="54" rx="5" stroke-width="2.4"/>
+      <text class="tt" x="565" y="67" text-anchor="middle" dominant-baseline="central">you lose</text>
+      <text class="tt" x="40" y="178" dominant-baseline="central">Act</text>
+      <text class="ts" x="40" y="198" dominant-baseline="central">runs on clues</text>
+      <rect class="f-teal" x="180" y="160" width="130" height="54" rx="5"/>
+      <text class="ts" x="245" y="187" text-anchor="middle" dominant-baseline="central">act 1</text>
+      <path class="line" d="M314 187 L336 187" marker-end="url(#ar3)"/>
+      <rect class="f-teal" x="340" y="160" width="130" height="54" rx="5"/>
+      <text class="ts" x="405" y="187" text-anchor="middle" dominant-baseline="central">act 2</text>
+      <path class="line" d="M474 187 L496 187" marker-end="url(#ar3)"/>
+      <rect class="f-teal" x="500" y="160" width="130" height="54" rx="5" stroke-width="2.4"/>
+      <text class="tt" x="565" y="187" text-anchor="middle" dominant-baseline="central">you win</text>
+      <text class="ts" x="340" y="250" text-anchor="middle" dominant-baseline="central">doom arrives on its own · clues only arrive if you go get them</text>
+    </svg>
+    <figcaption>Fig. 8 — the top track moves by itself; the bottom one doesn't</figcaption>
+  </figure>
+
+  <div class="scroll"><table>
+    <tr><th>Deck</th><th>Fuel</th><th>Where does the fuel come from</th></tr>
+    <tr><td>Act</td><td>Clues</td><td>You. Only you. Every clue is an action someone spent.</td></tr>
+    <tr><td>Agenda</td><td>Doom</td><td>The game. One token most rounds, free of charge.</td></tr>
+  </table></div>
+
+  <h3>Why this is the whole design</h3>
+  <p>Every action you spend picking up a dollar, shooting a ghoul or dodging into the next room is an action you didn't spend on clues — and the agenda doesn't care. It advances anyway.</p>
+
+  <p>This is also the most common way new players lose. They play <em>carefully</em>: kill every monster, buy every asset, keep everyone at full health. Then the agenda flips for the last time and they discover they're on act 1 of 3 with a beautifully equipped, completely doomed party.</p>
+
+  <div class="note"><span class="lab">The right instinct</span>Go faster than feels safe. Take the risky test. Run past the monster. Accept some damage. Being a bit hurt and ahead of schedule beats being healthy and late.</div>
+
+  <h3>So how do you actually win?</h3>
+  <p><strong>You win a scenario by finishing the last act card before the last agenda card flips.</strong> The final act almost never says "collect more clues" — it says something specific and dramatic: <em>kill the thing, escape the building, reach the roof before sunrise</em>. Do that, and the night ends in your favour.</p>
+
+  <div class="scroll"><table>
+    <tr><th>Outcome</th><th>How it happens</th></tr>
+    <tr><td>You win</td><td>Complete the final act</td></tr>
+    <tr><td>You lose</td><td>The agenda deck runs out — or every investigator is defeated at once</td></tr>
+  </table></div>
+
+  <p>But most scenarios don't have a simple win and loss. They have <strong>resolutions</strong>, numbered in the campaign guide, usually three or four of them. You might kill the monster <em>and</em> rescue the missing student. Or kill it and lose her. Or escape with your lives while it's still out there.</p>
+
+  <div class="note"><span class="lab">The honest question</span>Not "did we win?" but <em>"which ending did we get?"</em></div>
+
+  <p>And then there's winning the <strong>campaign</strong>, which is the real prize. Eight scenarios later you reach the finale, and how it goes depends on everything you dragged along: how much trauma your investigators carry, which weaknesses got shuffled in, which loose ends you never tied up. You can lose individual scenarios and still win the campaign — and you can win most of them and still get a grim ending. The game measures the whole arc, not the individual nights.</p>
+
+  <h3>The theatre of it</h3>
+  <p>The back of an agenda card stays hidden until it flips. So the whole table watches doom pile up knowing something is coming, and not what. Then somebody reads it aloud, and the game you were playing five seconds ago is not the game you're playing now.</p>
+</section>
+
+<!-- ============ 9 ============ -->
+<section class="page">
+  <div class="tab">Point 09</div>
+  <h2>One round, four phases — the whole machine</h2>
+  <p class="deck">You now have every part. Here's what happens when they all run together.</p>
+
+  <p>A round is always the same four steps, in the same order, forever.</p>
+
+  <figure>
+    <svg viewBox="0 0 680 200" role="img" xmlns="http://www.w3.org/2000/svg">
+      <title>The four phases of a round</title>
+      <desc>Mythos, investigation, enemy, upkeep — then the round repeats.</desc>
+      <defs><marker id="ar4" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#8A7C5F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+      <rect class="f-red" x="50" y="50" width="130" height="56" rx="5"/>
+      <text class="tt" x="115" y="68" text-anchor="middle" dominant-baseline="central">mythos</text>
+      <text class="ts" x="115" y="88" text-anchor="middle" dominant-baseline="central">doom + a card</text>
+      <path class="line" d="M184 78 L196 78" marker-end="url(#ar4)"/>
+      <rect class="f-teal" x="200" y="50" width="130" height="56" rx="5"/>
+      <text class="tt" x="265" y="68" text-anchor="middle" dominant-baseline="central">investigation</text>
+      <text class="ts" x="265" y="88" text-anchor="middle" dominant-baseline="central">3 actions each</text>
+      <path class="line" d="M334 78 L346 78" marker-end="url(#ar4)"/>
+      <rect class="f-violet" x="350" y="50" width="130" height="56" rx="5"/>
+      <text class="tt" x="415" y="68" text-anchor="middle" dominant-baseline="central">enemy</text>
+      <text class="ts" x="415" y="88" text-anchor="middle" dominant-baseline="central">monsters attack</text>
+      <path class="line" d="M484 78 L496 78" marker-end="url(#ar4)"/>
+      <rect class="f-brass" x="500" y="50" width="130" height="56" rx="5"/>
+      <text class="tt" x="565" y="68" text-anchor="middle" dominant-baseline="central">upkeep</text>
+      <text class="ts" x="565" y="88" text-anchor="middle" dominant-baseline="central">card + a dollar</text>
+      <text class="ts" x="340" y="150" text-anchor="middle" dominant-baseline="central">then it all happens again, until someone's clock runs out</text>
+    </svg>
+    <figcaption>Fig. 9 — the loop you'll live inside for two hours</figcaption>
+  </figure>
+
+  <div class="scroll"><table>
+    <tr><th>Phase</th><th>Who acts</th><th>What happens</th></tr>
+    <tr><td>Mythos</td><td>The game</td><td>A doom token lands on the agenda, then everyone draws an encounter card</td></tr>
+    <tr><td>Investigation</td><td>You</td><td>Everyone takes three actions, one player at a time</td></tr>
+    <tr><td>Enemy</td><td>The monsters</td><td>Anything hunting you moves closer; anything adjacent attacks</td></tr>
+    <tr><td>Upkeep</td><td>Nobody</td><td>Draw one card, take one resource, stand your exhausted cards back up</td></tr>
+  </table></div>
+
+  <p>Note the order on the enemy phase: you had your chance to deal with that ghoul, and you chose not to. Upkeep is the quiet bit — the deep breath before the mythos phase does it all again.</p>
+
+  <h3>Two things worth burning into your brain</h3>
+  <ul>
+    <li><strong>The game acts first and last.</strong> Mythos opens the round, the enemy phase closes it. Your three actions are squeezed in between the thing that creates problems and the thing that punishes you for not solving them.</li>
+    <li><strong>Upkeep is why patience is a trap.</strong> A free card and a free dollar every round is the game whispering <em>just wait, you'll be stronger next round</em>. And you will be — but the agenda gets stronger for free, while you're paying for it in actions.</li>
+  </ul>
+
+  <div class="note"><span class="lab">The honest summary</span>Four steps, repeating, and you only control step two.</div>
+</section>
+
+<!-- ============ 10 ============ -->
+<section class="page">
+  <div class="tab">Point 10</div>
+  <h2>Losing doesn't end the story — it changes it</h2>
+  <p class="deck">Everything so far has been one night. This is the part that makes Arkham Horror different from almost every other game you've played.</p>
+
+  <h3>Going down usually isn't dying</h3>
+  <p>When your health or sanity hits zero you're <strong>defeated</strong> — knocked out, dragged off, found wandering in the street at dawn. You're removed from the scenario and your friends have to finish without you. You'll be back next time.</p>
+  <p>You just won't be back <em>whole</em>.</p>
+
+  <figure>
+    <svg viewBox="0 0 680 200" role="img" xmlns="http://www.w3.org/2000/svg">
+      <title>How trauma carries between scenarios</title>
+      <desc>An investigator with five sanity is defeated, takes one mental trauma, and begins the next scenario with a maximum of four.</desc>
+      <defs><marker id="ar5" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#8A7C5F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+      <rect class="f-teal" x="50" y="50" width="130" height="56" rx="5"/>
+      <text class="tt" x="115" y="68" text-anchor="middle" dominant-baseline="central">game one</text>
+      <text class="ts" x="115" y="88" text-anchor="middle" dominant-baseline="central">sanity 5</text>
+      <path class="line" d="M184 78 L196 78" marker-end="url(#ar5)"/>
+      <rect class="f-red" x="200" y="50" width="130" height="56" rx="5"/>
+      <text class="tt" x="265" y="68" text-anchor="middle" dominant-baseline="central">defeated</text>
+      <text class="ts" x="265" y="88" text-anchor="middle" dominant-baseline="central">sanity hits 0</text>
+      <path class="line" d="M334 78 L346 78" marker-end="url(#ar5)"/>
+      <rect class="f-violet" x="350" y="50" width="130" height="56" rx="5"/>
+      <text class="tt" x="415" y="68" text-anchor="middle" dominant-baseline="central">trauma</text>
+      <text class="ts" x="415" y="88" text-anchor="middle" dominant-baseline="central">one permanent</text>
+      <path class="line" d="M484 78 L496 78" marker-end="url(#ar5)"/>
+      <rect class="f-neutral" x="500" y="50" width="130" height="56" rx="5"/>
+      <text class="tt" x="565" y="68" text-anchor="middle" dominant-baseline="central">game two</text>
+      <text class="ts" x="565" y="88" text-anchor="middle" dominant-baseline="central">max sanity 4</text>
+      <text class="ts" x="340" y="150" text-anchor="middle" dominant-baseline="central">scars carry forward between scenarios, and they never heal</text>
+    </svg>
+    <figcaption>Fig. 10 — the damage becomes part of the character</figcaption>
+  </figure>
+
+  <div class="scroll"><table>
+    <tr><th>Knocked out by</th><th>You take</th><th>Effect</th></tr>
+    <tr><td>Damage</td><td>Physical trauma</td><td>Maximum health permanently −1 for the rest of the campaign</td></tr>
+    <tr><td>Horror</td><td>Mental trauma</td><td>Maximum sanity permanently −1 for the rest of the campaign</td></tr>
+  </table></div>
+
+  <p>There's no healing it. No shop to visit, no rest between missions. Roland walks into game two with 4 sanity instead of 5, and he is measurably easier to break than he was last week — for every game after this one.</p>
+
+  <div class="note"><span class="lab">And if it reaches zero</span>That investigator is <strong>dead</strong>. Not out for the scenario — gone. Put the card away, pick somebody new, and everyone keeps going with a stranger.</div>
+
+  <h3>Losing a scenario doesn't stop the campaign</h3>
+  <p>The campaign guide is a booklet. At the end of every scenario you turn to a section that asks what happened: did you stop the ritual? Did you flee? Did anyone die? Whatever the answer, <strong>the book has a paragraph ready for it</strong> — and the story keeps going.</p>
+  <ul>
+    <li>Failed to burn down the house? The house is still standing, and three scenarios later that comes back to bite you.</li>
+    <li>Somebody died? Later scenarios reference the fact that they're gone.</li>
+    <li>Fled instead of fighting? The thing you fled from is still out there.</li>
+  </ul>
+
+  <div class="note"><span class="lab">No resets</span>The mess you make is the story you get.</div>
+
+  <p>That's why people get attached to a cardboard federal agent. It isn't that you might lose — it's that the version of your investigator who limps into the final scenario, down two sanity and carrying a breakdown he picked up in a museum in chapter three, is <em>yours</em>. Nobody else's campaign produced that exact person.</p>
+</section>
+
+<!-- ============ 11 ============ -->
+<section class="page">
+  <div class="tab">Point 11</div>
+  <h2>Your investigator grows — and growth means giving something up</h2>
+  <p class="deck">Point 10 was the scar. This is the other half of the same campaign.</p>
+
+  <p>At the end of every scenario you earn <strong>experience</strong>: for finishing acts, for killing the big named monsters (the ones with a victory value printed on them), and for how well the story resolved. A good night might be 5 XP. A rough one might be 2.</p>
+
+  <p>Then, before the next game, you go shopping in your own deck. And here's the crucial bit — <strong>you don't add cards, you swap them</strong>. Your deck is 30 cards at the start of the campaign and 30 cards at the end. Every upgrade is a decision about what to <em>leave behind</em>.</p>
+
+  <figure>
+    <svg viewBox="0 0 680 205" role="img" xmlns="http://www.w3.org/2000/svg">
+      <title>Spending experience to upgrade a card</title>
+      <desc>A level zero card is swapped for its stronger level two version, leaving the deck the same size.</desc>
+      <defs><marker id="ar6" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#8A7C5F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+      <rect class="f-neutral" x="100" y="40" width="190" height="90" rx="6"/>
+      <text class="tt" x="195" y="66" text-anchor="middle" dominant-baseline="central">Guts</text>
+      <text class="ts" x="195" y="90" text-anchor="middle" dominant-baseline="central">level 0</text>
+      <text class="ts" x="195" y="110" text-anchor="middle" dominant-baseline="central">starter version</text>
+      <text class="ts" x="340" y="62" text-anchor="middle" dominant-baseline="central">spend 2 xp</text>
+      <path class="line" d="M294 85 L386 85" marker-end="url(#ar6)"/>
+      <rect class="f-teal" x="390" y="40" width="190" height="90" rx="6"/>
+      <text class="tt" x="485" y="66" text-anchor="middle" dominant-baseline="central">Guts</text>
+      <text class="ts" x="485" y="90" text-anchor="middle" dominant-baseline="central">level 2</text>
+      <text class="ts" x="485" y="110" text-anchor="middle" dominant-baseline="central">strictly better</text>
+      <text class="ts" x="340" y="170" text-anchor="middle" dominant-baseline="central">deck is still 30 cards — you swapped, you didn't add</text>
+    </svg>
+    <figcaption>Fig. 11 — every upgrade costs a card you used to rely on</figcaption>
+  </figure>
+
+  <h3>Levels and what they cost</h3>
+  <p>Cards have a <strong>level</strong>, shown as little dots in the corner — 0 to 5. Everything you start with is level 0. The higher-level cards are the good stuff, and the level number is the XP price.</p>
+
+  <div class="scroll"><table>
+    <tr><th>Way to spend</th><th>Cost</th><th>What it's for</th></tr>
+    <tr><td>Upgrade the same card</td><td>The <em>difference</em> in level</td><td>Same card, meaner version. The cheap, sensible route.</td></tr>
+    <tr><td>Buy something new</td><td>The full level</td><td>Changing what your character <em>is</em> — the librarian who buys a weapon</td></tr>
+  </table></div>
+
+  <div class="note"><span class="lab">The fun problem</span>Your XP is never enough. After two scenarios you'll have maybe 8 XP and a wishlist worth 25 — so you choose between one expensive card that transforms a turn, or three cheap ones that make every turn slightly less bad.</div>
+
+  <h3>Put points 10 and 11 together</h3>
+  <p>Your investigator gets <strong>better at their job and worse at surviving it, at the same time</strong>. By the final scenario Roland is carrying a genuinely terrifying deck — and about four points of trauma. He can do things in chapter eight he couldn't dream of in chapter one, and one bad chaos pull will still put him on the floor.</p>
+
+  <div class="note"><span class="lab">Not a balance problem</span>That's a character arc.</div>
+</section>
+
+<!-- ============ 12 ============ -->
+<section class="page">
+  <div class="tab">Point 12</div>
+  <h2>Some cards in your own deck are working against you</h2>
+  <p class="deck">When you build your 30 cards, you don't get to choose all 30. The game reaches in and adds <strong>weaknesses</strong>.</p>
+
+  <p>They do nothing good, you can never remove them, and you will absolutely draw them at the worst possible moment. You get two kinds.</p>
+
+  <div class="scroll"><table>
+    <tr><th>Kind</th><th>Where it comes from</th><th>Example</th></tr>
+    <tr><td>Signature weakness</td><td>Written specifically for your investigator</td><td>Roland's <em>Cover Up</em> — he's a federal agent investigating things his bosses would shut down</td></tr>
+    <tr><td>Basic weakness</td><td>Drawn at random from a shared pile</td><td>Bad luck, a stalker, a crippling phobia — whatever you pull is yours for the campaign</td></tr>
+  </table></div>
+
+  <p>Roland's is the most characterful card in his deck: when <em>Cover Up</em> appears, evidence lands on the table that he has to spend clues to bury. Clues he needed for the act deck. His own career sabotages the mission.</p>
+
+  <figure>
+    <svg viewBox="0 0 680 300" role="img" xmlns="http://www.w3.org/2000/svg">
+      <title>Weaknesses hidden in your deck</title>
+      <desc>A thirty-card deck laid out as a grid, with two cards marked as weaknesses.</desc>
+      <g class="f-neutral">
+        <rect x="75" y="30" width="44" height="62" rx="3"/><rect x="129" y="30" width="44" height="62" rx="3"/><rect x="183" y="30" width="44" height="62" rx="3"/><rect x="291" y="30" width="44" height="62" rx="3"/><rect x="345" y="30" width="44" height="62" rx="3"/><rect x="399" y="30" width="44" height="62" rx="3"/><rect x="453" y="30" width="44" height="62" rx="3"/><rect x="507" y="30" width="44" height="62" rx="3"/><rect x="561" y="30" width="44" height="62" rx="3"/>
+        <rect x="75" y="104" width="44" height="62" rx="3"/><rect x="129" y="104" width="44" height="62" rx="3"/><rect x="183" y="104" width="44" height="62" rx="3"/><rect x="237" y="104" width="44" height="62" rx="3"/><rect x="291" y="104" width="44" height="62" rx="3"/><rect x="345" y="104" width="44" height="62" rx="3"/><rect x="399" y="104" width="44" height="62" rx="3"/><rect x="453" y="104" width="44" height="62" rx="3"/><rect x="507" y="104" width="44" height="62" rx="3"/><rect x="561" y="104" width="44" height="62" rx="3"/>
+        <rect x="75" y="178" width="44" height="62" rx="3"/><rect x="129" y="178" width="44" height="62" rx="3"/><rect x="183" y="178" width="44" height="62" rx="3"/><rect x="237" y="178" width="44" height="62" rx="3"/><rect x="291" y="178" width="44" height="62" rx="3"/><rect x="345" y="178" width="44" height="62" rx="3"/><rect x="453" y="178" width="44" height="62" rx="3"/><rect x="507" y="178" width="44" height="62" rx="3"/><rect x="561" y="178" width="44" height="62" rx="3"/>
+      </g>
+      <rect class="f-red" x="237" y="30" width="44" height="62" rx="3" stroke-width="2.4"/>
+      <text class="tt" x="259" y="61" text-anchor="middle" dominant-baseline="central">!</text>
+      <rect class="f-red" x="399" y="178" width="44" height="62" rx="3" stroke-width="2.4"/>
+      <text class="tt" x="421" y="209" text-anchor="middle" dominant-baseline="central">!</text>
+      <text class="ts" x="340" y="272" text-anchor="middle" dominant-baseline="central">28 cards you chose · 2 the game chose for you</text>
+    </svg>
+    <figcaption>Fig. 12 — they're shuffled in, and you'll never know where</figcaption>
+  </figure>
+
+  <h3>They go off the instant you draw them</h3>
+  <p>Most weaknesses are treacheries with a nasty little rule: you don't get to hold one, plan around it or discard it. You draw during upkeep, and instead of a shotgun you've got a panic attack — right now, before you've done anything.</p>
+
+  <p>And it compounds. Remember point 10: consequences stick. Some of those consequences are <strong>new weakness cards permanently added to your deck</strong>. Fail badly enough and the campaign guide tells you to shuffle in a curse. Your deck creeps from 30 to 31 to 32, and the extra cards are all poison.</p>
+
+  <h3>The strategy hiding in here</h3>
+  <ul>
+    <li>A <strong>bigger deck</strong> dilutes your weaknesses — 2 bad cards in 40 is safer per draw than 2 in 30.</li>
+    <li>A <strong>smaller deck</strong> means you see your <em>good</em> cards more often and your combos arrive on schedule.</li>
+  </ul>
+  <p>Experienced players almost always take the tight 30 and accept that the bad cards come around faster. Consistency beats safety — the agenda is ticking, and a deck that reliably does its job is worth a few more panic attacks.</p>
+
+  <div class="note"><span class="lab">Why they really exist</span>In every Lovecraft story the investigator's own history is part of the problem — the family secret, the thing they can't stop reading, the guilt they carry. Weaknesses put that in the deck. You aren't only fighting monsters out there; you're carrying a couple around with you.</div>
+</section>
+
+<!-- ============ 13 ============ -->
+<section class="page">
+  <div class="tab">Point 13</div>
+  <h2>Two investigators, and the problem of being in two places</h2>
+  <p class="deck">The game plays 1 to 4. Here's why the number matters more than usual.</p>
+
+  <p>Look back at the map in point 6: clues in the attic, the cellar <em>and</em> the parlor. One investigator physically cannot be in three rooms, so even with perfect play a lone investigator spends half the campaign walking.</p>
+
+  <p>So the party splits up. And splitting up is the most dangerous thing you can do.</p>
+
+  <figure>
+    <svg viewBox="0 0 680 230" role="img" xmlns="http://www.w3.org/2000/svg">
+      <title>Splitting up versus staying together</title>
+      <desc>Two approaches to moving the party, each with its own trade-offs.</desc>
+      <rect class="f-red" x="60" y="30" width="260" height="140" rx="6"/>
+      <text class="tt" x="190" y="60" text-anchor="middle" dominant-baseline="central">split up</text>
+      <text class="ts" x="190" y="96" text-anchor="middle" dominant-baseline="central">cover three rooms at once</text>
+      <text class="ts" x="190" y="122" text-anchor="middle" dominant-baseline="central">clues arrive much faster</text>
+      <text class="ts" x="190" y="148" text-anchor="middle" dominant-baseline="central">alone when it finds you</text>
+      <rect class="f-teal" x="360" y="30" width="260" height="140" rx="6"/>
+      <text class="tt" x="490" y="60" text-anchor="middle" dominant-baseline="central">stay together</text>
+      <text class="ts" x="490" y="96" text-anchor="middle" dominant-baseline="central">someone can cover you</text>
+      <text class="ts" x="490" y="122" text-anchor="middle" dominant-baseline="central">one room at a time</text>
+      <text class="ts" x="490" y="148" text-anchor="middle" dominant-baseline="central">the agenda runs ahead</text>
+      <text class="ts" x="340" y="205" text-anchor="middle" dominant-baseline="central">most rounds, the honest answer is somewhere in between</text>
+    </svg>
+    <figcaption>Fig. 13 — speed on one side, survival on the other</figcaption>
+  </figure>
+
+  <p>Alone with a monster is a genuinely bad place to be. Enemies attach to whoever they find, and if that's the librarian with Combat 2 she can't kill it and probably can't outrun it either — while the cop with Combat 4 is two rooms away doing something useless.</p>
+
+  <h3>Where party roles come from</h3>
+  <p>Not from the rules — from the shape of that problem.</p>
+  <div class="scroll"><table>
+    <tr><th>Role</th><th>Usually</th><th>The job</th></tr>
+    <tr><td>Clue-getter</td><td>Seeker</td><td>High Intellect, empties rooms of clues, is the reason the act deck ever advances, and is made of glass</td></tr>
+    <tr><td>Fighter</td><td>Guardian</td><td>High Combat, stands between the clue-getter and everything else — and <em>wants</em> enemies to come after them instead</td></tr>
+    <tr><td>Support</td><td>Rogue, Mystic, Survivor</td><td>Bends toward helping one of the other two: healing, cash, extra actions, sneaking, shouting in dead languages</td></tr>
+  </table></div>
+
+  <h3>What makes it real teamwork</h3>
+  <ul>
+    <li><strong>You can hand things over.</strong> In the same room you can pass a card or some money. The Rogue swimming in resources can fund the Guardian's shotgun — an action spent making someone else's turn better than yours.</li>
+    <li><strong>Clues pool at the end.</strong> Clues sit on individual investigators, but everyone throws them in together to advance the act. It doesn't matter who found them. No scoring, no MVP — just whether the pile is big enough.</li>
+  </ul>
+
+  <div class="note"><span class="lab">If you're starting out</span>Two investigators is the sweet spot. One is lonely and unforgiving; four means a blizzard of encounter cards and long gaps between turns. Two is fast, tense, and covers the map — which is why most solo players run two decks at once.</div>
+</section>
+
+<!-- ============ 14 ============ -->
+<section class="page">
+  <div class="tab">Point 14</div>
+  <h2>How a monster actually works</h2>
+  <p class="deck">"There's a ghoul on you" has more moving parts than it sounds. Enemy cards are built like investigator cards — same idea, pointed the other way.</p>
+
+  <figure>
+    <svg viewBox="0 0 680 410" role="img" xmlns="http://www.w3.org/2000/svg">
+      <title>Anatomy of an enemy card</title>
+      <desc>An enemy card showing fight, health and evade values, the damage and horror it deals, its keywords and its card text.</desc>
+      <rect class="f-neutral" x="140" y="40" width="240" height="330" rx="10"/>
+      <text class="tt" x="260" y="72" text-anchor="middle" dominant-baseline="central">Ghoul</text>
+      <text class="ts" x="260" y="90" text-anchor="middle" dominant-baseline="central">monster</text>
+      <rect class="f-red" x="156" y="105" width="64" height="56" rx="5"/>
+      <text class="ts" x="188" y="124" text-anchor="middle" dominant-baseline="central">fight</text><text class="tt" x="188" y="144" text-anchor="middle" dominant-baseline="central">3</text>
+      <rect class="f-red" x="228" y="105" width="64" height="56" rx="5"/>
+      <text class="ts" x="260" y="124" text-anchor="middle" dominant-baseline="central">health</text><text class="tt" x="260" y="144" text-anchor="middle" dominant-baseline="central">3</text>
+      <rect class="f-red" x="300" y="105" width="64" height="56" rx="5"/>
+      <text class="ts" x="332" y="124" text-anchor="middle" dominant-baseline="central">evade</text><text class="tt" x="332" y="144" text-anchor="middle" dominant-baseline="central">2</text>
+      <rect class="f-brass" x="156" y="180" width="100" height="48" rx="5"/>
+      <text class="ts" x="206" y="198" text-anchor="middle" dominant-baseline="central">damage</text><text class="tt" x="206" y="216" text-anchor="middle" dominant-baseline="central">1</text>
+      <rect class="f-violet" x="264" y="180" width="100" height="48" rx="5"/>
+      <text class="ts" x="314" y="198" text-anchor="middle" dominant-baseline="central">horror</text><text class="tt" x="314" y="216" text-anchor="middle" dominant-baseline="central">1</text>
+      <rect class="f-teal" x="156" y="245" width="208" height="44" rx="5"/>
+      <text class="ts" x="260" y="267" text-anchor="middle" dominant-baseline="central">keyword: hunter</text>
+      <rect class="f-neutral" x="156" y="305" width="208" height="48" rx="5"/>
+      <text class="ts" x="260" y="329" text-anchor="middle" dominant-baseline="central">card text</text>
+      <path class="lead" d="M380 80 L430 70"/><circle cx="380" cy="80" r="2.5" fill="#8A7C5F" stroke="none"/>
+      <text class="tt" x="436" y="70" dominant-baseline="central">What it is</text>
+      <path class="lead" d="M380 133 L430 130"/><circle cx="380" cy="133" r="2.5" fill="#8A7C5F" stroke="none"/>
+      <text class="tt" x="436" y="130" dominant-baseline="central">Three numbers</text>
+      <text class="ts" x="436" y="148" dominant-baseline="central">hit it, kill it, dodge it</text>
+      <path class="lead" d="M380 204 L430 204"/><circle cx="380" cy="204" r="2.5" fill="#8A7C5F" stroke="none"/>
+      <text class="tt" x="436" y="204" dominant-baseline="central">What it does</text>
+      <text class="ts" x="436" y="222" dominant-baseline="central">every enemy phase</text>
+      <path class="lead" d="M380 267 L430 267"/><circle cx="380" cy="267" r="2.5" fill="#8A7C5F" stroke="none"/>
+      <text class="tt" x="436" y="267" dominant-baseline="central">Keywords</text>
+      <text class="ts" x="436" y="285" dominant-baseline="central">how it behaves</text>
+      <path class="lead" d="M380 329 L430 329"/><circle cx="380" cy="329" r="2.5" fill="#8A7C5F" stroke="none"/>
+      <text class="tt" x="436" y="329" dominant-baseline="central">Card text</text>
+      <text class="ts" x="436" y="347" dominant-baseline="central">the nasty surprise</text>
+    </svg>
+    <figcaption>Fig. 14 — compare this with Fig. 1; it's your card, inverted</figcaption>
+  </figure>
+
+  <h3>The three numbers are three different questions</h3>
+  <div class="scroll"><table>
+    <tr><th>Number</th><th>Question</th><th>Test</th></tr>
+    <tr><td>Fight</td><td>How hard is it to hit?</td><td>Your Combat vs this</td></tr>
+    <tr><td>Health</td><td>How many hits to kill?</td><td>—</td></tr>
+    <tr><td>Evade</td><td>How hard is it to slip past?</td><td>Your Agility vs this</td></tr>
+  </table></div>
+
+  <p>Those are independent. A ghoul with Fight 3 and Evade 2 is easier to dodge than to punch; some monsters are the reverse. Reading those two numbers side by side is how you decide whether to swing or run — the single most useful habit to build.</p>
+
+  <p><strong>Damage and horror</strong> are what it does to you at the end of every round it's still attached: one to health, one to sanity. A ghoul chewing on you for four rounds costs 4 health <em>and</em> 4 sanity, which for most investigators is close to the whole tank.</p>
+
+  <h3>The rule that catches out every new player</h3>
+  <p>When a monster is engaged with you, most actions let it hit you for free. Walk away? Free hit. Investigate? Free hit. Play a card? Free hit. It's called an <strong>attack of opportunity</strong>.</p>
+
+  <div class="note"><span class="lab">Note which actions are exempt</span>Fight and evade — the two that actually deal with the monster. That's not a coincidence. The rule exists to force a decision: handle it, or pay for pretending it isn't there.</div>
+
+  <h3>Keywords rewrite the behaviour</h3>
+  <ul>
+    <li><strong>Hunter</strong> — moves toward the nearest investigator every round. You can't leave it behind; it follows.</li>
+    <li><strong>Aloof</strong> — ignores you unless you attack it. Sometimes the right answer is to walk past and let it brood.</li>
+    <li><strong>Massive</strong> — engages <em>everybody</em> at once. No hiding behind your friend.</li>
+    <li><strong>Retaliate</strong> — miss your attack, and it hits you for it.</li>
+    <li><strong>Alert</strong> — fail your evade, and it hits you for that instead.</li>
+  </ul>
+
+  <p>Retaliate and Alert are the mean ones because they punish the <em>attempt</em>. Against a Retaliate monster a low-odds swing isn't just wasteful, it's dangerous — and suddenly the safest play is to do nothing and walk away eating the attack of opportunity. A genuinely strange, genuinely Arkham kind of decision.</p>
+</section>
+
+<!-- ============ 15 ============ -->
+<section class="page">
+  <div class="tab">Point 15</div>
+  <h2>How to not lose your first game</h2>
+  <p class="deck">You know the rules now. Here's the stuff nobody tells you until you've already lost twice.</p>
+
+  <p>Almost every rookie defeat comes from the same four instincts — and all four are the instincts a normal board game trained into you.</p>
+
+  <figure>
+    <svg viewBox="0 0 680 300" role="img" xmlns="http://www.w3.org/2000/svg">
+      <title>Common beginner mistakes and what to do instead</title>
+      <desc>Four instincts that lose games, paired with the habit that wins them.</desc>
+      <defs><marker id="ar7" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#8A7C5F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+      <text class="ts" x="175" y="16" text-anchor="middle" dominant-baseline="central">the instinct</text>
+      <text class="ts" x="505" y="16" text-anchor="middle" dominant-baseline="central">the habit that wins</text>
+      <rect class="f-red" x="40" y="34" width="270" height="52" rx="6"/>
+      <text class="ts" x="175" y="60" text-anchor="middle" dominant-baseline="central">kill every monster you meet</text>
+      <path class="line" d="M316 60 L362 60" marker-end="url(#ar7)"/>
+      <rect class="f-teal" x="370" y="34" width="270" height="52" rx="6"/>
+      <text class="ts" x="505" y="60" text-anchor="middle" dominant-baseline="central">evade it and keep moving</text>
+      <rect class="f-red" x="40" y="96" width="270" height="52" rx="6"/>
+      <text class="ts" x="175" y="122" text-anchor="middle" dominant-baseline="central">save skill cards for later</text>
+      <path class="line" d="M316 122 L362 122" marker-end="url(#ar7)"/>
+      <rect class="f-teal" x="370" y="96" width="270" height="52" rx="6"/>
+      <text class="ts" x="505" y="122" text-anchor="middle" dominant-baseline="central">spend them on this test</text>
+      <rect class="f-red" x="40" y="158" width="270" height="52" rx="6"/>
+      <text class="ts" x="175" y="184" text-anchor="middle" dominant-baseline="central">buy your whole deck first</text>
+      <path class="line" d="M316 184 L362 184" marker-end="url(#ar7)"/>
+      <rect class="f-teal" x="370" y="158" width="270" height="52" rx="6"/>
+      <text class="ts" x="505" y="184" text-anchor="middle" dominant-baseline="central">two setup turns, then go</text>
+      <rect class="f-red" x="40" y="220" width="270" height="52" rx="6"/>
+      <text class="ts" x="175" y="246" text-anchor="middle" dominant-baseline="central">stay healthy, play it safe</text>
+      <path class="line" d="M316 246 L362 246" marker-end="url(#ar7)"/>
+      <rect class="f-teal" x="370" y="220" width="270" height="52" rx="6"/>
+      <text class="ts" x="505" y="246" text-anchor="middle" dominant-baseline="central">trade health for speed</text>
+    </svg>
+    <figcaption>Fig. 15 — four habits worth unlearning</figcaption>
+  </figure>
+
+  <h3>Stop killing things</h3>
+  <p>A monster with 3 health takes three successful Combat tests to remove — three actions minimum, probably four or five once the chaos bag gets involved. Evading takes one. Unless it's blocking the room you need or the scenario pays you for its corpse, walking away is usually correct. <strong>Dead monsters don't advance the act deck.</strong></p>
+
+  <h3>Spend your skill cards</h3>
+  <p>New players clutch them like emergency money and finish the game with three in hand. But the bag pulls you <em>down</em> on average (point 5), so a test you enter "probably fine" is a test you lose about a third of the time — and a failed investigate costs you the action anyway. Two cards to make a test near-certain is a good trade. The card you saved for a rainier day gets shuffled away when you're defeated.</p>
+
+  <h3>Shop fast, then stop</h3>
+  <p>Yes, you need your gun. The pattern that kills people is spending rounds one to five building a perfect engine, then looking up to find the agenda on its last card. Rough rule: get your key asset out, then start earning your keep. <strong>If you haven't taken a single clue by round four, you're already behind.</strong></p>
+
+  <h3>Get comfortable being hurt</h3>
+  <p>Health and sanity aren't a score to protect — they're a <strong>resource to spend</strong>. Taking one damage to save an action is very often a good deal, because you have 9 health and only about a dozen rounds. The party that ends at full health and loses on the agenda made a hundred small safe choices and one enormous mistake.</p>
+
+  <h3>Two habits, not instincts</h3>
+  <ul>
+    <li><strong>Read the agenda before you plan your turn.</strong> How much doom is on it, how much does it need? That number tells you whether this is a round for setting up or a round for sprinting. Most tables never look until it flips.</li>
+    <li><strong>Play your first campaign on Standard, and don't be proud about it.</strong> Difficulty settings change which tokens go in the bag. Easy and Standard exist so you can learn the story without it ending in chapter two. Nobody is watching.</li>
+  </ul>
+
+  <div class="note"><span class="lab">The mindset underneath all of it</span>You are not trying to survive the night. You are trying to finish the job before the night finishes you. Those sound similar, and they lead to completely different games.</div>
+</section>
+
+<p class="foot">End of briefing · <a href="../">back to the shelf</a></p>
+
+</div>
+</body>
+</html>

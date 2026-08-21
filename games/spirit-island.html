@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Field Guide to Spirit Island</title>
+<meta name="description" content="A field guide that teaches Spirit Island in twelve pieces, for someone who has never played it.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,600;9..144,900&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --tide:#08191E;
+  --tide-deep:#050F13;
+  --moss:#123A33;
+  --jade:#5AD6A8;
+  --jade-dim:#2E7D68;
+  --bone:#EAE4D2;
+  --stone:#8B9C97;
+  --ember:#E28B41;
+  --hair:rgba(234,228,210,.13);
+
+  --display:"Fraunces","Iowan Old Style","Palatino Linotype",Georgia,serif;
+  --body:"Newsreader","Iowan Old Style",Georgia,serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,monospace;
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background:var(--tide-deep);
+  color:var(--bone);
+  font-family:var(--body);
+  font-size:18px;
+  line-height:1.62;
+  font-weight:300;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ---------- atmosphere ---------- */
+.mist{
+  position:fixed; inset:0; pointer-events:none; z-index:0;
+  background:
+    radial-gradient(70% 50% at 12% 0%, rgba(90,214,168,.10), transparent 62%),
+    radial-gradient(55% 45% at 92% 22%, rgba(226,139,65,.07), transparent 60%),
+    radial-gradient(80% 60% at 50% 110%, rgba(18,58,51,.55), transparent 60%);
+}
+
+.wrap{position:relative; z-index:1; max-width:820px; margin:0 auto; padding:0 28px 120px}
+
+/* ---------- back to the shelf ---------- */
+.backlink{
+  display:inline-block; margin-top:30px;
+  font-family:var(--mono); font-size:11px; letter-spacing:.2em;
+  text-transform:uppercase; color:var(--jade-dim); text-decoration:none;
+  border-bottom:1px solid transparent;
+}
+.backlink:hover{color:var(--jade); border-bottom-color:var(--jade)}
+
+/* ---------- masthead ---------- */
+header{padding:40px 0 54px; border-bottom:1px solid var(--hair)}
+
+.eyebrow{
+  font-family:var(--mono); font-size:11px; letter-spacing:.22em;
+  text-transform:uppercase; color:var(--jade-dim); margin:0 0 22px;
+}
+
+h1{
+  font-family:var(--display);
+  font-variation-settings:"SOFT" 40,"WONK" 1,"opsz" 120;
+  font-weight:900; font-size:clamp(42px,8.5vw,76px);
+  line-height:.94; letter-spacing:-.02em; margin:0 0 20px;
+  color:var(--bone);
+}
+h1 em{
+  display:block; font-style:normal; font-weight:300;
+  font-size:clamp(20px,3.6vw,30px); letter-spacing:.01em;
+  color:var(--stone); margin-top:14px; line-height:1.25;
+}
+
+.tally{display:flex; align-items:center; gap:14px; margin-top:34px; flex-wrap:wrap}
+.pips{display:flex; gap:7px}
+.pip{width:9px; height:9px; border-radius:50%; border:1px solid var(--jade-dim); opacity:.45}
+.pip.lit{background:var(--jade); border-color:var(--jade); opacity:1; box-shadow:0 0 10px rgba(90,214,168,.7)}
+.tally span{font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--stone)}
+
+/* ---------- the spine ---------- */
+.spine{position:relative; padding-left:52px; margin-top:8px}
+.spine::before{
+  content:""; position:absolute; left:11px; top:34px; bottom:60px; width:1px;
+  background:linear-gradient(to bottom,var(--jade-dim),rgba(90,214,168,.16) 22%,var(--hair));
+}
+
+.entry{position:relative; padding:54px 0 0}
+
+.node{
+  position:absolute; left:-52px; top:64px;
+  width:23px; height:23px; border-radius:50%;
+  border:1px solid var(--jade-dim); background:var(--tide-deep);
+  display:grid; place-items:center;
+}
+.node::after{content:""; width:7px; height:7px; border-radius:50%; background:var(--jade-dim); opacity:.5}
+.entry.open .node{border-color:var(--jade)}
+.entry.open .node::after{background:var(--jade); opacity:1; box-shadow:0 0 12px rgba(90,214,168,.9); animation:breathe 4.5s ease-in-out infinite}
+@keyframes breathe{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.45);opacity:.72}}
+
+.num{
+  font-family:var(--mono); font-size:11px; letter-spacing:.2em;
+  color:var(--jade-dim); display:block; margin-bottom:12px;
+}
+.entry.open .num{color:var(--jade)}
+
+h2{
+  font-family:var(--display);
+  font-variation-settings:"SOFT" 30,"WONK" 1,"opsz" 60;
+  font-weight:600; font-size:clamp(25px,4.6vw,36px); line-height:1.14;
+  letter-spacing:-.015em; margin:0 0 22px; color:var(--bone);
+}
+
+.entry p{margin:0 0 20px; color:#D8D2C2}
+.entry p.lede{font-size:1.06em; color:var(--bone)}
+strong{font-weight:400; color:var(--jade); font-style:normal}
+em.turn{font-style:italic; color:var(--ember)}
+
+/* pull-quote: the one loud moment */
+.roar{
+  margin:34px 0; padding:26px 30px;
+  border-left:2px solid var(--ember);
+  background:linear-gradient(90deg,rgba(226,139,65,.10),transparent 78%);
+  font-family:var(--display);
+  font-variation-settings:"SOFT" 60,"WONK" 1,"opsz" 90;
+  font-weight:600; font-size:clamp(21px,3.9vw,29px); line-height:1.24;
+  color:var(--bone);
+}
+
+/* consequences list */
+.knots{list-style:none; padding:0; margin:30px 0 0; border-top:1px solid var(--hair)}
+.knots li{padding:20px 0; border-bottom:1px solid var(--hair)}
+.knots b{
+  display:block; font-family:var(--mono); font-size:11px; letter-spacing:.17em;
+  text-transform:uppercase; color:var(--jade); font-weight:500; margin-bottom:9px;
+}
+.knots span{color:#D8D2C2; font-size:.97em}
+
+/* ---------- sealed entries ---------- */
+.entry.sealed{padding-top:0; margin-top:26px}
+.entry.sealed .node{top:8px; width:19px; height:19px; left:-50px; opacity:.55}
+.sealed-row{
+  display:flex; align-items:baseline; gap:16px; padding:11px 0;
+  border-bottom:1px solid rgba(234,228,210,.06);
+}
+.sealed-row .num{margin:0; opacity:.65; flex:0 0 auto}
+.sealed-row h3{
+  margin:0; font-family:var(--body); font-weight:300;
+  font-size:17px; color:var(--stone); opacity:.62; letter-spacing:.005em;
+}
+
+.sealed-head{
+  font-family:var(--mono); font-size:11px; letter-spacing:.2em; text-transform:uppercase;
+  color:var(--jade-dim); margin:64px 0 6px;
+}
+
+footer{margin-top:64px; padding-top:26px; border-top:1px solid var(--hair)}
+footer p{font-family:var(--mono); font-size:12px; color:var(--stone); letter-spacing:.05em; margin:0}
+footer a{color:var(--jade); text-decoration:none; border-bottom:1px solid rgba(90,214,168,.35)}
+
+/* entrance */
+.rise{opacity:0; transform:translateY(14px); animation:rise .9s cubic-bezier(.2,.7,.3,1) forwards}
+.rise:nth-child(1){animation-delay:.05s}
+@keyframes rise{to{opacity:1;transform:none}}
+
+@media (max-width:620px){
+  body{font-size:17px}
+  .wrap{padding:0 20px 80px}
+  header{padding:26px 0 40px}
+  .spine{padding-left:38px}
+  .spine::before{left:8px}
+  .node{left:-38px; width:17px; height:17px}
+  .entry.sealed .node{left:-37px; width:15px; height:15px}
+  .roar{padding:20px 20px}
+  .sealed-row{flex-wrap:wrap; gap:6px}
+}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important; transition:none!important}
+  .rise{opacity:1; transform:none}
+}
+</style>
+</head>
+<body>
+<div class="mist"></div>
+
+<div class="wrap">
+
+<a class="backlink" href="../">← the shelf</a>
+
+<header class="rise">
+  <p class="eyebrow">Field guide · learn it in twelve pieces</p>
+  <h1>Spirit Island
+    <em>A cooperative game about being the thing the map warns you about.</em>
+  </h1>
+  <div class="tally">
+    <div class="pips">
+      <i class="pip lit"></i><i class="pip"></i><i class="pip"></i><i class="pip"></i>
+      <i class="pip"></i><i class="pip"></i><i class="pip"></i><i class="pip"></i>
+      <i class="pip"></i><i class="pip"></i><i class="pip"></i><i class="pip"></i>
+    </div>
+    <span>1 of 12 awakened</span>
+  </div>
+</header>
+
+<div class="spine">
+
+  <article class="entry open rise" id="p1">
+    <div class="node"></div>
+    <span class="num">01</span>
+    <h2>You are not a person. You are what people are afraid of.</h2>
+
+    <p class="lede">In almost every other board game about exploring a new land, you play the explorer. You sail in, chop down the forest, build a town, count your points, and win.</p>
+
+    <p>Spirit Island hands you the <em class="turn">other</em> side of that story.</p>
+
+    <p>You are a <strong>spirit</strong> — something ancient and enormous that has lived on this island since long before anyone showed up to give it a name. You might be a river that floods when it's angry. A shadow that hides inside flame. A mountain that remembers everything. A tangle of green that grows over stone until the stone gives up.</p>
+
+    <p>Then ships arrive. Little wooden pieces full of <strong>Invaders</strong> who look at your island and decide it's empty. They start exploring. Then building. Then burning.</p>
+
+    <div class="roar">You are what happens next.</div>
+
+    <p>That's the whole game: you and the other spirits looking at those ships and saying <em class="turn">absolutely not</em>.</p>
+
+    <ul class="knots">
+      <li>
+        <b>You don't have a pawn</b>
+        <span>Spirits don't walk around. You <strong>spread</strong>. You place little pieces of yourself — called presence — onto the island, and you can only affect places where some part of you already is. Getting bigger and reaching further is most of what you spend the game doing.</span>
+      </li>
+      <li>
+        <b>Nobody at the table is your opponent</b>
+        <span>Spirit Island is fully cooperative. There is no winner and no loser among the players. Either the island holds, or the island falls — together. The thing you're playing against is the box: a stack of Invader cards that never gets tired and never makes a mistake.</span>
+      </li>
+      <li>
+        <b>Being strange is the point</b>
+        <span>Every spirit breaks the rules in its own weird way. One drowns whole towns. One turns Invaders' nightmares against them. One is a swarm of insects that no one can quite kill. You're not picking a color — you're picking a personality.</span>
+      </li>
+    </ul>
+  </article>
+
+  <p class="sealed-head">Still sleeping</p>
+
+  <article class="entry sealed">
+    <div class="node"></div>
+    <div class="sealed-row"><span class="num">02</span><h3>The Invaders don't think — they follow a machine</h3></div>
+    <div class="sealed-row"><span class="num">03</span><h3>Fear is a weapon, and it's the fast way to win</h3></div>
+    <div class="sealed-row"><span class="num">04</span><h3>Blight: the island has a health bar</h3></div>
+    <div class="sealed-row"><span class="num">05</span><h3>The Dahan live here too, and they fight back</h3></div>
+    <div class="sealed-row"><span class="num">06</span><h3>Growth: every turn you choose how to get bigger</h3></div>
+    <div class="sealed-row"><span class="num">07</span><h3>Energy, and why your best card is often the cheap one</h3></div>
+    <div class="sealed-row"><span class="num">08</span><h3>Fast and Slow: the most important word on every card</h3></div>
+    <div class="sealed-row"><span class="num">09</span><h3>Elements and thresholds: the hidden combo system</h3></div>
+    <div class="sealed-row"><span class="num">10</span><h3>The four ways this ends badly</h3></div>
+    <div class="sealed-row"><span class="num">11</span><h3>Reading the board in ten seconds flat</h3></div>
+    <div class="sealed-row"><span class="num">12</span><h3>Your first full turn, start to finish</h3></div>
+  </article>
+
+</div>
+
+<footer>
+  <p>Entry 1 of 12 · <a href="../">back to the shelf</a></p>
+</footer>
+
+</div>
+</body>
+</html>

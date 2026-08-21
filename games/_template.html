@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GAME NAME — SUBTITLE</title>
+<meta name="description" content="One sentence on what this page teaches and who it's for.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Swap these for typefaces that suit the game. -->
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Spectral:ital,wght@0,300;0,400;0,600;1,400&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/dossier.css">
+<style>
+/* theme: describe the mood in a word or two.
+   Only override what the game actually needs — everything else
+   inherits from dossier.css so all pages stay recognisably siblings. */
+:root{
+  --accent:#7A241E;        /* tabs, section headings, note bars */
+  --accent-2:#A87C2E;      /* eyebrow, bullets, rules           */
+  --paper:#E6DCC3;         /* page stock                        */
+  --paper-edge:#D3C6A6;
+  --table:#1B1712;         /* background                        */
+  --table-deep:#100E0A;
+  --display:"IM Fell English",Georgia,serif;
+  --body:"Spectral",Georgia,serif;
+  --mono:"Courier Prime","Courier New",monospace;
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<a class="backlink" href="../">← the shelf</a>
+
+<header class="cover">
+  <div class="stamp">SHORT<br>STAMP</div>
+  <div class="eyebrow">Category · era or mood</div>
+  <h1>Game Name<em>subtitle</em></h1>
+  <div class="rule"></div>
+  <p class="sub">A briefing for a new player · points 1–N</p>
+</header>
+
+<!-- ============ 1 ============ -->
+<section class="page">
+  <div class="tab">Point 01</div>
+  <h2>The one-line premise</h2>
+  <p class="deck">A single italic sentence framing what this point is about.</p>
+
+  <p>Body copy. Short paragraphs. Second person. Explain the <em>why</em> behind a rule, not just the rule.</p>
+
+  <!-- A figure. Use the shared ink classes so it matches every other page:
+       f-neutral, f-teal, f-red, f-brass, f-violet, f-spent
+       and text classes tt (title) / ts (small). -->
+  <figure>
+    <svg viewBox="0 0 680 160" role="img" xmlns="http://www.w3.org/2000/svg">
+      <title>Short title for screen readers</title>
+      <desc>A sentence describing what the diagram shows.</desc>
+      <rect class="f-teal" x="40" y="30" width="180" height="90" rx="6"/>
+      <text class="tt" x="130" y="62" text-anchor="middle" dominant-baseline="central">label</text>
+      <text class="ts" x="130" y="86" text-anchor="middle" dominant-baseline="central">detail</text>
+    </svg>
+    <figcaption>Fig. 1 — caption that adds something, not a repeat of the title</figcaption>
+  </figure>
+
+  <h3>A sub-heading</h3>
+  <ul>
+    <li><strong>Term</strong> — what it means, in plain words.</li>
+    <li><strong>Term</strong> — what it means, in plain words.</li>
+  </ul>
+
+  <!-- Wrap every table in .scroll so wide tables scroll instead of
+       breaking the page on a phone. -->
+  <div class="scroll"><table>
+    <tr><th>Thing</th><th>What it is</th><th>Why you care</th></tr>
+    <tr><td>Row</td><td>Definition</td><td>Consequence</td></tr>
+  </table></div>
+
+  <div class="note"><span class="lab">The point</span>The single sentence you want them to remember from this page.</div>
+</section>
+
+<p class="foot">End of briefing · <a href="../">back to the shelf</a></p>
+
+</div>
+</body>
+</html>

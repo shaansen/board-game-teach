@@ -1,0 +1,149 @@
+/* ===========================================================
+   library.css — the shelf (index page)
+   =========================================================== */
+:root{
+  --table:#1B1712;
+  --table-deep:#100E0A;
+  --paper:#E6DCC3;
+  --paper-edge:#D3C6A6;
+  --ink:#241F17;
+  --ink-soft:#5C5344;
+  --accent:#7A241E;
+  --accent-2:#A87C2E;
+  --dim:#8E8371;
+  --display:"IM Fell English",Georgia,serif;
+  --body:"Spectral",Georgia,serif;
+  --mono:"Courier Prime","Courier New",monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:
+    radial-gradient(ellipse 900px 600px at 50% 0%, #2A241C 0%, var(--table) 55%, var(--table-deep) 100%);
+  background-attachment:fixed;
+  color:var(--paper);
+  font-family:var(--body);
+  font-size:17px;
+  line-height:1.68;
+  padding:0 20px 90px;
+}
+.wrap{max-width:860px;margin:0 auto}
+
+/* ---------- masthead ---------- */
+.masthead{padding:84px 0 46px;text-align:center}
+.masthead .eyebrow{
+  font-family:var(--mono);
+  font-size:12px;letter-spacing:.32em;text-transform:uppercase;
+  color:var(--accent-2);margin-bottom:26px;
+}
+.masthead h1{
+  font-family:var(--display);font-weight:400;
+  font-size:clamp(40px,9vw,72px);line-height:1.02;margin:0;
+}
+.masthead h1 em{
+  display:block;font-size:.36em;font-style:italic;
+  letter-spacing:.06em;color:var(--paper-edge);margin-top:16px;
+}
+.rule{width:70px;height:1px;background:var(--accent-2);margin:34px auto;opacity:.7}
+.masthead p{
+  max-width:560px;margin:0 auto;color:#BEB49B;font-size:17.5px;
+}
+
+/* ---------- section label ---------- */
+.shelf-label{
+  font-family:var(--mono);
+  font-size:11px;font-weight:700;
+  letter-spacing:.26em;text-transform:uppercase;
+  color:var(--dim);
+  border-bottom:1px solid rgba(230,220,195,.16);
+  padding-bottom:10px;margin:50px 0 26px;
+}
+
+/* ---------- cards ---------- */
+.shelf{display:grid;gap:22px}
+.card{
+  display:block;
+  background:var(--paper);
+  color:var(--ink);
+  text-decoration:none;
+  border-radius:2px;
+  padding:30px 32px 26px;
+  position:relative;
+  box-shadow:0 14px 30px rgba(0,0,0,.45), 0 2px 0 var(--paper-edge);
+  transition:transform .18s ease, box-shadow .18s ease;
+}
+.card::before{
+  content:"";position:absolute;inset:8px;
+  border:1px solid rgba(122,36,30,.14);pointer-events:none;
+}
+.card:hover{transform:translateY(-3px);box-shadow:0 22px 44px rgba(0,0,0,.55), 0 2px 0 var(--paper-edge)}
+.card .tab{
+  display:inline-block;
+  font-family:var(--mono);
+  font-size:10.5px;font-weight:700;
+  letter-spacing:.24em;text-transform:uppercase;
+  color:var(--paper);background:var(--accent);
+  padding:5px 12px;margin-bottom:16px;
+}
+.card h2{
+  font-family:var(--display);font-weight:400;
+  font-size:clamp(24px,4vw,32px);line-height:1.15;
+  margin:0 0 8px;color:var(--ink);
+}
+.card .deck{font-style:italic;color:var(--ink-soft);margin:0 0 18px}
+.card .meta{
+  display:flex;flex-wrap:wrap;gap:8px 22px;
+  font-family:var(--mono);font-size:11px;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);
+  border-top:1px solid rgba(36,31,23,.16);padding-top:14px;
+}
+.card .meta b{color:var(--ink);font-weight:700}
+.card .go{
+  font-family:var(--mono);font-size:11px;font-weight:700;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--accent);
+  margin-top:16px;display:block;
+}
+
+/* ---------- planned (not yet written) ---------- */
+.card.planned{
+  background:none;color:#9C927C;
+  border:1px dashed rgba(230,220,195,.22);
+  box-shadow:none;cursor:default;
+}
+.card.planned::before{display:none}
+.card.planned:hover{transform:none;box-shadow:none}
+.card.planned h2{color:#BEB49B}
+.card.planned .tab{background:none;color:var(--dim);border:1px solid rgba(230,220,195,.28);padding:4px 11px}
+.card.planned .deck{color:#8E8371}
+.card.planned .meta{border-top-color:rgba(230,220,195,.14);color:#7D7361}
+
+/* ---------- footer ---------- */
+.foot{
+  text-align:center;font-family:var(--mono);font-size:12px;
+  letter-spacing:.16em;color:#7D7361;padding:56px 0 0;
+}
+.foot a{color:var(--accent-2);text-decoration:none;border-bottom:1px solid rgba(168,124,46,.4)}
+
+@media (max-width:620px){
+  body{font-size:16px}
+  .masthead{padding:60px 0 30px}
+  .card{padding:24px 22px 22px}
+}
+@media (prefers-reduced-motion:no-preference){
+  .masthead>*,.card{animation:rise .7s ease-out both}
+  @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+}
+
+/* ---------- per-game accents ---------- */
+/* Each card borrows its page's accent so the shelf hints at what's behind it. */
+.card.t-arkham{--card-accent:#7A241E}
+.card.t-island{--card-accent:#1E6B57}
+.card .tab{background:var(--card-accent,var(--accent))}
+.card .go{color:var(--card-accent,var(--accent))}
+.card .status{
+  font-family:var(--mono);font-size:10.5px;font-weight:700;
+  letter-spacing:.2em;text-transform:uppercase;
+  color:var(--ink-soft);border:1px solid rgba(36,31,23,.28);
+  padding:4px 10px;margin-left:8px;display:inline-block;vertical-align:top;
+}
