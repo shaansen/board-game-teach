@@ -14,7 +14,8 @@ your first game.
 | --- | --- |
 | `index.html` | The shelf — the landing page listing every briefing |
 | `games/arkham-horror-lcg.html` | Arkham Horror: The Card Game — 15 points, complete |
-| `games/spirit-island.html` | Spirit Island — 12 pieces, 1 written |
+| `games/spirit-island.html` | Spirit Island — 12 pieces, complete |
+| `games/troyes.html` | Troyes — 14 chapters, complete |
 | `games/_template.html` | Starting point for a new briefing |
 | `assets/dossier.css` | Shared layout system, for pages that want one |
 | `assets/library.css` | Styles for the shelf |
@@ -27,7 +28,8 @@ browser and it works.
 
 1. `cp games/_template.html games/your-game.html` — or, if the game wants a look of
    its own, write a self-contained page with its own `<style>` block (that's what
-   `spirit-island.html` does). Both are fine; see *Two ways to style a page* below.
+   `spirit-island.html` and `troyes.html` do). Both are fine; see *Two ways to style
+   a page* below.
 2. Write it (see the house style below).
 3. Add a card to the "On the shelf" list in `index.html`:
 
@@ -78,10 +80,10 @@ variables — palette and typefaces only. Structure stays identical, so a reader
 learned one page can read them all. `arkham-horror-lcg.html` works this way.
 
 **Bring your own.** If the game deserves a different shape on the page, write a
-self-contained page with its own `<style>` block. `spirit-island.html` does this: a
-vertical spine of numbered entries rather than a stack of dossier sheets. The only
-things every page must share are the `← the shelf` backlink at the top, a footer link
-back, and the house style below.
+self-contained page with its own `<style>` block. `spirit-island.html` is a vertical
+spine of numbered entries; `troyes.html` is a parchment chronicle with a cathedral
+progress bar. The only things every page must share are the `← the shelf` backlink at
+the top, a footer link back, and the house style below.
 
 ### The building blocks (shared system)
 

@@ -10,264 +10,308 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,600;9..144,900&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
-  --tide:#08191E;
   --tide-deep:#050F13;
-  --moss:#123A33;
   --jade:#5AD6A8;
   --jade-dim:#2E7D68;
   --bone:#EAE4D2;
+  --body-ink:#D8D2C2;
   --stone:#8B9C97;
   --ember:#E28B41;
   --hair:rgba(234,228,210,.13);
-
+  --hair-soft:rgba(234,228,210,.07);
   --display:"Fraunces","Iowan Old Style","Palatino Linotype",Georgia,serif;
   --body:"Newsreader","Iowan Old Style",Georgia,serif;
   --mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,monospace;
 }
-
 *{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
-body{
-  margin:0;
-  background:var(--tide-deep);
-  color:var(--bone);
-  font-family:var(--body);
-  font-size:18px;
-  line-height:1.62;
-  font-weight:300;
-  -webkit-font-smoothing:antialiased;
-}
+html{-webkit-text-size-adjust:100%; scroll-behavior:smooth}
+body{margin:0;background:var(--tide-deep);color:var(--bone);font-family:var(--body);font-size:18px;line-height:1.62;font-weight:300;-webkit-font-smoothing:antialiased}
+.mist{position:fixed;inset:0;pointer-events:none;z-index:0;background:
+  radial-gradient(70% 40% at 12% 0%, rgba(90,214,168,.10), transparent 62%),
+  radial-gradient(55% 35% at 92% 18%, rgba(226,139,65,.06), transparent 60%),
+  radial-gradient(90% 50% at 50% 108%, rgba(18,58,51,.5), transparent 62%);}
+.wrap{position:relative;z-index:1;max-width:820px;margin:0 auto;padding:0 28px 110px}
 
-/* ---------- atmosphere ---------- */
-.mist{
-  position:fixed; inset:0; pointer-events:none; z-index:0;
-  background:
-    radial-gradient(70% 50% at 12% 0%, rgba(90,214,168,.10), transparent 62%),
-    radial-gradient(55% 45% at 92% 22%, rgba(226,139,65,.07), transparent 60%),
-    radial-gradient(80% 60% at 50% 110%, rgba(18,58,51,.55), transparent 60%);
-}
+/* back to the shelf */
+.backlink{display:inline-block;margin-top:30px;font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--jade-dim);text-decoration:none;border-bottom:1px solid transparent}
+.backlink:hover{color:var(--jade);border-bottom-color:var(--jade)}
 
-.wrap{position:relative; z-index:1; max-width:820px; margin:0 auto; padding:0 28px 120px}
+header{padding:40px 0 50px;border-bottom:1px solid var(--hair)}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--jade-dim);margin:0 0 22px}
+h1{font-family:var(--display);font-variation-settings:"SOFT" 40,"WONK" 1,"opsz" 120;font-weight:900;font-size:clamp(42px,8.5vw,76px);line-height:.94;letter-spacing:-.02em;margin:0 0 20px}
+h1 em{display:block;font-style:normal;font-weight:300;font-size:clamp(20px,3.6vw,30px);letter-spacing:.01em;color:var(--stone);margin-top:14px;line-height:1.25}
+.tally{display:flex;align-items:center;gap:14px;margin-top:34px;flex-wrap:wrap}
+.pips{display:flex;gap:7px}
+.pip{width:9px;height:9px;border-radius:50%;background:var(--jade);border:1px solid var(--jade);box-shadow:0 0 9px rgba(90,214,168,.6)}
+.tally span{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--stone)}
 
-/* ---------- back to the shelf ---------- */
-.backlink{
-  display:inline-block; margin-top:30px;
-  font-family:var(--mono); font-size:11px; letter-spacing:.2em;
-  text-transform:uppercase; color:var(--jade-dim); text-decoration:none;
-  border-bottom:1px solid transparent;
-}
-.backlink:hover{color:var(--jade); border-bottom-color:var(--jade)}
-
-/* ---------- masthead ---------- */
-header{padding:40px 0 54px; border-bottom:1px solid var(--hair)}
-
-.eyebrow{
-  font-family:var(--mono); font-size:11px; letter-spacing:.22em;
-  text-transform:uppercase; color:var(--jade-dim); margin:0 0 22px;
-}
-
-h1{
-  font-family:var(--display);
-  font-variation-settings:"SOFT" 40,"WONK" 1,"opsz" 120;
-  font-weight:900; font-size:clamp(42px,8.5vw,76px);
-  line-height:.94; letter-spacing:-.02em; margin:0 0 20px;
-  color:var(--bone);
-}
-h1 em{
-  display:block; font-style:normal; font-weight:300;
-  font-size:clamp(20px,3.6vw,30px); letter-spacing:.01em;
-  color:var(--stone); margin-top:14px; line-height:1.25;
-}
-
-.tally{display:flex; align-items:center; gap:14px; margin-top:34px; flex-wrap:wrap}
-.pips{display:flex; gap:7px}
-.pip{width:9px; height:9px; border-radius:50%; border:1px solid var(--jade-dim); opacity:.45}
-.pip.lit{background:var(--jade); border-color:var(--jade); opacity:1; box-shadow:0 0 10px rgba(90,214,168,.7)}
-.tally span{font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--stone)}
-
-/* ---------- the spine ---------- */
-.spine{position:relative; padding-left:52px; margin-top:8px}
-.spine::before{
-  content:""; position:absolute; left:11px; top:34px; bottom:60px; width:1px;
-  background:linear-gradient(to bottom,var(--jade-dim),rgba(90,214,168,.16) 22%,var(--hair));
-}
-
-.entry{position:relative; padding:54px 0 0}
-
-.node{
-  position:absolute; left:-52px; top:64px;
-  width:23px; height:23px; border-radius:50%;
-  border:1px solid var(--jade-dim); background:var(--tide-deep);
-  display:grid; place-items:center;
-}
-.node::after{content:""; width:7px; height:7px; border-radius:50%; background:var(--jade-dim); opacity:.5}
-.entry.open .node{border-color:var(--jade)}
-.entry.open .node::after{background:var(--jade); opacity:1; box-shadow:0 0 12px rgba(90,214,168,.9); animation:breathe 4.5s ease-in-out infinite}
+.spine{position:relative;padding-left:52px}
+.spine::before{content:"";position:absolute;left:11px;top:70px;bottom:40px;width:1px;background:linear-gradient(to bottom,var(--jade-dim),rgba(90,214,168,.3) 60%,var(--hair))}
+.entry{position:relative;padding:62px 0 0}
+.node{position:absolute;left:-52px;top:72px;width:23px;height:23px;border-radius:50%;border:1px solid var(--jade);background:var(--tide-deep);display:grid;place-items:center}
+.node::after{content:"";width:7px;height:7px;border-radius:50%;background:var(--jade);box-shadow:0 0 10px rgba(90,214,168,.85)}
+.entry:first-child .node::after{animation:breathe 4.5s ease-in-out infinite}
 @keyframes breathe{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.45);opacity:.72}}
+.num{font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--jade);display:block;margin-bottom:12px}
+h2{font-family:var(--display);font-variation-settings:"SOFT" 30,"WONK" 1,"opsz" 60;font-weight:600;font-size:clamp(24px,4.4vw,35px);line-height:1.14;letter-spacing:-.015em;margin:0 0 22px}
+.entry p{margin:0 0 20px;color:var(--body-ink)}
+.entry p.lede{font-size:1.06em;color:var(--bone)}
+strong{font-weight:400;color:var(--jade)}
+em.turn{font-style:italic;color:var(--ember)}
 
-.num{
-  font-family:var(--mono); font-size:11px; letter-spacing:.2em;
-  color:var(--jade-dim); display:block; margin-bottom:12px;
-}
-.entry.open .num{color:var(--jade)}
+.roar{margin:34px 0;padding:26px 30px;border-left:2px solid var(--ember);background:linear-gradient(90deg,rgba(226,139,65,.10),transparent 78%);font-family:var(--display);font-variation-settings:"SOFT" 60,"WONK" 1,"opsz" 90;font-weight:600;font-size:clamp(20px,3.7vw,28px);line-height:1.24;color:var(--bone)}
 
-h2{
-  font-family:var(--display);
-  font-variation-settings:"SOFT" 30,"WONK" 1,"opsz" 60;
-  font-weight:600; font-size:clamp(25px,4.6vw,36px); line-height:1.14;
-  letter-spacing:-.015em; margin:0 0 22px; color:var(--bone);
-}
+.knots{list-style:none;padding:0;margin:30px 0 0;border-top:1px solid var(--hair)}
+.knots li{padding:20px 0;border-bottom:1px solid var(--hair)}
+.knots b{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.17em;text-transform:uppercase;color:var(--jade);font-weight:500;margin-bottom:9px}
+.knots span{color:var(--body-ink);font-size:.97em}
 
-.entry p{margin:0 0 20px; color:#D8D2C2}
-.entry p.lede{font-size:1.06em; color:var(--bone)}
-strong{font-weight:400; color:var(--jade); font-style:normal}
-em.turn{font-style:italic; color:var(--ember)}
+.scroll{overflow-x:auto}
+.ledger{width:100%;border-collapse:collapse;margin:28px 0 4px;font-size:.93em}
+.ledger caption{text-align:left;font-family:var(--mono);font-size:11px;letter-spacing:.17em;text-transform:uppercase;color:var(--jade-dim);padding-bottom:12px}
+.ledger th{text-align:left;font-family:var(--mono);font-weight:500;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--stone);padding:0 14px 9px 0;border-bottom:1px solid var(--hair)}
+.ledger td{padding:12px 14px 12px 0;border-bottom:1px solid var(--hair-soft);color:var(--body-ink);vertical-align:top}
+.ledger td:first-child{color:var(--bone);white-space:nowrap}
 
-/* pull-quote: the one loud moment */
-.roar{
-  margin:34px 0; padding:26px 30px;
-  border-left:2px solid var(--ember);
-  background:linear-gradient(90deg,rgba(226,139,65,.10),transparent 78%);
-  font-family:var(--display);
-  font-variation-settings:"SOFT" 60,"WONK" 1,"opsz" 90;
-  font-weight:600; font-size:clamp(21px,3.9vw,29px); line-height:1.24;
-  color:var(--bone);
-}
+.phases{margin:32px 0;border:1px solid var(--hair);border-radius:2px;overflow:hidden}
+.ph{display:flex;gap:16px;padding:15px 18px;border-bottom:1px solid var(--hair-soft);align-items:baseline}
+.ph:last-child{border-bottom:0}
+.ph i{font-family:var(--mono);font-style:normal;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--stone);flex:0 0 74px}
+.ph b{font-weight:400;color:var(--bone)}
+.ph small{display:block;color:var(--stone);font-size:14px;line-height:1.5;margin-top:3px}
+.ph.you{background:rgba(90,214,168,.07);border-left:2px solid var(--jade)}
+.ph.you i{color:var(--jade)}
+.ph.them{background:rgba(226,139,65,.07);border-left:2px solid var(--ember)}
+.ph.them i{color:var(--ember)}
 
-/* consequences list */
-.knots{list-style:none; padding:0; margin:30px 0 0; border-top:1px solid var(--hair)}
-.knots li{padding:20px 0; border-bottom:1px solid var(--hair)}
-.knots b{
-  display:block; font-family:var(--mono); font-size:11px; letter-spacing:.17em;
-  text-transform:uppercase; color:var(--jade); font-weight:500; margin-bottom:9px;
-}
-.knots span{color:#D8D2C2; font-size:.97em}
+.elements{display:flex;flex-wrap:wrap;gap:8px;margin:26px 0 6px}
+.el{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--body-ink);border:1px solid var(--hair);border-radius:999px;padding:7px 14px}
 
-/* ---------- sealed entries ---------- */
-.entry.sealed{padding-top:0; margin-top:26px}
-.entry.sealed .node{top:8px; width:19px; height:19px; left:-50px; opacity:.55}
-.sealed-row{
-  display:flex; align-items:baseline; gap:16px; padding:11px 0;
-  border-bottom:1px solid rgba(234,228,210,.06);
-}
-.sealed-row .num{margin:0; opacity:.65; flex:0 0 auto}
-.sealed-row h3{
-  margin:0; font-family:var(--body); font-weight:300;
-  font-size:17px; color:var(--stone); opacity:.62; letter-spacing:.005em;
-}
+footer{margin-top:70px;padding-top:26px;border-top:1px solid var(--hair)}
+footer p{font-family:var(--mono);font-size:12px;color:var(--stone);letter-spacing:.05em;margin:0 0 8px}
+footer a{color:var(--jade);text-decoration:none;border-bottom:1px solid rgba(90,214,168,.35)}
 
-.sealed-head{
-  font-family:var(--mono); font-size:11px; letter-spacing:.2em; text-transform:uppercase;
-  color:var(--jade-dim); margin:64px 0 6px;
-}
-
-footer{margin-top:64px; padding-top:26px; border-top:1px solid var(--hair)}
-footer p{font-family:var(--mono); font-size:12px; color:var(--stone); letter-spacing:.05em; margin:0}
-footer a{color:var(--jade); text-decoration:none; border-bottom:1px solid rgba(90,214,168,.35)}
-
-/* entrance */
-.rise{opacity:0; transform:translateY(14px); animation:rise .9s cubic-bezier(.2,.7,.3,1) forwards}
-.rise:nth-child(1){animation-delay:.05s}
+.rise{opacity:0;transform:translateY(14px);animation:rise .9s cubic-bezier(.2,.7,.3,1) forwards}
 @keyframes rise{to{opacity:1;transform:none}}
 
 @media (max-width:620px){
   body{font-size:17px}
   .wrap{padding:0 20px 80px}
-  header{padding:26px 0 40px}
-  .spine{padding-left:38px}
+  header{padding:26px 0 38px}
+  .spine{padding-left:36px}
   .spine::before{left:8px}
-  .node{left:-38px; width:17px; height:17px}
-  .entry.sealed .node{left:-37px; width:15px; height:15px}
-  .roar{padding:20px 20px}
-  .sealed-row{flex-wrap:wrap; gap:6px}
+  .node{left:-36px;top:66px;width:17px;height:17px}
+  .node::after{width:5px;height:5px}
+  .roar{padding:20px}
+  .ph{flex-direction:column;gap:4px}
+  .ph i{flex:none}
+  .ledger td:first-child{white-space:normal}
 }
-
-@media (prefers-reduced-motion:reduce){
-  *{animation:none!important; transition:none!important}
-  .rise{opacity:1; transform:none}
-}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rise{opacity:1;transform:none}}
 </style>
 </head>
 <body>
 <div class="mist"></div>
-
 <div class="wrap">
 
-<a class="backlink" href="../">← the shelf</a>
+<a class="backlink" href="../">&larr; the shelf</a>
 
 <header class="rise">
-  <p class="eyebrow">Field guide · learn it in twelve pieces</p>
+  <p class="eyebrow">Field guide &middot; complete in twelve pieces</p>
   <h1>Spirit Island
     <em>A cooperative game about being the thing the map warns you about.</em>
   </h1>
   <div class="tally">
-    <div class="pips">
-      <i class="pip lit"></i><i class="pip"></i><i class="pip"></i><i class="pip"></i>
-      <i class="pip"></i><i class="pip"></i><i class="pip"></i><i class="pip"></i>
-      <i class="pip"></i><i class="pip"></i><i class="pip"></i><i class="pip"></i>
-    </div>
-    <span>1 of 12 awakened</span>
+    <div class="pips"><i class="pip"></i><i class="pip"></i><i class="pip"></i><i class="pip"></i><i class="pip"></i><i class="pip"></i><i class="pip"></i><i class="pip"></i><i class="pip"></i><i class="pip"></i><i class="pip"></i><i class="pip"></i></div>
+    <span>12 of 12 awakened</span>
   </div>
 </header>
 
 <div class="spine">
 
-  <article class="entry open rise" id="p1">
-    <div class="node"></div>
-    <span class="num">01</span>
-    <h2>You are not a person. You are what people are afraid of.</h2>
+<article class="entry rise">
+<div class="node"></div><span class="num">01</span>
+<h2>You are not a person. You are what people are afraid of.</h2>
+<p class="lede">In almost every other board game about exploring a new land, you play the explorer. You sail in, chop down the forest, build a town, count your points, and win.</p>
+<p>Spirit Island hands you the <em class="turn">other</em> side of that story.</p>
+<p>You are a <strong>spirit</strong> &mdash; something ancient and enormous that has lived here since long before anyone showed up to name it. A river that floods when it's angry. A shadow that hides inside flame. A mountain that remembers. A tangle of green that grows over stone until the stone gives up.</p>
+<p>Then ships arrive. Little wooden pieces full of <strong>Invaders</strong> who look at your island and decide it's empty. They explore. They build. They burn.</p>
+<div class="roar">You are what happens next.</div>
+<ul class="knots">
+<li><b>You don't have a pawn</b><span>Spirits don't walk. You <strong>spread</strong> &mdash; you place pieces of yourself, called presence, onto the island, and you can only act where part of you already is.</span></li>
+<li><b>Nobody at the table is your opponent</b><span>Fully cooperative. Either the island holds or it falls, together. Your enemy is a deck of cards that never gets tired and never misjudges.</span></li>
+<li><b>Being strange is the point</b><span>One spirit drowns towns. One weaponizes nightmares. One is a swarm of insects nothing can really kill. You're picking a personality, not a colour.</span></li>
+</ul>
+</article>
 
-    <p class="lede">In almost every other board game about exploring a new land, you play the explorer. You sail in, chop down the forest, build a town, count your points, and win.</p>
+<article class="entry">
+<div class="node"></div><span class="num">02</span>
+<h2>The Invaders don't think. They run on a machine &mdash; and the machine shows you its hand.</h2>
+<p class="lede">There is no evil mastermind. There is a small cardboard track with three slots on it, and a deck of cards that walks across it.</p>
+<p>Every card names a terrain: <strong>Jungle, Wetland, Mountain,</strong> or <strong>Sand</strong>. Each turn a fresh card flips onto the leftmost slot, and every card already on the track slides one step right.</p>
+<div class="scroll"><table class="ledger">
+<caption>The three slots, left to right</caption>
+<tr><th>Slot</th><th>What happens in every land of that terrain</th></tr>
+<tr><td>Explore</td><td>Add 1 Explorer &mdash; but only if the land is on the coast or next to an existing Town or City. Invaders spread from where they already are.</td></tr>
+<tr><td>Build</td><td>Add a building. If that land has more Towns than Cities, they add a City. Otherwise a Town. This is how a lone scout becomes a fortress.</td></tr>
+<tr><td>Ravage</td><td>Burn it. Damage is dealt to the land and to anyone living there.</td></tr>
+</table></div>
+<p>Here is the beautiful part, and the reason this game is a puzzle instead of a slog: a card takes three turns to cross the track. The instant "Jungle" flips into Explore, you know jungles get built on next turn and burned the turn after.</p>
+<p>You are always looking at the future. The pressure isn't surprise &mdash; it's that you can see exactly what's coming and you don't have enough power to stop all of it.</p>
+</article>
 
-    <p>Spirit Island hands you the <em class="turn">other</em> side of that story.</p>
+<article class="entry">
+<div class="node"></div><span class="num">03</span>
+<h2>Fear is a weapon, and it's the fast way to win.</h2>
+<p class="lede">You do not have to kill every Invader on the island. You have to make them want to leave.</p>
+<p>Whenever you destroy a building, you generate <strong>Fear</strong>: 1 for a Town, 2 for a City. Explorers are nobodies &mdash; they scare no one. Plenty of Power cards also generate Fear directly, no killing required.</p>
+<p>Fear tokens pile up. Every <strong>4 Fear per player</strong> earns a <strong>Fear Card</strong>, which gets resolved at the start of the next Invader Phase &mdash; usually something like "Invaders retreat" or "destroy an Explorer in every land with Dahan."</p>
+<p>And as the Fear deck empties, the <strong>Terror Level</strong> climbs, and winning gets easier:</p>
+<div class="scroll"><table class="ledger">
+<caption>Terror levels &mdash; what "victory" means right now</caption>
+<tr><th>Level</th><th>You win when&hellip;</th></tr>
+<tr><td>1</td><td>Not a single Invader remains on the island. Brutal.</td></tr>
+<tr><td>2</td><td>No Cities remain.</td></tr>
+<tr><td>3</td><td>No Cities <em>and</em> no Towns remain.</td></tr>
+<tr><td>4</td><td>You win. Immediately. They're already sailing away.</td></tr>
+</table></div>
+<div class="roar">Terror is not a side-quest. It is a second, quieter win condition running in parallel the entire game.</div>
+</article>
 
-    <p>You are a <strong>spirit</strong> — something ancient and enormous that has lived on this island since long before anyone showed up to give it a name. You might be a river that floods when it's angry. A shadow that hides inside flame. A mountain that remembers everything. A tangle of green that grows over stone until the stone gives up.</p>
+<article class="entry">
+<div class="node"></div><span class="num">04</span>
+<h2>Blight is the island's health bar, and it eats you too.</h2>
+<p class="lede">When a land gets Ravaged, count the damage: Explorer 1, Town 2, City 3. If the total hits <strong>2 or more</strong>, that land gains a <strong>Blight</strong> token &mdash; a black splotch of poisoned, ruined ground.</p>
+<p>Blight is nastier than it looks, in three separate ways:</p>
+<ul class="knots">
+<li><b>It hurts you personally</b><span>When Blight lands somewhere you have presence, you destroy 1 of your own presence there. The island's wounds are your wounds.</span></li>
+<li><b>It spreads</b><span>Add Blight to a land that's already Blighted and it cascades &mdash; 1 more Blight goes to an adjacent land of the players' choosing. One bad Ravage can domino.</span></li>
+<li><b>The supply is the clock</b><span>All Blight comes from one shared pool. Drain it and the island becomes <strong>Blighted</strong>: flip the card over for a permanent new penalty, refill, and keep going. Drain it a second time and the game is over.</span></li>
+</ul>
+<p>So Blight is simultaneously your health bar, a timer, and a punishment for letting one region rot while you defend another. Most losses start with someone saying <em class="turn">"we'll deal with that jungle later."</em></p>
+</article>
 
-    <p>Then ships arrive. Little wooden pieces full of <strong>Invaders</strong> who look at your island and decide it's empty. They start exploring. Then building. Then burning.</p>
+<article class="entry">
+<div class="node"></div><span class="num">05</span>
+<h2>The Dahan already live here, and they hit harder than you do.</h2>
+<p class="lede">Those little figures scattered across the island at setup aren't decoration. They're the <strong>Dahan</strong> &mdash; the people who have lived alongside you for generations, who know your name and leave you offerings.</p>
+<p>You can't order them around like units. But most of your Powers can nudge them: gather them, move them, protect them, rile them up.</p>
+<p>And during a Ravage, they don't just take it. Sequence in a Ravaged land:</p>
+<div class="scroll"><table class="ledger">
+<caption>What a Ravage actually resolves</caption>
+<tr><th>Step</th><th>Detail</th></tr>
+<tr><td>1 &mdash; Invaders strike</td><td>Total damage hits the land (2+ = Blight) and the Dahan at the same time. Each Dahan can absorb 2 damage before dying.</td></tr>
+<tr><td>2 &mdash; Dahan strike back</td><td>Every Dahan still standing deals 2 damage to Invaders in that land. Two survivors will flatten a Town.</td></tr>
+</table></div>
+<p>This unlocks one of the game's best moves: don't kill the Invaders yourself. <strong>Shove Invaders into a land full of Dahan</strong> and let the counterattack do the work. You are the storm; they are the spear.</p>
+</article>
 
-    <div class="roar">You are what happens next.</div>
+<article class="entry">
+<div class="node"></div><span class="num">06</span>
+<h2>Growth: every single turn, you choose how to get bigger.</h2>
+<p class="lede">Your turn opens with <strong>Growth</strong>, and it is the most important decision you make all game &mdash; because it's the only one that compounds.</p>
+<p>Your spirit's board shows two to four Growth options. Pick one (a few spirits get to pick several). Each is a small bundle of things like:</p>
+<ul class="knots">
+<li><b>Reclaim</b><span>Take every Power card you've already played back into your hand. Without this you eventually run dry &mdash; but spending a turn on it means growing in no other way.</span></li>
+<li><b>Add presence</b><span>Place a new piece of yourself onto the island, within a listed range of where you already are. This is how you reach a burning land you currently can't touch.</span></li>
+<li><b>Gain a Power card</b><span>Draw four, keep one. Your deck is small; every card you take reshapes what you're capable of.</span></li>
+<li><b>Gain energy</b><span>Straightforward fuel, right now.</span></li>
+</ul>
+<p>The classic beginner mistake is grabbing shiny new cards every turn and then having no presence anywhere and no energy to cast anything. Growth is a garden. Water it early.</p>
+</article>
 
-    <p>That's the whole game: you and the other spirits looking at those ships and saying <em class="turn">absolutely not</em>.</p>
+<article class="entry">
+<div class="node"></div><span class="num">07</span>
+<h2>Your presence tracks are your engine &mdash; and taking presence off the board turns it on.</h2>
+<p class="lede">Look at your spirit board. Your presence pieces start stacked on two printed tracks, and every time Growth pulls one off a track and onto the island, it uncovers the number underneath.</p>
+<div class="scroll"><table class="ledger">
+<caption>The two tracks</caption>
+<tr><th>Track</th><th>What it gives you</th></tr>
+<tr><td>Energy</td><td>How much energy you collect at the start of every turn. Power cards cost energy to play.</td></tr>
+<tr><td>Card plays</td><td>How many Power cards you're allowed to play in a single turn. Starts painfully low &mdash; often just one.</td></tr>
+</table></div>
+<p>So growing isn't only about reaching further across the island. Every presence you place makes you permanently richer or permanently faster. Early turns feel weak on purpose; a spirit at full bloom in the late game is genuinely terrifying.</p>
+<p>Also worth knowing: a cheap 0-energy card you can cast <em class="turn">every</em> turn often beats an expensive 4-energy card you cast twice all game. Cost is not the same as value.</p>
+</article>
 
-    <ul class="knots">
-      <li>
-        <b>You don't have a pawn</b>
-        <span>Spirits don't walk around. You <strong>spread</strong>. You place little pieces of yourself — called presence — onto the island, and you can only affect places where some part of you already is. Getting bigger and reaching further is most of what you spend the game doing.</span>
-      </li>
-      <li>
-        <b>Nobody at the table is your opponent</b>
-        <span>Spirit Island is fully cooperative. There is no winner and no loser among the players. Either the island holds, or the island falls — together. The thing you're playing against is the box: a stack of Invader cards that never gets tired and never makes a mistake.</span>
-      </li>
-      <li>
-        <b>Being strange is the point</b>
-        <span>Every spirit breaks the rules in its own weird way. One drowns whole towns. One turns Invaders' nightmares against them. One is a swarm of insects that no one can quite kill. You're not picking a color — you're picking a personality.</span>
-      </li>
-    </ul>
-  </article>
+<article class="entry">
+<div class="node"></div><span class="num">08</span>
+<h2>Fast or Slow &mdash; the most important word printed on any card.</h2>
+<p class="lede">Every Power card has one of two labels in its corner, and it decides whether that card happens <em>before</em> the Invaders act or <em>after</em>.</p>
+<div class="phases">
+<div class="ph you"><i>1 &middot; Spirit</i><div><b>Grow, collect energy, play your cards face down</b><small>Choose Growth, take your income, pay for the Powers you want this turn.</small></div></div>
+<div class="ph you"><i>2 &middot; Fast</i><div><b>All Fast Powers resolve</b><small>Your chance to prevent. Push Invaders out of a doomed land, defend against damage, kill a Town before it can burn anything.</small></div></div>
+<div class="ph them"><i>3 &middot; Invader</i><div><b>Fear cards &rarr; Ravage &rarr; Build &rarr; Explore &rarr; advance the track</b><small>The machine takes its turn. Nothing you do can interrupt it once it starts.</small></div></div>
+<div class="ph you"><i>4 &middot; Slow</i><div><b>All Slow Powers resolve</b><small>Your chance to punish. Destroy what they just built, clean up the wreckage, reposition for next turn.</small></div></div>
+<div class="ph"><i>5 &middot; Time</i><div><b>Time passes</b><small>Played cards go to your discard, damage clears, everything resets.</small></div></div>
+</div>
+<div class="roar">Fast stops a Ravage. Slow answers a Build. Playing the right one at the wrong moment is the single most common way new players waste a turn.</div>
+</article>
 
-  <p class="sealed-head">Still sleeping</p>
+<article class="entry">
+<div class="node"></div><span class="num">09</span>
+<h2>Elements: the combo system hiding in plain sight.</h2>
+<p class="lede">Along the top of every Power card sits a row of little symbols. There are eight, and they are the secret handshake between your cards.</p>
+<div class="elements">
+<span class="el">Sun</span><span class="el">Moon</span><span class="el">Fire</span><span class="el">Air</span><span class="el">Water</span><span class="el">Earth</span><span class="el">Plant</span><span class="el">Animal</span>
+</div>
+<p>Two things read those symbols:</p>
+<ul class="knots">
+<li><b>Thresholds</b><span>Some cards have a bonus line: "if you have 2 Fire and 1 Air, do this bigger thing instead." The symbols on <em>every</em> card you played this turn count together &mdash; so a junk card can be worth playing purely for the icon in its corner.</span></li>
+<li><b>Innate Powers</b><span>Printed permanently on your spirit board. They cost nothing and can't be discarded. They just fire, at increasing strength, based on the elements you've assembled that turn. Some spirits live almost entirely off these.</span></li>
+</ul>
+<p>This is the moment the game clicks for most people: you stop reading cards as "what does it do" and start reading them as "what does it do <em class="turn">and what does it unlock</em>."</p>
+</article>
 
-  <article class="entry sealed">
-    <div class="node"></div>
-    <div class="sealed-row"><span class="num">02</span><h3>The Invaders don't think — they follow a machine</h3></div>
-    <div class="sealed-row"><span class="num">03</span><h3>Fear is a weapon, and it's the fast way to win</h3></div>
-    <div class="sealed-row"><span class="num">04</span><h3>Blight: the island has a health bar</h3></div>
-    <div class="sealed-row"><span class="num">05</span><h3>The Dahan live here too, and they fight back</h3></div>
-    <div class="sealed-row"><span class="num">06</span><h3>Growth: every turn you choose how to get bigger</h3></div>
-    <div class="sealed-row"><span class="num">07</span><h3>Energy, and why your best card is often the cheap one</h3></div>
-    <div class="sealed-row"><span class="num">08</span><h3>Fast and Slow: the most important word on every card</h3></div>
-    <div class="sealed-row"><span class="num">09</span><h3>Elements and thresholds: the hidden combo system</h3></div>
-    <div class="sealed-row"><span class="num">10</span><h3>The four ways this ends badly</h3></div>
-    <div class="sealed-row"><span class="num">11</span><h3>Reading the board in ten seconds flat</h3></div>
-    <div class="sealed-row"><span class="num">12</span><h3>Your first full turn, start to finish</h3></div>
-  </article>
+<article class="entry">
+<div class="node"></div><span class="num">10</span>
+<h2>Three ways to lose. Learn them, because they're the real timer.</h2>
+<div class="scroll"><table class="ledger">
+<caption>Defeat conditions</caption>
+<tr><th>Ending</th><th>How it happens</th></tr>
+<tr><td>The island dies</td><td>Blight must be added and the pool is empty on an already-Blighted island. The land is too poisoned to sustain anything.</td></tr>
+<tr><td>Time runs out</td><td>You need to draw an Invader card and the deck is gone. The colonists simply won and you were too slow. This is the most common loss by far.</td></tr>
+<tr><td>A spirit is destroyed</td><td>Any spirit with zero presence left on the island is gone &mdash; and everyone loses with them. Nobody plays alone.</td></tr>
+</table></div>
+<p>Notice what's missing from that list: there is no penalty for the Invaders "getting points" or "spreading too far" on its own. The clock is what kills you. Which means the real question every turn isn't <em>"am I safe?"</em> &mdash; it's <em class="turn">"am I killing things fast enough?"</em></p>
+</article>
+
+<article class="entry">
+<div class="node"></div><span class="num">11</span>
+<h2>How to read the whole board in ten seconds.</h2>
+<p class="lede">Before you touch a card, run this scan. It'll make you look like you've played fifty games.</p>
+<ul class="knots">
+<li><b>1 &mdash; Read the Ravage slot</b><span>Which terrain burns this turn? Find every land of that terrain with Invaders in it. That's your emergency list.</span></li>
+<li><b>2 &mdash; Check each one for 2+ damage</b><span>Explorer 1, Town 2, City 3. Anything hitting 2 makes Blight. Anything already Blighted will cascade. Those are the fires worth putting out.</span></li>
+<li><b>3 &mdash; Read the Build slot</b><span>That's next turn's problem, forming right now. A Town about to become a City is much cheaper to kill today.</span></li>
+<li><b>4 &mdash; Count Dahan</b><span>Any Ravage land with 2+ Dahan may defend itself. Any Invader you can shove into Dahan is a free kill.</span></li>
+<li><b>5 &mdash; Say it out loud</b><span>Genuinely. Tell the table which land you're covering. Spirit Island is won by two players quietly covering the same jungle and losing the mountains &mdash; and lost the same way.</span></li>
+</ul>
+</article>
+
+<article class="entry">
+<div class="node"></div><span class="num">12</span>
+<h2>One full turn, start to finish.</h2>
+<p class="lede">Say you're <strong>River Surges in Sunlight</strong>, a river spirit. Here's a real turn, in order.</p>
+<div class="phases">
+<div class="ph you"><i>Growth</i><div><b>You take "add 1 presence + gain 1 Power card"</b><small>You put presence into wetland #3 &mdash; the land the Ravage card is about to hit &mdash; because you can't touch a land you're not in. You uncover a new number on your energy track: income is now 3.</small></div></div>
+<div class="ph you"><i>Energy</i><div><b>Collect 3 energy</b><small>You had 1 saved. You now have 4.</small></div></div>
+<div class="ph you"><i>Play cards</i><div><b>You have 2 card plays. You spend 3 energy on two Powers</b><small>One Fast, one Slow &mdash; deliberately.</small></div></div>
+<div class="ph you"><i>Fast</i><div><b>Flash Floods hits wetland #3</b><small>2 damage: the Town there dies. That's 1 Fear generated, and &mdash; crucially &mdash; the land now has only 1 Explorer left, so the Ravage will deal 1 damage instead of 3. No Blight.</small></div></div>
+<div class="ph them"><i>Invaders</i><div><b>Fear card resolves, then Ravage, Build, Explore</b><small>Wetland #3 takes its harmless 1 damage. But mountains get Built on: a new Town appears. The track advances &mdash; a Sand card flips into Explore.</small></div></div>
+<div class="ph you"><i>Slow</i><div><b>Boon of Vigor pushes Dahan into that mountain</b><small>You didn't kill the new Town. You parked two Dahan next to it, so when mountains Ravage in two turns, the Dahan counterattack erases it for free.</small></div></div>
+<div class="ph"><i>Time</i><div><b>Cards to discard. Turn over.</b><small>You'll need a Reclaim soon &mdash; watch that hand size.</small></div></div>
+</div>
+<div class="roar">That's the whole rhythm: see the machine two turns ahead, spend Fast to prevent, spend Slow to set traps, and grow a little bigger every single turn.</div>
+<p>Everything else in this game &mdash; the wild spirits, the scenarios, the adversary decks that make England or Sweden invade differently &mdash; is built on top of those twelve pieces. You know the game now. Go be terrifying.</p>
+</article>
 
 </div>
 
 <footer>
-  <p>Entry 1 of 12 · <a href="../">back to the shelf</a></p>
+  <p>Spirit Island &mdash; designed by R. Eric Reuss, published by Greater Than Games.</p>
+  <p>Field guide notes for a first playthrough. 1&ndash;4 players, roughly 90 minutes. &middot; <a href="../">back to the shelf</a></p>
 </footer>
-
 </div>
 </body>
 </html>

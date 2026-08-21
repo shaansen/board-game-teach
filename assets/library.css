@@ -139,6 +139,7 @@ body{
 /* Each card borrows its page's accent so the shelf hints at what's behind it. */
 .card.t-arkham{--card-accent:#7A241E}
 .card.t-island{--card-accent:#1E6B57}
+.card.t-troyes{--card-accent:#2F4B3C}
 .card .tab{background:var(--card-accent,var(--accent))}
 .card .go{color:var(--card-accent,var(--accent))}
 .card .status{
