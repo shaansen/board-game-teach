@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Breach Mage Training — Aeon's End</title>
+<meta name="description" content="A field manual that teaches Aeon's End in ten points, for someone who has never played it.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Grenze+Gotisch:wght@400;600;800&family=Karla:ital,wght@0,400;0,600;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --void:#0D0918;
+    --void-2:#161029;
+    --panel:#1B1333;
+    --edge:rgba(185,131,255,.22);
+    --bone:#E9E3F6;
+    --bone-dim:#A99CC4;
+    --aether:#7FD8FF;
+    --breach:#B983FF;
+    --ember:#FF7A59;
+    --display:"Grenze Gotisch", serif;
+    --body:"Karla", system-ui, sans-serif;
+    --mono:"Space Mono", ui-monospace, monospace;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    background:
+      radial-gradient(900px 500px at 50% -180px, rgba(185,131,255,.20), transparent 70%),
+      radial-gradient(600px 400px at 90% 20%, rgba(127,216,255,.07), transparent 70%),
+      var(--void);
+    color:var(--bone);
+    font-family:var(--body);
+    font-size:17px;
+    line-height:1.62;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:780px;margin:0 auto;padding:30px 22px 90px}
+
+  /* ---------- back to the shelf ---------- */
+  .backlink{
+    display:inline-block;margin-bottom:26px;
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.24em;
+    text-transform:uppercase;color:var(--bone-dim);text-decoration:none;
+    border-bottom:1px solid transparent;
+  }
+  .backlink:hover{color:var(--breach);border-bottom-color:var(--breach)}
+
+  /* ---------- header ---------- */
+  header{text-align:center;margin-bottom:14px}
+  .eyebrow{
+    font-family:var(--mono);font-size:11px;letter-spacing:.36em;
+    text-transform:uppercase;color:var(--bone-dim);
+  }
+  h1{
+    font-family:var(--display);font-weight:800;
+    font-size:clamp(2.6rem,9vw,4.4rem);
+    line-height:.94;margin:.28em 0 .18em;
+    text-shadow:0 0 42px rgba(185,131,255,.45);
+  }
+  h1 em{font-style:normal;color:var(--breach)}
+  .tagline{color:var(--bone-dim);max-width:46ch;margin:0 auto;font-size:16px}
+
+  .status{
+    display:flex;justify-content:center;gap:10px;align-items:center;
+    font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--bone-dim);margin:34px 0 44px;
+  }
+  .status b{color:var(--aether);font-weight:700}
+  .status .rule{height:1px;flex:1;max-width:110px;background:linear-gradient(90deg,transparent,var(--edge),transparent)}
+
+  /* ---------- the signature: breach cards ---------- */
+  .breach{
+    position:relative;
+    background:linear-gradient(160deg,var(--panel),var(--void-2));
+    border:1px solid var(--edge);
+    border-radius:2px;
+    padding:34px 30px 30px;
+    margin:0 0 26px;
+    animation:open .7s cubic-bezier(.2,.8,.25,1) both;
+  }
+  .breach::before{ /* glow seam along the top edge */
+    content:"";position:absolute;left:12%;right:12%;top:-1px;height:1px;
+    background:linear-gradient(90deg,transparent,var(--breach),transparent);
+    box-shadow:0 0 14px var(--breach);
+  }
+  @keyframes open{from{opacity:0;transform:translateY(14px) scale(.985)}to{opacity:1;transform:none}}
+
+  .glyph{
+    position:absolute;top:-21px;left:26px;
+    width:42px;height:42px;display:grid;place-items:center;
+    background:var(--void);
+    border:1px solid var(--breach);
+    transform:rotate(45deg);
+    box-shadow:0 0 22px rgba(185,131,255,.4);
+  }
+  .glyph span{
+    transform:rotate(-45deg);
+    font-family:var(--mono);font-size:14px;font-weight:700;color:var(--breach);
+  }
+
+  .label{
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.3em;
+    text-transform:uppercase;color:var(--bone-dim);margin-left:44px;
+  }
+  h2{
+    font-family:var(--display);font-weight:600;
+    font-size:clamp(1.6rem,4.6vw,2.15rem);line-height:1.1;
+    margin:.3em 0 .7em;color:var(--bone);
+  }
+  .breach p{margin:0 0 1em}
+  .breach p:last-child{margin-bottom:0}
+  strong{color:var(--aether);font-weight:600}
+  .bad{color:var(--ember);font-weight:600}
+
+  ul{margin:0 0 1em;padding-left:0;list-style:none}
+  ul li{position:relative;padding-left:26px;margin-bottom:.5em}
+  ul li::before{
+    content:"";position:absolute;left:6px;top:.62em;
+    width:7px;height:7px;background:var(--breach);transform:rotate(45deg);
+  }
+
+  .plain{
+    border-left:2px solid var(--aether);
+    background:rgba(127,216,255,.06);
+    padding:14px 18px;margin:22px 0 0;
+  }
+  .plain .k{
+    display:block;font-family:var(--mono);font-size:10px;letter-spacing:.28em;
+    text-transform:uppercase;color:var(--aether);margin-bottom:6px;
+  }
+  .plain p{font-size:16px}
+
+  /* ---------- closed breach (empty state) ---------- */
+  .closed{
+    border:1px dashed rgba(169,156,196,.3);
+    border-radius:2px;padding:26px 30px;text-align:center;color:var(--bone-dim);
+  }
+  .closed .glyph-closed{
+    width:34px;height:34px;margin:0 auto 12px;
+    border:1px dashed rgba(169,156,196,.5);transform:rotate(45deg);
+  }
+  .closed h3{
+    font-family:var(--display);font-weight:400;font-size:1.3rem;
+    margin:0 0 6px;color:var(--bone-dim);
+  }
+  .closed p{margin:0;font-size:15px}
+  .closed code{
+    font-family:var(--mono);color:var(--breach);background:rgba(185,131,255,.12);
+    padding:2px 7px;font-size:13px;
+  }
+
+  footer{
+    margin-top:46px;text-align:center;
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.24em;
+    text-transform:uppercase;color:rgba(169,156,196,.55);
+  }
+  footer a{color:var(--breach);text-decoration:none;border-bottom:1px solid rgba(185,131,255,.35)}
+
+  @media (prefers-reduced-motion:reduce){
+    .breach{animation:none}
+  }
+  @media (max-width:520px){
+    .wrap{padding:24px 16px 70px}
+    .breach{padding:32px 20px 24px}
+    .glyph{left:18px}
+    .label{margin-left:38px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <a class="backlink" href="../">&larr; the shelf</a>
+
+  <header>
+    <div class="eyebrow">Field manual · Gravehold</div>
+    <h1>Breach&nbsp;Mage <em>Training</em></h1>
+    <p class="tagline">Learning Aeon's End one breach at a time. Each point you learn opens a new breach below.</p>
+  </header>
+
+  <div class="status">
+    <span class="rule"></span>
+    <span>Breaches opened: <b>10</b></span>
+    <span class="rule"></span>
+  </div>
+
+  <!-- ===== POINT 1 ===== -->
+  <section class="breach">
+    <div class="glyph"><span>I</span></div>
+    <div class="label">Point 01 · The situation</div>
+    <h2>You're defending the last city on Earth — and you're doing it together.</h2>
+
+    <p>The world already lost. Everything above ground belongs to monsters called <strong>The Nameless</strong>, who crawl out of a place called the Void. What's left of humanity hides in <strong>Gravehold</strong>, an underground city.</p>
+
+    <p>You play a <strong>breach mage</strong> — a magic user who tears open little rips in reality (breaches) and fires spells through them. Right now, one enormous Nameless creature, called the <span class="bad">nemesis</span>, has found Gravehold and is trying to smash it open.</p>
+
+    <p>Here's the important part: <strong>Aeon's End is cooperative.</strong> There is no winner at the table. You and the other mages either all win or all lose, so talking, planning, and arguing about strategy out loud is part of the game.</p>
+
+    <ul>
+      <li><strong>You win</strong> by knocking the nemesis's life down to 0. (There's also a rarer way: outlasting it until its whole deck is gone.)</li>
+      <li><span class="bad">You lose</span> if Gravehold's life hits 0 — the city has its own health, starting at 30.</li>
+      <li><span class="bad">You also lose</span> if every mage is knocked out at once. Each mage starts with 10 life.</li>
+    </ul>
+
+    <p>So you're juggling three health bars at all times: the monster's (get it down), the city's (keep it up), and your own (don't be a hero and die).</p>
+
+    <div class="plain">
+      <span class="k">In plain words</span>
+      <p>Big monster attacks your city. You and your friends are wizards. Kill it before it flattens the city or flattens all of you.</p>
+    </div>
+  </section>
+
+  <!-- ===== POINT 2 ===== -->
+  <section class="breach" style="animation-delay:.05s">
+    <div class="glyph"><span>II</span></div>
+    <div class="label">Point 02 · The weird one</div>
+    <h2>Your deck is never shuffled. Not once. Not ever.</h2>
+
+    <p>Every mage starts with a <strong>10-card deck</strong>, stacked in an exact order printed on your mage board. Mostly <strong>Crystals</strong> (play one, get 1 Aether — that's the money) and <strong>Sparks</strong> (a basic spell that deals 1 damage), plus a card or two unique to your mage.</p>
+
+    <p>In almost every other deck-building game, when your deck runs out you shuffle your discard pile. Here you just <strong>flip the discard pile over</strong> and that's your new deck — in exactly the order the cards went in.</p>
+
+    <p>Which means you control the future. At the end of your turn you put the cards you played onto your discard pile <strong>in any order you want</strong>, and cards you buy land on top of the pile. So you can deliberately bury a weak card at the bottom and stack your best cards so they come back together in one monster turn.</p>
+
+    <div class="plain">
+      <span class="k">In plain words</span>
+      <p>No luck of the shuffle. If you draw a garbage hand, that's on you — you built that order five turns ago.</p>
+    </div>
+  </section>
+
+  <!-- ===== POINT 3 ===== -->
+  <section class="breach" style="animation-delay:.1s">
+    <div class="glyph"><span>III</span></div>
+    <div class="label">Point 03 · The chaos</div>
+    <h2>Nobody knows who goes next. Including the monster.</h2>
+
+    <p>Since your deck is totally predictable, the game makes something else unpredictable: <strong>turn order</strong>.</p>
+
+    <p>There's a small facedown <strong>turn order deck</strong> holding a card for each player plus exactly <strong>two nemesis cards</strong>. Flip the top card — whoever it names takes a turn. Then flip the next one. When the deck runs out, shuffle the discards and start again.</p>
+
+    <p>You're not allowed to peek. So the nemesis might go once, or you might flip <span class="bad">two nemesis cards back to back</span> and eat two monster turns in a row before anyone can react. That double-turn is the thing that kills teams.</p>
+
+    <div class="plain">
+      <span class="k">In plain words</span>
+      <p>Always leave a little defense in the tank. "The nemesis just went, we're safe" is a lie.</p>
+    </div>
+  </section>
+
+  <!-- ===== POINT 4 ===== -->
+  <section class="breach" style="animation-delay:.15s">
+    <div class="glyph"><span>IV</span></div>
+    <div class="label">Point 04 · Your toolkit</div>
+    <h2>Three kinds of cards, and only one of them is complicated.</h2>
+
+    <ul>
+      <li><strong>Gems</strong> — play them, get <strong>Aether</strong> (the sparkly blue currency). Aether is money, and it's gone at the end of your turn if you don't spend it.</li>
+      <li><strong>Relics</strong> — play them, get a one-time useful effect, done.</li>
+      <li><strong>Spells</strong> — your damage. These <em>cannot</em> just be played. They have to go through a breach first. That's Point 5.</li>
+    </ul>
+
+    <p>In the middle of the table sits the <strong>supply</strong>: 9 piles of cards everyone can buy from, usually about 3 gems, 2 relics and 4 spells. Spend Aether, take the top card of a pile, and it goes straight onto <strong>top of your discard pile</strong> — not into your hand. You'll use it in a future turn, not this one.</p>
+
+    <div class="plain">
+      <span class="k">In plain words</span>
+      <p>Gems and relics do their thing instantly. Spells are the ones with the delay, and the delay is the whole game.</p>
+    </div>
+  </section>
+
+  <!-- ===== POINT 5 ===== -->
+  <section class="breach" style="animation-delay:.2s">
+    <div class="glyph"><span>V</span></div>
+    <div class="label">Point 05 · The signature move</div>
+    <h2>Breaches: load the spell this turn, fire it next turn.</h2>
+
+    <p>Each mage has <strong>four breaches</strong> next to their board. Some start open, the rest start closed. To attack, you <strong>prep</strong> a spell — lay the spell card face up on an open breach — and then it just sits there. You <strong>cast</strong> it at the start of your <em>next</em> turn.</p>
+
+    <p>So every attack you make is a decision you made a turn ago. That's the tension of the whole game.</p>
+
+    <p>Closed breaches can be dealt with two ways, and both cost Aether:</p>
+    <ul>
+      <li><strong>Focus</strong> (cheap) — rotate the breach 90° clockwise. Progress is permanent, and four rotations opens it for good. Bonus: you may prep a spell to it <em>this turn only</em>.</li>
+      <li><strong>Open</strong> (expensive) — flip it fully open right now, forever.</li>
+    </ul>
+
+    <p>One catch: a spell sitting on a proper <strong>open</strong> breach can wait as long as you like — hold it for the perfect moment. A spell prepped to a breach you only <strong>focused</strong> is unstable and <span class="bad">must</span> be cast on your next turn.</p>
+
+    <div class="plain">
+      <span class="k">In plain words</span>
+      <p>Breaches are your gun barrels. More open breaches = more spells in the air at once. Getting a second and third breach open early is usually a great idea.</p>
+    </div>
+  </section>
+
+  <!-- ===== POINT 6 ===== -->
+  <section class="breach" style="animation-delay:.25s">
+    <div class="glyph"><span>VI</span></div>
+    <div class="label">Point 06 · Your turn</div>
+    <h2>Cast, then spend, then draw. Same three steps every time.</h2>
+
+    <ul>
+      <li><strong>1. Casting phase.</strong> Cast the spells prepped on your breaches and deal the damage. Spells on unstable (focused) breaches must be cast now; spells on open breaches are your choice. Cast spells go to your discard pile.</li>
+      <li><strong>2. Main phase.</strong> The busy part — do any of these, any number of times, in any order: play gems and relics for Aether, buy cards from the supply, focus or open breaches, charge your ability, and prep spells from your hand onto breaches.</li>
+      <li><strong>3. Draw phase.</strong> Everything you played, plus anything still in your hand, goes on top of your discard pile <strong>in the order you choose</strong>. Then draw back up to 5 cards.</li>
+    </ul>
+
+    <p>Notice that step 3 is where Point 2 pays off. That "in the order you choose" is not filler — it's the single most skill-heavy moment of your turn.</p>
+
+    <div class="plain">
+      <span class="k">In plain words</span>
+      <p>Fire what you loaded. Shop and reload. Stack your discard pile like you're setting a trap for future-you.</p>
+    </div>
+  </section>
+
+  <!-- ===== POINT 7 ===== -->
+  <section class="breach" style="animation-delay:.3s">
+    <div class="glyph"><span>VII</span></div>
+    <div class="label">Point 07 · The monster's turn</div>
+    <h2>The nemesis doesn't think. It just gets worse.</h2>
+
+    <p>When a nemesis turn order card flips, three things happen in order:</p>
+    <ul>
+      <li><strong>Unleash</strong> — the nemesis mat has one signature nasty effect that triggers every single nemesis turn. It's different for each monster.</li>
+      <li><strong>Resolve what's already on the table</strong> — minions attack again, and every power card ticks down one token.</li>
+      <li><strong>Flip the top nemesis card</strong> and resolve it.</li>
+    </ul>
+
+    <p>That flipped card is one of three types:</p>
+    <ul>
+      <li><span class="bad">Attack</span> — happens right now, then gets discarded. Usually damage to Gravehold or to a mage.</li>
+      <li><span class="bad">Minion</span> — a smaller creature that stays on the table with its own life total and hurts you <em>every</em> nemesis turn until you kill it. Your spells can target minions instead of the boss.</li>
+      <li><span class="bad">Power</span> — a doomsday timer. It arrives with a number of tokens, loses one per nemesis turn, and when it hits zero something horrible happens. Some can be cancelled early if you meet a condition.</li>
+    </ul>
+
+    <div class="plain">
+      <span class="k">In plain words</span>
+      <p>Powers are countdowns, minions are leaks, attacks are punches. Ignoring a countdown feels fine right up until it doesn't.</p>
+    </div>
+  </section>
+
+  <!-- ===== POINT 8 ===== -->
+  <section class="breach" style="animation-delay:.35s">
+    <div class="glyph"><span>VIII</span></div>
+    <div class="label">Point 08 · Your special move</div>
+    <h2>Every mage has one signature ability, and you have to save up for it.</h2>
+
+    <p>Your mage board has a unique ability with a charge cost. During your main phase you may spend <strong>2 Aether to gain 1 charge token</strong> (once per turn). Once you've stacked up enough charges, discard them all to fire the ability.</p>
+
+    <p>These are the game-swinging moments: healing Gravehold, blasting every minion at once, letting a teammate cast a spell out of nowhere. Many abilities can be used on <em>anyone's</em> turn, which makes them perfect emergency buttons — so it's often better to sit on a fully charged ability than to spend it the second it's ready.</p>
+
+    <div class="plain">
+      <span class="k">In plain words</span>
+      <p>It's your ultimate. Charge it early, hold it, and use it on the turn everything is about to go wrong.</p>
+    </div>
+  </section>
+
+  <!-- ===== POINT 9 ===== -->
+  <section class="breach" style="animation-delay:.4s">
+    <div class="glyph"><span>IX</span></div>
+    <div class="label">Point 09 · Getting hurt</div>
+    <h2>You're the shield. Being knocked out is bad, but it isn't the end.</h2>
+
+    <p>Every nemesis card tells you exactly who takes the damage — Gravehold, one mage, or everyone. When a mage hits <strong>0 life</strong>, they become <span class="bad">exhausted</span>, and all of this happens:</p>
+    <ul>
+      <li>Gravehold immediately suffers 2 damage.</li>
+      <li>That mage destroys one of their own breaches, along with any spell prepped on it.</li>
+      <li>They lose all their charge tokens.</li>
+      <li>They can never gain life again for the rest of the game.</li>
+    </ul>
+
+    <p>But they <strong>keep taking turns</strong> — buying, prepping, casting, all of it. The catch is that from then on, any damage they would take is <span class="bad">doubled and dealt to Gravehold instead</span>. Which is why an exhausted mage is a slow bleed the whole team pays for.</p>
+
+    <p>Still — with 10 life each and a city on 30, mages are the cheaper resource. Soaking a hit yourself to spare Gravehold is often correct.</p>
+
+    <div class="plain">
+      <span class="k">In plain words</span>
+      <p>Take hits early to protect the city. Just don't get so used to it that you hit zero, because after that you're a liability.</p>
+    </div>
+  </section>
+
+  <!-- ===== POINT 10 ===== -->
+  <section class="breach" style="animation-delay:.45s">
+    <div class="glyph"><span>X</span></div>
+    <div class="label">Point 10 · How to not lose your first game</div>
+    <h2>Six things new mages get wrong.</h2>
+
+    <ul>
+      <li><strong>Buy a better gem early.</strong> A deck full of 1-Aether Crystals can never afford the good spells. Money first, muscle second.</li>
+      <li><strong>Get a second breach open fast.</strong> One open breach means one spell per turn forever. That's not enough damage to win.</li>
+      <li><strong>Don't buy something just because you have the Aether.</strong> A junk card is in your deck permanently, clogging every future hand.</li>
+      <li><strong>Kill minions.</strong> They look small. They hit every single nemesis turn, and they add up faster than the boss does.</li>
+      <li><strong>Read the power countdowns out loud.</strong> Say what's going to happen and in how many turns, so the whole table is planning around the same clock.</li>
+      <li><strong>Talk constantly.</strong> It's co-op. Tell people what's prepped, what your ability does and when you'll fire it. The game is genuinely balanced expecting you to coordinate.</li>
+    </ul>
+
+    <div class="plain">
+      <span class="k">The one-sentence version</span>
+      <p>Stack your discard pile on purpose, open your breaches early, and always play like the nemesis is about to take two turns in a row — because sooner or later, it will.</p>
+    </div>
+  </section>
+
+  <section class="breach" style="animation-delay:.5s">
+    <div class="glyph"><span>✦</span></div>
+    <div class="label">Field manual complete</div>
+    <h2>That's the whole game. Everything else is just cards.</h2>
+    <p>Genuinely — those ten points cover the rules. Every mage, spell, and nemesis you meet from here is a variation on what's above, and the box has a rulebook if a specific card ever argues with you.</p>
+    <p>Gravehold is counting on you. Try not to mention that the city has 30 life and you have 10.</p>
+  </section>
+
+  <footer>10 of 10 · All breaches open · <a href="../">back to the shelf</a></footer>
+
+</div>
+</body>
+</html>
