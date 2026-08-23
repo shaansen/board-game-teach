@@ -12,30 +12,30 @@ your first game.
 
 | Path | What it is |
 | --- | --- |
-| `index.html` | The shelf — the landing page listing every briefing |
-| `games/arkham-horror-lcg.html` | Arkham Horror: The Card Game — 15 points, complete |
-| `games/spirit-island.html` | Spirit Island — 12 pieces, complete |
-| `games/troyes.html` | Troyes — 14 chapters, complete |
-| `games/aeons-end.html` | Aeon's End — 10 points, complete |
-| `games/obsession.html` | Obsession — 22 points, complete |
-| `games/paperback.html` | Paperback — 10 points, complete |
+| `index.html` | The shelf, the landing page listing every briefing |
+| `games/arkham-horror-lcg.html` | Arkham Horror: The Card Game, 15 points, complete |
+| `games/spirit-island.html` | Spirit Island, 12 pieces, complete |
+| `games/troyes.html` | Troyes, 14 chapters, complete |
+| `games/aeons-end.html` | Aeon's End, 10 points, complete |
+| `games/obsession.html` | Obsession, 22 points, complete |
+| `games/paperback.html` | Paperback, 10 points, complete |
 | `games/_template.html` | Starting point for a new briefing |
 | `assets/dossier.css` | Shared layout system, for pages that want one |
 | `assets/library.css` | Styles for the shelf |
 | `.github/workflows/deploy.yml` | Publishes the repo to GitHub Pages on every push to `main` |
 
-No build step, no dependencies, no framework. Plain HTML and CSS — open any file in a
+No build step, no dependencies, no framework. Plain HTML and CSS: open any file in a
 browser and it works.
 
 ## Adding a game
 
-1. `cp games/_template.html games/your-game.html` — or, if the game wants a look of
+1. `cp games/_template.html games/your-game.html`, or, if the game wants a look of
    its own, write a self-contained page with its own `<style>` block (that's what
    `spirit-island.html` and `troyes.html` do). Both are fine; see *Two ways to style
    a page* below.
 2. Write it (see the house style below).
-3. Add a card to the shelf in `index.html` — an emblem `<symbol>` in the icon set at
-   the top, then a box:
+3. Add a card to the shelf in `index.html`. First an emblem `<symbol>` in the icon
+   set at the top, then a box:
 
    ```html
    <a class="game" href="games/your-game.html" style="--accent:#7A241E">
@@ -53,23 +53,23 @@ To preview locally: `python3 -m http.server` then open http://localhost:8000.
 
 The thing that makes these work is the format, so keep it:
 
-- **Numbered points, one idea each.** Each point is a `.page` section — a sheet of
+- **Numbered points, one idea each.** Each point is a `.page` section, a sheet of
   paper on a dark table. A reader should be able to stop after any point and still
   have learned something whole.
 - **Order by dependency.** Point *n* only uses ideas from points 1…*n*−1. The first
   point is always "what kind of game is this and who are you playing against".
-- **Explain the why.** Never "you get three actions" alone — always "you get three
+- **Explain the why.** Never "you get three actions" alone, always "you get three
   actions, it's never enough, and that's the game."
 - **Second person, plain words.** No jargon before it's defined. Say "monster", not
   "non-player enemy unit".
-- **End each point with a `.note`** — the one sentence worth remembering.
+- **End each point with a `.note`**: the one sentence worth remembering.
 - **Finish with a "how not to lose your first game" point.** The instincts a normal
   board game trained into the reader are usually the ones that lose this one.
 
 ### Two ways to style a page
 
 **Share the system.** Load `assets/dossier.css` and override a handful of CSS
-variables — palette and typefaces only. Structure stays identical, so a reader who
+variables, palette and typefaces only. Structure stays identical, so a reader who
 learned one page can read them all. `arkham-horror-lcg.html` works this way.
 
 **Bring your own.** If the game deserves a different shape on the page, write a
@@ -91,7 +91,7 @@ The only things every page must share are the `← the shelf` backlink at the to
 | `figure` + inline `<svg>` | Diagrams |
 | `.scroll` around `<table>` | Keeps wide tables from breaking phones |
 
-Diagrams are **inline SVG only** — no images, no libraries. Use the shared ink classes
+Diagrams are **inline SVG only**: no images, no libraries. Use the shared ink classes
 (`f-neutral`, `f-teal`, `f-red`, `f-brass`, `f-violet`, `f-spent`) and text classes
 (`tt`, `ts`) so figures look the same everywhere, and always give each `<svg>` a
 `<title>` and `<desc>` for screen readers.
@@ -99,5 +99,5 @@ Diagrams are **inline SVG only** — no images, no libraries. Use the shared ink
 ## Licence
 
 Text and layout: do what you like with it. Game names, rules and settings belong to
-their publishers — these pages are unofficial teaching material and reproduce no
+their publishers. These pages are unofficial teaching material and reproduce no
 copyrighted card text or art.

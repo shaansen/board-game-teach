@@ -1,5 +1,5 @@
 /* ===========================================================
-   dossier.css — shared "field notes" layout for teaching pages
+   dossier.css: shared "field notes" layout for teaching pages
    Every game page loads this, then overrides the palette and
    typefaces in its own <style> block. Structure stays identical
    so a reader who learned one page can read them all.
@@ -17,7 +17,7 @@
   --body:Georgia,serif;
   --mono:"Courier New",monospace;
 
-  /* figure ink — used by inline SVG diagrams */
+  /* figure ink, used by inline SVG diagrams */
   --f-neutral-fill:#DBD0B4; --f-neutral-line:#8A7C5F;
   --f-teal-fill:#CBD9D2;    --f-teal-line:#2D5F58;
   --f-red-fill:#E9D0C8;     --f-red-line:#7A241E;
@@ -172,7 +172,7 @@ body{
 }
 .page ul li:last-child{border-bottom:none}
 .page ul li::before{
-  content:"—";
+  content:"–";
   position:absolute;left:0;top:7px;
   color:var(--accent-2);
   font-family:var(--mono);
