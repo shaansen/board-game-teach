@@ -34,26 +34,17 @@ browser and it works.
    `spirit-island.html` and `troyes.html` do). Both are fine; see *Two ways to style
    a page* below.
 2. Write it (see the house style below).
-3. Add a card to the "On the shelf" list in `index.html`:
+3. Add a card to the shelf in `index.html` — an emblem `<symbol>` in the icon set at
+   the top, then a box:
 
    ```html
-   <a class="card" href="games/your-game.html">
-     <span class="tab">Co-op · campaign</span>
-     <h2>Your Game</h2>
-     <p class="deck">The hook, in one italic sentence.</p>
-     <div class="meta">
-       <span><b>1–4</b> players</span>
-       <span><b>~90 min</b></span>
-       <span><b>12 of 12</b> points</span>
-       <span><b>~20 min</b> read</span>
-     </div>
-     <span class="go">Read the briefing →</span>
+   <a class="game" href="games/your-game.html" style="--accent:#7A241E">
+     <span class="emblem"><svg><use href="#e-yourgame"/></svg></span>
+     <h3>Your Game</h3>
+     <p class="hook">The hook, in one sentence.</p>
+     <p class="meta">1–4 players · 90 min · 12 points</p>
    </a>
    ```
-
-   Add `class="card t-yourgame"` and a `.t-yourgame{--card-accent:#...}` rule in
-   `assets/library.css` if you want the card to carry the page's own accent colour,
-   and a `<span class="status">In progress</span>` badge while it's unfinished.
 
 4. Push to `main`. The workflow deploys it.
 
