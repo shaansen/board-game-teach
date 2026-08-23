@@ -19,6 +19,7 @@ your first game.
 | `games/aeons-end.html` | Aeon's End, 10 points, complete |
 | `games/obsession.html` | Obsession, 22 points, complete |
 | `games/paperback.html` | Paperback, 10 points, complete |
+| `games/glass-road.html` | Glass Road, 14 points, complete |
 | `games/_template.html` | Starting point for a new briefing |
 | `assets/dossier.css` | Shared layout system, for pages that want one |
 | `assets/library.css` | Styles for the shelf |
