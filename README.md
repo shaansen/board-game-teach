@@ -17,6 +17,8 @@ your first game.
 | `games/spirit-island.html` | Spirit Island — 12 pieces, complete |
 | `games/troyes.html` | Troyes — 14 chapters, complete |
 | `games/aeons-end.html` | Aeon's End — 10 points, complete |
+| `games/obsession.html` | Obsession — 22 points, complete |
+| `games/paperback.html` | Paperback — 10 points, complete |
 | `games/_template.html` | Starting point for a new briefing |
 | `assets/dossier.css` | Shared layout system, for pages that want one |
 | `assets/library.css` | Styles for the shelf |
@@ -83,8 +85,10 @@ learned one page can read them all. `arkham-horror-lcg.html` works this way.
 **Bring your own.** If the game deserves a different shape on the page, write a
 self-contained page with its own `<style>` block. `spirit-island.html` is a vertical
 spine of numbered entries; `troyes.html` is a parchment chronicle with a cathedral
-progress bar; `aeons-end.html` is a run of glowing breaches in the Void. The only things every page must share are the `← the shelf` backlink at
-the top, a footer link back, and the house style below.
+progress bar; `aeons-end.html` is a run of glowing breaches in the Void;
+`obsession.html` is a single card you deal through from a servants' bell board;
+`paperback.html` is a stack of pulp novels on a shelf.
+The only things every page must share are the `← the shelf` backlink at the top, a footer link back, and the house style below.
 
 ### The building blocks (shared system)
 

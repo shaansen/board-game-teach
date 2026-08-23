@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Paperback — A Crash Course for New Authors</title>
+<meta name="description" content="A crash course that teaches Paperback in ten points, for someone who has never opened the box.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Ultra&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#14110C;
+    --ink-2:#1E1A13;
+    --paper:#F4ECDA;
+    --paper-2:#EADFC7;
+    --text:#221C13;
+    --text-dim:#6B5F4B;
+    --red:#C33A22;
+    --mustard:#E0A020;
+    --teal:#1E6F63;
+    --display:"Ultra", Georgia, serif;
+    --body:"Crimson Pro", Georgia, serif;
+    --type:"Courier Prime", ui-monospace, monospace;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    background:var(--ink);
+    background-image:
+      repeating-linear-gradient(0deg, rgba(255,255,255,.014) 0 1px, transparent 1px 3px),
+      radial-gradient(700px 340px at 50% -60px, rgba(224,160,32,.13), transparent 70%);
+    color:var(--paper);
+    font-family:var(--body);
+    font-size:19px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:760px;margin:0 auto;padding:32px 20px 80px}
+
+  /* ---------- back to the shelf ---------- */
+  .backlink{
+    display:inline-block;margin-bottom:22px;
+    font-family:var(--type);font-size:10.5px;letter-spacing:.24em;
+    text-transform:uppercase;color:rgba(244,236,218,.6);text-decoration:none;
+    border-bottom:1px solid transparent;
+  }
+  .backlink:hover{color:var(--mustard);border-bottom-color:var(--mustard)}
+
+  /* ---------- cover ---------- */
+  header{
+    border:3px solid var(--paper);
+    padding:30px 24px 26px;
+    text-align:center;
+    position:relative;
+    background:linear-gradient(180deg, rgba(195,58,34,.14), transparent 60%);
+  }
+  header::after{
+    content:"";position:absolute;inset:6px;border:1px solid rgba(244,236,218,.35);pointer-events:none;
+  }
+  .imprint{
+    font-family:var(--type);font-size:11px;letter-spacing:.34em;text-transform:uppercase;
+    color:var(--mustard);
+  }
+  h1{
+    font-family:var(--display);
+    font-size:clamp(2.5rem,11vw,4.6rem);
+    line-height:.92;margin:.2em 0 .1em;
+    color:var(--paper);
+    text-shadow:4px 4px 0 var(--red);
+    letter-spacing:-.01em;
+  }
+  .byline{
+    font-family:var(--type);font-size:12px;letter-spacing:.2em;text-transform:uppercase;
+    color:rgba(244,236,218,.7);margin-top:10px;
+  }
+  .blurb{
+    max-width:44ch;margin:16px auto 0;font-style:italic;color:rgba(244,236,218,.85);font-size:17px;
+  }
+
+  .shelf{
+    display:flex;align-items:center;gap:12px;margin:34px 0 26px;
+    font-family:var(--type);font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+    color:rgba(244,236,218,.6);
+  }
+  .shelf::before,.shelf::after{content:"";height:2px;flex:1;background:rgba(244,236,218,.25)}
+
+  /* ---------- the signature: each point is a paperback ---------- */
+  .pb{
+    position:relative;
+    background:var(--paper);
+    color:var(--text);
+    border-left:12px solid var(--red);
+    padding:30px 28px 26px 30px;
+    margin:0 0 22px;
+    box-shadow:6px 6px 0 rgba(0,0,0,.45);
+    animation:shelve .55s ease-out both;
+  }
+  .pb:nth-of-type(4n+2){border-left-color:var(--mustard)}
+  .pb:nth-of-type(4n+3){border-left-color:var(--teal)}
+  .pb:nth-of-type(4n+4){border-left-color:var(--ink-2)}
+  @keyframes shelve{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+  .price{
+    position:absolute;top:-14px;right:22px;
+    width:56px;height:56px;border-radius:50%;
+    background:var(--ink);color:var(--paper);
+    display:grid;place-items:center;text-align:center;
+    font-family:var(--type);font-size:11px;font-weight:700;line-height:1.15;
+    border:2px solid var(--paper);
+    transform:rotate(-8deg);
+  }
+  .kicker{
+    font-family:var(--type);font-size:10.5px;letter-spacing:.28em;
+    text-transform:uppercase;color:var(--red);
+  }
+  h2{
+    font-family:var(--display);
+    font-size:clamp(1.35rem,4.4vw,1.85rem);
+    line-height:1.12;margin:.35em 0 .6em;max-width:22ch;
+    color:var(--ink);
+  }
+  .pb p{margin:0 0 .9em}
+  .pb p:last-child{margin-bottom:0}
+  strong{color:var(--red);font-weight:600}
+  .hl{background:rgba(224,160,32,.4);padding:0 3px}
+
+  ul{margin:0 0 1em;padding-left:0;list-style:none}
+  li{position:relative;padding-left:24px;margin-bottom:.45em}
+  li::before{
+    content:"";position:absolute;left:4px;top:.62em;width:9px;height:2px;background:var(--ink);
+  }
+
+  .card-row{
+    display:flex;flex-wrap:wrap;gap:7px;margin:0 0 1em;
+  }
+  .tile{
+    font-family:var(--type);font-weight:700;font-size:15px;
+    border:2px solid var(--ink);padding:8px 11px;background:var(--paper-2);
+    min-width:38px;text-align:center;
+  }
+  .tile.wild{border-style:dashed;color:var(--text-dim)}
+  .track{display:flex;gap:6px;align-items:center;margin:0 0 1em;flex-wrap:wrap}
+  .track span{
+    font-family:var(--type);font-size:12px;font-weight:700;
+    border:2px solid var(--ink);padding:5px 9px;
+  }
+  .track span.end{background:var(--ink);color:var(--paper)}
+
+  .note{
+    border:2px dashed var(--text-dim);
+    padding:13px 16px;margin-top:20px;background:rgba(224,160,32,.12);
+  }
+  .note .k{
+    display:block;font-family:var(--type);font-size:10px;letter-spacing:.26em;
+    text-transform:uppercase;color:var(--text-dim);margin-bottom:5px;
+  }
+  .note p{font-size:17px;margin:0}
+
+  footer{
+    margin-top:40px;text-align:center;
+    font-family:var(--type);font-size:10.5px;letter-spacing:.24em;
+    text-transform:uppercase;color:rgba(244,236,218,.45);
+  }
+  footer a{color:var(--mustard);text-decoration:none;border-bottom:1px solid rgba(224,160,32,.4)}
+
+  @media (prefers-reduced-motion:reduce){.pb{animation:none}}
+  @media (max-width:520px){
+    body{font-size:18px}
+    .wrap{padding:24px 14px 60px}
+    .pb{padding:28px 18px 22px 20px}
+    .price{right:14px}
+    h2{max-width:none}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <a class="backlink" href="../">&larr; the shelf</a>
+
+  <header>
+    <div class="imprint">Fowers Games · 2014 · Word + Deck</div>
+    <h1>Paperback</h1>
+    <div class="byline">A crash course for new authors</div>
+    <p class="blurb">You're a struggling pulp novelist. Spell words, get paid, buy better letters, and become famous before anyone else does.</p>
+  </header>
+
+  <div class="shelf">Ten points · read in order</div>
+
+  <!-- 01 -->
+  <section class="pb">
+    <div class="price">No.<br>01</div>
+    <div class="kicker">The pitch</div>
+    <h2>It's Scrabble and Dominion in a trench coat.</h2>
+    <p>You're helping a writer named Paige Turner crank out cheap paperback novels — westerns, sci-fi, romance, crime. Every turn you spell a word out of the cards in your hand. Better words earn more money. Money buys better cards. Better cards let you spell better words.</p>
+    <p>But money isn't how you win. You win by collecting <strong>Fame</strong> points, printed on the beautiful fake book covers you buy. <span class="hl">Most Fame at the end wins</span> — and everything else in the game is just the machine you build to get there.</p>
+    <div class="note">
+      <span class="k">In plain words</span>
+      <p>Spell words → earn cash → buy cards → spell better words → buy book covers → win. Your vocabulary matters, but your shopping matters more.</p>
+    </div>
+  </section>
+
+  <!-- 02 -->
+  <section class="pb">
+    <div class="price">No.<br>02</div>
+    <div class="kicker">Your deck</div>
+    <h2>You start with ten cards and not a single vowel.</h2>
+    <p>Everyone begins with the exact same deck: the letters <strong>R, S, T, L, N</strong> plus five <strong>wild cards</strong>. Shuffle it, draw five, and you're an author.</p>
+    <div class="card-row">
+      <span class="tile">R</span><span class="tile">S</span><span class="tile">T</span><span class="tile">L</span><span class="tile">N</span>
+      <span class="tile wild">?</span><span class="tile wild">?</span><span class="tile wild">?</span><span class="tile wild">?</span><span class="tile wild">?</span>
+    </div>
+    <p>Wilds can be <em>any</em> letter you want — including vowels, which is lucky, because you own zero of those. The catch: a wild pays you <strong>0¢</strong>. It fills a slot in your word and hands you nothing.</p>
+    <p>So a hand of five wilds can spell almost anything and earns you almost nothing. That trade-off is the entire game in one sentence.</p>
+    <div class="note">
+      <span class="k">In plain words</span>
+      <p>Wilds are flexible but broke. Letters are stiff but pay. You need both, and you'll spend the whole game arguing with yourself about the ratio.</p>
+    </div>
+  </section>
+
+  <!-- 03 -->
+  <section class="pb">
+    <div class="price">No.<br>03</div>
+    <div class="kicker">Your turn</div>
+    <h2>Step one: put five cards down as a word.</h2>
+    <p>Lay the cards you're using face-up in front of you, left to right, spelling a real word. A few ground rules:</p>
+    <ul>
+      <li>You <strong>don't</strong> have to use all five cards. A short, expensive word can beat a long, cheap one.</li>
+      <li>No proper nouns — no names, no places, no brands.</li>
+      <li>Cards you don't use earn you nothing and get discarded anyway.</li>
+    </ul>
+    <p>This is the part that scares people off, and it shouldn't. Unlike Scrabble, you're never staring at a board full of blocked squares. You have five cards, wilds to cover the gaps, and a shared vowel sitting in the middle of the table (that's next).</p>
+    <div class="note">
+      <span class="k">In plain words</span>
+      <p>Plurals and endings are your best friends. <em>-S, -ED, -ING, -ER</em> turn a boring 4-letter word into a paying 6-letter one.</p>
+    </div>
+  </section>
+
+  <!-- 04 -->
+  <section class="pb">
+    <div class="price">No.<br>04</div>
+    <div class="kicker">Shared letter</div>
+    <h2>The Common card is a free letter for everybody.</h2>
+    <p>In the middle of the table, one card is face up — the <strong>Common card</strong>, usually a vowel. On your turn you may use it in your word for free, once. You don't pick it up; you just point at it and say you're using it. It stays put for the next player.</p>
+    <p>So really you have six letters to work with, not five. New players constantly forget this and spell four-letter words all game.</p>
+    <div class="note">
+      <span class="k">In plain words</span>
+      <p>Look at the Common card first, then build around it. It's free money you already own.</p>
+    </div>
+  </section>
+
+  <!-- 05 -->
+  <section class="pb">
+    <div class="price">No.<br>05</div>
+    <div class="kicker">Payday</div>
+    <h2>Only the letters you actually used pay you.</h2>
+    <p>Every card has a small <strong>¢ value</strong> printed on it. Add up the cents on the cards in your word — plus the Common card if you used it — and that total is your money for this turn.</p>
+    <p>Cards left in your hand are worth nothing. Wilds in your word are worth nothing. Rarer, pricier letters are worth more, which is why your starting <em>R-S-T-L-N</em> deck feels so poor so fast.</p>
+    <p>Any money you don't spend this turn <span class="hl">vanishes</span>. There's no saving up between turns, ever.</p>
+    <div class="note">
+      <span class="k">In plain words</span>
+      <p>A 7-letter word made of four wilds might pay less than a 3-letter word made of good letters. Count the cents, not the letters.</p>
+    </div>
+  </section>
+
+  <!-- 06 -->
+  <section class="pb">
+    <div class="price">No.<br>06</div>
+    <div class="kicker">Shopping</div>
+    <h2>Spend it all, on as much as it'll cover.</h2>
+    <p>In the middle of the table sits <strong>the Offer</strong>: piles of letter cards sorted by price, from cheap 2¢ letters up to the expensive powerhouses, plus the Fame cards. Spend your money on anything you can afford — and unlike most deck-builders, you can <strong>buy more than one card</strong> as long as the total fits your budget.</p>
+    <p>Everything you buy goes straight into your <strong>discard pile</strong>, not your hand. Then your whole hand and your purchases go to the discard, and you draw five fresh cards. When your deck runs out, shuffle the discard pile into a new deck — new cards included.</p>
+    <div class="note">
+      <span class="k">In plain words</span>
+      <p>Eight cents buys one great letter or two decent ones. Two decent ones thicken your deck; one great one sharpens it. Sharper usually wins.</p>
+    </div>
+  </section>
+
+  <!-- 07 -->
+  <section class="pb">
+    <div class="price">No.<br>07</div>
+    <div class="kicker">The trap</div>
+    <h2>Fame cards win the game and wreck your deck.</h2>
+    <p>Fame cards are the gorgeous fake novel covers, sold in four piles from cheap ones worth a few points up to prestige covers worth a small fortune. They're the only real way to score.</p>
+    <p>Here's the cruelty: a Fame card in your hand is just another <strong>wild worth 0¢</strong>. Every one you buy makes your future hands a little poorer. Buy too many too early and you'll be spelling beautiful words for two cents each while everyone else buys the good letters.</p>
+    <p>Buy none, though, and you lose with the sharpest deck at the table. <span class="hl">Letters early, Fame late</span> is the classic rhythm — and knowing exactly when to flip is the skill of the whole game.</p>
+    <div class="note">
+      <span class="k">In plain words</span>
+      <p>Fame cards are dessert. Eat them too early and you can't finish dinner. Skip them entirely and you starve.</p>
+    </div>
+  </section>
+
+  <!-- 08 -->
+  <section class="pb">
+    <div class="price">No.<br>08</div>
+    <div class="kicker">The long shot</div>
+    <h2>Spell a monster word, keep the Common card.</h2>
+    <p>The Common cards sit on a <strong>length track</strong>. If your word is at least as long as the number showing, you keep that Common card permanently — it's worth <strong>5 Fame</strong> and becomes a useful vowel in your deck. Then the next Common card is revealed and the bar goes up:</p>
+    <div class="track">
+      <span>7</span><span>8</span><span>9</span><span>10</span><span class="end">Game end</span>
+    </div>
+    <p>Seven letters out of a five-card hand sounds impossible, which is why double-letter cards exist: some cards show two letters at once, like <strong>ED</strong> or <strong>NG</strong>. They must be used together, in that order, and they count as two letters toward your length.</p>
+    <div class="note">
+      <span class="k">In plain words</span>
+      <p>Two double-letter cards plus wilds plus the Common card gets you to eight letters fast. Free Fame, no money spent.</p>
+    </div>
+  </section>
+
+  <!-- 09 -->
+  <section class="pb">
+    <div class="price">No.<br>09</div>
+    <div class="kicker">Powers</div>
+    <h2>Letters have abilities — but only if you use them.</h2>
+    <p>Most bought letters carry a special power printed on them, and it fires only when that card appears in your word. Sitting unused in your hand, it does nothing.</p>
+    <ul>
+      <li><strong>Double letter score</strong> — the Scrabble classic, on a card you own forever.</li>
+      <li><strong>Draw extra cards</strong> — a bigger hand next turn means a longer word.</li>
+      <li><strong>Bonus cents</strong> — flat extra money, sometimes for each wild in your word.</li>
+      <li><strong>Trash a card</strong> — the quiet superstar. It deletes a card from your deck permanently.</li>
+    </ul>
+    <p>Trashing is how good players win. Every junk starting card you throw away means your good cards come around faster. Get rid of a couple of those 0¢ starting wilds early and your whole deck gets richer.</p>
+    <p>There are also <strong>attack</strong> cards that mess with the next player's hand. The rulebook suggests leaving those out of your very first game.</p>
+    <div class="note">
+      <span class="k">In plain words</span>
+      <p>Building a deck is subtraction as much as addition. A thin deck of great cards beats a fat deck with a few great cards in it.</p>
+    </div>
+  </section>
+
+  <!-- 10 -->
+  <section class="pb">
+    <div class="price">No.<br>10</div>
+    <div class="kicker">Last page</div>
+    <h2>How it ends, and how to be the one holding the trophy.</h2>
+    <p>The game finishes the moment <strong>two Fame piles run empty</strong> or the <strong>last Common card is claimed</strong>. Whoever triggered it finishes their turn, then everyone counts the Fame points across their entire deck — hand, draw pile, discard, all of it. Most Fame is the bestselling author.</p>
+    <p>Five things to remember on your first play:</p>
+    <ul>
+      <li><strong>Buy vowels early.</strong> You start with none, and they unlock every word you want to spell.</li>
+      <li><strong>Trash your junk</strong> before you start buying Fame.</li>
+      <li><strong>Watch the endgame clock.</strong> When Fame piles get low, stop improving your deck and start cashing out — a beautiful deck is worth zero points.</li>
+      <li><strong>Chase the length track</strong> when you can. Common cards are Fame you didn't have to pay for.</li>
+      <li><strong>Don't panic about your vocabulary.</strong> Wilds cover the letters you're missing, and nobody's judging your spelling. Probably.</li>
+    </ul>
+    <div class="note">
+      <span class="k">The one-sentence version</span>
+      <p>Spend the early game making your hand richer, spend the late game turning that money into book covers, and never leave a cent unspent.</p>
+    </div>
+  </section>
+
+  <footer>The end · 10 of 10 · Now go write something · <a href="../">back to the shelf</a></footer>
+
+</div>
+</body>
+</html>
