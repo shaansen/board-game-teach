@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Glass Road: one point at a time</title>
+<meta name="description" content="A walkthrough that teaches Glass Road in fourteen points, with two working production wheels you can spin yourself.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Literata:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#E9EDE3;
+  --paper-2:#F3F6EE;
+  --ink:#16241F;
+  --ink-soft:#4A5C54;
+  --line:rgba(22,36,31,.16);
+  --kiln:#E0561F;
+  --glass:#2F8F76;
+  --sand:#E0A63B;
+  --food:#C9A272;
+  --charcoal:#2C302E;
+  --water:#2A79A5;
+  --wood:#6E5335;
+  --clay:#A8563E;
+  --brick:#C24A25;
+  --display:"Bricolage Grotesque",system-ui,sans-serif;
+  --body:"Literata",Georgia,serif;
+  --mono:"JetBrains Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--body);font-size:17px;line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:820px;margin:0 auto;padding:0 22px 100px}
+
+/* ---------- back to the shelf ---------- */
+.backlink{
+  display:inline-block;margin-top:26px;
+  font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ink-soft);text-decoration:none;border-bottom:1px solid transparent;
+}
+.backlink:hover{color:var(--kiln);border-bottom-color:var(--kiln)}
+
+/* ---------- hero ---------- */
+header{padding:26px 0 34px;position:relative}
+.eyebrow{
+  font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--kiln);margin:0 0 18px
+}
+h1{
+  font-family:var(--display);font-weight:800;font-size:clamp(48px,10vw,88px);
+  line-height:.92;letter-spacing:-.03em;margin:0 0 18px
+}
+h1 .molten{
+  background:linear-gradient(100deg,var(--kiln),var(--sand) 55%,var(--glass));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.lede{font-size:20px;max-width:56ch;color:var(--ink-soft);margin:0 0 28px}
+.facts{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 34px;padding:0;list-style:none}
+.facts li{
+  font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;
+  border:1px solid var(--line);border-radius:100px;padding:6px 12px;color:var(--ink-soft);
+  background:var(--paper-2)
+}
+.kiln-art{display:block;width:100%;max-width:520px;margin:0 auto 8px}
+
+/* ---------- progress ---------- */
+.rail{
+  position:sticky;top:0;z-index:20;background:rgba(233,237,227,.92);
+  backdrop-filter:blur(6px);border-bottom:1px solid var(--line);
+  padding:10px 0;margin-bottom:8px
+}
+.rail-inner{max-width:820px;margin:0 auto;padding:0 22px;display:flex;align-items:center;gap:14px}
+.pips{display:flex;gap:4px;flex:1;flex-wrap:wrap}
+.pip{width:100%;max-width:22px;height:4px;border-radius:2px;background:var(--line);transition:background .3s}
+.pip.on{background:var(--kiln)}
+.rail-count{font-family:var(--mono);font-size:11px;color:var(--ink-soft);white-space:nowrap}
+.skip{
+  font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.08em;
+  background:none;border:none;color:var(--ink-soft);cursor:pointer;text-decoration:underline;
+  text-underline-offset:3px;padding:4px
+}
+.skip:hover{color:var(--kiln)}
+
+/* ---------- points ---------- */
+.pt{
+  border-top:1px solid var(--line);padding:44px 0 8px;
+  display:none;
+}
+.pt.shown{display:block;animation:rise .5s cubic-bezier(.2,.7,.2,1) both}
+@keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.num{
+  font-family:var(--mono);font-weight:700;font-size:12px;letter-spacing:.14em;
+  color:var(--kiln);display:block;margin-bottom:10px
+}
+h2{
+  font-family:var(--display);font-weight:800;font-size:clamp(28px,5.4vw,40px);
+  line-height:1.05;letter-spacing:-.02em;margin:0 0 16px;max-width:22ch
+}
+.pt p{max-width:62ch;margin:0 0 16px}
+.pt strong{font-weight:600;box-shadow:inset 0 -.42em 0 rgba(224,86,31,.16)}
+.aside{
+  border-left:3px solid var(--sand);padding:2px 0 2px 16px;margin:22px 0;
+  font-style:italic;color:var(--ink-soft);max-width:58ch
+}
+.locked{
+  display:flex;gap:12px;align-items:baseline;margin:26px 0 0;padding:14px 16px;
+  background:var(--paper-2);border:1px solid var(--line);border-radius:3px
+}
+.locked b{
+  font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--kiln);white-space:nowrap;font-weight:700
+}
+.locked span{font-size:15.5px}
+
+/* ---------- next button ---------- */
+.next-wrap{padding:38px 0 0;text-align:center}
+.next{
+  font-family:var(--display);font-weight:600;font-size:17px;letter-spacing:-.01em;
+  background:var(--ink);color:var(--paper);border:none;border-radius:100px;
+  padding:15px 30px;cursor:pointer;transition:transform .15s,background .2s
+}
+.next:hover{background:var(--kiln);transform:translateY(-2px)}
+.next:focus-visible{outline:3px solid var(--kiln);outline-offset:3px}
+.next[hidden]{display:none}
+
+/* ---------- figures ---------- */
+figure{margin:26px 0;background:var(--paper-2);border:1px solid var(--line);border-radius:4px;padding:20px}
+figcaption{
+  font-family:var(--mono);font-size:11px;line-height:1.5;color:var(--ink-soft);
+  margin-top:14px;letter-spacing:.02em
+}
+svg{display:block;max-width:100%;height:auto;margin:0 auto}
+
+/* ---------- goods grid ---------- */
+.goods{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:0}
+.good{text-align:center;padding:12px 4px;border-radius:3px;background:var(--paper)}
+.good.made{background:#dfe8dd;border:1px dashed var(--glass)}
+.good svg{width:38px;height:38px;margin-bottom:6px}
+.good b{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.04em;text-transform:uppercase}
+.good i{display:block;font-size:11.5px;font-style:normal;color:var(--ink-soft);line-height:1.35;margin-top:3px}
+@media(max-width:560px){.goods{grid-template-columns:repeat(2,1fr)}}
+
+/* ---------- wheel widget ---------- */
+.wheelbox{display:grid;grid-template-columns:1fr 240px;gap:24px;align-items:center}
+@media(max-width:680px){.wheelbox{grid-template-columns:1fr}}
+.dialsvg{width:100%;max-width:360px}
+.dial,.tok{transition:transform .55s cubic-bezier(.35,.9,.3,1)}
+.controls p{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--ink-soft);margin:0 0 10px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.chip{
+  font-family:var(--mono);font-size:11px;font-weight:700;border:1px solid var(--line);
+  background:var(--paper);border-radius:100px;padding:7px 11px;cursor:pointer;display:flex;
+  align-items:center;gap:6px;transition:transform .12s,box-shadow .2s
+}
+.chip:hover{transform:translateY(-1px);box-shadow:0 2px 0 var(--line)}
+.chip:focus-visible{outline:2px solid var(--kiln);outline-offset:2px}
+.dot{width:10px;height:10px;border-radius:50%;display:inline-block;border:1px solid rgba(0,0,0,.35)}
+.readout{
+  font-family:var(--mono);font-size:12px;line-height:1.7;border-top:1px solid var(--line);
+  padding-top:12px;min-height:78px
+}
+.readout .hit{color:var(--kiln);font-weight:700}
+.reset{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.1em;background:none;border:none;color:var(--ink-soft);cursor:pointer;padding:4px 0;text-decoration:underline;text-underline-offset:3px}
+
+/* ---------- quiz ---------- */
+.check{border-top:1px solid var(--line);padding-top:44px;margin-top:44px}
+details{background:var(--paper-2);border:1px solid var(--line);border-radius:3px;padding:14px 16px;margin-bottom:10px}
+summary{cursor:pointer;font-weight:600;font-family:var(--display);font-size:16.5px}
+summary::marker{color:var(--kiln)}
+details p{margin:12px 0 0;font-size:15.5px;color:var(--ink-soft)}
+
+footer{border-top:1px solid var(--line);margin-top:56px;padding-top:20px;font-family:var(--mono);font-size:11px;color:var(--ink-soft)}
+footer a{color:var(--kiln);text-decoration:none;border-bottom:1px solid rgba(224,86,31,.4)}
+
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms!important;transition-duration:.01ms!important}
+  html{scroll-behavior:auto}
+}
+@media print{
+  .pt{display:block!important}.rail,.next-wrap{display:none}
+}
+</style>
+</head>
+<body>
+
+<div class="rail">
+  <div class="rail-inner">
+    <div class="pips" id="pips"></div>
+    <span class="rail-count" id="count">0 / 14</span>
+    <button class="skip" id="skip">show all</button>
+  </div>
+</div>
+
+<div class="wrap">
+
+<a class="backlink" href="../">&larr; the shelf</a>
+
+<header>
+  <p class="eyebrow">Learn the whole game · 14 points</p>
+  <h1>Glass<br><span class="molten">Road</span></h1>
+  <p class="lede">You run a glass workshop in a German forest in the 1700s. You have four seasons, fifteen workers, and two very strange dials. Here's everything, one piece at a time.</p>
+  <ul class="facts">
+    <li>1–4 players</li><li>4 building periods</li><li>~20 min per player</li><li>Uwe Rosenberg, 2013</li>
+  </ul>
+
+  <svg class="kiln-art" viewBox="0 0 520 180" role="img" aria-label="A glass kiln glowing in a pine forest at night">
+    <defs>
+      <radialGradient id="glow" cx="50%" cy="60%" r="50%">
+        <stop offset="0%" stop-color="#FFD08A"/><stop offset="55%" stop-color="#E0561F"/><stop offset="100%" stop-color="#E0561F" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+    <!-- trees -->
+    <g fill="#2F4A3E">
+      <path d="M40 150 L60 70 L80 150 Z"/><path d="M46 118 L60 88 L74 118 Z" fill="#263F35"/>
+      <path d="M92 150 L106 96 L120 150 Z"/>
+      <path d="M400 150 L420 74 L440 150 Z"/><path d="M406 120 L420 92 L434 120 Z" fill="#263F35"/>
+      <path d="M452 150 L468 100 L484 150 Z"/>
+      <path d="M8 150 L20 108 L32 150 Z" opacity=".55"/>
+    </g>
+    <!-- kiln -->
+    <circle cx="248" cy="118" r="72" fill="url(#glow)" opacity=".55"/>
+    <path d="M196 150 L206 92 Q248 62 290 92 L300 150 Z" fill="#5A4436"/>
+    <path d="M206 92 Q248 62 290 92" fill="none" stroke="#3E2E24" stroke-width="4"/>
+    <path d="M232 150 L232 118 Q248 104 264 118 L264 150 Z" fill="#FFB454"/>
+    <path d="M238 150 L238 124 Q248 114 258 124 L258 150 Z" fill="#FFE2A8"/>
+    <rect x="214" y="34" width="16" height="34" rx="3" fill="#5A4436"/>
+    <g fill="none" stroke="#8FA398" stroke-width="3" stroke-linecap="round" opacity=".7">
+      <path d="M222 30 q-8 -10 0 -18 q8 -8 2 -16"/>
+    </g>
+    <!-- molten blob on a pipe -->
+    <line x1="318" y1="150" x2="360" y2="126" stroke="#3E2E24" stroke-width="3"/>
+    <circle cx="364" cy="124" r="9" fill="#2F8F76"/>
+    <!-- ground -->
+    <line x1="0" y1="150" x2="520" y2="150" stroke="#2F4A3E" stroke-width="2"/>
+  </svg>
+</header>
+
+<!-- ============ 1 ============ -->
+<section class="pt" id="p1">
+  <span class="num">Point 01</span>
+  <h2>You make glass in the middle of a forest</h2>
+  <p>The real Glass Road is a 150-mile route through the Bavarian Forest, on the German–Czech border, where people blew glass for about 700 years. Why out there in the trees? Because glass needs three things a forest hands you for free: <strong>quartz sand</strong> under the ground, <strong>wood</strong> to burn, and <strong>water</strong> to cool everything down.</p>
+  <p>You run one of those workshops. But here's the twist that decides the whole game: at the end, your glass is worth almost nothing. <strong>Only your buildings score points.</strong> Glass, bricks, wood and clay are just the currency you spend to put buildings on your land.</p>
+  <div class="locked"><b>Locked in</b><span>Glass is money. Buildings are points.</span></div>
+</section>
+
+<!-- ============ 2 ============ -->
+<section class="pt" id="p2">
+  <span class="num">Point 02</span>
+  <h2>The game is way shorter than it looks</h2>
+  <p>Glass Road runs for <strong>4 building periods</strong> (think of them as seasons). Each period is <strong>3 card rounds</strong>. In each card round you play one card of your own.</p>
+  <p>Do the maths: 4 × 3 = <strong>12 turns for the entire game</strong>. That's it. All those tiles and tokens in the box make it look like an epic, but it's over fast. The classic beginner mistake is spending the first two periods building a gorgeous resource engine that finally works on turn 13.</p>
+  <figure>
+    <svg viewBox="0 0 620 130" role="img" aria-label="Timeline of four building periods, each split into three card rounds">
+      <g font-family="JetBrains Mono, monospace" font-size="11">
+        <g id="tl">
+          <!-- periods -->
+          <g fill="#F3F6EE" stroke="#16241F" stroke-opacity=".2">
+            <rect x="6" y="40" width="140" height="52" rx="4"/>
+            <rect x="158" y="40" width="140" height="52" rx="4"/>
+            <rect x="310" y="40" width="140" height="52" rx="4"/>
+            <rect x="462" y="40" width="140" height="52" rx="4"/>
+          </g>
+          <g fill="#16241F" text-anchor="middle" font-size="10" letter-spacing="1.5">
+            <text x="76" y="30">PERIOD 1</text><text x="228" y="30">PERIOD 2</text>
+            <text x="380" y="30">PERIOD 3</text><text x="532" y="30">PERIOD 4</text>
+          </g>
+          <!-- card rounds -->
+          <g fill="#E0561F">
+            <g><rect x="18" y="54" width="36" height="24" rx="3"/><rect x="64" y="54" width="36" height="24" rx="3"/><rect x="110" y="54" width="26" height="24" rx="3"/></g>
+            <g transform="translate(152,0)"><rect x="18" y="54" width="36" height="24" rx="3"/><rect x="64" y="54" width="36" height="24" rx="3"/><rect x="110" y="54" width="26" height="24" rx="3"/></g>
+            <g transform="translate(304,0)"><rect x="18" y="54" width="36" height="24" rx="3"/><rect x="64" y="54" width="36" height="24" rx="3"/><rect x="110" y="54" width="26" height="24" rx="3"/></g>
+            <g transform="translate(456,0)"><rect x="18" y="54" width="36" height="24" rx="3"/><rect x="64" y="54" width="36" height="24" rx="3"/><rect x="110" y="54" width="26" height="24" rx="3"/></g>
+          </g>
+          <text x="304" y="118" text-anchor="middle" fill="#4A5C54" font-size="10" letter-spacing="1.2">12 CARDS OF YOUR OWN, START TO FINISH</text>
+        </g>
+      </g>
+    </svg>
+    <figcaption>Each orange block is one card round. Pick 5 cards at the start of a period, but you only lead 3 of them.</figcaption>
+  </figure>
+  <div class="locked"><b>Locked in</b><span>4 periods × 3 card rounds. Build early or don't build at all.</span></div>
+</section>
+
+<!-- ============ 3 ============ -->
+<section class="pt" id="p3">
+  <span class="num">Point 03</span>
+  <h2>Eight goods, and only four of them buy things</h2>
+  <p>Six goods come out of the ground: <strong>quartz sand, food, charcoal, water, wood, clay</strong>. Two goods you manufacture: <strong>glass</strong> and <strong>brick</strong>.</p>
+  <p>Buildings are paid for with wood, clay, glass and brick. Everything else exists to feed the factory: food keeps your workers going, charcoal is the fire, water cools the glass, and wood ash is literally what makes old forest glass green.</p>
+  <figure>
+    <div class="goods">
+      <div class="good"><svg viewBox="0 0 40 40"><path d="M6 30 L20 10 L34 30 Z" fill="#E0A63B"/><circle cx="16" cy="26" r="1.6" fill="#fff" opacity=".7"/><circle cx="23" cy="23" r="1.4" fill="#fff" opacity=".7"/></svg><b>Sand</b><i>the glass itself</i></div>
+      <div class="good"><svg viewBox="0 0 40 40"><path d="M8 18 h24 a12 12 0 0 1 -24 0Z" fill="#C9A272"/><path d="M6 17 h28" stroke="#16241F" stroke-width="2" stroke-linecap="round"/><path d="M18 12 q3 -4 0 -7" stroke="#4A5C54" stroke-width="1.6" fill="none"/></svg><b>Food</b><i>fed to workers</i></div>
+      <div class="good"><svg viewBox="0 0 40 40"><path d="M10 28 L14 14 L26 10 L31 22 L22 31 Z" fill="#2C302E"/><path d="M16 20 L23 17" stroke="#8FA398" stroke-width="1.6"/></svg><b>Charcoal</b><i>the fire</i></div>
+      <div class="good"><svg viewBox="0 0 40 40"><path d="M20 7 C28 18 31 22 31 26 a11 11 0 0 1 -22 0 C9 22 12 18 20 7Z" fill="#2A79A5"/><path d="M15 27 a5 5 0 0 0 4 4" stroke="#fff" stroke-width="1.6" fill="none" opacity=".6"/></svg><b>Water</b><i>cooling</i></div>
+      <div class="good"><svg viewBox="0 0 40 40"><rect x="7" y="14" width="26" height="13" rx="6" fill="#6E5335"/><ellipse cx="10" cy="20.5" rx="3.6" ry="6.5" fill="#8A6B45"/><circle cx="10" cy="20.5" r="1.8" fill="#5A4436"/></svg><b>Wood</b><i>builds + burns</i></div>
+      <div class="good"><svg viewBox="0 0 40 40"><path d="M9 27 q2 -12 11 -13 q10 1 11 13 z" fill="#A8563E"/><path d="M13 24 q7 -3 14 0" stroke="#7C3A2A" stroke-width="1.6" fill="none"/></svg><b>Clay</b><i>builds + bricks</i></div>
+      <div class="good made"><svg viewBox="0 0 40 40"><path d="M17 6 h6 v6 l5 8 v14 h-16 V20 l5 -8 z" fill="#2F8F76"/><path d="M15 22 h10" stroke="#fff" stroke-width="1.4" opacity=".5"/></svg><b>Glass</b><i>made from 5 goods</i></div>
+      <div class="good made"><svg viewBox="0 0 40 40"><rect x="7" y="13" width="26" height="7" rx="1" fill="#C24A25"/><rect x="7" y="22" width="26" height="7" rx="1" fill="#C24A25"/><rect x="17" y="13" width="2" height="7" fill="#F3F6EE"/><rect x="26" y="22" width="2" height="7" fill="#F3F6EE"/></svg><b>Brick</b><i>made from 3 goods</i></div>
+    </div>
+    <figcaption>Green-outlined goods are manufactured, not collected. You never pick up glass directly.</figcaption>
+  </figure>
+  <div class="locked"><b>Locked in</b><span>Buildings cost wood, clay, glass, brick. The other four are fuel.</span></div>
+</section>
+
+<!-- ============ 4 ============ -->
+<section class="pt" id="p4">
+  <span class="num">Point 04</span>
+  <h2>You don't own a pile of stuff. You own two dials.</h2>
+  <p>Here's the part that makes people stare. There is no pile of wood tokens in front of you. Instead, every good is a little marker sitting on a slice of a <strong>rotating wheel</strong>, and the slice it's sitting on tells you how many you have.</p>
+  <p>You get two wheels on your production board:</p>
+  <p><strong>The Glassworks</strong> (top) holds sand, food, charcoal, water and wood, five goods in all, and produces <strong>glass</strong>.<br>
+  <strong>The Brickworks</strong> (bottom) holds clay, food and charcoal, and produces <strong>brick</strong>.</p>
+  <p class="aside">Food and charcoal show up on <em>both</em> wheels, each with its own marker. So when a card gives you 2 food, you decide which wheel it lands on, but a single gain can't be split across both. That choice is a real decision, not bookkeeping.</p>
+  <div class="locked"><b>Locked in</b><span>Two wheels: Glassworks (5 goods to glass), Brickworks (3 goods to brick).</span></div>
+</section>
+
+<!-- ============ 5 ============ -->
+<section class="pt" id="p5">
+  <span class="num">Point 05</span>
+  <h2>How the wheel actually makes glass</h2>
+  <p>Each wheel is cut into 12 slices by two pointers. On the big side, 8 slices count your basic goods from <strong>0 to 7</strong>. On the small side, 4 slices count your glass from <strong>0 to 3</strong>.</p>
+  <p>Two of those slices are <strong>brown</strong>: the <em>0</em> slice on the big side and the <em>3</em> slice on the glass side. And here is the entire rule:</p>
+  <p><strong>The moment both brown slices are empty, the wheel immediately clicks one slice clockwise.</strong> Both brown slices empty means: you have at least 1 of every single good on that wheel, and you're not already sitting on 3 glass.</p>
+  <p>One click = every basic good drops by 1, and glass goes up by 1. Five goods walk in, one glass walks out. Notice that the markers themselves never move; the <em>pointer</em> sweeps past them. Push the buttons and watch it happen.</p>
+
+  <figure>
+    <div class="wheelbox">
+      <div><svg class="dialsvg" id="glassDial" viewBox="0 0 360 360" role="img" aria-label="Interactive Glassworks production wheel"></svg></div>
+      <div class="controls">
+        <p>Gain a good</p>
+        <div class="chips" id="glassChips"></div>
+        <div class="readout" id="glassOut">Nothing produced yet. You're missing sand: the marker is parked on the brown 0 slice, which jams the wheel.</div>
+        <button class="reset" id="glassReset">reset the wheel</button>
+      </div>
+    </div>
+    <figcaption>Starting setup, exactly as the rulebook sets it: sand 0, food 1, charcoal 2, water 3, wood 4, glass 0.</figcaption>
+  </figure>
+
+  <p>Now the small one. Same machine, fewer parts: clay, food and charcoal, turning into bricks. It clicks far more often, which is why bricks feel cheap and glass feels precious.</p>
+  <figure>
+    <div class="wheelbox">
+      <div><svg class="dialsvg" id="brickDial" viewBox="0 0 360 360" role="img" aria-label="Interactive Brickworks production wheel"></svg></div>
+      <div class="controls">
+        <p>Gain a good</p>
+        <div class="chips" id="brickChips"></div>
+        <div class="readout" id="brickOut">Charcoal is on the brown 0 slice. One charcoal and this thing fires.</div>
+        <button class="reset" id="brickReset">reset the wheel</button>
+      </div>
+    </div>
+    <figcaption>The Brickworks starts at clay 1, food 2, charcoal 0, brick 0.</figcaption>
+  </figure>
+  <div class="locked"><b>Locked in</b><span>At least 1 of everything on a wheel = it fires, whether you like it or not.</span></div>
+</section>
+
+<!-- ============ 6 ============ -->
+<section class="pt" id="p6">
+  <span class="num">Point 06</span>
+  <h2>Three ways the wheel bites you</h2>
+  <p><strong>1. It's not optional.</strong> If the wheel can turn, it turns. You cannot hold back that last piece of wood to save it: the second you have one of everything, five goods are gone and you're holding glass instead.</p>
+  <p><strong>2. There's a ceiling.</strong> Seven of any basic good per wheel, three glass, three bricks. Extra just evaporates. Gaining 4 wood when you already have 6 gets you exactly one useful wood.</p>
+  <p><strong>3. It can chain.</strong> One gain can spin the wheel two or three times in a row. But a spin can never interrupt a payment: pay the full cost of a building first, then let the wheel sort itself out.</p>
+  <p class="aside">The sneaky trick hiding in rule 1: deliberately keeping one good at zero lets you stockpile everything else. Empty water bucket, full warehouse.</p>
+  <div class="locked"><b>Locked in</b><span>Automatic, capped at 7 / 3, and it never interrupts a payment.</span></div>
+</section>
+
+<!-- ============ 7 ============ -->
+<section class="pt" id="p7">
+  <span class="num">Point 07</span>
+  <h2>Fifteen specialists, and everyone has the same fifteen</h2>
+  <p>There is zero card luck in this game. You, and every opponent, hold an identical set of <strong>15 specialist cards</strong>: Woodcutter, Charcoal Burner, Pond Builder, Fish Farmer, Feudal Lord, and so on.</p>
+  <p>At the start of every building period, you all <strong>secretly choose 5</strong> of the 15 to take into your hand and put the other 10 aside face-down. At the start of the next period you get all 15 back and choose again from scratch.</p>
+  <div class="locked"><b>Locked in</b><span>Same 15 cards for everyone. Choose 5 secretly, each period.</span></div>
+</section>
+
+<!-- ============ 8 ============ -->
+<section class="pt" id="p8">
+  <span class="num">Point 08</span>
+  <h2>Every card is two workers in one</h2>
+  <p>A specialist card carries <strong>two separate abilities</strong>, and sometimes an <strong>entry fee</strong> printed down the left edge. Pay the fee once, then use ability A, or ability B, or both, in whatever order you like. You just can't use the same one twice.</p>
+  <p>The Charcoal Burner is the clean example: entry fee 1 wood, and each ability gives 3 charcoal. Use both and you turned 1 wood into <strong>6 charcoal</strong>.</p>
+  <figure>
+    <svg viewBox="0 0 460 220" role="img" aria-label="Anatomy of a specialist card: entry fee on the left, two abilities stacked on the right">
+      <g font-family="JetBrains Mono, monospace" font-size="11">
+        <rect x="60" y="14" width="230" height="192" rx="8" fill="#F3F6EE" stroke="#16241F" stroke-opacity=".35"/>
+        <rect x="60" y="14" width="46" height="192" rx="8" fill="#E9EDE3"/>
+        <path d="M106 14 v192" stroke="#16241F" stroke-opacity=".2"/>
+        <text x="175" y="42" text-anchor="middle" font-family="Bricolage Grotesque, sans-serif" font-size="15" font-weight="700" fill="#16241F">Charcoal Burner</text>
+        <!-- fee -->
+        <rect x="70" y="96" width="26" height="14" rx="6" fill="#6E5335"/>
+        <text x="83" y="126" text-anchor="middle" font-size="10" fill="#4A5C54">−1</text>
+        <!-- ability A -->
+        <rect x="118" y="58" width="160" height="60" rx="5" fill="#E9EDE3" stroke="#16241F" stroke-opacity=".15"/>
+        <text x="132" y="82" font-size="10" fill="#4A5C54">ABILITY A</text>
+        <g fill="#2C302E"><circle cx="200" cy="98" r="8"/><circle cx="222" cy="98" r="8"/><circle cx="244" cy="98" r="8"/></g>
+        <!-- ability B -->
+        <rect x="118" y="128" width="160" height="60" rx="5" fill="#E9EDE3" stroke="#16241F" stroke-opacity=".15"/>
+        <text x="132" y="152" font-size="10" fill="#4A5C54">ABILITY B</text>
+        <g fill="#2C302E"><circle cx="200" cy="168" r="8"/><circle cx="222" cy="168" r="8"/><circle cx="244" cy="168" r="8"/></g>
+        <!-- labels -->
+        <g fill="#E0561F">
+          <text x="6" y="106">fee: 1 wood</text>
+          <path d="M52 102 h4" stroke="#E0561F"/>
+          <text x="302" y="92">alone? take</text><text x="302" y="106">both. 6 charcoal.</text>
+          <path d="M290 88 h-8" stroke="#E0561F"/>
+        </g>
+        <text x="302" y="170" fill="#4A5C54">fee is paid once,</text><text x="302" y="184" fill="#4A5C54">not twice</text>
+      </g>
+    </svg>
+    <figcaption>You may also play a card and use nothing at all; then you pay no fee. It still counts as played.</figcaption>
+  </figure>
+  <div class="locked"><b>Locked in</b><span>Two abilities per card. Entry fee paid once, no matter how many you use.</span></div>
+</section>
+
+<!-- ============ 9 ============ -->
+<section class="pt" id="p9">
+  <span class="num">Point 09</span>
+  <h2>The mind game: if someone copies you, you both get half</h2>
+  <p>This is the heart of Glass Road. When you flip your card face-up, <strong>every opponent must check their hand</strong>. If they're holding the same card, they must play it right now, out of turn.</p>
+  <p>And the moment that happens, <strong>nobody gets both abilities</strong>. You each pick just one, and you can pick different ones. So:</p>
+  <p>Alone with the Charcoal Burner → 1 wood becomes <strong>6 charcoal</strong>.<br>
+  Someone matched you → 1 wood becomes <strong>3 charcoal</strong>, and your opponent got 3 charcoal too, on your turn, for free.</p>
+  <figure>
+    <svg viewBox="0 0 560 200" role="img" aria-label="Comparison: playing a card alone gives both abilities, playing a matched card gives one each">
+      <g font-family="JetBrains Mono, monospace" font-size="10">
+        <!-- alone -->
+        <text x="14" y="20" fill="#4A5C54" letter-spacing="1.4">NOBODY ELSE HAS IT</text>
+        <rect x="14" y="30" width="72" height="96" rx="5" fill="#F3F6EE" stroke="#16241F" stroke-opacity=".3"/>
+        <rect x="24" y="42" width="52" height="34" rx="3" fill="#2F8F76" opacity=".85"/>
+        <rect x="24" y="82" width="52" height="34" rx="3" fill="#2F8F76" opacity=".85"/>
+        <text x="50" y="145" text-anchor="middle" fill="#16241F" font-weight="700">you: A + B</text>
+        <text x="50" y="160" text-anchor="middle" fill="#4A5C54">6 charcoal</text>
+
+        <line x1="130" y1="20" x2="130" y2="180" stroke="#16241F" stroke-opacity=".15"/>
+
+        <!-- shared -->
+        <text x="160" y="20" fill="#E0561F" letter-spacing="1.4">TWO OF YOU PICKED IT</text>
+        <rect x="160" y="30" width="72" height="96" rx="5" fill="#F3F6EE" stroke="#16241F" stroke-opacity=".3"/>
+        <rect x="170" y="42" width="52" height="34" rx="3" fill="#2F8F76" opacity=".85"/>
+        <rect x="170" y="82" width="52" height="34" rx="3" fill="#F3F6EE" stroke="#16241F" stroke-opacity=".2" stroke-dasharray="3 3"/>
+        <text x="196" y="145" text-anchor="middle" fill="#16241F" font-weight="700">you: A only</text>
+        <text x="196" y="160" text-anchor="middle" fill="#4A5C54">3 charcoal</text>
+
+        <rect x="266" y="30" width="72" height="96" rx="5" fill="#F3F6EE" stroke="#16241F" stroke-opacity=".3"/>
+        <rect x="276" y="42" width="52" height="34" rx="3" fill="#F3F6EE" stroke="#16241F" stroke-opacity=".2" stroke-dasharray="3 3"/>
+        <rect x="276" y="82" width="52" height="34" rx="3" fill="#E0561F" opacity=".85"/>
+        <text x="302" y="145" text-anchor="middle" fill="#16241F" font-weight="700">them: B only</text>
+        <text x="302" y="160" text-anchor="middle" fill="#4A5C54">3 charcoal, free</text>
+
+        <path d="M356 78 h30" stroke="#E0561F" stroke-width="1.5"/>
+        <text x="392" y="66" fill="#E0561F">so the real question</text>
+        <text x="392" y="82" fill="#E0561F">is never "what do I</text>
+        <text x="392" y="98" fill="#E0561F">want?", it's "what</text>
+        <text x="392" y="114" fill="#E0561F">will they take?"</text>
+      </g>
+    </svg>
+    <figcaption>Each player who plays the card chooses their own single ability, independently.</figcaption>
+  </figure>
+  <div class="locked"><b>Locked in</b><span>Alone = both abilities. Matched = one each. Read the table.</span></div>
+</section>
+
+<!-- ============ 10 ============ -->
+<section class="pt" id="p10">
+  <span class="num">Point 10</span>
+  <h2>Three cards you lead, two you're betting on</h2>
+  <p>You chose 5 cards but there are only 3 card rounds. Each round everyone picks a card, puts it face-down, then reveals in clockwise order starting from the player with the start player goblet.</p>
+  <p>So <strong>3 of your 5 cards you play yourself</strong>. The other 2 only ever get used if someone else calls them out, and then you play them into the <strong>two slots</strong> on the edge of your board. Once both slots are full, you can't follow anyone anymore for the rest of the period. And while a slot is still open, you're <em>not allowed to refuse</em>.</p>
+  <p>That's the whole drafting puzzle: pick 3 cards you want, plus 2 cards you're confident someone else is going to play.</p>
+  <p class="aside">One easy detail to get wrong: if someone reveals the card you've already placed face-down for later, you do <em>not</em> flip it. It waits for its own round. Only cards still in your hand can follow.</p>
+  <div class="locked"><b>Locked in</b><span>Lead 3, follow at most 2, and you can't decline while a slot is open.</span></div>
+</section>
+
+<!-- ============ 11 ============ -->
+<section class="pt" id="p11">
+  <span class="num">Point 11</span>
+  <h2>Your land is mostly in the way</h2>
+  <p>Your landscape board starts covered: <strong>6 forest tiles</strong> (each one covers two spaces), plus 2 pits, 2 groves, 2 ponds, and 3 buildings already printed on the left.</p>
+  <p>Buildings need empty spaces, so you have to clear ground. Pits, groves and ponds you may remove for free at any moment. <strong>Forests are different.</strong> Only certain cards shift them: the Woodcutter (2 or 4 wood), the Carpenter (fee: remove a forest), and the Slash-and-burn Farmer (2 charcoal and/or 2 food). Chopping trees pays.</p>
+  <p>But don't bulldoze everything. Several cards pay you <em>per tile you own</em>: the Pit Worker gives sand or clay for each pit, the Forest Manager food or wood per grove, the Pond Builder sand or water per pond. Land is both a floor and an income.</p>
+  <figure>
+    <svg viewBox="0 0 480 220" role="img" aria-label="A landscape board showing printed start buildings, forest tiles covering two spaces each, and small pit, grove and pond tiles">
+      <g font-family="JetBrains Mono, monospace" font-size="9">
+        <rect x="8" y="14" width="464" height="176" rx="6" fill="#F3F6EE" stroke="#16241F" stroke-opacity=".3"/>
+        <!-- start buildings -->
+        <g>
+          <rect x="20" y="26" width="86" height="46" rx="3" fill="#DCC9A8" stroke="#8A6B45"/>
+          <rect x="20" y="80" width="86" height="46" rx="3" fill="#DCC9A8" stroke="#8A6B45"/>
+          <rect x="20" y="134" width="86" height="46" rx="3" fill="#DCC9A8" stroke="#8A6B45"/>
+          <g fill="#5A4436" text-anchor="middle"><text x="63" y="53">START</text><text x="63" y="107">START</text><text x="63" y="161">START</text>
+          <text x="63" y="64">BUILDING</text><text x="63" y="118">BUILDING</text><text x="63" y="172">BUILDING</text></g>
+        </g>
+        <!-- forests (2 spaces each) -->
+        <g>
+          <rect x="120" y="26" width="100" height="46" rx="3" fill="#2F4A3E"/>
+          <rect x="120" y="80" width="100" height="46" rx="3" fill="#2F4A3E"/>
+          <rect x="234" y="134" width="100" height="46" rx="3" fill="#2F4A3E"/>
+          <g fill="#8FA398" text-anchor="middle"><text x="170" y="53">FOREST</text><text x="170" y="107">FOREST</text><text x="284" y="161">FOREST</text>
+          <text x="170" y="64">2 spaces</text><text x="170" y="118">2 spaces</text><text x="284" y="172">2 spaces</text></g>
+        </g>
+        <!-- small tiles -->
+        <g stroke="#16241F" stroke-opacity=".25">
+          <rect x="234" y="26" width="46" height="46" rx="3" fill="#C9A272"/>
+          <rect x="288" y="26" width="46" height="46" rx="3" fill="#3E7A4E"/>
+          <rect x="234" y="80" width="46" height="46" rx="3" fill="#2A79A5"/>
+        </g>
+        <g fill="#16241F" text-anchor="middle"><text x="257" y="53">PIT</text><text x="311" y="53" fill="#E9EDE3">GROVE</text><text x="257" y="107" fill="#E9EDE3">POND</text></g>
+        <!-- empty -->
+        <g stroke="#16241F" stroke-opacity=".22" stroke-dasharray="4 4" fill="none">
+          <rect x="288" y="80" width="46" height="46" rx="3"/>
+          <rect x="348" y="26" width="46" height="46" rx="3"/>
+          <rect x="348" y="80" width="46" height="46" rx="3"/>
+          <rect x="120" y="134" width="100" height="46" rx="3"/>
+        </g>
+        <text x="371" y="53" text-anchor="middle" fill="#4A5C54">EMPTY</text>
+        <text x="371" y="63" text-anchor="middle" fill="#4A5C54">build here</text>
+        <text x="170" y="161" text-anchor="middle" fill="#4A5C54">cleared forest = 2 free spaces</text>
+        <text x="411" y="112" fill="#E0561F">pits, groves and</text>
+        <text x="411" y="124" fill="#E0561F">ponds pay income</text>
+      </g>
+    </svg>
+    <figcaption>Small tiles can be scrapped whenever you need the space, but you can never rearrange what's already down.</figcaption>
+  </figure>
+  <div class="locked"><b>Locked in</b><span>No empty space, no buildings. Clearing forests needs specific cards.</span></div>
+</section>
+
+<!-- ============ 12 ============ -->
+<section class="pt" id="p12">
+  <span class="num">Point 12</span>
+  <h2>Three flavours of building</h2>
+  <p>The central board holds three rows, and each row does a different job:</p>
+  <p><strong>Processing (blue).</strong> A trade you may use <em>any number of times, at any moment</em>, including on someone else's turn. A Cooperage turns 1 wood into 2 water forever. These are your engine.<br>
+  <strong>Immediate.</strong> A one-time payout the instant you build it.<br>
+  <strong>Bonus.</strong> Silent all game, then scores at the end based on what you own.</p>
+  <p>You build with a card that allows it (the Cultivator, Builder, Carpenter or Supplier) by paying the cost in wood, clay, glass and brick. A tile with a <strong>wooden frame</strong> goes on an empty space. A tile with a <strong>brick pattern</strong> is an upgrade and stacks on top of a printed start building instead (and then only the upgrade scores).</p>
+  <p class="aside">The Feudal Lord is worth knowing early: it deals you 3 buildings that are yours alone, hidden from everyone else's grabbing hands.</p>
+  <div class="locked"><b>Locked in</b><span>Blue = reusable trade. Wooden frame = new space. Brick pattern = upgrade.</span></div>
+</section>
+
+<!-- ============ 13 ============ -->
+<section class="pt" id="p13">
+  <span class="num">Point 13</span>
+  <h2>How it ends, and how you win</h2>
+  <p>After the fourth building period, stop and do the most satisfying thing in the game: <strong>everyone may use their processing buildings as many times as they want</strong>. Wring every last trade out of your engine, convert junk into whatever your bonus buildings are counting.</p>
+  <p>Then add up the <strong>value printed on your buildings</strong>, plus whatever your bonus buildings earn. Leftover goods are usually worth nothing, except through a bonus building like the Glassmaker's Colony, which pays half a point per quartz sand (and you don't round it, so 3 sand = 1.5 points).</p>
+  <p>Highest total wins. A tie means everyone tied wins. This is a friendly game about a nice forest.</p>
+  <div class="locked"><b>Locked in</b><span>Milk your processing buildings first, then only buildings score.</span></div>
+</section>
+
+<!-- ============ 14 ============ -->
+<section class="pt" id="p14">
+  <span class="num">Point 14</span>
+  <h2>Five things to do in your first game</h2>
+  <p><strong>Build in period 1.</strong> Even a cheap building. Twelve turns is nothing, and a building that helps you build is worth more than a perfect plan.</p>
+  <p><strong>Look at your wheel before you spend.</strong> Ask "if I take this wood, does the wheel fire?" Sometimes that's exactly what you want. Sometimes it eats four goods you were saving.</p>
+  <p><strong>For your 2 follow cards, take the obvious ones.</strong> Woodcutter, Charcoal Burner, Cultivator: the cards everybody wants. Getting a free half-card on someone else's turn is pure profit.</p>
+  <p><strong>Clear two forests early.</strong> They pay you as you clear them and they open the space you'll desperately want in period 3.</p>
+  <p><strong>Don't sit on 3 glass.</strong> A full glass slice jams the whole Glassworks. Spend it, then let the wheel keep turning.</p>
+  <div class="locked"><b>Locked in</b><span>You know the game now. Go make some bottles.</span></div>
+
+  <div class="check">
+    <h2>Quick check</h2>
+    <details><summary>Your Glassworks shows sand 2, food 1, charcoal 1, water 2, wood 0 and glass 1. You gain 1 wood. What happens?</summary>
+      <p>The wheel fires once. Every basic drops by 1 (sand 1, food 0, charcoal 0, water 1, wood 0) and glass goes to 2. It stops there, because food, charcoal and wood are now on the brown 0 slice.</p></details>
+    <details><summary>You play the Fish Farmer. One opponent has it in hand. How many of its two abilities do you use?</summary>
+      <p>One. So does your opponent, and they choose theirs independently of yours.</p></details>
+    <details><summary>Three opponents each reveal a card you're holding a copy of, one after another. Do you play all three?</summary>
+      <p>No, only the first two. You have exactly two slots per building period, and once they're full you can't follow anymore.</p></details>
+    <details><summary>You finish the game with 4 glass, 6 wood and 11 points of buildings. What's your score?</summary>
+      <p>11. (Also, you couldn't have had 4 glass; the wheel caps you at 3.) Goods only score through bonus buildings that specifically count them.</p></details>
+  </div>
+</section>
+
+<div class="next-wrap"><button class="next" id="next">Start with point 1</button></div>
+
+<footer>A teaching walkthrough of Glass Road by Uwe Rosenberg (2013). Rules summarised for learning; the rulebook is still the authority, especially for the 2-player and solo variants. <a href="../">Back to the shelf</a>.</footer>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------------- progressive reveal ---------------- */
+  var pts = Array.prototype.slice.call(document.querySelectorAll('.pt'));
+  var next = document.getElementById('next');
+  var pips = document.getElementById('pips');
+  var count = document.getElementById('count');
+  var skip = document.getElementById('skip');
+  var shown = 0;
+
+  pts.forEach(function(){
+    var d = document.createElement('span'); d.className = 'pip'; pips.appendChild(d);
+  });
+  var pipEls = Array.prototype.slice.call(pips.children);
+
+  function paint(){
+    pipEls.forEach(function(p,i){ p.classList.toggle('on', i < shown); });
+    count.textContent = shown + ' / ' + pts.length;
+    if(shown === 0){ next.textContent = 'Start with point 1'; }
+    else if(shown < pts.length){ next.textContent = 'Show me point ' + (shown+1); }
+    else { next.hidden = true; }
+  }
+  function reveal(scroll){
+    if(shown >= pts.length) return;
+    var el = pts[shown];
+    el.classList.add('shown');
+    shown++;
+    paint();
+    if(scroll){ el.scrollIntoView({block:'start'}); }
+  }
+  next.addEventListener('click', function(){ reveal(true); });
+  skip.addEventListener('click', function(){
+    while(shown < pts.length){ reveal(false); }
+    next.hidden = true;
+  });
+  paint();
+  reveal(false); // point 1 is visible on load
+
+  /* ---------------- production wheels ---------------- */
+  var GOOD = {
+    sand:     {label:'Sand',     short:'SAND',  color:'#E0A63B', dark:false},
+    food:     {label:'Food',     short:'FOOD',  color:'#C9A272', dark:false},
+    charcoal: {label:'Charcoal', short:'COAL',  color:'#2C302E', dark:true},
+    water:    {label:'Water',    short:'WATR',  color:'#2A79A5', dark:true},
+    wood:     {label:'Wood',     short:'WOOD',  color:'#6E5335', dark:true},
+    clay:     {label:'Clay',     short:'CLAY',  color:'#A8563E', dark:true},
+    glass:    {label:'Glass',    short:'GLASS', color:'#2F8F76', dark:true},
+    brick:    {label:'Brick',    short:'BRICK', color:'#C24A25', dark:true}
+  };
+  var C = 180, R_OUT = 152, R_IN = 84, R_TOK = 118, STEP = 30, MAXB = 7, MAXM = 3;
+
+  function pt(angle, r){
+    var a = (angle - 90) * Math.PI / 180;
+    return [C + r * Math.cos(a), C + r * Math.sin(a)];
+  }
+  function sector(a1, a2){
+    var o1 = pt(a1, R_OUT), o2 = pt(a2, R_OUT), i2 = pt(a2, R_IN), i1 = pt(a1, R_IN);
+    return 'M' + o1 + 'A' + R_OUT + ',' + R_OUT + ' 0 0 1 ' + o2 +
+           'L' + i2 + 'A' + R_IN + ',' + R_IN + ' 0 0 0 ' + i1 + 'Z';
+  }
+  function el(tag, attrs){
+    var n = document.createElementNS('http://www.w3.org/2000/svg', tag);
+    for(var k in attrs){ n.setAttribute(k, attrs[k]); }
+    return n;
+  }
+
+  function Wheel(cfg){
+    var svg = document.getElementById(cfg.svg);
+    var out = document.getElementById(cfg.out);
+    var st = {P:0, v:{}, made:0};
+    var dial = el('g', {'class':'dial', 'transform-origin':C + 'px ' + C + 'px'});
+    var toks = el('g', {});
+    var tokEls = {};
+
+    // static ring backdrop
+    svg.appendChild(el('circle',{cx:C,cy:C,r:R_OUT+6,fill:'#E9EDE3'}));
+    svg.appendChild(dial);
+    svg.appendChild(toks);
+
+    // 8 supply slices (values 0-7) then 4 made slices (values 3,2,1,0)
+    for(var i=0;i<12;i++){
+      var isSupply = i < 8;
+      var val = isSupply ? i : 11 - i;
+      var brown = (isSupply && i===0) || (!isSupply && val===MAXM);
+      dial.appendChild(el('path',{
+        d: sector(i*STEP, (i+1)*STEP),
+        fill: brown ? '#8A6B45' : (isSupply ? '#F3F6EE' : '#DCE8E1'),
+        stroke:'#16241F','stroke-opacity':'.18'
+      }));
+      var lp = pt(i*STEP+15, R_IN+16);
+      var t = el('text',{x:lp[0],y:lp[1]+4,'text-anchor':'middle',
+        'font-family':'JetBrains Mono, monospace','font-size':'13','font-weight':'700',
+        fill: brown ? '#F3F6EE' : '#4A5C54'});
+      t.textContent = val;
+      dial.appendChild(t);
+    }
+    // two pointers
+    [0,240].forEach(function(a,idx){
+      var p1 = pt(a, R_IN-2), p2 = pt(a, R_OUT+4);
+      dial.appendChild(el('line',{x1:p1[0],y1:p1[1],x2:p2[0],y2:p2[1],
+        stroke:'#16241F','stroke-width': idx===0 ? 7 : 4,'stroke-linecap':'round'}));
+    });
+    dial.appendChild(el('circle',{cx:C,cy:C,r:R_IN-4,fill:'#F3F6EE',stroke:'#16241F','stroke-opacity':'.2'}));
+    var hub = el('text',{x:C,y:C-4,'text-anchor':'middle','font-family':'Bricolage Grotesque, sans-serif',
+      'font-size':'17','font-weight':'800',fill:'#16241F'});
+    hub.textContent = cfg.title;
+    dial.appendChild(hub);
+    var hub2 = el('text',{x:C,y:C+16,'text-anchor':'middle','font-family':'JetBrains Mono, monospace',
+      'font-size':'12',fill:'#4A5C54'});
+    dial.appendChild(hub2);
+
+    // tokens
+    cfg.basics.concat([cfg.made]).forEach(function(g){
+      var grp = el('g',{'class':'tok'});
+      grp.appendChild(el('circle',{r:15,fill:GOOD[g].color,stroke:'#16241F','stroke-width':1.5}));
+      var lab = el('text',{y:4,'text-anchor':'middle','font-family':'JetBrains Mono, monospace',
+        'font-size': GOOD[g].short.length > 4 ? '7.5' : '8.5','font-weight':'700',
+        'letter-spacing':'-0.2', fill: GOOD[g].dark ? '#F3F6EE' : '#16241F'});
+      lab.textContent = GOOD[g].short;
+      grp.appendChild(lab);
+      toks.appendChild(grp);
+      tokEls[g] = grp;
+    });
+
+    function place(){
+      // group basics that share a value so markers don't stack
+      var byVal = {};
+      cfg.basics.forEach(function(g){
+        (byVal[st.v[g]] = byVal[st.v[g]] || []).push(g);
+      });
+      Object.keys(byVal).forEach(function(v){
+        var arr = byVal[v];
+        arr.forEach(function(g,i){
+          var spread = (i - (arr.length-1)/2) * (arr.length > 2 ? 8 : 10);
+          var r = R_TOK - (arr.length > 2 ? (i%3)*23 : (i%2)*23);
+          var p = pt(st.P + Number(v)*STEP + 15 + spread, r);
+          tokEls[g].setAttribute('transform','translate('+p[0]+','+p[1]+')');
+        });
+      });
+      var pm = pt(st.P - st.made*STEP - 15, R_TOK);
+      tokEls[cfg.made].setAttribute('transform','translate('+pm[0]+','+pm[1]+')');
+      dial.setAttribute('transform','rotate('+st.P+' '+C+' '+C+')');
+      hub2.textContent = GOOD[cfg.made].label + ': ' + st.made;
+    }
+
+    function settle(){
+      var spins = 0;
+      while(cfg.basics.every(function(g){ return st.v[g] >= 1; }) && st.made < MAXM){
+        cfg.basics.forEach(function(g){ st.v[g]--; });
+        st.made++; st.P += STEP; spins++;
+        if(spins > 12) break;
+      }
+      return spins;
+    }
+
+    function blocked(){
+      var missing = cfg.basics.filter(function(g){ return st.v[g] === 0; });
+      if(st.made >= MAXM) return 'The ' + GOOD[cfg.made].label.toLowerCase() + ' marker is sitting on the brown 3 slice, so the wheel is jammed at maximum. Spend some before it can turn again.';
+      return 'Still short of ' + missing.map(function(g){ return GOOD[g].label.toLowerCase(); }).join(' and ') +
+             '. Those markers are parked on the brown 0 slice, holding the wheel still.';
+    }
+
+    function gain(g){
+      var before = st.v[g];
+      st.v[g] = Math.min(MAXB, st.v[g] + 1);
+      var msg = '';
+      if(st.v[g] === before){ msg = 'Already at 7 ' + GOOD[g].label.toLowerCase() + ', so the extra one is lost. '; }
+      var spins = settle();
+      place();
+      if(spins > 0){
+        out.innerHTML = '<span class="hit">Both brown slices empty → the wheel clicked ' + spins +
+          (spins>1 ? ' times' : ' time') + '.</span> Every basic good dropped by ' + spins +
+          ' and you now have ' + st.made + ' ' + GOOD[cfg.made].label.toLowerCase() +
+          '. ' + blocked();
+      } else {
+        out.innerHTML = msg + '+1 ' + GOOD[g].label.toLowerCase() + ' (now ' + st.v[g] + '). ' + blocked();
+      }
+    }
+
+    function reset(){
+      st.P = 0; st.made = 0;
+      cfg.basics.forEach(function(g){ st.v[g] = cfg.start[g]; });
+      place();
+      out.textContent = 'Back to the starting setup. ' + blocked();
+    }
+
+    // controls
+    var chips = document.getElementById(cfg.chips);
+    cfg.basics.forEach(function(g){
+      var b = document.createElement('button');
+      b.className = 'chip';
+      b.innerHTML = '<span class="dot" style="background:'+GOOD[g].color+'"></span>+1 ' + GOOD[g].label;
+      b.addEventListener('click', function(){ gain(g); });
+      chips.appendChild(b);
+    });
+    document.getElementById(cfg.reset).addEventListener('click', reset);
+
+    reset();
+    out.textContent = cfg.intro;
+  }
+
+  Wheel({
+    svg:'glassDial', chips:'glassChips', out:'glassOut', reset:'glassReset',
+    title:'Glassworks', made:'glass',
+    basics:['sand','food','charcoal','water','wood'],
+    start:{sand:0,food:1,charcoal:2,water:3,wood:4},
+    intro:'Nothing produced yet. Sand is parked on the brown 0 slice, which jams the wheel. Add 1 sand and watch.'
+  });
+
+  Wheel({
+    svg:'brickDial', chips:'brickChips', out:'brickOut', reset:'brickReset',
+    title:'Brickworks', made:'brick',
+    basics:['clay','food','charcoal'],
+    start:{clay:1,food:2,charcoal:0},
+    intro:'Charcoal is on the brown 0 slice. One charcoal and this thing fires immediately.'
+  });
+})();
+</script>
+</body>
+</html>
