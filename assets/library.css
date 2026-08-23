@@ -118,12 +118,7 @@ body{
   letter-spacing:-.005em;overflow-wrap:break-word;
 }
 .game .hook{
-  font-style:italic;color:var(--ink-soft);margin:0 0 16px;font-size:16px;flex:1;
-}
-.game .meta{
-  font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;
-  text-transform:uppercase;color:var(--ink-soft);margin:0;
-  border-top:1px dashed rgba(34,32,28,.22);padding-top:13px;
+  font-style:italic;color:var(--ink-soft);margin:0;font-size:16px;
 }
 
 /* ---------- footer ---------- */

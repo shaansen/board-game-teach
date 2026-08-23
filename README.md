@@ -42,7 +42,6 @@ browser and it works.
      <span class="emblem"><svg><use href="#e-yourgame"/></svg></span>
      <h3>Your Game</h3>
      <p class="hook">The hook, in one sentence.</p>
-     <p class="meta">1–4 players · 90 min · 12 points</p>
    </a>
    ```
 
