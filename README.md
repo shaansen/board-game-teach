@@ -80,8 +80,11 @@ spine of numbered entries; `troyes.html` is a parchment chronicle with a cathedr
 progress bar; `aeons-end.html` is a run of glowing breaches in the Void;
 `obsession.html` is a single card you deal through from a servants' bell board;
 `paperback.html` is a stack of pulp novels on a shelf; `glass-road.html`
-reveals one point at a time and hands you two working production wheels to spin;
-`through-the-ages.html` fills a bank of population cubes as you read.
+hands you two working production wheels to spin; `through-the-ages.html` fills a
+bank of population cubes as you read.
+
+Every page is **one continuous scroll**. Progress indicators that follow the
+reader are welcome, but no page should hide a point behind a click.
 The only things every page must share are the `← the shelf` backlink at the top, a footer link back, and the house style below.
 
 ### The building blocks (shared system)
