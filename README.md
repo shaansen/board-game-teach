@@ -20,6 +20,7 @@ your first game.
 | `games/obsession.html` | Obsession, 22 points, complete |
 | `games/paperback.html` | Paperback, 10 points, complete |
 | `games/glass-road.html` | Glass Road, 14 points, complete |
+| `games/through-the-ages.html` | Through the Ages, 20 points, complete |
 | `games/_template.html` | Starting point for a new briefing |
 | `assets/dossier.css` | Shared layout system, for pages that want one |
 | `assets/library.css` | Styles for the shelf |
@@ -79,7 +80,8 @@ spine of numbered entries; `troyes.html` is a parchment chronicle with a cathedr
 progress bar; `aeons-end.html` is a run of glowing breaches in the Void;
 `obsession.html` is a single card you deal through from a servants' bell board;
 `paperback.html` is a stack of pulp novels on a shelf; `glass-road.html`
-reveals one point at a time and hands you two working production wheels to spin.
+reveals one point at a time and hands you two working production wheels to spin;
+`through-the-ages.html` fills a bank of population cubes as you read.
 The only things every page must share are the `← the shelf` backlink at the top, a footer link back, and the house style below.
 
 ### The building blocks (shared system)
