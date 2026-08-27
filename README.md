@@ -12,7 +12,7 @@ your first game.
 
 | Path | What it is |
 | --- | --- |
-| `index.html` | The shelf, the landing page listing every briefing |
+| `index.html` | The shelf: the landing page, with a search box that filters the briefings |
 | `games/arkham-horror-lcg.html` | Arkham Horror: The Card Game, 15 points, complete |
 | `games/spirit-island.html` | Spirit Island, 12 pieces, complete |
 | `games/troyes.html` | Troyes, 14 chapters, complete |
@@ -21,6 +21,9 @@ your first game.
 | `games/paperback.html` | Paperback, 10 points, complete |
 | `games/glass-road.html` | Glass Road, 14 points, complete |
 | `games/through-the-ages.html` | Through the Ages, 20 points, complete |
+| `games/seasons.html` | Seasons, 12 points, complete |
+| `games/taverns-of-tiefenthal.html` | The Taverns of Tiefenthal, 12 points, complete |
+| `games/root.html` | Root, 16 points, complete |
 | `games/_template.html` | Starting point for a new briefing |
 | `assets/dossier.css` | Shared layout system, for pages that want one |
 | `assets/library.css` | Styles for the shelf |
@@ -40,12 +43,19 @@ browser and it works.
    set at the top, then a box:
 
    ```html
-   <a class="game" href="games/your-game.html" style="--accent:#7A241E">
+   <a class="game" href="games/your-game.html"
+      data-keywords="mechanisms designer mood, lowercase, space separated"
+      style="--accent:#7A241E">
      <span class="emblem"><svg><use href="#e-yourgame"/></svg></span>
      <h3>Your Game</h3>
      <p class="hook">The hook, in one sentence.</p>
    </a>
    ```
+
+   The search box on the shelf matches the title, the hook and `data-keywords`,
+   so put the words a reader would search for (mechanisms, designer, weight,
+   player count) in that attribute rather than on the card. Every term typed has
+   to match, so `dice deck` narrows rather than widens.
 
 4. Push to `main`. The workflow deploys it.
 
@@ -81,7 +91,9 @@ progress bar; `aeons-end.html` is a run of glowing breaches in the Void;
 `obsession.html` is a single card you deal through from a servants' bell board;
 `paperback.html` is a stack of pulp novels on a shelf; `glass-road.html`
 hands you two working production wheels to spin; `through-the-ages.html` fills a
-bank of population cubes as you read.
+bank of population cubes as you read; `seasons.html` turns a season wheel in the
+rail; `taverns-of-tiefenthal.html` chalks up a bar tab; `root.html` tints each
+point with the faction it belongs to.
 
 Every page is **one continuous scroll**. Progress indicators that follow the
 reader are welcome, but no page should hide a point behind a click.

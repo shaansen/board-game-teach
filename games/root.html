@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Root: Four Games on One Table</title>
+<meta name="description" content="A briefing that teaches Root in sixteen points, for someone who has never opened the box.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vollkorn:ital,wght@0,600;0,800;1,400&family=Inter:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --moss:#101A14;
+  --moss-2:#17251C;
+  --paper:#F0EADC;
+  --paper-dim:#A9B3A5;
+  --cat:#E0862A;
+  --bird:#4C7FB8;
+  --mouse:#4E9E6A;
+  --vagabond:#A9A2B8;
+  --blood:#B8433A;
+  --line:rgba(240,234,220,.13);
+  --display:"Vollkorn",Georgia,serif;
+  --body:"Inter",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;color:var(--paper);font-family:var(--body);font-size:17px;line-height:1.66;
+  -webkit-font-smoothing:antialiased;
+  background:
+    radial-gradient(800px 480px at 10% -6%, rgba(224,134,42,.10), transparent 60%),
+    radial-gradient(760px 520px at 92% 6%, rgba(76,127,184,.10), transparent 60%),
+    linear-gradient(180deg,var(--moss-2),var(--moss) 70%);
+  background-attachment:fixed;
+}
+.wrap{max-width:820px;margin:0 auto;padding:0 22px 90px}
+
+/* ---------- clearing rail ---------- */
+.rail{
+  position:sticky;top:0;z-index:20;background:rgba(16,26,20,.95);
+  backdrop-filter:blur(6px);border-bottom:1px solid var(--line);padding:9px 22px;
+}
+.rail-in{max-width:820px;margin:0 auto;display:flex;align-items:center;gap:13px;flex-wrap:wrap}
+.rail-lab{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--paper-dim)}
+.dots{display:flex;gap:5px;flex:1;min-width:130px}
+.dot{
+  width:9px;height:9px;border-radius:50%;flex:0 0 auto;
+  border:1px solid rgba(240,234,220,.28);background:transparent;transition:background .3s,border-color .3s;
+}
+.dot.on{background:var(--faction,var(--cat));border-color:var(--faction,var(--cat))}
+.rail-count{font-family:var(--mono);font-size:11px;color:var(--paper-dim);white-space:nowrap}
+
+.backlink{
+  display:inline-block;margin-top:26px;font-family:var(--mono);font-size:11px;
+  letter-spacing:.15em;text-transform:uppercase;color:var(--paper-dim);text-decoration:none;
+  border-bottom:1px solid transparent;
+}
+.backlink:hover{color:var(--cat);border-bottom-color:var(--cat)}
+
+header.top{padding:28px 0 42px;border-bottom:1px solid var(--line)}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--cat);margin:22px 0 18px}
+h1{
+  font-family:var(--display);font-weight:800;font-size:clamp(46px,10vw,88px);
+  line-height:.95;letter-spacing:-.03em;margin:0 0 14px;
+}
+h1 span{
+  background:linear-gradient(96deg,var(--cat),var(--bird) 42%,var(--mouse) 74%,var(--vagabond));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.lede{font-size:19px;color:var(--paper-dim);max-width:56ch;margin:0}
+
+.pt{border-top:1px solid var(--line);padding:44px 0 8px;scroll-margin-top:60px}
+.pt:first-of-type{border-top:none}
+.num{
+  display:inline-flex;align-items:center;gap:11px;margin-bottom:12px;
+  font-family:var(--mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--faction,var(--cat));
+}
+.num b{
+  width:29px;height:29px;display:grid;place-items:center;
+  background:var(--faction,var(--cat));color:var(--moss);
+  font-family:var(--display);font-size:15px;font-weight:800;
+  clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);
+}
+.pt[data-f="cat"]{--faction:var(--cat)}
+.pt[data-f="bird"]{--faction:var(--bird)}
+.pt[data-f="mouse"]{--faction:var(--mouse)}
+.pt[data-f="vaga"]{--faction:var(--vagabond)}
+.pt[data-f="blood"]{--faction:var(--blood)}
+h2{
+  font-family:var(--display);font-weight:800;font-size:clamp(25px,4.4vw,36px);
+  line-height:1.14;letter-spacing:-.02em;margin:0 0 16px;max-width:24ch;
+}
+h3{font-family:var(--display);font-weight:600;font-size:19px;margin:28px 0 8px}
+.pt p{max-width:62ch;margin:0 0 16px}
+strong{font-weight:700;color:#fff}
+em.t{font-style:normal;font-family:var(--mono);font-size:.84em;background:rgba(240,234,220,.08);
+  padding:2px 6px;border-radius:2px}
+.aside{
+  border-left:3px solid var(--faction,var(--cat));padding:2px 0 2px 18px;margin:24px 0;
+  font-style:italic;color:var(--paper-dim);max-width:58ch;
+}
+.trap{
+  margin:26px 0;border-left:3px solid var(--blood);background:rgba(184,67,58,.10);
+  padding:15px 20px;border-radius:0 3px 3px 0;max-width:62ch;
+}
+.trap b{
+  display:block;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:#E0857D;margin-bottom:8px;font-weight:500;
+}
+.trap p{margin:0}
+.note{
+  margin:30px 0 0;padding:18px 22px;border-radius:3px;max-width:62ch;
+  background:rgba(240,234,220,.06);border:1px solid var(--line);border-left:3px solid var(--faction,var(--cat));
+}
+.note .lab{
+  display:block;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--faction,var(--cat));margin-bottom:8px;
+}
+.note p{margin:0}
+ul.clean{list-style:none;padding:0;margin:0 0 16px;max-width:62ch}
+ul.clean li{padding:8px 0 8px 24px;position:relative;border-bottom:1px dashed rgba(240,234,220,.1)}
+ul.clean li:last-child{border-bottom:none}
+ul.clean li::before{
+  content:"";position:absolute;left:2px;top:18px;width:9px;height:9px;border-radius:50%;
+  background:var(--faction,var(--cat));
+}
+figure{margin:28px 0;padding:18px;background:rgba(240,234,220,.035);border:1px solid var(--line);border-radius:4px}
+figure svg{display:block;width:100%;height:auto}
+figcaption{font-family:var(--mono);font-size:10.5px;color:var(--paper-dim);margin-top:12px;text-align:center;line-height:1.6}
+.scroll{overflow-x:auto;margin:24px 0}
+table{border-collapse:collapse;width:100%;min-width:520px;font-size:15.5px}
+th,td{text-align:left;padding:9px 14px 9px 0;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--paper-dim);font-weight:500}
+footer{margin:64px 0 0;padding-top:24px;border-top:1px solid var(--line);color:var(--paper-dim);font-size:15px}
+a{color:var(--cat)}
+@media(max-width:620px){body{font-size:16px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+@media print{.rail{display:none}}
+</style>
+</head>
+<body>
+
+<div class="rail">
+  <div class="rail-in">
+    <span class="rail-lab">the woodland</span>
+    <div class="dots" id="dots"></div>
+    <span class="rail-count" id="count">1 / 16</span>
+  </div>
+</div>
+
+<div class="wrap">
+
+<a class="backlink" href="../">&larr; the shelf</a>
+
+<header class="top">
+  <p class="eyebrow">Learn the whole game &middot; 16 points</p>
+  <h1>R<span>oot</span></h1>
+  <p class="lede">Cute woodland animals fighting a brutal asymmetric war. Nobody at the table is playing the same game as you, and that is not a metaphor: you each have different rules, different turns and different ways to score.</p>
+</header>
+
+<article class="pt" data-f="cat">
+  <p class="num"><b>1</b> The big picture</p>
+  <h2>Four players, four rulebooks, one map.</h2>
+
+  <p>Most games give everyone the same actions and different starting positions. Root gives everyone <strong>a different game</strong> and asks them to share a board.</p>
+
+  <p>The cats run an industrial economy and score by building. The birds are locked into an ever-growing list of orders they must obey. The mice run an insurgency that gets stronger when you hit it. The vagabond is one raccoon with a backpack who makes friends and does errands. All four are on the same map, all four are racing to thirty points, and none of them win the same way.</p>
+
+  <div class="aside">This is why Root has a reputation for a rough first game. The rules are not hard. Learning what the other three players are quietly doing to you is hard, and that only comes from a full play.</div>
+
+  <h3>The one thing everyone shares</h3>
+
+  <p>Everyone is racing up the same <strong>thirty point track</strong>, and everyone is scoring at a different speed from a different source. Your job is not just to score. It is to notice who is about to hit thirty and to be the one who slows them down.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>You are not playing a war game. You are playing <strong>a race with weapons</strong>, and the weapons exist to manage the pace of everyone else's race.</p>
+  </div>
+</article>
+
+<article class="pt" data-f="cat">
+  <p class="num"><b>2</b> The map</p>
+  <h2>Twelve clearings, four suits, and everything happens in them.</h2>
+
+  <p>The board is a woodland of twelve <strong>clearings</strong> joined by paths. Every clearing has two properties that matter constantly:</p>
+
+  <ul class="clean">
+    <li>A <strong>suit</strong>: fox, rabbit or mouse. Cards share those suits, and most actions ask for a match.</li>
+    <li>A number of <strong>building slots</strong>: one, two or three. This is how much a clearing is worth owning.</li>
+  </ul>
+
+  <p>Warriors move along paths between adjacent clearings. Buildings sit in the slots and cannot move. Forests, the gaps between clearings, matter only to the vagabond, who can walk through them.</p>
+
+  <figure>
+    <svg viewBox="0 0 760 300" role="img" aria-labelledby="r2t r2d">
+      <title id="r2t">A section of the woodland map showing suited clearings and building slots</title>
+      <desc id="r2d">Four clearings joined by paths, labelled fox, rabbit and mouse, each showing how many building slots it has.</desc>
+      <g stroke="#A9B3A5" stroke-opacity=".5" stroke-width="2">
+        <path d="M150 90 L400 70"/><path d="M400 70 L620 130"/>
+        <path d="M150 90 L300 230"/><path d="M300 230 L620 130"/><path d="M400 70 L300 230"/>
+      </g>
+      <g font-family="Inter, sans-serif" font-size="14" text-anchor="middle">
+        <g>
+          <circle cx="150" cy="90" r="52" fill="rgba(224,134,42,.16)" stroke="#E0862A" stroke-width="2"/>
+          <text x="150" y="84" fill="#F0EADC" font-weight="700">FOX</text>
+          <text x="150" y="106" fill="#A9B3A5" font-size="12">2 slots</text>
+        </g>
+        <g>
+          <circle cx="400" cy="70" r="52" fill="rgba(240,234,220,.10)" stroke="#F0EADC" stroke-width="2" stroke-opacity=".6"/>
+          <text x="400" y="64" fill="#F0EADC" font-weight="700">RABBIT</text>
+          <text x="400" y="86" fill="#A9B3A5" font-size="12">1 slot</text>
+        </g>
+        <g>
+          <circle cx="620" cy="130" r="52" fill="rgba(78,158,106,.16)" stroke="#4E9E6A" stroke-width="2"/>
+          <text x="620" y="124" fill="#F0EADC" font-weight="700">MOUSE</text>
+          <text x="620" y="146" fill="#A9B3A5" font-size="12">3 slots</text>
+        </g>
+        <g>
+          <circle cx="300" cy="230" r="52" fill="rgba(224,134,42,.16)" stroke="#E0862A" stroke-width="2"/>
+          <text x="300" y="224" fill="#F0EADC" font-weight="700">FOX</text>
+          <text x="300" y="246" fill="#A9B3A5" font-size="12">2 slots</text>
+        </g>
+      </g>
+      <text x="620" y="228" text-anchor="middle" fill="#A9B3A5" font-family="IBM Plex Mono, monospace" font-size="11" letter-spacing="1">PATHS = WHERE ARMIES CAN WALK</text>
+      <text x="620" y="252" text-anchor="middle" fill="#A9B3A5" font-family="IBM Plex Mono, monospace" font-size="11" letter-spacing="1">SUITS = WHICH CARDS WORK HERE</text>
+    </svg>
+    <figcaption>THE WOODLAND: a three slot clearing is worth fighting over. A one slot clearing is usually worth walking through.</figcaption>
+  </figure>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Suit tells you <strong>which cards work here</strong>. Slots tell you <strong>how much this clearing is worth</strong>. Learn to read both at a glance.</p>
+  </div>
+</article>
+
+<article class="pt" data-f="cat">
+  <p class="num"><b>3</b> Rule</p>
+  <h2>Who rules a clearing, and why the answer decides everything.</h2>
+
+  <p>You <strong>rule</strong> a clearing if you have more pieces there than anybody else, counting warriors and buildings together. Ties go to nobody, except that some factions win ties by their own rules.</p>
+
+  <p>Ruling matters because most of the good actions require it: building, recruiting, and several card effects all check whether you rule the clearing you are trying to use.</p>
+
+  <p>Two implications that beginners miss:</p>
+
+  <ul class="clean">
+    <li><strong>Buildings count.</strong> A clearing with two of your buildings is already contested in your favour, even with no warriors present.</li>
+    <li><strong>One warrior is a real move.</strong> Walking a single warrior into a clearing to break someone's rule is often stronger than a battle, and it costs nothing.</li>
+  </ul>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Rule is a count, not a battle. <strong>You can take a clearing away without fighting for it</strong>, and doing so is frequently the best move on the board.</p>
+  </div>
+</article>
+
+<article class="pt" data-f="cat">
+  <p class="num"><b>4</b> Battle</p>
+  <h2>Two dice, both used, and the defender is never helpless.</h2>
+
+  <p>Combat is fast and deliberately unsatisfying. You declare a battle in a clearing where you have a warrior and pick a defender. Roll two dice. <strong>The attacker takes the higher roll, the defender takes the lower.</strong> Each side then removes that many enemy pieces, though you cannot deal more hits than you have warriors present.</p>
+
+  <p>Three consequences worth internalising before your first fight:</p>
+
+  <ul class="clean">
+    <li><strong>Attacking always costs you something.</strong> The defender rolls too, so even a winning attack usually bleeds warriors.</li>
+    <li><strong>Numbers matter more than luck.</strong> Attacking with one warrior caps your damage at one, whatever the dice say.</li>
+    <li><strong>Buildings die last.</strong> Warriors are removed first, so an enemy building in a defended clearing takes real force to remove.</li>
+  </ul>
+
+  <div class="trap">
+    <b>The trap</b>
+    <p>Fighting because someone annoyed you. Every warrior you lose is one you have to spend a whole action recruiting back, while the third player at the table scores unopposed. In Root, revenge is a gift to whoever is not involved.</p>
+  </div>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Battle is a tool for <strong>removing a specific obstacle</strong>: a building, a rule, a sympathy token. If you cannot name the obstacle, do not roll.</p>
+  </div>
+</article>
+
+<article class="pt" data-f="bird">
+  <p class="num"><b>5</b> Cards</p>
+  <h2>One deck, shared by everyone, and it is not really about the fighting.</h2>
+
+  <p>There is a single deck of cards for the whole table. Cards are suited to match clearings, and they do three separate jobs depending on how you use them:</p>
+
+  <div class="scroll">
+  <table>
+    <tr><th>Use</th><th>What happens</th></tr>
+    <tr><td>Craft it</td><td>Spend the matching clearings you control to turn the card into a permanent item or a one-off score</td></tr>
+    <tr><td>Spend it</td><td>Most factions burn cards as fuel: the birds add them to the decree, the mice pay for revolts, the cats buy actions</td></tr>
+    <tr><td>Play it</td><td>Some cards are ambushes or effects you play at the exact right moment</td></tr>
+  </table>
+  </div>
+
+  <p>Because it is one shared deck, the ambush card that ruins your attack could be in anyone's hand. Attacking into a clearing where the defender is holding cards of that suit is a real risk, and experienced players count what has already been played.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>A card is fuel, an item, or a trap. Before you attack, ask what suit the clearing is and <strong>whether the defender might be holding it</strong>.</p>
+  </div>
+</article>
+
+<article class="pt" data-f="bird">
+  <p class="num"><b>6</b> Crafting</p>
+  <h2>The quiet scoring engine everyone forgets in their first game.</h2>
+
+  <p>Crafting turns cards into value. To craft, you need crafting capacity in clearings matching the card's suit, which comes from buildings: workshops for the cats, roosts for the birds, sympathy for the mice, and the vagabond's hammer.</p>
+
+  <p>Crafted things are either <strong>items</strong>, which sit on your board and do something useful forever, or <strong>immediate points</strong>, which is exactly as good as it sounds.</p>
+
+  <p>The reason it gets forgotten is that crafting never feels urgent. Nobody is attacking your crafting. But a faction that crafts steadily is scoring two or three points a turn from cards it was going to draw anyway, and that adds up faster than any single military plan.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Crafting is <strong>free points from cards you already hold</strong>. Check every turn whether the suits you control match anything in your hand.</p>
+  </div>
+</article>
+
+<article class="pt" data-f="bird">
+  <p class="num"><b>7</b> The turn shape</p>
+  <h2>Birdsong, Daylight, Evening. Every faction, every turn.</h2>
+
+  <p>Whatever faction you are, your turn has the same three phases, and each faction fills them with different things:</p>
+
+  <div class="scroll">
+  <table>
+    <tr><th>Phase</th><th>Roughly</th><th>Examples</th></tr>
+    <tr><td>Birdsong</td><td>Preparation</td><td>Cats place wood, birds add to the decree, mice revolt and spread</td></tr>
+    <tr><td>Daylight</td><td>The main event</td><td>Move, battle, build, craft, spend your actions</td></tr>
+    <tr><td>Evening</td><td>Payoff and cleanup</td><td>Score, draw cards, discard down</td></tr>
+  </table>
+  </div>
+
+  <p>Learning this rhythm early makes the other factions readable. When the bird player is fussing in birdsong, they are committing to orders they must obey later. When the mouse player does nothing all daylight, they are waiting for you to attack them.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Same three phases for everyone, filled differently. It is the one piece of shared structure in an otherwise asymmetric game.</p>
+  </div>
+</article>
+
+<article class="pt" data-f="cat">
+  <p class="num"><b>8</b> The Marquise de Cat</p>
+  <h2>Orange: an industrial economy that scores by building things.</h2>
+
+  <p>You start owning almost the entire map and you will spend the game slowly losing it. That is normal, and it is not the disaster it feels like.</p>
+
+  <p>Your engine is <strong>wood</strong>. Sawmills make wood, wood pays for buildings, and buildings score points when placed. Recruiters give you warriors, workshops give you crafting. Every building you place also earns more the more of that type you have already placed, so the cats accelerate: your first sawmill is worth little, your fifth is worth a lot.</p>
+
+  <p>Your problem is that you are everywhere and therefore weak everywhere. Three warriors spread across twelve clearings is not an army, it is a set of targets, and every other faction scores by taking your things.</p>
+
+  <div class="scroll">
+  <table>
+    <tr><th>You score by</th><th>You lose by</th></tr>
+    <tr><td>Placing buildings, especially the later ones in each row</td><td>Defending everything and therefore defending nothing</td></tr>
+    <tr><td>Keeping a wood supply that can actually reach your building sites</td><td>Letting your wood get stranded in clearings you no longer rule</td></tr>
+  </table>
+  </div>
+
+  <div class="note">
+    <span class="lab">Playing the cats</span>
+    <p>Pick a <strong>core of three or four connected clearings</strong> and genuinely defend it. Concede the edges early rather than lose warriors defending a one slot clearing you did not need.</p>
+  </div>
+</article>
+
+<article class="pt" data-f="bird">
+  <p class="num"><b>9</b> The Eyrie Dynasties</p>
+  <h2>Blue: a bureaucracy that scores automatically and punishes failure brutally.</h2>
+
+  <p>The birds are the cleverest design in the box. You have a <strong>decree</strong>: a list of orders, sorted into columns for recruit, move, battle and build. Each turn you add cards to it, and then you <strong>must carry out every order in it</strong>, in order, for every suit listed.</p>
+
+  <p>If you cannot fulfil an order, you fall into <strong>turmoil</strong>: your leader is deposed, you lose points, and the decree is wiped clean. It is a spectacular, self-inflicted collapse, and it happens to every new bird player at least once.</p>
+
+  <p>In exchange, you score for free. At the end of every turn you gain points based on how many roosts you have on the map, with no action required. The birds are a snowball: survive, keep the decree fulfillable, and the points arrive by themselves.</p>
+
+  <div class="trap">
+    <b>The trap</b>
+    <p>Adding two cards to the decree every turn because you can. A decree with four battle orders in suits you cannot reach is a turmoil with a countdown on it. Add slowly and keep it in suits where you actually have warriors.</p>
+  </div>
+
+  <div class="note">
+    <span class="lab">Playing the birds</span>
+    <p>Your enemy is <strong>your own decree</strong>, not the other players. Plan every addition as a promise you must keep for the rest of the game.</p>
+  </div>
+</article>
+
+<article class="pt" data-f="mouse">
+  <p class="num"><b>10</b> The Woodland Alliance</p>
+  <h2>Green: an insurgency that grows every time somebody hits it.</h2>
+
+  <p>You start with nothing on the map. You score by placing <strong>sympathy</strong> tokens, spreading discontent clearing by clearing, and each token placed is points.</p>
+
+  <p>Two rules make the mice terrifying to play against:</p>
+
+  <ul class="clean">
+    <li><strong>Outrage.</strong> If anyone removes a sympathy token, they must hand you a card. Attacking you literally funds you.</li>
+    <li><strong>Revolt.</strong> When a clearing is sympathetic enough and you have the cards, you can flip it: every enemy piece in that clearing is destroyed and a base appears. This is the biggest single swing available to anybody in the game.</li>
+  </ul>
+
+  <p>Your weakness is that you are fragile until you have bases. Early on, a determined faction can grind your sympathy off the board faster than you can place it, and you will spend three turns doing very little while everyone else scores.</p>
+
+  <div class="note">
+    <span class="lab">Playing the mice</span>
+    <p>Spread <strong>where the enemy is weak but present</strong>. Sympathy in an empty corner scores the same but threatens nobody, and a revolt that destroys nothing is a wasted hand of cards.</p>
+  </div>
+</article>
+
+<article class="pt" data-f="vaga">
+  <p class="num"><b>11</b> The Vagabond</p>
+  <h2>Grey: one raccoon, a backpack, and a completely different game.</h2>
+
+  <p>You are a single figure. You do not rule clearings, you do not have warriors, and you are not really fighting a war. Your actions are powered by <strong>items</strong>: boots let you move, swords let you fight, hammers let you craft, and every item exhausts when used and must be refreshed.</p>
+
+  <p>You score in three ways, and they pull in different directions:</p>
+
+  <ul class="clean">
+    <li><strong>Quests</strong>, completed by spending the right items in the right suited clearing</li>
+    <li><strong>Aid</strong>, giving cards to other factions to improve your relationship with them, which eventually scores</li>
+    <li><strong>Raiding</strong>, attacking a faction to steal items and score, which permanently sours that relationship</li>
+  </ul>
+
+  <p>Being everyone's friend is a real strategy and so is being one faction's nightmare. What does not work is drifting between the two, because your relationships are the engine and half-built ones pay nothing.</p>
+
+  <div class="aside">The vagabond is also the diplomat at the table, holding conversations about who is winning while quietly doing errands for everybody. Some groups love this. Some groups find it maddening.</div>
+
+  <div class="note">
+    <span class="lab">Playing the vagabond</span>
+    <p>Decide early whether you are a <strong>friend or a thief</strong>, and pick your victim before you need one. Neutral vagabonds finish last.</p>
+  </div>
+</article>
+
+<article class="pt" data-f="mouse">
+  <p class="num"><b>12</b> Asymmetry in practice</p>
+  <h2>Nobody's turn tells you what your turn should be.</h2>
+
+  <p>Because the factions score so differently, the normal instincts you bring from other games misfire. Being ahead on the map means nothing if you are the cats and your buildings are all placed. Having no pieces on the board means nothing if you are the mice with three revolts in hand.</p>
+
+  <p>The habit to build is <strong>reading the other three boards, not the map</strong>. Each faction has a visible progress meter:</p>
+
+  <div class="scroll">
+  <table>
+    <tr><th>Faction</th><th>Look at</th><th>Danger sign</th></tr>
+    <tr><td>Cats</td><td>How many buildings are left in their rows</td><td>Rows emptying fast, wood flowing freely</td></tr>
+    <tr><td>Birds</td><td>Number of roosts, and the size of the decree</td><td>Many roosts and a small tidy decree</td></tr>
+    <tr><td>Mice</td><td>Sympathy tokens left on their board</td><td>Bases up, supporters piling, nobody attacking them</td></tr>
+    <tr><td>Vagabond</td><td>Item count and relationship track</td><td>Full backpack and two friendly factions</td></tr>
+  </table>
+  </div>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Every faction wears its speed on its player board. <strong>Look at the boards, not the map</strong>, when you are deciding who to slow down.</p>
+  </div>
+</article>
+
+<article class="pt" data-f="blood">
+  <p class="num"><b>13</b> Policing the leader</p>
+  <h2>The game does not stop the runaway. You have to.</h2>
+
+  <p>Root has no catch-up mechanism. If one faction is left alone to run its engine, it will hit thirty points and win, and nobody will have done anything wrong except be polite.</p>
+
+  <p>So the game asks something unusual of the table: <strong>everyone is responsible for the pace of everyone else</strong>. When a faction is clearly ahead, the correct play for the other three is to spend real resources hurting them, even though it costs points and even though it helps the fourth player too.</p>
+
+  <div class="trap">
+    <b>The trap</b>
+    <p>"I will let someone else deal with them." Everyone thinks this, nobody acts, and the leader wins on turn nine. If you can see the win coming and you have the pieces to interfere, it is your job this turn.</p>
+  </div>
+
+  <p>The flip side, when you are the leader: expect it. A good Root player scores in bursts, hiding progress until they can convert several turns of setup into a rush that ends the game before the table organises against them.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>The score track is a threat display. <strong>Read it out loud every turn</strong>, and act on the number that scares you most.</p>
+  </div>
+</article>
+
+<article class="pt" data-f="vaga">
+  <p class="num"><b>14</b> Dominance and the endgame</p>
+  <h2>The other way to win, and why the leader should fear it.</h2>
+
+  <p>Certain cards in the deck are <strong>dominance</strong> cards. Instead of crafting or spending them, a player at ten or more points can play one to change their victory condition entirely: they stop racing to thirty and instead win immediately if they rule a particular set of clearings at the start of their turn.</p>
+
+  <p>This exists to break stalemates and to punish a leader who has stalled. It also creates a distinctive endgame: a player who cannot win the race can suddenly threaten a win the map has to answer, and the whole table has to reorganise around them.</p>
+
+  <p class="aside">You can also trade a dominance card away to another player for a card in hand, which is the closest thing to diplomacy the base game has.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Thirty points is the usual way to win, not the only one. When someone at fifteen points suddenly stops caring about scoring, look for the dominance card.</p>
+  </div>
+</article>
+
+<article class="pt" data-f="mouse">
+  <p class="num"><b>15</b> Choosing your faction</p>
+  <h2>Your first game is much better if you pick the right animal.</h2>
+
+  <div class="scroll">
+  <table>
+    <tr><th>Faction</th><th>Difficulty</th><th>Pick it if</th></tr>
+    <tr><td>Marquise de Cat</td><td>Gentle</td><td>You like building engines and can accept losing ground all game</td></tr>
+    <tr><td>Eyrie Dynasties</td><td>Medium, punishing</td><td>You enjoy planning under a constraint and will read the decree rules twice</td></tr>
+    <tr><td>Woodland Alliance</td><td>Hard</td><td>You are patient, you like traps, and you do not mind three quiet turns</td></tr>
+    <tr><td>Vagabond</td><td>Hard, and social</td><td>You want a puzzle of your own and enjoy negotiating with everyone</td></tr>
+  </table>
+  </div>
+
+  <p>The other consideration is the table. The cats and the birds are the two engines that punish an inattentive group, so a first-time table should have experienced players on the mice and the vagabond if possible, and should absolutely expect the cats to be attacked from three directions at once.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Ask what a faction does on a <strong>bad</strong> turn before you pick it. That is the turn you will have most often in your first game.</p>
+  </div>
+</article>
+
+<article class="pt" data-f="cat">
+  <p class="num"><b>16</b> Your first game</p>
+  <h2>How not to lose it: five instincts to switch off.</h2>
+
+  <h3>1. "I should hold my ground."</h3>
+  <p>You should not. Root rewards concentration, and every faction is too thin to be everywhere. Pick the clearings that pay you, defend those, and let the rest go without a fight.</p>
+
+  <h3>2. "I will attack whoever attacked me."</h3>
+  <p>Retaliation in a four player race is a donation to the two players not involved. Hit whoever is closest to winning, not whoever hurt you most recently.</p>
+
+  <h3>3. "Crafting is a side thing."</h3>
+  <p>It is two or three points a turn from cards you drew anyway. Over a game that is a faction's entire score. Check your hand against your suits every single turn.</p>
+
+  <h3>4. "I will build up and then rush."</h3>
+  <p>Everyone else is scoring while you build. The engines in Root are meant to start paying almost immediately: if you have gone two full turns without scoring, something is wrong with your plan, not with your luck.</p>
+
+  <h3>5. "It is rude to gang up."</h3>
+  <p>It is the rules. The game hands you no other brake. A table that will not police its leader is a table where the first person to be left alone wins, and that is a worse game for everyone.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Concentrate, craft, and always know who is closest to thirty. Root punishes the polite and the scattered, usually at the same time.</p>
+  </div>
+</article>
+
+<footer>A teaching walkthrough of Root by Cole Wehrle (Leder Games, 2018), covering the four factions in the base box. Rules summarised for learning; the rulebook and the Law of Root are still the authority, especially for the decree, dominance and vagabond relationships. <a href="../">Back to the shelf</a>.</footer>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var pts = Array.prototype.slice.call(document.querySelectorAll('.pt'));
+  var dots = document.getElementById('dots');
+  var count = document.getElementById('count');
+  var tint = {cat:'#E0862A', bird:'#4C7FB8', mouse:'#4E9E6A', vaga:'#A9A2B8', blood:'#B8433A'};
+
+  pts.forEach(function(p){
+    var d = document.createElement('span');
+    d.className = 'dot';
+    d.style.setProperty('--faction', tint[p.getAttribute('data-f')] || tint.cat);
+    dots.appendChild(d);
+  });
+  var dotEls = Array.prototype.slice.call(dots.children);
+
+  var at = 0;
+  function paint(n){
+    if(n === at) return;
+    at = n;
+    dotEls.forEach(function(d,i){ d.classList.toggle('on', i < n); });
+    count.textContent = n + ' / ' + pts.length;
+    dots.setAttribute('aria-label', 'Point ' + n + ' of ' + pts.length);
+  }
+
+  var ticking = false;
+  function measure(){
+    ticking = false;
+    var mark = window.innerHeight * 0.45, n = 1;
+    for(var i = 0; i < pts.length; i++){
+      if(pts[i].getBoundingClientRect().top <= mark){ n = i + 1; }
+    }
+    paint(n);
+  }
+  window.addEventListener('scroll', function(){
+    if(!ticking){ ticking = true; window.requestAnimationFrame(measure); }
+  }, {passive:true});
+  window.addEventListener('resize', measure);
+  paint(1);
+  measure();
+})();
+</script>
+</body>
+</html>

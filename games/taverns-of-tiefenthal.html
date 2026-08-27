@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Taverns of Tiefenthal: Twelve Rounds Behind the Bar</title>
+<meta name="description" content="A briefing that teaches The Taverns of Tiefenthal in twelve points, for someone who has never opened the box.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bitter:wght@600;800&family=Karla:ital,wght@0,400;0,600;1,400&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --oak:#2A1D14;
+  --oak-2:#3A2A1D;
+  --board:#161009;
+  --chalk:#F4EEE3;
+  --chalk-dim:#B6A891;
+  --beer:#E0A32E;
+  --foam:#F7E7C4;
+  --copper:#B4602B;
+  --slate:#7FA3A8;
+  --line:rgba(244,238,227,.14);
+  --display:"Bitter",Georgia,serif;
+  --body:"Karla",system-ui,sans-serif;
+  --mono:"Courier Prime",ui-monospace,Menlo,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;color:var(--chalk);font-family:var(--body);font-size:18px;line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+  background:
+    repeating-linear-gradient(90deg, rgba(0,0,0,.13) 0 2px, transparent 2px 68px),
+    radial-gradient(900px 520px at 50% -6%, rgba(224,163,46,.13), transparent 62%),
+    linear-gradient(180deg,var(--oak),var(--board) 65%);
+  background-attachment:fixed;
+}
+.wrap{max-width:810px;margin:0 auto;padding:0 22px 90px}
+
+/* ---------- the bar tab rail ---------- */
+.rail{
+  position:sticky;top:0;z-index:20;background:rgba(22,16,9,.95);
+  backdrop-filter:blur(6px);border-bottom:1px solid var(--line);padding:9px 22px;
+}
+.rail-in{max-width:810px;margin:0 auto;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.rail-lab{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--chalk-dim)}
+.marks{display:flex;gap:6px;flex:1;min-width:130px}
+.mark{
+  flex:1;max-width:20px;height:16px;border-radius:2px;
+  border:1px solid rgba(244,238,227,.22);background:transparent;transition:background .3s,border-color .3s;
+}
+.mark.on{background:var(--beer);border-color:var(--foam)}
+.rail-count{font-family:var(--mono);font-size:12px;color:var(--beer);white-space:nowrap}
+
+.backlink{
+  display:inline-block;margin-top:26px;font-family:var(--mono);font-size:11px;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--chalk-dim);text-decoration:none;
+  border-bottom:1px solid transparent;
+}
+.backlink:hover{color:var(--beer);border-bottom-color:var(--beer)}
+
+header.top{padding:28px 0 40px;border-bottom:2px solid var(--line)}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--beer);margin:22px 0 18px}
+h1{
+  font-family:var(--display);font-weight:800;font-size:clamp(38px,8vw,68px);
+  line-height:1;letter-spacing:-.02em;margin:0 0 8px;color:var(--foam);
+}
+h1 small{display:block;font-size:.38em;font-weight:600;letter-spacing:.02em;color:var(--beer);margin-bottom:6px}
+.lede{font-size:20px;color:var(--chalk-dim);max-width:54ch;margin:18px 0 0}
+
+.pt{border-top:1px solid var(--line);padding:44px 0 8px;scroll-margin-top:60px}
+.pt:first-of-type{border-top:none}
+.num{
+  display:inline-flex;align-items:center;gap:11px;margin-bottom:12px;
+  font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--beer);
+}
+.num b{
+  width:30px;height:30px;border-radius:4px;display:grid;place-items:center;
+  background:var(--beer);color:var(--board);font-family:var(--display);font-size:15px;
+  box-shadow:0 3px 0 rgba(0,0,0,.45);
+}
+h2{
+  font-family:var(--display);font-weight:800;font-size:clamp(26px,4.6vw,37px);
+  line-height:1.12;letter-spacing:-.02em;margin:0 0 16px;max-width:23ch;color:var(--foam);
+}
+h3{
+  font-family:var(--display);font-weight:600;font-size:19px;margin:28px 0 8px;color:var(--chalk);
+}
+.pt p{max-width:62ch;margin:0 0 16px}
+strong{font-weight:600;color:#fff}
+em.t{font-style:normal;font-family:var(--mono);font-size:.86em;background:rgba(244,238,227,.09);
+  padding:2px 6px;border-radius:2px}
+.aside{
+  border-left:3px solid var(--copper);padding:2px 0 2px 18px;margin:24px 0;
+  font-style:italic;color:var(--chalk-dim);max-width:58ch;
+}
+.trap{
+  margin:26px 0;border:1px dashed rgba(180,96,43,.65);background:rgba(180,96,43,.12);
+  border-radius:3px;padding:16px 20px;max-width:62ch;
+}
+.trap b{
+  display:block;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:#DB9163;margin-bottom:8px;
+}
+.trap p{margin:0}
+.note{
+  margin:30px 0 0;padding:18px 22px;border-radius:3px;max-width:62ch;
+  background:rgba(224,163,46,.10);border:1px solid rgba(224,163,46,.42);
+}
+.note .lab{
+  display:block;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--beer);margin-bottom:8px;
+}
+.note p{margin:0}
+ul.clean{list-style:none;padding:0;margin:0 0 16px;max-width:62ch}
+ul.clean li{padding:8px 0 8px 26px;position:relative;border-bottom:1px dashed rgba(244,238,227,.1)}
+ul.clean li:last-child{border-bottom:none}
+ul.clean li::before{
+  content:"";position:absolute;left:3px;top:17px;width:10px;height:10px;border-radius:2px;
+  background:var(--beer);
+}
+figure{margin:28px 0;padding:18px;background:rgba(244,238,227,.04);border:1px solid var(--line);border-radius:4px}
+figure svg{display:block;width:100%;height:auto}
+figcaption{font-family:var(--mono);font-size:11px;color:var(--chalk-dim);margin-top:12px;text-align:center;line-height:1.6}
+.scroll{overflow-x:auto;margin:24px 0}
+table{border-collapse:collapse;width:100%;min-width:440px;font-size:16px}
+th,td{text-align:left;padding:9px 14px 9px 0;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--chalk-dim);font-weight:700}
+footer{margin:64px 0 0;padding-top:24px;border-top:1px solid var(--line);color:var(--chalk-dim);font-size:15px}
+a{color:var(--beer)}
+@media(max-width:620px){body{font-size:17px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+@media print{.rail{display:none}}
+</style>
+</head>
+<body>
+
+<div class="rail">
+  <div class="rail-in">
+    <span class="rail-lab">tonight's tab</span>
+    <div class="marks" id="marks"></div>
+    <span class="rail-count" id="count">1 / 12</span>
+  </div>
+</div>
+
+<div class="wrap">
+
+<a class="backlink" href="../">&larr; the shelf</a>
+
+<header class="top">
+  <p class="eyebrow">Learn the whole game &middot; 12 points</p>
+  <h1><small>The Taverns of</small>Tiefenthal</h1>
+  <p class="lede">You run a Bavarian pub. Every night the same regulars stagger in, you seat them by the number on a die, and you try to turn beer money into a better pub before the season ends.</p>
+</header>
+
+<article class="pt">
+  <p class="num"><b>1</b> The big picture</p>
+  <h2>A deck builder where the cards are customers and the money is dice.</h2>
+
+  <p>Taverns of Tiefenthal looks like a dice game and is really two familiar games bolted together, cleanly.</p>
+
+  <p>Half of it is <strong>deck building</strong>: you own a deck of guest cards, you draw a few each round, and you spend the night's takings on better guests who go into that deck for next time. Half of it is <strong>dice placement</strong>: the dice you draft each round decide which of your seated guests actually get served.</p>
+
+  <div class="aside">Everybody plays at the same time, all round, every round. There is no turn order to wait for, which is why a four player game takes about as long as a two player one.</div>
+
+  <h3>What your tavern is</h3>
+
+  <p>Your player board is a pub seen from above: a few tables, each with numbered seats, plus a bar area, a cash box and a beer counter. Guest cards sit on the seats. Dice go on the seats too, and a seat only pays out when both a guest and a die of the right number are on it.</p>
+
+  <p>Everything you buy makes the pub physically better: more tables, higher numbered seats, a monastery that brews for you, a serving hatch that lets you move dice around. By the last round your grubby three-table pub is a machine, and that transformation is the actual pleasure of the game.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Guests come from your deck. Service comes from your dice. <strong>A seat pays only when it has both.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>2</b> The round</p>
+  <h2>One round is one night, and it always runs the same four steps.</h2>
+
+  <p>The shape never changes, which is why the game teaches itself after two rounds:</p>
+
+  <ul class="clean">
+    <li><strong>Guests arrive.</strong> Draw cards from your deck and seat them in your tavern.</li>
+    <li><strong>Dice.</strong> Roll, draft, and place dice on seats to serve the guests sitting there.</li>
+    <li><strong>Takings.</strong> Total up the beer and the money your served guests produced.</li>
+    <li><strong>Spending.</strong> Beer hires a new guest into your deck. Money buys an upgrade to the pub itself.</li>
+  </ul>
+
+  <p>Then you clear the tables, the guests go back into your deck, and the next night begins. The game runs a fixed number of nights and then you count points, so there is no catching up later: every night has to earn.</p>
+
+  <figure>
+    <svg viewBox="0 0 780 170" role="img" aria-labelledby="t2t t2d">
+      <title id="t2t">The four steps of a round</title>
+      <desc id="t2d">Guests arrive, dice are drafted and placed, takings are totalled, and beer and money are spent on a guest and an upgrade, then the loop repeats.</desc>
+      <g font-family="Karla, sans-serif" font-size="15" fill="#F4EEE3">
+        <rect x="14" y="34" width="168" height="86" rx="4" fill="rgba(244,238,227,.06)" stroke="#B6A891" stroke-opacity=".5"/>
+        <text x="98" y="66" text-anchor="middle" font-weight="600">1. guests arrive</text>
+        <text x="98" y="92" text-anchor="middle" fill="#B6A891" font-size="14">from your own deck</text>
+
+        <rect x="204" y="34" width="168" height="86" rx="4" fill="rgba(244,238,227,.06)" stroke="#B6A891" stroke-opacity=".5"/>
+        <text x="288" y="66" text-anchor="middle" font-weight="600">2. dice</text>
+        <text x="288" y="92" text-anchor="middle" fill="#B6A891" font-size="14">roll, keep one, pass</text>
+
+        <rect x="394" y="34" width="168" height="86" rx="4" fill="rgba(244,238,227,.06)" stroke="#B6A891" stroke-opacity=".5"/>
+        <text x="478" y="66" text-anchor="middle" font-weight="600">3. takings</text>
+        <text x="478" y="92" text-anchor="middle" fill="#B6A891" font-size="14">beer and money</text>
+
+        <rect x="584" y="34" width="182" height="86" rx="4" fill="rgba(224,163,46,.13)" stroke="#E0A32E"/>
+        <text x="675" y="66" text-anchor="middle" font-weight="600">4. spending</text>
+        <text x="675" y="92" text-anchor="middle" fill="#E0A32E" font-size="14">a guest and an upgrade</text>
+      </g>
+      <g stroke="#B6A891" stroke-width="1.4" fill="none">
+        <path d="M186 77 h14"/><path d="M376 77 h14"/><path d="M566 77 h14"/>
+        <path d="M675 128 v18 H98 v-22"/>
+      </g>
+      <text x="386" y="162" text-anchor="middle" fill="#B6A891" font-family="Courier Prime, monospace" font-size="11" letter-spacing="1">AND AGAIN TOMORROW NIGHT</text>
+    </svg>
+    <figcaption>THE LOOP: nothing carries over except your deck and your pub, so those are the only two things worth improving.</figcaption>
+  </figure>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Beer and money are <strong>spent the same night you earn them</strong>. There is no saving up, so every round asks "one guest and one upgrade: which ones?"</p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>3</b> The dice draft</p>
+  <h2>Roll your dice, keep one, hand the rest to your neighbour.</h2>
+
+  <p>This is the mechanism people remember. Everyone rolls their own dice at the same time, everyone picks exactly one to place in their tavern, and then the remaining dice slide to the player on your left. You pick one from the batch that arrives, pass the rest on, and around they go until everyone has placed.</p>
+
+  <p>So each round you see your own roll, then someone else's leftovers, then someone else's leftovers again. The good news is you get more choices than a private roll would give you. The bad news is that everyone else is picking from the same stream, and the die you leave is the die they get.</p>
+
+  <div class="aside">This is a friendly game, but it is not a solitaire one. If your neighbour is visibly desperate for a 5, the polite thing and the correct thing are different things.</div>
+
+  <p>Two things make a die good:</p>
+
+  <ul class="clean">
+    <li>It <strong>matches a seat number</strong> where a paying guest is already sitting</li>
+    <li>It is <strong>high</strong>, because the better seats and the better guests live at the high numbers</li>
+  </ul>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>You are drafting from a shared stream. Take what you need first, and only then think about what you are handing along.</p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>4</b> Seating</p>
+  <h2>Numbered seats, numbered dice, and one very strict matching rule.</h2>
+
+  <p>Each table in your pub has seats printed with numbers. A die placed there must show that seat's number. A seat with a guest and a matching die is <strong>served</strong>: it pays whatever the guest prints, usually beer, money, or both.</p>
+
+  <figure>
+    <svg viewBox="0 0 780 220" role="img" aria-labelledby="t4t t4d">
+      <title id="t4t">A tavern table with served and unserved seats</title>
+      <desc id="t4d">Three seats numbered two, four and five. The two and five seats hold a guest and a matching die and pay out. The four seat holds a guest with no die and pays nothing.</desc>
+      <rect x="20" y="26" width="500" height="164" rx="8" fill="rgba(58,42,29,.85)" stroke="#B6A891" stroke-opacity=".35"/>
+      <text x="40" y="52" fill="#B6A891" font-family="Courier Prime, monospace" font-size="11" letter-spacing="1.6">TABLE ONE</text>
+
+      <g font-family="Karla, sans-serif" font-size="14">
+        <g>
+          <rect x="48" y="66" width="128" height="104" rx="5" fill="#F4EEE3"/>
+          <text x="112" y="92" text-anchor="middle" fill="#2A1D14" font-weight="600">guest</text>
+          <rect x="86" y="102" width="52" height="52" rx="9" fill="#E0A32E"/>
+          <text x="112" y="137" text-anchor="middle" fill="#2A1D14" font-family="Bitter, serif" font-size="24" font-weight="800">2</text>
+          <text x="112" y="188" text-anchor="middle" fill="#E0A32E">served</text>
+        </g>
+        <g>
+          <rect x="196" y="66" width="128" height="104" rx="5" fill="#F4EEE3"/>
+          <text x="260" y="92" text-anchor="middle" fill="#2A1D14" font-weight="600">guest</text>
+          <rect x="234" y="102" width="52" height="52" rx="9" fill="none" stroke="#B4602B" stroke-dasharray="5 4"/>
+          <text x="260" y="137" text-anchor="middle" fill="#B4602B" font-family="Bitter, serif" font-size="24" font-weight="800">4</text>
+          <text x="260" y="188" text-anchor="middle" fill="#B4602B">no die, no sale</text>
+        </g>
+        <g>
+          <rect x="344" y="66" width="128" height="104" rx="5" fill="#F4EEE3"/>
+          <text x="408" y="92" text-anchor="middle" fill="#2A1D14" font-weight="600">guest</text>
+          <rect x="382" y="102" width="52" height="52" rx="9" fill="#E0A32E"/>
+          <text x="408" y="137" text-anchor="middle" fill="#2A1D14" font-family="Bitter, serif" font-size="24" font-weight="800">5</text>
+          <text x="408" y="188" text-anchor="middle" fill="#E0A32E">served</text>
+        </g>
+      </g>
+
+      <g font-family="Karla, sans-serif" font-size="16" fill="#F4EEE3">
+        <text x="556" y="76">A guest with no die is</text>
+        <text x="556" y="102">a customer standing at</text>
+        <text x="556" y="128">the bar being ignored.</text>
+        <text x="556" y="170" fill="#E0A32E" font-family="Courier Prime, monospace" font-size="12">SEATS ARE THE BOTTLENECK</text>
+      </g>
+    </svg>
+    <figcaption>MATCHING: your pub can be full and still earn nothing. Dice are the staff, and you never have enough of them.</figcaption>
+  </figure>
+
+  <p>Because dice come out of a shared stream, you cannot rely on getting the exact numbers you want. The fix is to widen your pub rather than pray: more seats, more numbers covered, and upgrades that let you nudge a die's value up or down.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>A guest is a promise. <strong>A die is the payment.</strong> Build a pub whose seat numbers cover the range you actually roll.</p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>5</b> Beer and money</p>
+  <h2>Two currencies, two shops, and they never mix.</h2>
+
+  <p>At the end of the night you total two things.</p>
+
+  <div class="scroll">
+  <table>
+    <tr><th>Currency</th><th>Buys</th><th>Effect</th></tr>
+    <tr><td>Beer</td><td>A new guest card from the shared display</td><td>Goes into your deck, so it improves every future night</td></tr>
+    <tr><td>Money</td><td>An upgrade tile for your tavern board</td><td>Improves the pub permanently: seats, capacity, dice tricks, points</td></tr>
+  </table>
+  </div>
+
+  <p>You cannot convert one into the other, and you cannot bank either of them. Whatever you earned tonight, you spend tonight, at whatever price tier you managed to reach. Ending a round on eight beer when the good guest costs nine is genuinely painful, and it happens constantly.</p>
+
+  <p>That gives every round a small, sharp optimisation puzzle: not "how do I maximise everything" but "which of the two thresholds can I actually clear tonight, and which am I giving up on".</p>
+
+  <div class="trap">
+    <b>The trap</b>
+    <p>Splitting the difference. Six beer and six money often buys two mediocre things, while nine beer and two money buys one excellent one. Aim at a threshold and commit.</p>
+  </div>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Beer improves the <strong>deck</strong>. Money improves the <strong>building</strong>. Decide which one your pub is short of before you place a single die.</p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>6</b> Your deck</p>
+  <h2>Every guest you hire will come back, so hire carefully.</h2>
+
+  <p>Your starting deck is a set of cheap regulars who pay almost nothing. Every guest you buy shuffles into it, so the deck gets richer as the game goes on, and that thickening is your real engine.</p>
+
+  <p>Deck building here is unusually gentle: your deck is small, you cycle through it often, and there is no real deck thinning to worry about. What you are choosing is not "how do I keep my deck lean" but <strong>which seat numbers my good guests want</strong>.</p>
+
+  <p>A brilliant guest who only pays when seated in a high seat is a dead card until your pub has high seats. A modest guest who pays on a low number is money on every single night. Fit beats power.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Buy guests that match the pub you already have, not the pub you are imagining. <strong>Fit beats power.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>7</b> Upgrades</p>
+  <h2>The pub is the other deck, and it never gets shuffled away.</h2>
+
+  <p>Money buys tiles that slot onto your tavern board, and they are the most reliably good purchases in the game because they work every night with no card draw required.</p>
+
+  <ul class="clean">
+    <li><strong>More seats and better seats</strong>, which widen the range of dice you can use</li>
+    <li><strong>Capacity</strong>, letting you seat more guests each night</li>
+    <li><strong>Dice manipulation</strong>, the quiet winners: anything that lets you change a die's value turns a useless roll into a served table</li>
+    <li><strong>Points</strong>, printed straight on some tiles</li>
+  </ul>
+
+  <p>Dice manipulation deserves a sentence of its own. The frustration in this game is always "I have the guest, I have the seat, and I rolled a 3". Any upgrade that fixes that converts your worst nights into ordinary ones, and consistency compounds harder than a single big payout.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Card guests are luck. <strong>Tiles are certainty.</strong> When the choice is close, buy the thing that works whether or not the right card comes up.</p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>8</b> Nobles and the schnapps</p>
+  <h2>Two little pressure valves that decide close games.</h2>
+
+  <p>Two smaller systems sit alongside the main loop, and beginners tend to notice them a round too late.</p>
+
+  <h3>The nobles</h3>
+  <p>Attracting nobles to your tavern is the prestige track: they are hard to satisfy, they want your best seats, and they hand out victory points that beer and money never will. A pub that earns brilliantly and never courts a noble often finishes third.</p>
+
+  <h3>The schnapps</h3>
+  <p>Schnapps is the emergency button: a stashed shot you can spend to change a die, effectively buying yourself the number you needed. It is limited, it does not refill freely, and holding one unused at the end of the game is a small tragedy.</p>
+
+  <div class="trap">
+    <b>The trap</b>
+    <p>Saving schnapps for a perfect moment that never comes. Use it on the night it converts a dead table into a served one. There is no bonus for finishing sober.</p>
+  </div>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Nobles are points you cannot buy with beer. Schnapps is the difference between a bad roll and a bad round. Neither keeps.</p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>9</b> The modules</p>
+  <h2>The box is eight games, and you are meant to play them in order.</h2>
+
+  <p>This is the thing to understand before your first session, because it changes what "learning the rules" even means.</p>
+
+  <p>Taverns of Tiefenthal ships as a base game plus a stack of <strong>modules</strong>, numbered and meant to be added one at a time over successive plays. Module one is a simple pub. By the last module you have several extra systems layered on and the pub you built looks nothing like the starting one.</p>
+
+  <div class="aside">Nothing is destroyed and nothing is permanent, so this is not a legacy game. It is a teaching ramp with the difficulty printed on the boxes.</div>
+
+  <p>Two practical consequences:</p>
+
+  <ul class="clean">
+    <li><strong>Play the base game once, properly.</strong> It is deliberately thin. That is the point: it teaches the loop in twenty minutes.</li>
+    <li><strong>Add modules in the printed order</strong>, one per session. Skipping ahead to the shiny ones is how a light family game turns into an hour of rules arguments.</li>
+  </ul>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>If your first game felt too simple, that was the design working. The complexity is in the next box, and it is meant to arrive next week.</p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>10</b> Simultaneity</p>
+  <h2>Nobody waits, which means nobody is watching you.</h2>
+
+  <p>Because all players roll, draft and place at the same time, the pace is brisk and the table is noisy. That has a strategic edge worth naming.</p>
+
+  <p>You will not have time to audit your opponents' pubs, and they will not have time to audit yours. Direct interaction is limited to the dice you pass and the shared guest display everyone is buying from. In practice this makes Taverns a <strong>race against a standard</strong> rather than a fight: you are trying to run a good pub, not to ruin someone else's.</p>
+
+  <p>The one live conflict is the guest display. When a strong guest appears and two players can afford it, the one who gets there first takes it, and the other spends their beer on second best. That is the only place where speed of decision has real weight, so know roughly what you want before the round ends.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Play your own pub, watch the shared display, and pass dice with one eye on your left-hand neighbour. That is the whole of the interaction.</p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>11</b> Scoring</p>
+  <h2>Points come from the pub you built, not the beer you sold.</h2>
+
+  <p>At the end, beer and money are worth nothing. What scores is what you converted them into:</p>
+
+  <div class="scroll">
+  <table>
+    <tr><th>Source</th><th>Notes</th></tr>
+    <tr><td>Upgrade tiles</td><td>Printed points, earned the moment you bought them</td></tr>
+    <tr><td>Guests in your deck</td><td>Many are worth points on their own, quietly, all game</td></tr>
+    <tr><td>Nobles</td><td>Chunky, competitive, and easy to leave until too late</td></tr>
+    <tr><td>Module-specific tracks</td><td>Whatever the modules you added are counting</td></tr>
+    <tr><td>Leftover beer, money, schnapps</td><td>Nothing at all</td></tr>
+  </table>
+  </div>
+
+  <p>The last row again teaches the same lesson every economic game teaches: unspent is unscored. On the final night, spend everything, take the guest even if the deck will never see it again, and drink the schnapps.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>You are scored on the <strong>pub and the people</strong>, never the till. Convert everything before the last round ends.</p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>12</b> Your first game</p>
+  <h2>How not to lose it: four habits from behind the bar.</h2>
+
+  <h3>1. Widen before you deepen</h3>
+  <p>Early money on seats and capacity pays back every night for the rest of the game. A brilliant guest in a three-seat pub is a brilliant guest with nowhere to sit.</p>
+
+  <h3>2. Aim at one threshold per night</h3>
+  <p>Decide before you place dice whether tonight is a beer night or a money night. Landing exactly on a purchase you wanted beats being two short of two purchases.</p>
+
+  <h3>3. Buy the die fixer</h3>
+  <p>Anything that lets you change a die's value, whether a tile, a guest or a shot of schnapps, is worth more than its face value suggests. This is a game of near misses, and near misses are what those upgrades delete.</p>
+
+  <h3>4. Court a noble before the last two rounds</h3>
+  <p>Nobles take setup, and the players who remember them at the end never get one. Points that beer cannot buy are exactly the points that decide a close game.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Wide pub, one clear target per night, dice you can bend, and a noble in the diary. Everything else is beer.</p>
+  </div>
+</article>
+
+<footer>A teaching walkthrough of The Taverns of Tiefenthal by Wolfgang Warsch (Schmidt Spiele / North Star Games, 2019). Rules summarised for learning; the rulebook is still the authority, especially for the exact contents of each module and the solo variant. <a href="../">Back to the shelf</a>.</footer>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var pts = Array.prototype.slice.call(document.querySelectorAll('.pt'));
+  var marks = document.getElementById('marks');
+  var count = document.getElementById('count');
+
+  pts.forEach(function(){
+    var m = document.createElement('span'); m.className = 'mark'; marks.appendChild(m);
+  });
+  var markEls = Array.prototype.slice.call(marks.children);
+
+  var at = 0;
+  function paint(n){
+    if(n === at) return;
+    at = n;
+    markEls.forEach(function(m,i){ m.classList.toggle('on', i < n); });
+    count.textContent = n + ' / ' + pts.length;
+    marks.setAttribute('aria-label', 'Point ' + n + ' of ' + pts.length);
+  }
+
+  var ticking = false;
+  function measure(){
+    ticking = false;
+    var mark = window.innerHeight * 0.45, n = 1;
+    for(var i = 0; i < pts.length; i++){
+      if(pts[i].getBoundingClientRect().top <= mark){ n = i + 1; }
+    }
+    paint(n);
+  }
+  window.addEventListener('scroll', function(){
+    if(!ticking){ ticking = true; window.requestAnimationFrame(measure); }
+  }, {passive:true});
+  window.addEventListener('resize', measure);
+  paint(1);
+  measure();
+})();
+</script>
+</body>
+</html>

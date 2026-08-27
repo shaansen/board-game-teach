@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Seasons: Three Years, Twelve Cards</title>
+<meta name="description" content="A briefing that teaches Seasons in twelve points, for someone who has never opened the box.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --night:#131826;
+  --night-2:#1A2133;
+  --vellum:#F2EAD8;
+  --vellum-dim:#B3AC9A;
+  --spring:#5FA55A;
+  --summer:#E0A22C;
+  --autumn:#C2622F;
+  --winter:#5E92C4;
+  --crystal:#8FD3E8;
+  --line:rgba(242,234,216,.13);
+  --display:"Cinzel",Georgia,serif;
+  --body:"Cormorant Garamond",Georgia,serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;color:var(--vellum);font-family:var(--body);
+  font-size:20px;line-height:1.6;-webkit-font-smoothing:antialiased;
+  background:
+    radial-gradient(900px 600px at 12% -8%, rgba(95,165,90,.12), transparent 60%),
+    radial-gradient(800px 600px at 88% 4%, rgba(94,146,196,.12), transparent 60%),
+    var(--night);
+}
+.wrap{max-width:800px;margin:0 auto;padding:0 22px 90px}
+
+/* ---------- the year rail ---------- */
+.rail{
+  position:sticky;top:0;z-index:20;
+  background:rgba(19,24,38,.94);backdrop-filter:blur(7px);
+  border-bottom:1px solid var(--line);padding:9px 22px;
+}
+.rail-in{max-width:800px;margin:0 auto;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.rail-lab{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--vellum-dim)}
+.wheel{width:34px;height:34px;flex:0 0 auto}
+.wheel .q{opacity:.22;transition:opacity .3s}
+.wheel .q.on{opacity:1}
+.ticks{display:flex;gap:5px;flex:1;min-width:120px}
+.tick{flex:1;height:4px;border-radius:2px;background:rgba(242,234,216,.14);transition:background .3s}
+.tick.on{background:var(--crystal)}
+.rail-count{font-family:var(--mono);font-size:11px;color:var(--crystal);white-space:nowrap}
+
+/* ---------- head ---------- */
+.backlink{
+  display:inline-block;margin-top:26px;font-family:var(--mono);font-size:11px;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--vellum-dim);
+  text-decoration:none;border-bottom:1px solid transparent;
+}
+.backlink:hover{color:var(--crystal);border-bottom-color:var(--crystal)}
+header.top{padding:30px 0 44px;border-bottom:1px solid var(--line)}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--summer);margin:22px 0 20px}
+h1{
+  font-family:var(--display);font-weight:700;font-size:clamp(44px,9vw,80px);
+  line-height:.98;letter-spacing:.01em;margin:0 0 18px;
+}
+h1 span{
+  background:linear-gradient(100deg,var(--spring),var(--summer) 34%,var(--autumn) 66%,var(--winter));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.lede{font-size:22px;font-style:italic;color:var(--vellum-dim);max-width:52ch;margin:0}
+
+/* ---------- points ---------- */
+.pt{border-top:1px solid var(--line);padding:46px 0 10px;scroll-margin-top:62px}
+.pt:first-of-type{border-top:none}
+.num{
+  display:inline-flex;align-items:center;gap:10px;margin-bottom:14px;
+  font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--season,var(--summer));
+}
+.num b{
+  font-family:var(--display);font-size:15px;letter-spacing:0;
+  width:30px;height:30px;border-radius:50%;display:grid;place-items:center;
+  background:var(--season,var(--summer));color:var(--night);
+}
+.pt[data-season="spring"]{--season:var(--spring)}
+.pt[data-season="summer"]{--season:var(--summer)}
+.pt[data-season="autumn"]{--season:var(--autumn)}
+.pt[data-season="winter"]{--season:var(--winter)}
+h2{
+  font-family:var(--display);font-weight:600;font-size:clamp(27px,4.6vw,38px);
+  line-height:1.14;margin:0 0 18px;max-width:22ch;
+}
+.pt p{max-width:60ch;margin:0 0 16px}
+strong{font-weight:600;color:#fff}
+em.t{font-style:normal;font-family:var(--mono);font-size:.76em;letter-spacing:.02em;
+  background:rgba(242,234,216,.08);padding:2px 7px;border-radius:2px}
+.aside{
+  border-left:3px solid var(--season,var(--summer));padding:2px 0 2px 18px;margin:24px 0;
+  font-style:italic;color:var(--vellum-dim);max-width:58ch;
+}
+.trap{
+  margin:26px 0;border:1px solid rgba(194,98,47,.45);background:rgba(194,98,47,.09);
+  border-radius:3px;padding:16px 20px;max-width:60ch;
+}
+.trap b{
+  display:block;font-family:var(--mono);font-size:10px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--autumn);margin-bottom:8px;font-weight:500;
+}
+.trap p{margin:0}
+.note{
+  margin:30px 0 0;padding:18px 22px;border-radius:3px;
+  background:rgba(143,211,232,.09);border:1px solid rgba(143,211,232,.3);max-width:60ch;
+}
+.note .lab{
+  display:block;font-family:var(--mono);font-size:10px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--crystal);margin-bottom:8px;
+}
+.note p{margin:0}
+ul.clean{list-style:none;padding:0;margin:0 0 16px;max-width:60ch}
+ul.clean li{padding:8px 0 8px 24px;position:relative;border-bottom:1px dashed rgba(242,234,216,.1)}
+ul.clean li:last-child{border-bottom:none}
+ul.clean li::before{
+  content:"";position:absolute;left:2px;top:19px;width:8px;height:8px;
+  background:var(--season,var(--summer));transform:rotate(45deg);
+}
+figure{margin:28px 0;padding:18px;background:rgba(242,234,216,.035);border:1px solid var(--line);border-radius:4px}
+figure svg{display:block;width:100%;height:auto}
+figcaption{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;color:var(--vellum-dim);
+  margin-top:12px;text-align:center;line-height:1.6}
+.scroll{overflow-x:auto;margin:24px 0}
+table{border-collapse:collapse;width:100%;min-width:440px;font-size:17px}
+th,td{text-align:left;padding:9px 14px 9px 0;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--vellum-dim);font-weight:500}
+footer{
+  margin:64px 0 0;padding-top:24px;border-top:1px solid var(--line);
+  color:var(--vellum-dim);font-size:17px;
+}
+a{color:var(--crystal)}
+@media(max-width:620px){body{font-size:18px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+@media print{.rail{display:none}}
+</style>
+</head>
+<body>
+
+<div class="rail">
+  <div class="rail-in">
+    <svg class="wheel" viewBox="0 0 40 40" aria-hidden="true">
+      <path class="q q1" d="M20 20 L20 2 A18 18 0 0 1 38 20 Z" fill="#5FA55A"/>
+      <path class="q q2" d="M20 20 L38 20 A18 18 0 0 1 20 38 Z" fill="#E0A22C"/>
+      <path class="q q3" d="M20 20 L20 38 A18 18 0 0 1 2 20 Z" fill="#C2622F"/>
+      <path class="q q4" d="M20 20 L2 20 A18 18 0 0 1 20 2 Z" fill="#5E92C4"/>
+      <circle cx="20" cy="20" r="5.4" fill="#131826"/>
+    </svg>
+    <span class="rail-lab">the year turns</span>
+    <div class="ticks" id="ticks"></div>
+    <span class="rail-count" id="count">1 / 12</span>
+  </div>
+</div>
+
+<div class="wrap">
+
+<a class="backlink" href="../">&larr; the shelf</a>
+
+<header class="top">
+  <p class="eyebrow">Learn the whole game &middot; 12 points</p>
+  <h1>Seas<span>ons</span></h1>
+  <p class="lede">Three years of a wizards' tournament, fought with dice you did not choose, energy that will not keep, and twelve cards you picked before the game began.</p>
+</header>
+
+<article class="pt" data-season="spring">
+  <p class="num"><b>1</b> The big picture</p>
+  <h2>A card game wearing a dice game as a coat.</h2>
+
+  <p>The table is covered in dice, a big seasons wheel and a pile of coloured energy tokens, so everyone assumes Seasons is a dice game. It is not. It is a <strong>card game with a dice-shaped payment system</strong>.</p>
+
+  <p>Your cards are the whole point. Each one is a familiar, an artefact or a spell that either makes you money, breaks a rule, or scores prestige at the end. The dice exist to hand you the energy those cards demand, and the seasons wheel exists to decide which energy is easy to get this month.</p>
+
+  <p class="aside">Three years, four seasons each, and then the tournament is scored. That's roughly a dozen turns per player, which is far fewer than you think when you are holding nine cards.</p>
+
+  <p>The whole game is a race between two clocks. One is the calendar: three years and out. The other is your own tableau: every card you get into play starts producing for you, so a card played in year one earns three years of value and a card played in year three earns almost none.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Dice give you energy. Energy buys cards. <strong>Cards win the tournament.</strong> Anything that gets your cards down earlier is worth more than it looks.</p>
+  </div>
+</article>
+
+<article class="pt" data-season="spring">
+  <p class="num"><b>2</b> The score</p>
+  <h2>Prestige is the only currency that counts, and crystals are how you carry it.</h2>
+
+  <p>You win with <strong>prestige points</strong>, and the track around the board is the tally. Three things put points on it:</p>
+
+  <ul class="clean">
+    <li><strong>Crystals</strong>, the blue gems, which are worth one prestige each at the end and are also a spendable currency during the game</li>
+    <li><strong>Cards</strong>, many of which are worth a printed pile of prestige just for being in play</li>
+    <li><strong>Card effects</strong> that hand you prestige directly, usually in exchange for something you would rather have kept</li>
+  </ul>
+
+  <p>Crystals are the interesting one, because they are simultaneously money and score. Spending a crystal to summon a card is spending a point today for a machine that will make more points tomorrow. That trade is the game.</p>
+
+  <div class="trap">
+    <b>The trap</b>
+    <p>Treating crystals as savings. A crystal held from year one to the end scored exactly one point and did nothing on the way. A crystal spent in year one on a card that generates energy every season has been working for you the entire tournament.</p>
+  </div>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>A crystal is one point, and one point is nothing. Spend early, hoard only at the very end.</p>
+  </div>
+</article>
+
+<article class="pt" data-season="summer">
+  <p class="num"><b>3</b> The draft</p>
+  <h2>The most important decisions happen before turn one.</h2>
+
+  <p>Before the game starts you are dealt nine cards and you draft them, passing the rest around the table. Then you do something unusual: you <strong>split your nine into three piles of three</strong>, one for each year, and put them away.</p>
+
+  <p>Those piles are locked. The year-one pile is your opening hand. When year two arrives you pick up the year-two pile, and year three the same. So you are not just choosing which cards you want; you are scheduling when you are allowed to have them.</p>
+
+  <figure>
+    <svg viewBox="0 0 760 220" role="img" aria-labelledby="s3t s3d">
+      <title id="s3t">Nine drafted cards split into three sealed years</title>
+      <desc id="s3d">Nine cards on the left are divided into three piles of three labelled year one, year two and year three, each with a note about what belongs there.</desc>
+      <g font-family="IBM Plex Mono, monospace" font-size="10" letter-spacing="1.4" fill="#B3AC9A">
+        <text x="16" y="20">YOU DRAFTED NINE</text>
+        <text x="250" y="20">YOU SEAL THEM INTO THREE YEARS</text>
+      </g>
+      <g fill="#F2EAD8" opacity=".18">
+        <rect x="16" y="36" width="34" height="50" rx="3"/><rect x="56" y="36" width="34" height="50" rx="3"/>
+        <rect x="96" y="36" width="34" height="50" rx="3"/><rect x="16" y="94" width="34" height="50" rx="3"/>
+        <rect x="56" y="94" width="34" height="50" rx="3"/><rect x="96" y="94" width="34" height="50" rx="3"/>
+        <rect x="16" y="152" width="34" height="50" rx="3"/><rect x="56" y="152" width="34" height="50" rx="3"/>
+        <rect x="96" y="152" width="34" height="50" rx="3"/>
+      </g>
+      <path d="M150 118 h64" stroke="#B3AC9A" stroke-width="1.4"/>
+      <path d="M214 118 l-8 -4 v8 z" fill="#B3AC9A"/>
+      <g font-family="Cormorant Garamond, Georgia, serif" font-size="16" fill="#F2EAD8">
+        <rect x="240" y="40" width="150" height="140" rx="4" fill="rgba(95,165,90,.12)" stroke="#5FA55A"/>
+        <text x="315" y="70" text-anchor="middle" fill="#5FA55A" font-family="Cinzel, serif" font-size="15">YEAR I</text>
+        <text x="315" y="102" text-anchor="middle">cheap</text>
+        <text x="315" y="124" text-anchor="middle">engine cards</text>
+        <text x="315" y="156" text-anchor="middle" font-size="13" fill="#B3AC9A">play them at once</text>
+
+        <rect x="404" y="40" width="150" height="140" rx="4" fill="rgba(224,162,44,.12)" stroke="#E0A22C"/>
+        <text x="479" y="70" text-anchor="middle" fill="#E0A22C" font-family="Cinzel, serif" font-size="15">YEAR II</text>
+        <text x="479" y="102" text-anchor="middle">the middle</text>
+        <text x="479" y="124" text-anchor="middle">weight</text>
+        <text x="479" y="156" text-anchor="middle" font-size="13" fill="#B3AC9A">your engine pays for these</text>
+
+        <rect x="568" y="40" width="150" height="140" rx="4" fill="rgba(94,146,196,.12)" stroke="#5E92C4"/>
+        <text x="643" y="70" text-anchor="middle" fill="#5E92C4" font-family="Cinzel, serif" font-size="15">YEAR III</text>
+        <text x="643" y="102" text-anchor="middle">big scorers,</text>
+        <text x="643" y="124" text-anchor="middle">nothing slow</text>
+        <text x="643" y="156" text-anchor="middle" font-size="13" fill="#B3AC9A">no time to build</text>
+      </g>
+    </svg>
+    <figcaption>THE SPLIT: you are writing your own three-act structure, and you cannot rewrite it later.</figcaption>
+  </figure>
+
+  <p>The instinct is to put your best cards in year one. Resist it slightly. Year one you are poor: expensive cards sit uselessly in hand while you scrape energy together. What belongs in year one is the <em>cheap engine</em>: the card that produces energy, the card that gives crystals every season, the card that raises your summoning limit. What belongs in year three is anything expensive that scores on arrival, because there is no time left for it to work.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Sort your nine cards by <strong>when they pay back</strong>, not by how good they are. Slow and cheap goes early, expensive and instant goes late.</p>
+  </div>
+</article>
+
+<article class="pt" data-season="summer">
+  <p class="num"><b>4</b> The dice</p>
+  <h2>Everyone rolls, everyone chooses, and the leftovers move the calendar.</h2>
+
+  <p>At the start of each turn you roll a set of dice: one more than the number of players. In turn order everybody takes one, and the die you take is your entire turn's worth of options.</p>
+
+  <p>A die face is not a number, it is a shopping list. A single face might offer you two energy of specific colours, or a crystal, or the right to draw a card, or an increase to your summoning gauge, or the ability to transmute. You take the die and you may use any or all of what it shows.</p>
+
+  <figure>
+    <svg viewBox="0 0 760 210" role="img" aria-labelledby="s4t s4d">
+      <title id="s4t">Three dice offered, two taken, and the last one advancing the calendar</title>
+      <desc id="s4d">Two players each take a die showing energy and crystals. The unchosen die shows a number which advances the season marker by that many spaces.</desc>
+      <g font-family="Cormorant Garamond, Georgia, serif" font-size="15" fill="#F2EAD8">
+        <rect x="26" y="42" width="120" height="120" rx="14" fill="#F2EAD8" opacity=".92"/>
+        <text x="86" y="80" text-anchor="middle" fill="#1A2133" font-family="Cinzel, serif" font-size="13">ENERGY</text>
+        <circle cx="60" cy="108" r="12" fill="#5E92C4"/><circle cx="90" cy="108" r="12" fill="#C2622F"/>
+        <text x="86" y="146" text-anchor="middle" fill="#1A2133" font-size="14">taken by you</text>
+
+        <rect x="176" y="42" width="120" height="120" rx="14" fill="#F2EAD8" opacity=".92"/>
+        <text x="236" y="80" text-anchor="middle" fill="#1A2133" font-family="Cinzel, serif" font-size="13">CRYSTALS</text>
+        <path d="M236 92 l14 16 -14 20 -14 -20z" fill="#8FD3E8"/>
+        <text x="236" y="146" text-anchor="middle" fill="#1A2133" font-size="14">taken by them</text>
+
+        <rect x="326" y="42" width="120" height="120" rx="14" fill="none" stroke="#B3AC9A" stroke-dasharray="6 5"/>
+        <text x="386" y="86" text-anchor="middle" fill="#B3AC9A" font-family="Cinzel, serif" font-size="13">NOBODY</text>
+        <text x="386" y="120" text-anchor="middle" fill="#F2EAD8" font-family="Cinzel, serif" font-size="30">3</text>
+        <text x="386" y="146" text-anchor="middle" fill="#B3AC9A" font-size="14">left behind</text>
+      </g>
+      <path d="M462 102 h44" stroke="#B3AC9A" stroke-width="1.4"/><path d="M506 102 l-8 -4 v8 z" fill="#B3AC9A"/>
+      <g>
+        <rect x="522" y="60" width="212" height="84" rx="4" fill="rgba(94,146,196,.12)" stroke="#5E92C4"/>
+        <text x="628" y="92" text-anchor="middle" fill="#F2EAD8" font-family="Cinzel, serif" font-size="14">THE CALENDAR MOVES 3</text>
+        <text x="628" y="120" text-anchor="middle" fill="#B3AC9A" font-family="Cormorant Garamond, serif" font-size="15">the season can change under you</text>
+      </g>
+    </svg>
+    <figcaption>THE LEFTOVER: the die nobody wanted is the one that decides how fast time passes.</figcaption>
+  </figure>
+
+  <p>That last bit is the twist that makes Seasons a real game rather than a slot machine. The <strong>unchosen die advances the calendar</strong> by the number it shows. So when you pick a die you are choosing two things at once: what you get, and what you leave behind for the clock.</p>
+
+  <p>Taking the juicy die that leaves a big number behind can skip the table straight past the season you were saving your energy for. Taking a mediocre die that leaves a small number behind buys everyone, including you, more turns in a season that suits you.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Never choose a die on its face value alone. Always glance at <strong>the one you are about to leave</strong>, because that is the one that moves time.</p>
+  </div>
+</article>
+
+<article class="pt" data-season="autumn">
+  <p class="num"><b>5</b> Energy</p>
+  <h2>Four colours, seven tokens, and a strict no-hoarding policy.</h2>
+
+  <p>Energy comes in four flavours: air, water, earth and fire. Cards demand specific colours, so a fistful of the wrong energy is a fistful of nothing.</p>
+
+  <p>Two rules shape everything about how you handle it:</p>
+
+  <ul class="clean">
+    <li>You may hold <strong>no more than seven energy tokens</strong>. Excess is discarded, and it hurts every time.</li>
+    <li>Energy is <strong>seasonal</strong>. Each season the wheel changes which colours the dice tend to offer, so the water you cannot get today is abundant two turns from now.</li>
+  </ul>
+
+  <p>The consequence is a game about timing rather than accumulation. You cannot sit on twelve energy waiting for the perfect card. You gather exactly the four you need, you spend them, and you go again.</p>
+
+  <div class="trap">
+    <b>The trap</b>
+    <p>Collecting energy "for later" and hitting the cap. Every discarded token was a die face you spent your entire turn on. If you are ever at six energy with nothing to summon, that is a signal you drafted your years wrong, not a signal to grab more.</p>
+  </div>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Seven is a hard ceiling. Energy is a <strong>flow to be spent</strong>, never a pile to be kept.</p>
+  </div>
+</article>
+
+<article class="pt" data-season="autumn">
+  <p class="num"><b>6</b> Transmutation</p>
+  <h2>Energy into crystals, at a price the season sets.</h2>
+
+  <p>Some die faces let you <strong>transmute</strong>: throw energy away and take crystals instead. The exchange rate is not fixed. Each energy colour has a value printed for each season, and those values move.</p>
+
+  <div class="scroll">
+  <table>
+    <tr><th>Season</th><th>What it does to the market</th></tr>
+    <tr><td>Spring, summer, autumn, winter</td><td>Each season prices the four energies differently, so the same token is worth more in one season than another</td></tr>
+    <tr><td>Practical effect</td><td>Hold the energy the coming season prices highly, dump the one it prices low</td></tr>
+  </table>
+  </div>
+
+  <p>Transmutation is your emergency valve. It turns energy you cannot use into currency you always can, it clears your hand before the seven-token cap bites, and it is the main way a struggling player gets back into the game.</p>
+
+  <p class="aside">It is also a tax on bad planning. Every transmutation is energy that was meant to be a card, so a game where you transmute constantly is a game where your tableau never got built.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Transmute the colour the <strong>next</strong> season will devalue, not the one you happen to have most of.</p>
+  </div>
+</article>
+
+<article class="pt" data-season="winter">
+  <p class="num"><b>7</b> The summoning gauge</p>
+  <h2>You are allowed a certain number of cards in play, and it starts at one.</h2>
+
+  <p>This is the rule that catches every new player. Your board has a <strong>summoning gauge</strong>, and it caps how many cards you may have on the table at once. At the start it lets you have one. One.</p>
+
+  <p>So the beautiful engine you drafted is not a hand of three cards you play over three turns. It is a hand of three cards, of which you may have one out, until you spend turns raising the gauge.</p>
+
+  <p>Raising it is a die face, and it feels like a wasted turn every single time. It is not. The gauge is the width of your whole civilization: a player at gauge four in year two is running four engines while the player at gauge two is running two, forever.</p>
+
+  <div class="trap">
+    <b>The trap</b>
+    <p>Skipping gauge increases because "nothing happened" that turn. Gauge is the same shape of decision as a government upgrade in a civilization game: it buys you a bigger turn for the rest of the game, and it only gets more expensive to be behind.</p>
+  </div>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>The gauge is not a limit on your hand, it is a limit on <strong>how much of your engine can run at once</strong>. Raise it early, especially in year one.</p>
+  </div>
+</article>
+
+<article class="pt" data-season="winter">
+  <p class="num"><b>8</b> The cards</p>
+  <h2>Three jobs: make things, break rules, or be worth points.</h2>
+
+  <p>Every card in Seasons does one of three jobs, and knowing which you are holding tells you when to play it.</p>
+
+  <div class="scroll">
+  <table>
+    <tr><th>Kind</th><th>What it does</th><th>When it belongs</th></tr>
+    <tr><td>Producers</td><td>Give you energy, crystals or cards, every season, forever</td><td>Year one. They are worth what remains of the game.</td></tr>
+    <tr><td>Rule benders</td><td>Change a cost, a cap, a die, or how the wheel treats you</td><td>Early, and only if they bend a rule you actually bump into.</td></tr>
+    <tr><td>Scorers</td><td>A lump of prestige, often for a heavy cost</td><td>Year three, when there is nothing left to build.</td></tr>
+  </table>
+  </div>
+
+  <p>Cards cost energy to summon, sometimes crystals too, and once summoned they usually stay. A few have one-shot effects and burn out; those are the cards you should treat as expensive spells, not as engine parts.</p>
+
+  <p class="aside">The card pool is large and quite silly, in a good way. There are cards that steal energy from your neighbours, cards that let you take two dice, cards that punish you for holding crystals. You are not expected to know them. You are expected to read the three in front of you and ask which of the three jobs each one is doing.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Producer, bender, scorer. Sort every card into one of those three the moment you see it, and its correct year becomes obvious.</p>
+  </div>
+</article>
+
+<article class="pt" data-season="spring">
+  <p class="num"><b>9</b> The wheel</p>
+  <h2>The season is not decoration. It is the weather report for your turn.</h2>
+
+  <p>The big wheel in the middle tracks where in the year you are, and each season changes three things: which dice are in the pool, what energy is easy to come by, and what transmutation pays.</p>
+
+  <figure>
+    <svg viewBox="0 0 760 250" role="img" aria-labelledby="s9t s9d">
+      <title id="s9t">The seasons wheel and what each season changes</title>
+      <desc id="s9d">A four part wheel of spring, summer, autumn and winter, with a note that each season swaps the dice pool, the plentiful energy and the crystal exchange rate.</desc>
+      <g transform="translate(130,125)">
+        <path d="M0 0 L0 -96 A96 96 0 0 1 96 0 Z" fill="#5FA55A" opacity=".85"/>
+        <path d="M0 0 L96 0 A96 96 0 0 1 0 96 Z" fill="#E0A22C" opacity=".85"/>
+        <path d="M0 0 L0 96 A96 96 0 0 1 -96 0 Z" fill="#C2622F" opacity=".85"/>
+        <path d="M0 0 L-96 0 A96 96 0 0 1 0 -96 Z" fill="#5E92C4" opacity=".85"/>
+        <circle cx="0" cy="0" r="30" fill="#131826"/>
+        <g font-family="Cinzel, serif" font-size="13" fill="#131826" text-anchor="middle">
+          <text x="48" y="-44">SPR</text><text x="48" y="56">SUM</text>
+          <text x="-48" y="56">AUT</text><text x="-48" y="-44">WIN</text>
+        </g>
+        <path d="M0 -6 L58 -58" stroke="#F2EAD8" stroke-width="3" stroke-linecap="round"/>
+      </g>
+      <g font-family="Cormorant Garamond, Georgia, serif" font-size="17" fill="#F2EAD8">
+        <text x="290" y="72">Each season swaps out the dice you roll from,</text>
+        <text x="290" y="104">makes one or two energies plentiful and others scarce,</text>
+        <text x="290" y="136">and reprices what your energy fetches when you transmute.</text>
+        <text x="290" y="182" fill="#8FD3E8" font-family="IBM Plex Mono, monospace" font-size="12" letter-spacing="1">PLAN ONE SEASON AHEAD, NEVER TWO</text>
+      </g>
+    </svg>
+    <figcaption>THE WHEEL: the same card costs the same energy all game, but the ease of getting that energy swings every few turns.</figcaption>
+  </figure>
+
+  <p>Practically, this means you should always know two things: which season you are in, and how close the marker is to tipping into the next one. A card you can nearly afford in autumn may be much harder in winter, and the leftover die that everybody ignores is what decides whether you get one more autumn turn.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Look at the marker before you choose your die. <strong>Time is a resource other people spend on you.</strong></p>
+  </div>
+</article>
+
+<article class="pt" data-season="summer">
+  <p class="num"><b>10</b> The penalty</p>
+  <h2>Cards left in your hand at the end cost you five points each.</h2>
+
+  <p>This is the single cruellest rule in the box and the one most likely to decide your first game.</p>
+
+  <p>When the tournament ends, every card still sitting in your hand, unsummoned, is worth <strong>minus five prestige</strong>. Not zero. Minus five. Three stranded cards is a fifteen point swing, which is more than most players score from crystals all game.</p>
+
+  <div class="trap">
+    <b>The trap</b>
+    <p>Drafting a gorgeous, expensive year three pile. You pick up three fat cards with eight turns left, your gauge is at two, your energy is wrong, and two of them never hit the table. You have just paid ten points for the privilege of admiring them.</p>
+  </div>
+
+  <p>The defence is built at the draft. Your year three pile should be cheap enough to actually play or valuable enough to be worth the pain. And in the final season, "summon this now even though it is slightly wasteful" is nearly always correct, because a mediocre card in play beats a great card in hand by at least five points.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>An unplayed card is not a neutral outcome, it is a <strong>penalty</strong>. Count your hand in the last season and start dumping.</p>
+  </div>
+</article>
+
+<article class="pt" data-season="autumn">
+  <p class="num"><b>11</b> The shape of a game</p>
+  <h2>Build, exploit, cash in. One year each.</h2>
+
+  <p>Good players in Seasons all look like they are doing roughly the same thing at roughly the same time, and beginners look like they are doing all three at once, badly.</p>
+
+  <div class="scroll">
+  <table>
+    <tr><th>Year</th><th>What you are doing</th><th>What it looks like</th></tr>
+    <tr><td>Year one</td><td>Build</td><td>Raise the gauge, land cheap producers, take dice for the engine and not for the crystals</td></tr>
+    <tr><td>Year two</td><td>Exploit</td><td>Your producers pay for the middleweight cards. Your score barely moves and that is fine.</td></tr>
+    <tr><td>Year three</td><td>Cash in</td><td>Summon everything, transmute the leftovers, empty your hand before the last turn</td></tr>
+  </table>
+  </div>
+
+  <p>If your prestige track is embarrassing at the end of year two, that is not a warning sign. It is what a working engine looks like from outside. The warning sign is a gauge stuck at two with cards still in hand.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Score late. In Seasons the leader at the end of year two is very often the player who <strong>built nothing</strong>.</p>
+  </div>
+</article>
+
+<article class="pt" data-season="winter">
+  <p class="num"><b>12</b> Your first game</p>
+  <h2>How not to lose it: four habits to pick up immediately.</h2>
+
+  <h3 style="font-family:var(--display);font-size:20px;margin:26px 0 8px;color:var(--vellum)">1. Raise the gauge before you feel ready</h3>
+  <p>Two gauge increases in year one feel like two wasted turns and are worth more than any single card you will play. Everything else in your game is bottlenecked behind this number.</p>
+
+  <h3 style="font-family:var(--display);font-size:20px;margin:26px 0 8px;color:var(--vellum)">2. Choose your die by what you leave, not what you take</h3>
+  <p>Two energy and a crystal is not better than one energy if taking it hands the table a jump of four and skips the season you needed. Read the leftovers first, every single turn.</p>
+
+  <h3 style="font-family:var(--display);font-size:20px;margin:26px 0 8px;color:var(--vellum)">3. Empty your hand</h3>
+  <p>Minus five per card. In the last season, play the awkward card at a bad price rather than keep it. If you truly cannot play it, look for any effect that discards cards and use it.</p>
+
+  <h3 style="font-family:var(--display);font-size:20px;margin:26px 0 8px;color:var(--vellum)">4. Spend crystals like they are money, because they are</h3>
+  <p>A crystal is one point. A card is usually many, plus everything it produces. Beginners finish with a shiny pile of unspent crystals and a thin tableau, and lose by twenty.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Cheap engine early, gauge early, hand empty at the end. Everything else in Seasons is decoration on those three habits.</p>
+  </div>
+</article>
+
+<footer>A teaching walkthrough of Seasons by Regis Bonnessee (Libellud, 2012). Rules summarised for learning; the rulebook is still the authority, especially for the exact die faces, the energy values on the seasons wheel, and the card texts. <a href="../">Back to the shelf</a>.</footer>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var pts = Array.prototype.slice.call(document.querySelectorAll('.pt'));
+  var ticks = document.getElementById('ticks');
+  var count = document.getElementById('count');
+  var quads = Array.prototype.slice.call(document.querySelectorAll('.wheel .q'));
+  var order = {spring:0, summer:1, autumn:2, winter:3};
+
+  pts.forEach(function(){
+    var t = document.createElement('span'); t.className = 'tick'; ticks.appendChild(t);
+  });
+  var tickEls = Array.prototype.slice.call(ticks.children);
+
+  var at = 0;
+  function paint(n){
+    if(n === at) return;
+    at = n;
+    tickEls.forEach(function(t,i){ t.classList.toggle('on', i < n); });
+    count.textContent = n + ' / ' + pts.length;
+    ticks.setAttribute('aria-label', 'Point ' + n + ' of ' + pts.length);
+    var season = pts[n-1].getAttribute('data-season');
+    quads.forEach(function(q,i){ q.classList.toggle('on', i === order[season]); });
+  }
+
+  var ticking = false;
+  function measure(){
+    ticking = false;
+    var mark = window.innerHeight * 0.45, n = 1;
+    for(var i = 0; i < pts.length; i++){
+      if(pts[i].getBoundingClientRect().top <= mark){ n = i + 1; }
+    }
+    paint(n);
+  }
+  window.addEventListener('scroll', function(){
+    if(!ticking){ ticking = true; window.requestAnimationFrame(measure); }
+  }, {passive:true});
+  window.addEventListener('resize', measure);
+  paint(1);
+  measure();
+})();
+</script>
+</body>
+</html>

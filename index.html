@@ -52,6 +52,19 @@
     <path d="M3 20.4h18"/><path d="M5.6 20.4v-4h12.8v4"/><path d="M8.4 16.4v-3.8h7.2v3.8"/>
     <path d="M12 12.6V9.2"/><path d="M8.6 7.4a3.4 3.4 0 0 1 6.8 0"/>
   </symbol>
+  <symbol id="e-seasons" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round">
+    <circle cx="12" cy="12" r="8.6"/><path d="M12 3.4v17.2M3.4 12h17.2"/>
+    <circle cx="12" cy="12" r="2.2" fill="currentColor" stroke="none"/>
+  </symbol>
+  <symbol id="e-taverns" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round">
+    <path d="M6.2 6.2h9.2v13.2H6.2Z"/><path d="M15.4 8.6h2.6a2 2 0 0 1 0 4h-2.6"/>
+    <path d="M6.2 9.6h9.2"/><path d="M8.6 3.2v2.2M12 2.6v2.8"/>
+  </symbol>
+  <symbol id="e-root" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M12 2.8v8.4"/><path d="M12 11.2 6.6 15v6M12 11.2 17.4 15v6"/>
+    <circle cx="12" cy="11.2" r="2"/><circle cx="6.6" cy="21" r="1.4"/><circle cx="17.4" cy="21" r="1.4"/>
+    <path d="M9.4 5.4 12 2.8l2.6 2.6"/>
+  </symbol>
 </svg>
 
 <div class="wrap">
@@ -66,57 +79,91 @@
   <p class="tagline">Pick one up · learn it properly · go play</p>
 </header>
 
+<div class="finder">
+  <div class="finder-in">
+    <label class="visually-hidden" for="q">Search the shelf</label>
+    <span class="finder-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+        <circle cx="10.6" cy="10.6" r="6.4"/><path d="m15.4 15.4 4 4"/>
+      </svg>
+    </span>
+    <input id="q" type="search" placeholder="Search a game, a mechanism, a mood" autocomplete="off" spellcheck="false">
+    <button id="clear" class="finder-clear" type="button" hidden>clear</button>
+    <span class="tally" id="tally" role="status" aria-live="polite">11 briefings</span>
+  </div>
+</div>
+
 <div class="shelf">
 
-  <a class="game" href="games/arkham-horror-lcg.html" style="--accent:#7A241E">
+  <a class="game" href="games/arkham-horror-lcg.html" data-keywords="co-operative campaign card game living lovecraft horror investigators deck building chaos bag" style="--accent:#7A241E">
     <span class="emblem"><svg><use href="#e-arkham"/></svg></span>
     <h3>Arkham Horror: The Card Game</h3>
     <p class="hook">Friends versus the dark. A deck you build, a deck that hates you, and a bag full of bad luck.</p>
   </a>
 
-  <a class="game" href="games/spirit-island.html" style="--accent:#1E6B57">
+  <a class="game" href="games/spirit-island.html" data-keywords="co-operative heavy area control colonial settlers powers elemental puzzle" style="--accent:#1E6B57">
     <span class="emblem"><svg><use href="#e-island"/></svg></span>
     <h3>Spirit Island</h3>
     <p class="hook">You are not the settler. You are the thing the map warns them about.</p>
   </a>
 
-  <a class="game" href="games/troyes.html" style="--accent:#2F4B3C">
+  <a class="game" href="games/troyes.html" data-keywords="dice worker placement medieval france cathedral area control euro" style="--accent:#2F4B3C">
     <span class="emblem"><svg><use href="#e-troyes"/></svg></span>
     <h3>Troyes</h3>
     <p class="hook">Your dice sit in the open, and anyone at the table can buy them out from under you.</p>
   </a>
 
-  <a class="game" href="games/aeons-end.html" style="--accent:#5B3A8C">
+  <a class="game" href="games/aeons-end.html" data-keywords="co-operative deck building boss battler no shuffle breaches mage" style="--accent:#5B3A8C">
     <span class="emblem"><svg><use href="#e-aeons"/></svg></span>
     <h3>Aeon's End</h3>
     <p class="hook">Your deck is never shuffled, so a bad hand is a mistake you made five turns ago.</p>
   </a>
 
-  <a class="game" href="games/obsession.html" style="--accent:#8A6A2E">
+  <a class="game" href="games/obsession.html" data-keywords="deck building tableau victorian england estate reputation engine" style="--accent:#8A6A2E">
     <span class="emblem"><svg><use href="#e-obsession"/></svg></span>
     <h3>Obsession</h3>
     <p class="hook">A crumbling Victorian estate, and a county that will not stop talking about you.</p>
   </a>
 
-  <a class="game" href="games/paperback.html" style="--accent:#C33A22">
+  <a class="game" href="games/paperback.html" data-keywords="deck building word game spelling light family filler" style="--accent:#C33A22">
     <span class="emblem"><svg><use href="#e-paperback"/></svg></span>
     <h3>Paperback</h3>
     <p class="hook">Scrabble and Dominion in a trench coat. Your wild cards spell anything and pay nothing.</p>
   </a>
 
-  <a class="game" href="games/glass-road.html" style="--accent:#D2551F">
+  <a class="game" href="games/glass-road.html" data-keywords="economic euro rondel production wheels uwe rosenberg card selection" style="--accent:#D2551F">
     <span class="emblem"><svg><use href="#e-glassroad"/></svg></span>
     <h3>Glass Road</h3>
     <p class="hook">Two dials own your goods, and the moment you hold one of everything they spin whether you like it or not.</p>
   </a>
 
-  <a class="game" href="games/through-the-ages.html" style="--accent:#3D6E93">
+  <a class="game" href="games/through-the-ages.html" data-keywords="civilization card drafting engine building action economy vlaada chvatil heavy" style="--accent:#3D6E93">
     <span class="emblem"><svg><use href="#e-ages"/></svg></span>
     <h3>Through the Ages</h3>
     <p class="hook">Six thousand years of history, and every citizen of your empire is the same little yellow cube.</p>
   </a>
 
+  <a class="game" href="games/seasons.html" data-keywords="dice drafting card drafting fantasy wizards tournament energy crystals libellud engine" style="--accent:#5FA55A">
+    <span class="emblem"><svg><use href="#e-seasons"/></svg></span>
+    <h3>Seasons</h3>
+    <p class="hook">You drafted your twelve cards before turn one, and the die nobody wanted is the one that moves time.</p>
+  </a>
+
+  <a class="game" href="games/taverns-of-tiefenthal.html" data-keywords="dice drafting deck building tavern beer bavaria family simultaneous wolfgang warsch modules" style="--accent:#E0A32E">
+    <span class="emblem"><svg><use href="#e-taverns"/></svg></span>
+    <h3>The Taverns of Tiefenthal</h3>
+    <p class="hook">Seat the regulars, roll for the staff, and spend every last coin before closing time.</p>
+  </a>
+
+  <a class="game" href="games/root.html" data-keywords="asymmetric war game area control woodland factions cats birds mice vagabond cole wehrle" style="--accent:#E0862A">
+    <span class="emblem"><svg><use href="#e-root"/></svg></span>
+    <h3>Root</h3>
+    <p class="hook">Cute animals, four separate rulebooks, and nobody at the table is playing your game.</p>
+  </a>
+
 </div>
+
+<p class="empty" id="empty" hidden>Nothing on the shelf matches that. <button type="button" id="reset">Show everything</button></p>
 
 <div class="plank"></div>
 
@@ -126,5 +173,64 @@
 </p>
 
 </div>
+
+<script>
+(function(){
+  "use strict";
+  var q = document.getElementById('q');
+  var clear = document.getElementById('clear');
+  var reset = document.getElementById('reset');
+  var tally = document.getElementById('tally');
+  var empty = document.getElementById('empty');
+  var games = Array.prototype.slice.call(document.querySelectorAll('.game'));
+
+  var index = games.map(function(el){
+    return {
+      el: el,
+      text: [
+        el.querySelector('h3').textContent,
+        el.querySelector('.hook').textContent,
+        el.getAttribute('data-keywords') || ''
+      ].join(' ').toLowerCase()
+    };
+  });
+
+  function label(n){
+    return n === games.length
+      ? games.length + ' briefings'
+      : n + ' of ' + games.length;
+  }
+
+  function filter(){
+    var terms = q.value.toLowerCase().split(/\s+/).filter(Boolean);
+    var shown = 0;
+    index.forEach(function(item){
+      var hit = terms.every(function(t){ return item.text.indexOf(t) !== -1; });
+      item.el.hidden = !hit;
+      if(hit){ shown++; }
+    });
+    tally.textContent = label(shown);
+    empty.hidden = shown !== 0;
+    clear.hidden = q.value === '';
+  }
+
+  q.addEventListener('input', filter);
+  q.addEventListener('keydown', function(e){
+    if(e.key === 'Escape'){ q.value = ''; filter(); }
+  });
+  clear.addEventListener('click', function(){ q.value = ''; filter(); q.focus(); });
+  reset.addEventListener('click', function(){ q.value = ''; filter(); q.focus(); });
+
+  document.addEventListener('keydown', function(e){
+    if(e.key === '/' && document.activeElement !== q){
+      e.preventDefault();
+      q.focus();
+      q.select();
+    }
+  });
+
+  filter();
+})();
+</script>
 </body>
 </html>
