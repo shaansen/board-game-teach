@@ -22,7 +22,7 @@ your first game.
 | `games/glass-road.html` | Glass Road, 14 points, complete |
 | `games/through-the-ages.html` | Through the Ages, 20 points, complete |
 | `games/seasons.html` | Seasons, 12 points, complete |
-| `games/taverns-of-tiefenthal.html` | The Taverns of Tiefenthal, 12 points, complete |
+| `games/taverns-of-tiefenthal.html` | The Taverns of Tiefenthal, 14 points, complete, with the exact rules folded in |
 | `games/root.html` | Root, 16 points, complete |
 | `games/_template.html` | Starting point for a new briefing |
 | `assets/dossier.css` | Shared layout system, for pages that want one |
@@ -74,6 +74,11 @@ The thing that makes these work is the format, so keep it:
   actions, it's never enough, and that's the game."
 - **Second person, plain words.** No jargon before it's defined. Say "monster", not
   "non-player enemy unit".
+- **Give every point the actual rule.** The essay says why the rule exists; a
+  "the actual rule" box under it gives the real numbers, limits and edge cases,
+  taken from the publisher's rulebook, with a line naming the section it came
+  from. A reader should be able to play from the page, not just talk about the
+  game. `taverns-of-tiefenthal.html` is the reference for this.
 - **End each point with a `.note`**: the one sentence worth remembering.
 - **Finish with a "how not to lose your first game" point.** The instincts a normal
   board game trained into the reader are usually the ones that lose this one.

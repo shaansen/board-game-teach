@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>The Taverns of Tiefenthal: Twelve Rounds Behind the Bar</title>
-<meta name="description" content="A briefing that teaches The Taverns of Tiefenthal in twelve points, for someone who has never opened the box.">
+<title>The Taverns of Tiefenthal: Learn It and Play It</title>
+<meta name="description" content="Learn The Taverns of Tiefenthal properly: fourteen points that explain how the game works and give you the exact rules to play it.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bitter:wght@600;800&family=Karla:ital,wght@0,400;0,600;1,400&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
@@ -126,6 +126,32 @@ figcaption{font-family:var(--mono);font-size:11px;color:var(--chalk-dim);margin-
 table{border-collapse:collapse;width:100%;min-width:440px;font-size:16px}
 th,td{text-align:left;padding:9px 14px 9px 0;border-bottom:1px solid var(--line);vertical-align:top}
 th{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--chalk-dim);font-weight:700}
+/* ---------- the actual rule ---------- */
+.rule{
+  margin:26px 0;max-width:62ch;border:1px solid rgba(127,163,168,.45);
+  border-radius:4px;overflow:hidden;background:rgba(127,163,168,.07);
+}
+.rule > b{
+  display:block;background:rgba(127,163,168,.17);color:#BFDCE0;
+  font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;
+  padding:9px 18px;font-weight:700;
+}
+.rule .body{padding:14px 18px 4px}
+.rule p{margin:0 0 12px;max-width:none}
+.rule ul{list-style:none;margin:0 0 12px;padding:0}
+.rule li{padding:5px 0 5px 20px;position:relative}
+.rule li::before{
+  content:"";position:absolute;left:2px;top:14px;width:7px;height:7px;border-radius:1px;
+  background:var(--slate);
+}
+.rule .n{font-family:var(--mono);color:#BFDCE0;font-weight:700}
+.rule .src{
+  display:block;padding:0 18px 12px;font-family:var(--mono);font-size:10px;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--chalk-dim);
+}
+.rule ol{margin:0 0 12px;padding-left:22px}
+.rule ol li{padding:5px 0}
+.rule ol li::before{display:none}
 footer{margin:64px 0 0;padding-top:24px;border-top:1px solid var(--line);color:var(--chalk-dim);font-size:15px}
 a{color:var(--beer)}
 @media(max-width:620px){body{font-size:17px}}
@@ -139,7 +165,7 @@ a{color:var(--beer)}
   <div class="rail-in">
     <span class="rail-lab">tonight's tab</span>
     <div class="marks" id="marks"></div>
-    <span class="rail-count" id="count">1 / 12</span>
+    <span class="rail-count" id="count">1 / 14</span>
   </div>
 </div>
 
@@ -148,338 +174,515 @@ a{color:var(--beer)}
 <a class="backlink" href="../">&larr; the shelf</a>
 
 <header class="top">
-  <p class="eyebrow">Learn the whole game &middot; 12 points</p>
+  <p class="eyebrow">Learn it and play it &middot; 14 points</p>
   <h1><small>The Taverns of</small>Tiefenthal</h1>
-  <p class="lede">You run a Bavarian pub. Every night the same regulars stagger in, you seat them by the number on a die, and you try to turn beer money into a better pub before the season ends.</p>
+  <p class="lede">You run a Bavarian pub. Every night the regulars stagger in, you roll for the staff who serve them, and you spend the takings before closing time. This page teaches you what the game is <em>and</em> gives you the exact rules, so you can play it straight from here.</p>
+  <div class="rule">
+    <b>How to read this page</b>
+    <div class="body">
+      <p>Every point explains an idea in plain words, then gives you a box like this one with the <strong>actual rule</strong>: the real numbers, the real limits, the things people get wrong. Read just the essay to understand the game. Read the boxes too and you can teach it at the table.</p>
+      <p>Everything here is the <strong>basic game, Module 1</strong>, for 2 to 4 players, ages 12 and up. The other modules get a point of their own at the end.</p>
+    </div>
+    <span class="src">Rules from the Schmidt Spiele English rulebook</span>
+  </div>
 </header>
 
 <article class="pt">
   <p class="num"><b>1</b> The big picture</p>
-  <h2>A deck builder where the cards are customers and the money is dice.</h2>
+  <h2>A deck builder where the cards are customers and the staff are dice.</h2>
 
-  <p>Taverns of Tiefenthal looks like a dice game and is really two familiar games bolted together, cleanly.</p>
+  <p>Taverns of Tiefenthal is two familiar games bolted together, cleanly.</p>
 
-  <p>Half of it is <strong>deck building</strong>: you own a deck of guest cards, you draw a few each round, and you spend the night's takings on better guests who go into that deck for next time. Half of it is <strong>dice placement</strong>: the dice you draft each round decide which of your seated guests actually get served.</p>
+  <p>Half of it is <strong>deck building</strong>: you own a deck of cards, you flip cards off it each round to fill your pub with guests, and you spend the night's takings buying better cards that go back into that deck. Half of it is <strong>dice</strong>: the dice you draft each round are the staff, and a guest only pays when a die is put on them.</p>
 
-  <div class="aside">Everybody plays at the same time, all round, every round. There is no turn order to wait for, which is why a four player game takes about as long as a two player one.</div>
+  <p>Your player board is a pub seen from above: tables where guests sit, a counter, a cashbox, a beer supplier, a barrel, a monk, and so on. Nearly every part of it can be upgraded by flipping the tile over. By round eight your grubby little pub is a machine, and that transformation is the actual pleasure of the game.</p>
 
-  <h3>What your tavern is</h3>
-
-  <p>Your player board is a pub seen from above: a few tables, each with numbered seats, plus a bar area, a cash box and a beer counter. Guest cards sit on the seats. Dice go on the seats too, and a seat only pays out when both a guest and a die of the right number are on it.</p>
-
-  <p>Everything you buy makes the pub physically better: more tables, higher numbered seats, a monastery that brews for you, a serving hatch that lets you move dice around. By the last round your grubby three-table pub is a machine, and that transformation is the actual pleasure of the game.</p>
+  <div class="rule">
+    <b>The actual rule: what you are doing</b>
+    <div class="body">
+      <ul>
+        <li>The game lasts exactly <span class="n">8 rounds</span>. The moon marker on the Monastery Board tracks which round you are in.</li>
+        <li>You win with <strong>victory points</strong>, printed in the top right corner of cards.</li>
+        <li>At the end, count the victory points on <strong>all the cards in your deck</strong>: both the face-down draw stack and the face-up discard stack. Most points wins.</li>
+        <li>Tie: whoever has more doubloons plus beer saved wins. Still tied, they share the win.</li>
+        <li>Two currencies: <strong>doubloons</strong> (money) and <strong>beer</strong>. Neither exists as a physical component. You count them in your head during your turn.</li>
+      </ul>
+    </div>
+    <span class="src">Rulebook: game overview, game end</span>
+  </div>
 
   <div class="note">
     <span class="lab">Remember this</span>
-    <p>Guests come from your deck. Service comes from your dice. <strong>A seat pays only when it has both.</strong></p>
+    <p>Guests come from your deck. Service comes from your dice. <strong>A guest pays only when a die is on them.</strong></p>
   </div>
 </article>
 
 <article class="pt">
-  <p class="num"><b>2</b> The round</p>
-  <h2>One round is one night, and it always runs the same four steps.</h2>
+  <p class="num"><b>2</b> Setting up</p>
+  <h2>Ten minutes of laying out, and then you never touch the box again.</h2>
 
-  <p>The shape never changes, which is why the game teaches itself after two rounds:</p>
+  <p>Setup looks fussy the first time and takes two minutes once you have done it. The shape of it: a shared board in the middle with the shops around it, and an identical pub in front of each player.</p>
 
-  <ul class="clean">
-    <li><strong>Guests arrive.</strong> Draw cards from your deck and seat them in your tavern.</li>
-    <li><strong>Dice.</strong> Roll, draft, and place dice on seats to serve the guests sitting there.</li>
-    <li><strong>Takings.</strong> Total up the beer and the money your served guests produced.</li>
-    <li><strong>Spending.</strong> Beer hires a new guest into your deck. Money buys an upgrade to the pub itself.</li>
-  </ul>
+  <div class="rule">
+    <b>The actual rule: setting up Module 1</b>
+    <div class="body">
+      <ol>
+        <li>Put the <strong>Monastery Board</strong> in the middle, summer side up (the one without snow). Leave room around it, because you will be passing dice coasters about.</li>
+        <li>Put the moon <strong>round marker</strong> above the first box of the round track. Put <span class="n">3 counter guests per player</span> beside the board; the rest go back in the box.</li>
+        <li><strong>Tavern cards</strong>: return all the Bards to the box (they are for Module 3). Sort the rest by type (Beer Merchant, Dishwasher, Waitress, Table, Beer Supplier) into an open display everyone can reach.</li>
+        <li><strong>Guest cards</strong>: find the <span class="n">8 guests that cost 3 beer</span> and stack them face up. Remove the <span class="n">10 guest cards showing a white die</span> at the top; they are for Module 3 and up. Shuffle the rest into a face-down pile, then deal <span class="n">4 face up</span> beside it as the shop.</li>
+        <li><strong>Noble cards</strong> go in a face-up stack to the right of the guests.</li>
+        <li>Each player takes a <strong>tavern board</strong> and its <span class="n">10 equipment tiles</span> (tables, waitress, cashbox, monk, dishwasher, safe, host, barrel, beer supplier, beer storage), placed with the doubloon cost showing in the top left. Turn the host so its victory points are hidden.</li>
+        <li>Each player puts their <strong>safe marker</strong> and <strong>beer storage marker</strong> on the "0" spaces.</li>
+        <li>Each player takes a <strong>dice coaster</strong> and <span class="n">4 white dice</span>. Coloured dice go in a shared supply.</li>
+        <li>Each player builds a starting deck: their <span class="n">7 regulars</span> in their colour plus <span class="n">1 waitress, 1 table and 1 beer supplier</span> from the shop. That is 10 cards. Shuffle it, face down, left of your tables.</li>
+        <li>Each player puts their <strong>monastery marker</strong> on "0" on the monastery track.</li>
+        <li>Whoever was most recently in a pub takes the <strong>beer mug</strong> and is start player.</li>
+      </ol>
+      <p>Everything else stays in the box for your first game.</p>
+    </div>
+    <span class="src">Rulebook: setup steps 1 to 12</span>
+  </div>
 
-  <p>Then you clear the tables, the guests go back into your deck, and the next night begins. The game runs a fixed number of nights and then you count points, so there is no catching up later: every night has to earn.</p>
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Your starting deck is <strong>ten cards</strong> and three of them are staff, not guests. That is why your first night earns so little.</p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>3</b> The round</p>
+  <h2>Seven phases, always the same order, and most of them are simultaneous.</h2>
+
+  <p>The round never changes, which is why the game teaches itself by round three. Five of the seven phases happen at the same time for everybody, so there is very little sitting about waiting.</p>
 
   <figure>
-    <svg viewBox="0 0 780 170" role="img" aria-labelledby="t2t t2d">
-      <title id="t2t">The four steps of a round</title>
-      <desc id="t2d">Guests arrive, dice are drafted and placed, takings are totalled, and beer and money are spent on a guest and an upgrade, then the loop repeats.</desc>
-      <g font-family="Karla, sans-serif" font-size="15" fill="#F4EEE3">
-        <rect x="14" y="34" width="168" height="86" rx="4" fill="rgba(244,238,227,.06)" stroke="#B6A891" stroke-opacity=".5"/>
-        <text x="98" y="66" text-anchor="middle" font-weight="600">1. guests arrive</text>
-        <text x="98" y="92" text-anchor="middle" fill="#B6A891" font-size="14">from your own deck</text>
+    <svg viewBox="0 0 780 250" role="img" aria-labelledby="t3t t3d">
+      <title id="t3t">The seven phases of a round</title>
+      <desc id="t3d">Phases A to G in order: a new evening, the tavern fills up, here comes the waitress, how can I serve you, planning your actions, time to serve the guests, and closing time. Phases D and F are in turn order, the rest simultaneous.</desc>
+      <g font-family="Karla, sans-serif" font-size="14" fill="#F4EEE3">
+        <rect x="14" y="30" width="106" height="74" rx="4" fill="rgba(244,238,227,.06)" stroke="#B6A891" stroke-opacity=".45"/>
+        <text x="67" y="56" text-anchor="middle" font-weight="600" font-size="15">A</text>
+        <text x="67" y="78" text-anchor="middle" font-size="12.5" fill="#B6A891">new evening</text>
 
-        <rect x="204" y="34" width="168" height="86" rx="4" fill="rgba(244,238,227,.06)" stroke="#B6A891" stroke-opacity=".5"/>
-        <text x="288" y="66" text-anchor="middle" font-weight="600">2. dice</text>
-        <text x="288" y="92" text-anchor="middle" fill="#B6A891" font-size="14">roll, keep one, pass</text>
+        <rect x="128" y="30" width="106" height="74" rx="4" fill="rgba(244,238,227,.06)" stroke="#B6A891" stroke-opacity=".45"/>
+        <text x="181" y="56" text-anchor="middle" font-weight="600" font-size="15">B</text>
+        <text x="181" y="78" text-anchor="middle" font-size="12.5" fill="#B6A891">tavern fills</text>
 
-        <rect x="394" y="34" width="168" height="86" rx="4" fill="rgba(244,238,227,.06)" stroke="#B6A891" stroke-opacity=".5"/>
-        <text x="478" y="66" text-anchor="middle" font-weight="600">3. takings</text>
-        <text x="478" y="92" text-anchor="middle" fill="#B6A891" font-size="14">beer and money</text>
+        <rect x="242" y="30" width="106" height="74" rx="4" fill="rgba(244,238,227,.06)" stroke="#B6A891" stroke-opacity=".45"/>
+        <text x="295" y="56" text-anchor="middle" font-weight="600" font-size="15">C</text>
+        <text x="295" y="78" text-anchor="middle" font-size="12.5" fill="#B6A891">waitresses</text>
 
-        <rect x="584" y="34" width="182" height="86" rx="4" fill="rgba(224,163,46,.13)" stroke="#E0A32E"/>
-        <text x="675" y="66" text-anchor="middle" font-weight="600">4. spending</text>
-        <text x="675" y="92" text-anchor="middle" fill="#E0A32E" font-size="14">a guest and an upgrade</text>
+        <rect x="356" y="30" width="106" height="74" rx="4" fill="rgba(224,163,46,.16)" stroke="#E0A32E"/>
+        <text x="409" y="56" text-anchor="middle" font-weight="600" font-size="15">D</text>
+        <text x="409" y="78" text-anchor="middle" font-size="12.5" fill="#E0A32E">draft dice</text>
+
+        <rect x="470" y="30" width="106" height="74" rx="4" fill="rgba(244,238,227,.06)" stroke="#B6A891" stroke-opacity=".45"/>
+        <text x="523" y="56" text-anchor="middle" font-weight="600" font-size="15">E</text>
+        <text x="523" y="78" text-anchor="middle" font-size="12.5" fill="#B6A891">plan</text>
+
+        <rect x="584" y="30" width="106" height="74" rx="4" fill="rgba(224,163,46,.16)" stroke="#E0A32E"/>
+        <text x="637" y="56" text-anchor="middle" font-weight="600" font-size="15">F</text>
+        <text x="637" y="78" text-anchor="middle" font-size="12.5" fill="#E0A32E">serve</text>
+
+        <rect x="698" y="30" width="68" height="74" rx="4" fill="rgba(244,238,227,.06)" stroke="#B6A891" stroke-opacity=".45"/>
+        <text x="732" y="56" text-anchor="middle" font-weight="600" font-size="15">G</text>
+        <text x="732" y="78" text-anchor="middle" font-size="12.5" fill="#B6A891">closing</text>
       </g>
-      <g stroke="#B6A891" stroke-width="1.4" fill="none">
-        <path d="M186 77 h14"/><path d="M376 77 h14"/><path d="M566 77 h14"/>
-        <path d="M675 128 v18 H98 v-22"/>
+      <g font-family="Courier Prime, monospace" font-size="11" letter-spacing="1">
+        <rect x="356" y="118" width="334" height="26" rx="3" fill="rgba(224,163,46,.12)"/>
+        <text x="523" y="136" text-anchor="middle" fill="#E0A32E">D AND F GO IN TURN ORDER</text>
+        <rect x="14" y="118" width="334" height="26" rx="3" fill="rgba(244,238,227,.05)"/>
+        <text x="181" y="136" text-anchor="middle" fill="#B6A891">EVERYTHING ELSE: ALL AT ONCE</text>
       </g>
-      <text x="386" y="162" text-anchor="middle" fill="#B6A891" font-family="Courier Prime, monospace" font-size="11" letter-spacing="1">AND AGAIN TOMORROW NIGHT</text>
+      <path d="M732 158 v22 H67 v-24" stroke="#B6A891" stroke-width="1.4" fill="none"/>
+      <text x="390" y="204" text-anchor="middle" fill="#B6A891" font-family="Courier Prime, monospace" font-size="11" letter-spacing="1">EIGHT TIMES, THEN COUNT THE POINTS</text>
     </svg>
-    <figcaption>THE LOOP: nothing carries over except your deck and your pub, so those are the only two things worth improving.</figcaption>
+    <figcaption>THE LOOP: learn the seven letters and the whole game is just filling them in.</figcaption>
   </figure>
 
+  <div class="rule">
+    <b>The actual rule: the seven phases</b>
+    <div class="body">
+      <ul>
+        <li><strong>A. A new evening in the tavern</strong> (start player): move the moon one space along the round track and everyone takes the bonus shown there.</li>
+        <li><strong>B. The tavern fills up</strong> (everyone at once): flip cards off your deck until every table is full.</li>
+        <li><strong>C. Here comes the waitress</strong> (everyone at once): take one coloured die for each waitress you drew.</li>
+        <li><strong>D. How can I serve you?</strong> (turn order): roll and draft the white dice.</li>
+        <li><strong>E. Planning your actions</strong> (everyone at once): lay your dice on action spaces.</li>
+        <li><strong>F. Time to serve the guests</strong> (turn order): actually take the actions and spend what you earn.</li>
+        <li><strong>G. Closing time</strong> (everyone at once): discard the cards you drew, pass the mug, start again.</li>
+      </ul>
+    </div>
+    <span class="src">Rulebook: gameplay, phases A to G</span>
+  </div>
+
   <div class="note">
     <span class="lab">Remember this</span>
-    <p>Beer and money are <strong>spent the same night you earn them</strong>. There is no saving up, so every round asks "one guest and one upgrade: which ones?"</p>
+    <p>Cards first, dice second, spending last. If you are ever lost, ask which of the seven letters you are on.</p>
   </div>
 </article>
 
 <article class="pt">
-  <p class="num"><b>3</b> The dice draft</p>
-  <h2>Roll your dice, keep one, hand the rest to your neighbour.</h2>
+  <p class="num"><b>4</b> Phase A</p>
+  <h2>The moon moves, and it hands everybody a present.</h2>
 
-  <p>This is the mechanism people remember. Everyone rolls their own dice at the same time, everyone picks exactly one to place in their tavern, and then the remaining dice slide to the player on your left. You pick one from the batch that arrives, pass the rest on, and around they go until everyone has placed.</p>
+  <p>Phase A takes five seconds and is easy to skip, which is a shame, because several rounds hand out free stuff and one of them hands out a free upgrade.</p>
 
-  <p>So each round you see your own roll, then someone else's leftovers, then someone else's leftovers again. The good news is you get more choices than a private roll would give you. The bad news is that everyone else is picking from the same stream, and the die you leave is the die they get.</p>
-
-  <div class="aside">This is a friendly game, but it is not a solitaire one. If your neighbour is visibly desperate for a 5, the polite thing and the correct thing are different things.</div>
-
-  <p>Two things make a die good:</p>
-
-  <ul class="clean">
-    <li>It <strong>matches a seat number</strong> where a paying guest is already sitting</li>
-    <li>It is <strong>high</strong>, because the better seats and the better guests live at the high numbers</li>
-  </ul>
+  <div class="rule">
+    <b>The actual rule: round track bonuses</b>
+    <div class="body">
+      <ul>
+        <li><strong>Rounds 1, 4 and 6:</strong> every player takes a <strong>counter guest</strong> and puts it on a bar stool at the counter. Each is used once, then returned to the box.</li>
+        <li>A counter guest does one of two things, your choice: in phase B, after filling your tables, discard everything you drew and <strong>redo phase B from scratch</strong>. Or in phase F, discard it to move <span class="n">1 space</span> on the monastery track.</li>
+        <li><strong>Round 2:</strong> take either a 3-beer guest card or a beer merchant card, face down on top of your deck.</li>
+        <li><strong>Round 3:</strong> take either a coloured die (rolled, for this round) or a dishwasher card.</li>
+        <li><strong>Round 7:</strong> take either a coloured die (rolled, for this round) or a beer merchant card.</li>
+        <li><strong>Round 8:</strong> every player <strong>upgrades any one area for free</strong>. It works immediately, but you do <em>not</em> get a noble for it.</li>
+      </ul>
+      <p>Anything bought or earned goes <strong>face down on top of your draw deck</strong>, so it arrives next round.</p>
+    </div>
+    <span class="src">Rulebook: bonuses on the round track</span>
+  </div>
 
   <div class="note">
     <span class="lab">Remember this</span>
-    <p>You are drafting from a shared stream. Take what you need first, and only then think about what you are handing along.</p>
+    <p>A counter guest is a <strong>re-roll for your whole opening hand</strong>. If your tables fill with rubbish, that is what it is for.</p>
   </div>
 </article>
 
 <article class="pt">
-  <p class="num"><b>4</b> Seating</p>
-  <h2>Numbered seats, numbered dice, and one very strict matching rule.</h2>
+  <p class="num"><b>5</b> Phase B</p>
+  <h2>Flip cards until every table is full, and you cannot stop early.</h2>
 
-  <p>Each table in your pub has seats printed with numbers. A die placed there must show that seat's number. A seat with a guest and a matching die is <strong>served</strong>: it pays whatever the guest prints, usually beer, money, or both.</p>
+  <p>This is the deck-building half. You turn over the top card of your deck and put it where it belongs: guests sit at tables, staff line up beside the part of the pub they work in. Then you flip another. You keep going until every table has somebody at it.</p>
 
-  <figure>
-    <svg viewBox="0 0 780 220" role="img" aria-labelledby="t4t t4d">
-      <title id="t4t">A tavern table with served and unserved seats</title>
-      <desc id="t4d">Three seats numbered two, four and five. The two and five seats hold a guest and a matching die and pay out. The four seat holds a guest with no die and pays nothing.</desc>
-      <rect x="20" y="26" width="500" height="164" rx="8" fill="rgba(58,42,29,.85)" stroke="#B6A891" stroke-opacity=".35"/>
-      <text x="40" y="52" fill="#B6A891" font-family="Courier Prime, monospace" font-size="11" letter-spacing="1.6">TABLE ONE</text>
+  <p>Notice what that means: <strong>you do not choose how many cards you draw</strong>. A deck full of staff cards makes you flip deeper to fill your tables, which is good, because staff are the cards that make you money later.</p>
 
-      <g font-family="Karla, sans-serif" font-size="14">
-        <g>
-          <rect x="48" y="66" width="128" height="104" rx="5" fill="#F4EEE3"/>
-          <text x="112" y="92" text-anchor="middle" fill="#2A1D14" font-weight="600">guest</text>
-          <rect x="86" y="102" width="52" height="52" rx="9" fill="#E0A32E"/>
-          <text x="112" y="137" text-anchor="middle" fill="#2A1D14" font-family="Bitter, serif" font-size="24" font-weight="800">2</text>
-          <text x="112" y="188" text-anchor="middle" fill="#E0A32E">served</text>
-        </g>
-        <g>
-          <rect x="196" y="66" width="128" height="104" rx="5" fill="#F4EEE3"/>
-          <text x="260" y="92" text-anchor="middle" fill="#2A1D14" font-weight="600">guest</text>
-          <rect x="234" y="102" width="52" height="52" rx="9" fill="none" stroke="#B4602B" stroke-dasharray="5 4"/>
-          <text x="260" y="137" text-anchor="middle" fill="#B4602B" font-family="Bitter, serif" font-size="24" font-weight="800">4</text>
-          <text x="260" y="188" text-anchor="middle" fill="#B4602B">no die, no sale</text>
-        </g>
-        <g>
-          <rect x="344" y="66" width="128" height="104" rx="5" fill="#F4EEE3"/>
-          <text x="408" y="92" text-anchor="middle" fill="#2A1D14" font-weight="600">guest</text>
-          <rect x="382" y="102" width="52" height="52" rx="9" fill="#E0A32E"/>
-          <text x="408" y="137" text-anchor="middle" fill="#2A1D14" font-family="Bitter, serif" font-size="24" font-weight="800">5</text>
-          <text x="408" y="188" text-anchor="middle" fill="#E0A32E">served</text>
-        </g>
-      </g>
-
-      <g font-family="Karla, sans-serif" font-size="16" fill="#F4EEE3">
-        <text x="556" y="76">A guest with no die is</text>
-        <text x="556" y="102">a customer standing at</text>
-        <text x="556" y="128">the bar being ignored.</text>
-        <text x="556" y="170" fill="#E0A32E" font-family="Courier Prime, monospace" font-size="12">SEATS ARE THE BOTTLENECK</text>
-      </g>
-    </svg>
-    <figcaption>MATCHING: your pub can be full and still earn nothing. Dice are the staff, and you never have enough of them.</figcaption>
-  </figure>
-
-  <p>Because dice come out of a shared stream, you cannot rely on getting the exact numbers you want. The fix is to widen your pub rather than pray: more seats, more numbers covered, and upgrades that let you nudge a die's value up or down.</p>
-
-  <div class="note">
-    <span class="lab">Remember this</span>
-    <p>A guest is a promise. <strong>A die is the payment.</strong> Build a pub whose seat numbers cover the range you actually roll.</p>
+  <div class="rule">
+    <b>The actual rule: filling the tavern</b>
+    <div class="body">
+      <ul>
+        <li>Reveal the top card of your deck and place it in the right spot. Repeat until <strong>all your tables are occupied</strong>, counting tables you drew this phase. Then stop.</li>
+        <li>Guests and regulars fill free tables <strong>left to right</strong>.</li>
+        <li><strong>Nobles sit together.</strong> The first noble you draw takes a free table. Every later noble that round is stacked on top of that same one.</li>
+        <li>Drawn tables go to the right of the printed tables. Waitresses go left of the dog. Dishwashers go left of the dish washing area. Beer suppliers go right of the printed beer supplier. Beer merchants go right of the beer storage.</li>
+        <li>If your deck runs out mid-draw, <strong>shuffle your discard pile</strong> into a new deck and carry on.</li>
+        <li>Players finish this phase at different times. That is normal.</li>
+      </ul>
+    </div>
+    <span class="src">Rulebook: phase B, the tavern fills up</span>
   </div>
-</article>
-
-<article class="pt">
-  <p class="num"><b>5</b> Beer and money</p>
-  <h2>Two currencies, two shops, and they never mix.</h2>
-
-  <p>At the end of the night you total two things.</p>
-
-  <div class="scroll">
-  <table>
-    <tr><th>Currency</th><th>Buys</th><th>Effect</th></tr>
-    <tr><td>Beer</td><td>A new guest card from the shared display</td><td>Goes into your deck, so it improves every future night</td></tr>
-    <tr><td>Money</td><td>An upgrade tile for your tavern board</td><td>Improves the pub permanently: seats, capacity, dice tricks, points</td></tr>
-  </table>
-  </div>
-
-  <p>You cannot convert one into the other, and you cannot bank either of them. Whatever you earned tonight, you spend tonight, at whatever price tier you managed to reach. Ending a round on eight beer when the good guest costs nine is genuinely painful, and it happens constantly.</p>
-
-  <p>That gives every round a small, sharp optimisation puzzle: not "how do I maximise everything" but "which of the two thresholds can I actually clear tonight, and which am I giving up on".</p>
 
   <div class="trap">
     <b>The trap</b>
-    <p>Splitting the difference. Six beer and six money often buys two mediocre things, while nine beer and two money buys one excellent one. Aim at a threshold and commit.</p>
+    <p>Stacked nobles look like a jackpot and are not. However many nobles you pile on that table, <strong>only the top one gets a die</strong>, so the rest earn nothing tonight.</p>
   </div>
 
   <div class="note">
     <span class="lab">Remember this</span>
-    <p>Beer improves the <strong>deck</strong>. Money improves the <strong>building</strong>. Decide which one your pub is short of before you place a single die.</p>
+    <p>More tables means a deeper draw, which means more of your deck seen every night. Tables are how you get to use the cards you bought.</p>
   </div>
 </article>
 
 <article class="pt">
-  <p class="num"><b>6</b> Your deck</p>
-  <h2>Every guest you hire will come back, so hire carefully.</h2>
+  <p class="num"><b>6</b> Phase C</p>
+  <h2>Waitresses are extra dice, and three is the ceiling.</h2>
 
-  <p>Your starting deck is a set of cheap regulars who pay almost nothing. Every guest you buy shuffles into it, so the deck gets richer as the game goes on, and that thickening is your real engine.</p>
+  <p>Every waitress card you drew this round hands you one die in your own colour, rolled straight away. A permanent waitress (the tile upgrade) gives you one as well. Those dice work exactly like the white ones, except you never pass them to anybody.</p>
 
-  <p>Deck building here is unusually gentle: your deck is small, you cycle through it often, and there is no real deck thinning to worry about. What you are choosing is not "how do I keep my deck lean" but <strong>which seat numbers my good guests want</strong>.</p>
-
-  <p>A brilliant guest who only pays when seated in a high seat is a dead card until your pub has high seats. A modest guest who pays on a low number is money on every single night. Fit beats power.</p>
+  <div class="rule">
+    <b>The actual rule: coloured dice</b>
+    <div class="body">
+      <ul>
+        <li><span class="n">1 coloured die</span> per waitress card drawn this round, taken from the shared supply and rolled now.</li>
+        <li>Upgrading the waitress tile gives you <span class="n">1 more</span> every round, starting the round <em>after</em> you buy it.</li>
+        <li><strong>Maximum 3 coloured dice at once.</strong> Extra waitresses beyond that give you nothing.</li>
+        <li>Coloured dice are yours to keep for the round. Used ones go back to the shared supply at the end of your turn.</li>
+      </ul>
+    </div>
+    <span class="src">Rulebook: phase C, here comes the waitress</span>
+  </div>
 
   <div class="note">
     <span class="lab">Remember this</span>
-    <p>Buy guests that match the pub you already have, not the pub you are imagining. <strong>Fit beats power.</strong></p>
+    <p>Four white dice is what everyone gets. <strong>Waitresses are how you get a fifth, sixth and seventh</strong>, and the cap is three extra.</p>
   </div>
 </article>
 
 <article class="pt">
-  <p class="num"><b>7</b> Upgrades</p>
-  <h2>The pub is the other deck, and it never gets shuffled away.</h2>
+  <p class="num"><b>7</b> Phase D</p>
+  <h2>Roll four, keep one, pass the coaster left. Four times.</h2>
 
-  <p>Money buys tiles that slot onto your tavern board, and they are the most reliably good purchases in the game because they work every night with no card draw required.</p>
+  <p>This is the mechanism people remember. Everybody rolls their own four white dice onto their own beer coaster at the same time. Then, in turn order, each player takes one die off their coaster and tucks it under their board. Everyone slides their coaster to the left, and you do it again with the three dice that arrive.</p>
 
-  <ul class="clean">
-    <li><strong>More seats and better seats</strong>, which widen the range of dice you can use</li>
-    <li><strong>Capacity</strong>, letting you seat more guests each night</li>
-    <li><strong>Dice manipulation</strong>, the quiet winners: anything that lets you change a die's value turns a useless roll into a served table</li>
-    <li><strong>Points</strong>, printed straight on some tiles</li>
-  </ul>
+  <p>Four passes later, everybody has four white dice and nobody got exactly what they wanted.</p>
 
-  <p>Dice manipulation deserves a sentence of its own. The frustration in this game is always "I have the guest, I have the seat, and I rolled a 3". Any upgrade that fixes that converts your worst nights into ordinary ones, and consistency compounds harder than a single big payout.</p>
+  <figure>
+    <svg viewBox="0 0 780 200" role="img" aria-labelledby="t7t t7d">
+      <title id="t7t">The coaster pass</title>
+      <desc id="t7d">A coaster of four dice: one is taken by the player, the remaining three pass to the neighbour on the left, and the process repeats four times.</desc>
+      <g font-family="Karla, sans-serif" font-size="14" fill="#F4EEE3">
+        <circle cx="110" cy="90" r="66" fill="rgba(244,238,227,.07)" stroke="#B6A891" stroke-opacity=".45"/>
+        <text x="110" y="42" text-anchor="middle" fill="#B6A891" font-family="Courier Prime, monospace" font-size="11" letter-spacing="1.4">YOUR COASTER</text>
+        <g fill="#F4EEE3">
+          <rect x="74" y="60" width="28" height="28" rx="5"/><rect x="112" y="60" width="28" height="28" rx="5"/>
+          <rect x="74" y="98" width="28" height="28" rx="5"/><rect x="112" y="98" width="28" height="28" rx="5"/>
+        </g>
+        <g fill="#2A1D14" font-family="Bitter, serif" font-size="17" font-weight="800" text-anchor="middle">
+          <text x="88" y="81">6</text><text x="126" y="81">2</text><text x="88" y="119">4</text><text x="126" y="119">1</text>
+        </g>
+      </g>
+      <g stroke="#E0A32E" stroke-width="1.6" fill="none"><path d="M186 90 h58"/></g>
+      <path d="M244 90 l-9 -5 v10 z" fill="#E0A32E"/>
+      <g>
+        <rect x="256" y="60" width="120" height="60" rx="5" fill="rgba(224,163,46,.16)" stroke="#E0A32E"/>
+        <text x="316" y="86" text-anchor="middle" fill="#F4EEE3" font-family="Karla, sans-serif" font-size="14" font-weight="600">keep one</text>
+        <text x="316" y="108" text-anchor="middle" fill="#E0A32E" font-family="Karla, sans-serif" font-size="13">under your board</text>
+      </g>
+      <g stroke="#B6A891" stroke-width="1.6" fill="none"><path d="M392 90 h58"/></g>
+      <path d="M450 90 l-9 -5 v10 z" fill="#B6A891"/>
+      <g>
+        <rect x="462" y="52" width="150" height="76" rx="5" fill="rgba(244,238,227,.06)" stroke="#B6A891" stroke-opacity=".5"/>
+        <text x="537" y="80" text-anchor="middle" fill="#F4EEE3" font-family="Karla, sans-serif" font-size="14" font-weight="600">pass three left</text>
+        <text x="537" y="104" text-anchor="middle" fill="#B6A891" font-family="Karla, sans-serif" font-size="13">to your neighbour</text>
+      </g>
+      <path d="M628 90 h44" stroke="#B6A891" stroke-width="1.6" fill="none"/>
+      <path d="M672 90 l-9 -5 v10 z" fill="#B6A891"/>
+      <text x="726" y="86" text-anchor="middle" fill="#E0A32E" font-family="Bitter, serif" font-size="26" font-weight="800">x4</text>
+      <text x="726" y="112" text-anchor="middle" fill="#B6A891" font-family="Karla, sans-serif" font-size="13">rounds of picking</text>
+      <text x="390" y="180" text-anchor="middle" fill="#B6A891" font-family="Courier Prime, monospace" font-size="11" letter-spacing="1">THE DIE YOU LEAVE IS THE DIE THEY GET</text>
+    </svg>
+    <figcaption>THE PASS: you see four rolls each round instead of one, and so does everybody else.</figcaption>
+  </figure>
+
+  <div class="rule">
+    <b>The actual rule: the dice draft</b>
+    <div class="body">
+      <ul>
+        <li>All players roll their <span class="n">4 white dice</span> onto their own coaster at the same time, then set them down showing the rolled numbers.</li>
+        <li>Starting with the start player and going clockwise, each player takes <strong>1 white die</strong> from the coaster in front of them and puts it under their tavern board.</li>
+        <li>When everyone has taken one, all coasters pass <strong>to the left</strong> at the same time.</li>
+        <li>Repeat <span class="n">3 more times</span>, until every coaster is empty and every player has 4 white dice.</li>
+        <li>Those 4 white dice plus any coloured dice from phase C are what you have to work with.</li>
+      </ul>
+    </div>
+    <span class="src">Rulebook: phase D, how can I serve you?</span>
+  </div>
 
   <div class="note">
     <span class="lab">Remember this</span>
-    <p>Card guests are luck. <strong>Tiles are certainty.</strong> When the choice is close, buy the thing that works whether or not the right card comes up.</p>
+    <p>Take what your guests need first. A high die is not automatically a good die: a guest wanting a "2" cannot be served with a "6".</p>
   </div>
 </article>
 
 <article class="pt">
-  <p class="num"><b>8</b> Nobles and the schnapps</p>
-  <h2>Two little pressure valves that decide close games.</h2>
+  <p class="num"><b>8</b> Phase E</p>
+  <h2>Lay the dice out before you spend anything. It is a rough draft.</h2>
 
-  <p>Two smaller systems sit alongside the main loop, and beginners tend to notice them a round too late.</p>
+  <p>Before you actually do anything, you park every die you own on the action space you intend to use it on. Nothing happens yet. This is a planning layout, and you are allowed to change your mind right up until you start removing dice.</p>
 
-  <h3>The nobles</h3>
-  <p>Attracting nobles to your tavern is the prestige track: they are hard to satisfy, they want your best seats, and they hand out victory points that beer and money never will. A pub that earns brilliantly and never courts a noble often finishes third.</p>
+  <p>Action spaces care about the number on the die. A guest card shows what it wants: some want a specific number, some show a question mark and accept anything. Get to know four spaces and you know the pub:</p>
 
-  <h3>The schnapps</h3>
-  <p>Schnapps is the emergency button: a stashed shot you can spend to change a die, effectively buying yourself the number you needed. It is limited, it does not refill freely, and holding one unused at the end of the game is a small tragedy.</p>
+  <div class="rule">
+    <b>The actual rule: placing dice</b>
+    <div class="body">
+      <ul>
+        <li>A space showing <strong>a number of pips</strong> needs a die of exactly that value.</li>
+        <li>A space showing <strong>"?"</strong> takes a die of any value.</li>
+        <li>A green arrow with <strong>"1x"</strong> means only one die may go there. A green arrow with <strong>"..."</strong> means any number of dice may go there.</li>
+        <li>Even with several nobles stacked at one table, you may only place <span class="n">1 die</span> on the top noble's space.</li>
+        <li><strong>Dishwashers:</strong> for each dishwasher card in your pub, one die may be placed on a space as if it were <strong>1 higher</strong>. You do not turn the die, you leave the real number showing, so you can see how many dishwashers you used. Values do not wrap: a "6" can never become a "1". Several dishwashers can be stacked on the same die.</li>
+        <li>The permanent dishwasher tile gives you one such use per round, starting the round after you buy it.</li>
+        <li>This layout is provisional. You can rearrange freely until you start taking actions.</li>
+      </ul>
+    </div>
+    <span class="src">Rulebook: phase E, planning your actions</span>
+  </div>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Dishwashers are the "close enough" card. They turn a 4 into the 5 the monk wanted, and they are the cure for a bad roll.</p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>9</b> Phase F</p>
+  <h2>Take the dice off one at a time, and count in your head.</h2>
+
+  <p>Now the money appears. In turn order, you pull your planned dice off their spaces one by one, and each one you remove pays you something. Doubloons and beer are imaginary: no coins, no tokens, just a running total you hold in your head until you spend it.</p>
+
+  <p>The order is completely up to you, and mixing is normal: earn a few doubloons, buy an upgrade that makes beer better, then earn the beer.</p>
+
+  <div class="rule">
+    <b>The actual rule: what each space pays</b>
+    <div class="body">
+      <ul>
+        <li><strong>A guest, regular or noble:</strong> remove the die, get the <strong>doubloons printed at the bottom right</strong> of that card or space.</li>
+        <li><strong>Cashbox:</strong> remove any die, get <span class="n">1 doubloon</span>. Upgraded, <span class="n">3 doubloons</span>.</li>
+        <li><strong>Beer supplier:</strong> only dice showing <span class="n">1</span> or <span class="n">6</span> may go here. Each die removed pays <span class="n">1 beer</span>, plus <span class="n">1 more per beer supplier card</span> next to the space. Upgraded, the die itself pays 2 beer.</li>
+        <li><strong>Beer merchant:</strong> each beer merchant card you drew in phase B pays exactly <span class="n">1 beer</span>. It does not boost the beer supplier.</li>
+        <li><strong>Barrel (house brew):</strong> remove any die, get <span class="n">1 beer</span>. Upgraded, <span class="n">2 beer</span>.</li>
+        <li><strong>Monk:</strong> only dice showing <span class="n">5</span>. Each one moves your monastery marker <span class="n">1 space</span>, or <span class="n">2</span> if upgraded. Passing or landing on a bonus space gives you that bonus at once. Going past space 22 wraps back to the start of the track.</li>
+        <li>Remove each die as you use it. Used white dice go back on your coaster, coloured dice back to the supply.</li>
+        <li>Overshoot is fine: leftover doubloons and beer stay available for later actions this turn.</li>
+      </ul>
+    </div>
+    <span class="src">Rulebook: phase F, the action spaces explained</span>
+  </div>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Beer supplier eats <strong>1s and 6s</strong>, the monk eats <strong>5s</strong>. Those three numbers are why an "unwanted" die is often the best one on the coaster.</p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>10</b> Spending doubloons</p>
+  <h2>Money buys staff cards and upgrades, and upgrades hand you a noble.</h2>
+
+  <p>Doubloons do two jobs. They buy tavern cards from the shared display, which go into your deck, and they flip the tiles on your board to their better side.</p>
+
+  <p>The upgrade rule that decides games: <strong>every upgrade gives you a free noble card</strong>. Nobles are victory points. New players forget this constantly, so say it out loud the first few times.</p>
+
+  <div class="rule">
+    <b>The actual rule: doubloon actions</b>
+    <div class="body">
+      <p><strong>Buying tavern cards.</strong> Take one or more cards from the display (beer merchant, dishwasher, waitress, table, beer supplier) and put them face down on top of your deck. Cost is printed top left. Limit: <strong>1 card of each type per round</strong>.</p>
+      <p><strong>Upgrading.</strong> Any area of your pub except the host counter can be upgraded by paying the doubloon cost in the banner top left of that area, then flipping the tile over.</p>
+      <ul>
+        <li>You <strong>immediately take 1 noble</strong> from the supply, face down on top of your deck.</li>
+        <li>Beer supplier, cashbox, barrel, safe, beer storage and monk upgrades work <strong>immediately</strong>.</li>
+        <li>Waitress, dishwasher and table upgrades only start working <strong>next round</strong>.</li>
+        <li>Dice sitting on an upgraded tile go back onto it after the flip.</li>
+      </ul>
+      <p><strong>Special offer.</strong> You can make an upgrade cheaper by handing back matching tavern cards you drew this round: <span class="n">3 doubloons off per dishwasher</span>, <span class="n">4 off per waitress</span>, <span class="n">5 off per table</span>, <span class="n">6 off per beer supplier</span>. The price can never drop below 0, and you never earn money this way.</p>
+    </div>
+    <span class="src">Rulebook: doubloon actions, special offer</span>
+  </div>
 
   <div class="trap">
     <b>The trap</b>
-    <p>Saving schnapps for a perfect moment that never comes. Use it on the night it converts a dead table into a served one. There is no bonus for finishing sober.</p>
+    <p>Forgetting the free noble. If you upgraded and did not take a noble card, you skipped victory points that cost you nothing. The symbol above the host counter is printed there to remind you.</p>
   </div>
 
   <div class="note">
     <span class="lab">Remember this</span>
-    <p>Nobles are points you cannot buy with beer. Schnapps is the difference between a bad roll and a bad round. Neither keeps.</p>
+    <p>An upgrade is <strong>two things at once</strong>: a permanently better pub and a free noble. That is why upgrading usually beats buying another card.</p>
   </div>
 </article>
 
 <article class="pt">
-  <p class="num"><b>9</b> The modules</p>
-  <h2>The box is eight games, and you are meant to play them in order.</h2>
+  <p class="num"><b>11</b> Spending beer</p>
+  <h2>Beer hires people: one guest a night, or a fistful of nobles.</h2>
 
-  <p>This is the thing to understand before your first session, because it changes what "learning the rules" even means.</p>
+  <p>Beer buys the other half of your deck. You may recruit one guest from the display each round, and you can pay for nobles in bulk if you have had a very good night.</p>
 
-  <p>Taverns of Tiefenthal ships as a base game plus a stack of <strong>modules</strong>, numbered and meant to be added one at a time over successive plays. Module one is a simple pub. By the last module you have several extra systems layered on and the pub you built looks nothing like the starting one.</p>
+  <div class="rule">
+    <b>The actual rule: beer actions</b>
+    <div class="body">
+      <ul>
+        <li><strong>Recruit a guest:</strong> take 1 guest card from the display, pay the beer cost printed top left, put it face down on top of your deck. Guests cost between <span class="n">3 and 8 beer</span>. Limit: <strong>1 guest per round</strong>.</li>
+        <li>When a guest is taken, immediately refill the gap from the face-down guest deck.</li>
+        <li>Some guests show an <strong>immediate bonus</strong> in the middle of the card. You get it once, when you recruit them, and never again.</li>
+        <li><strong>Recruit nobles:</strong> pay <span class="n">9 beer for 1</span>, <span class="n">14 for 2</span>, or <span class="n">18 for 3</span>. Face down on top of your deck. You may do this at any point in your turn.</li>
+      </ul>
+    </div>
+    <span class="src">Rulebook: beer actions, recruit nobles</span>
+  </div>
 
-  <div class="aside">Nothing is destroyed and nothing is permanent, so this is not a legacy game. It is a teaching ramp with the difficulty printed on the boxes.</div>
-
-  <p>Two practical consequences:</p>
-
-  <ul class="clean">
-    <li><strong>Play the base game once, properly.</strong> It is deliberately thin. That is the point: it teaches the loop in twenty minutes.</li>
-    <li><strong>Add modules in the printed order</strong>, one per session. Skipping ahead to the shiny ones is how a light family game turns into an hour of rules arguments.</li>
-  </ul>
+  <p>Look at those noble prices for a second. Nine beer for one noble, but eighteen for three. A single enormous beer night is worth far more than three ordinary ones, which is the whole argument for stacking beer suppliers and upgrading the barrel.</p>
 
   <div class="note">
     <span class="lab">Remember this</span>
-    <p>If your first game felt too simple, that was the design working. The complexity is in the next box, and it is meant to arrive next week.</p>
+    <p>One guest per round, no exceptions, so make it the right one. Beer above that is best spent <strong>in one big lump on nobles</strong>.</p>
   </div>
 </article>
 
 <article class="pt">
-  <p class="num"><b>10</b> Simultaneity</p>
-  <h2>Nobody waits, which means nobody is watching you.</h2>
+  <p class="num"><b>12</b> Closing time</p>
+  <h2>Save two, lose the rest, and the mug moves on.</h2>
 
-  <p>Because all players roll, draft and place at the same time, the pace is brisk and the table is noisy. That has a strategic edge worth naming.</p>
+  <p>The end of the night is where beginners quietly throw away half their earnings. Whatever you have not spent is almost entirely lost.</p>
 
-  <p>You will not have time to audit your opponents' pubs, and they will not have time to audit yours. Direct interaction is limited to the dice you pass and the shared guest display everyone is buying from. In practice this makes Taverns a <strong>race against a standard</strong> rather than a fight: you are trying to run a good pub, not to ruin someone else's.</p>
+  <div class="rule">
+    <b>The actual rule: end of your turn and phase G</b>
+    <div class="body">
+      <ul>
+        <li>When you stop taking actions, you may put up to <span class="n">2 doubloons</span> in your safe and up to <span class="n">2 beer</span> in your beer storage. Upgraded, those limits become <span class="n">5</span> each.</li>
+        <li><strong>Everything above that is lost.</strong> So are any unused dice, which go back to the coaster or the supply.</li>
+        <li>Phase G: every player picks up the cards they placed in phase B and discards them face up beside their deck.</li>
+        <li>If the moon is on the last space of the round track, the game ends now.</li>
+        <li>Otherwise pass the beer mug clockwise and start again at phase A.</li>
+      </ul>
+    </div>
+    <span class="src">Rulebook: end of your action phase, phase G, game end</span>
+  </div>
 
-  <p>The one live conflict is the guest display. When a strong guest appears and two players can afford it, the one who gets there first takes it, and the other spends their beer on second best. That is the only place where speed of decision has real weight, so know roughly what you want before the round ends.</p>
+  <div class="trap">
+    <b>The trap</b>
+    <p>Ending on 8 beer when the guest you wanted costs 9. You keep 2 and burn 6. Before you remove your last dice, count what you can actually reach, and take the cheaper guest rather than the bigger pile of nothing.</p>
+  </div>
 
   <div class="note">
     <span class="lab">Remember this</span>
-    <p>Play your own pub, watch the shared display, and pass dice with one eye on your left-hand neighbour. That is the whole of the interaction.</p>
+    <p>Spend down to <strong>2 and 2</strong> every single night. The safe is a pocket, not a bank.</p>
   </div>
 </article>
 
 <article class="pt">
-  <p class="num"><b>11</b> Scoring</p>
-  <h2>Points come from the pub you built, not the beer you sold.</h2>
+  <p class="num"><b>13</b> The modules</p>
+  <h2>The box is five games, and it wants you to play them in order.</h2>
 
-  <p>At the end, beer and money are worth nothing. What scores is what you converted them into:</p>
+  <p>What you have read so far is Module 1, the basic game. The box holds four more, each adding a layer, each meant to be added after you have played the one before.</p>
 
-  <div class="scroll">
-  <table>
-    <tr><th>Source</th><th>Notes</th></tr>
-    <tr><td>Upgrade tiles</td><td>Printed points, earned the moment you bought them</td></tr>
-    <tr><td>Guests in your deck</td><td>Many are worth points on their own, quietly, all game</td></tr>
-    <tr><td>Nobles</td><td>Chunky, competitive, and easy to leave until too late</td></tr>
-    <tr><td>Module-specific tracks</td><td>Whatever the modules you added are counting</td></tr>
-    <tr><td>Leftover beer, money, schnapps</td><td>Nothing at all</td></tr>
-  </table>
+  <div class="rule">
+    <b>The actual rule: what each module adds</b>
+    <div class="body">
+      <ul>
+        <li><strong>Module 1:</strong> the basic game. Attract as many nobles as you can.</li>
+        <li><strong>Module 2, schnapps:</strong> the monastery board flips to its winter side. Schnapps tokens buy bonus actions from entertainer tiles that arrive in rounds 2, 3 and 5.</li>
+        <li><strong>Module 3, reputation:</strong> flip the host tile to its reputation track. A second route to beer and nobles, and the Bards and the white-die guest cards come back into the game.</li>
+        <li><strong>Module 4:</strong> each player picks a starting card that sets their opening equipment, so the pubs stop being identical.</li>
+        <li><strong>Module 5, the guest book:</strong> signature tiles come off the guests you recruit and fill a book of four columns for bonuses.</li>
+      </ul>
+      <p>Each module needs all the ones before it: Module 4 means playing 1, 2 and 3 too. The rulebook recommends new players start with Module 1 alone, and says experienced gamers can start with 2 and 3 added.</p>
+    </div>
+    <span class="src">Rulebook: the modules, supplement M1 to M4</span>
   </div>
-
-  <p>The last row again teaches the same lesson every economic game teaches: unspent is unscored. On the final night, spend everything, take the guest even if the deck will never see it again, and drink the schnapps.</p>
 
   <div class="note">
     <span class="lab">Remember this</span>
-    <p>You are scored on the <strong>pub and the people</strong>, never the till. Convert everything before the last round ends.</p>
+    <p>If your first game felt thin, that was the design working. The complexity is in the next envelope, and it is meant to arrive next week.</p>
   </div>
 </article>
 
 <article class="pt">
-  <p class="num"><b>12</b> Your first game</p>
-  <h2>How not to lose it: four habits from behind the bar.</h2>
+  <p class="num"><b>14</b> Your first game</p>
+  <h2>How not to lose it: five habits from behind the bar.</h2>
 
-  <h3>1. Widen before you deepen</h3>
-  <p>Early money on seats and capacity pays back every night for the rest of the game. A brilliant guest in a three-seat pub is a brilliant guest with nowhere to sit.</p>
+  <h3>1. Upgrade something almost every round</h3>
+  <p>An upgrade is a better pub forever and a free noble in your deck. Two upgrades a game is a losing pace; five or six is a winning one, and round 8 gives you one free.</p>
 
-  <h3>2. Aim at one threshold per night</h3>
-  <p>Decide before you place dice whether tonight is a beer night or a money night. Landing exactly on a purchase you wanted beats being two short of two purchases.</p>
+  <h3>2. Buy tables early</h3>
+  <p>Tables make you draw deeper, so you see more of your good cards every night. A pub with one extra table is quietly running a bigger deck than everybody else.</p>
 
-  <h3>3. Buy the die fixer</h3>
-  <p>Anything that lets you change a die's value, whether a tile, a guest or a shot of schnapps, is worth more than its face value suggests. This is a game of near misses, and near misses are what those upgrades delete.</p>
+  <h3>3. Put 1s and 6s to work</h3>
+  <p>A "1" feels like a wasted die and it is beer supplier fuel. With two beer supplier cards beside the space, a single 1 pays three beer. That is how nine-beer nights happen.</p>
 
-  <h3>4. Court a noble before the last two rounds</h3>
-  <p>Nobles take setup, and the players who remember them at the end never get one. Points that beer cannot buy are exactly the points that decide a close game.</p>
+  <h3>4. Aim at one purchase per night</h3>
+  <p>Decide what you are buying before you pull the first die, then earn exactly that. Ending with 8 beer and no plan wastes six of it.</p>
+
+  <h3>5. Take the noble. Take the noble.</h3>
+  <p>Every upgrade gives one. Nobles are the points. If you remember one rule from this page at the table, make it this one.</p>
 
   <div class="note">
     <span class="lab">Remember this</span>
-    <p>Wide pub, one clear target per night, dice you can bend, and a noble in the diary. Everything else is beer.</p>
+    <p>Wide pub, deep draw, 1s and 6s into beer, one clear target a night, and never skip the free noble.</p>
   </div>
 </article>
 
-<footer>A teaching walkthrough of The Taverns of Tiefenthal by Wolfgang Warsch (Schmidt Spiele / North Star Games, 2019). Rules summarised for learning; the rulebook is still the authority, especially for the exact contents of each module and the solo variant. <a href="../">Back to the shelf</a>.</footer>
+<footer>A teaching walkthrough of The Taverns of Tiefenthal by Wolfgang Warsch (Schmidt Spiele, 2019). The rules quoted here are the basic game, Module 1, taken from the English rulebook; the rulebook and its module supplement remain the authority, especially for the module rules summarised in point 13. <a href="../">Back to the shelf</a>.</footer>
 
 </div>
 
