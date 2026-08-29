@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>The Castles of Burgundy: Learn It and Play It</title>
-<meta name="description" content="Learn The Castles of Burgundy properly: seventeen points that explain how the estate, the dice and the region bonuses work, with the exact rules to play from.">
+<title>The Castles of Burgundy: Learn It Properly</title>
+<meta name="description" content="Learn what The Castles of Burgundy actually is: fourteen points on the hex estate, the two dice, and the bonus that shrinks while you dawdle.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Karla:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
@@ -48,7 +48,7 @@ body{
 }
 .rail-in{max-width:810px;margin:0 auto;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
 .rail-lab{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
-#estate{flex:1;min-width:140px;max-width:300px;height:38px}
+#estate{flex:1;min-width:140px;max-width:270px;height:38px}
 #estate polygon{fill:transparent;stroke:rgba(242,234,217,.26);stroke-width:1;transition:fill .35s,stroke .35s}
 #estate polygon.on{stroke:rgba(242,234,217,.7)}
 .rail-count{font-family:var(--mono);font-size:12px;color:var(--gold);white-space:nowrap}
@@ -126,35 +126,6 @@ table{border-collapse:collapse;width:100%;min-width:440px;font-size:16px}
 th,td{text-align:left;padding:9px 14px 9px 0;border-bottom:1px solid var(--line);vertical-align:top}
 th{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);font-weight:600}
 td.n{font-family:var(--mono);color:var(--gold-pale)}
-/* ---------- the actual rule ---------- */
-.rule{
-  margin:26px 0;max-width:62ch;border:1px solid rgba(78,143,190,.45);
-  background:rgba(78,143,190,.07);
-}
-.rule > b{
-  display:block;background:rgba(78,143,190,.17);color:#B7D8EE;
-  font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;
-  padding:9px 18px;font-weight:600;
-}
-.rule .body{padding:14px 18px 4px}
-.rule p{margin:0 0 12px;max-width:none}
-.rule ul{list-style:none;margin:0 0 12px;padding:0}
-.rule li{padding:5px 0 5px 20px;position:relative}
-.rule li::before{
-  content:"";position:absolute;left:2px;top:13px;width:8px;height:9px;background:var(--river);
-  clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);
-}
-.rule .n{font-family:var(--mono);color:#CFE6F5;font-weight:600}
-.rule .src{
-  display:block;padding:0 18px 12px;font-family:var(--mono);font-size:10px;
-  letter-spacing:.1em;text-transform:uppercase;color:var(--dim);
-}
-.rule ol{margin:0 0 12px;padding-left:22px}
-.rule ol li{padding:5px 0}
-.rule ol li::before{display:none}
-.rule table{min-width:0}
-.swatch{display:inline-block;width:11px;height:12px;margin-right:7px;vertical-align:-1px;
-  clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%)}
 footer{margin:64px 0 0;padding-top:24px;border-top:1px solid var(--line);color:var(--dim);font-size:15px}
 a{color:var(--gold)}
 @media(max-width:620px){body{font-size:17px}#estate{max-width:190px;height:32px}}
@@ -168,7 +139,7 @@ a{color:var(--gold)}
   <div class="rail-in">
     <span class="rail-lab">your estate</span>
     <svg id="estate" viewBox="0 0 300 38" role="img" aria-label="Progress through the briefing" preserveAspectRatio="xMinYMid meet"></svg>
-    <span class="rail-count" id="count">1 / 17</span>
+    <span class="rail-count" id="count">1 / 14</span>
   </div>
 </div>
 
@@ -177,41 +148,22 @@ a{color:var(--gold)}
 <a class="backlink" href="../">&larr; the shelf</a>
 
 <header class="top">
-  <p class="eyebrow">Learn it and play it &middot; 17 points</p>
+  <p class="eyebrow">Learn it properly &middot; 14 points</p>
   <h1><small>The Castles of</small>Burgundy</h1>
-  <p class="lede">A hex board in front of you, thirty-seven empty spaces on it, and two dice a turn for twenty-five turns. This page teaches you what the game is <em>and</em> gives you the exact rules, so you can play it straight from here.</p>
-  <div class="rule">
-    <b>How to read this page</b>
-    <div class="body">
-      <p>Every point explains one idea in plain words, then gives you a box like this one with the <strong>actual rule</strong>: the real numbers, the real limits, the things people get wrong. Read just the essay to understand the game. Read the boxes too and you can teach it at the table.</p>
-      <p>Everything here is the <strong>base game</strong> for 2 to 4 players, using estate board number 1, which is the board the rules tell you to start on.</p>
-    </div>
-    <span class="src">Rules from the alea / Ravensburger English rulebook</span>
-  </div>
+  <p class="lede">A honeycomb of thirty-seven empty spaces in front of you, two dice a turn, and twenty-five turns to fill it. Everything about this game is gentle, polite and quietly ruthless.</p>
 </header>
 
 <article class="pt">
   <p class="num"><b>1</b> The big picture</p>
   <h2>You are filling in a map, and every tile you lay pays you twice.</h2>
 
-  <p>Castles of Burgundy is a fifteenth century Loire valley in the fiction and a beautifully tight efficiency puzzle in practice. In front of you is your <strong>estate</strong>: a honeycomb of thirty-seven hex spaces, grouped into coloured regions. Rivers are blue, cities are beige, pastures are light green, and so on. Each space also carries a number from 1 to 6.</p>
+  <p>Castles of Burgundy is a fifteenth century Loire valley in the fiction and a very tight efficiency puzzle in practice. In front of you is your <strong>estate</strong>: a honeycomb of hex spaces grouped into coloured regions. Rivers are blue, cities are beige, pastures are light green, mines grey, castles dark green, knowledge yellow. Every space also carries a number from 1 to 6.</p>
 
-  <p>You take tiles from a shared board and lay them into that honeycomb. Two things then happen, and understanding both is understanding the game. First, <strong>the tile does something the moment it lands</strong>: a ship fetches you goods, a pasture pays out points, a building does a favour. Second, when a tile finishes off the last empty space of its coloured region, <strong>the whole region scores</strong>, and it scores far more than the individual tiles ever did.</p>
+  <p>You take hex tiles from a shared board and lay them into that honeycomb. Two things then happen, and understanding both is understanding the game. First, <strong>the tile does something the instant it lands</strong>: a ship fetches you goods, a pasture pays out points, a building does you a favour. Second, when a tile fills the last empty space of its coloured region, <strong>the whole region scores</strong>, and it scores far more than any single tile ever did.</p>
 
-  <p>So a good turn is never just "I placed a thing". It is "I placed a thing, it did a job on the way in, and it brought a region one space closer to paying out." Nobody attacks you and nobody blocks your board. The competition is for the tiles on the shared board, for turn order, and for the bonuses that go to whoever finishes a colour first.</p>
+  <p>So a good turn is never just "I placed a thing". It is "I placed a thing, it did a job on the way in, and it brought a region one space closer to paying out."</p>
 
-  <div class="rule">
-    <b>The actual rule: what you are doing</b>
-    <div class="body">
-      <ul>
-        <li>The game lasts <span class="n">5 phases</span> (A to E). Each phase is <span class="n">5 rounds</span>. That is <span class="n">25 turns</span> each, and since every turn is two dice, <span class="n">50 dice actions</span> for the whole game.</li>
-        <li>You score on a victory point track running <span class="n">0 to 100</span>. Pass 100 and you flip your victory point tile to its 100 side; pass 200 and you flip it again.</li>
-        <li>Most victory points wins.</li>
-        <li>Tie: the tied player with the <strong>fewest empty spaces</strong> in their estate wins. Still tied, the one who went <strong>later</strong> in turn order wins.</li>
-      </ul>
-    </div>
-    <span class="src">Rulebook: game idea, game end</span>
-  </div>
+  <p class="aside">Nobody attacks you and nobody can block your board. The competition is for the tiles in the shared shop, for turn order, and for the bonuses that go to whoever finishes a colour first. Everything else is you against your own inefficiency.</p>
 
   <div class="note">
     <span class="lab">Remember this</span>
@@ -223,19 +175,9 @@ a{color:var(--gold)}
   <p class="num"><b>2</b> The two boards</p>
   <h2>One board is the shop and the clock. The other one is you.</h2>
 
-  <p>The board in the middle of the table is not a map and nothing moves across it. It is a <strong>shop</strong>: six numbered depots, each holding a few face-up tiles, and each carrying a stack of goods. The number on the depot is the die face you need to buy from it. Around the edge it also keeps the time, the turn order and the score.</p>
+  <p>The board in the middle of the table is not a map and nothing moves across it. It is a <strong>shop</strong>: six numbered depots, each holding a handful of face-up tiles and a pile of goods. The number on a depot is the die face you need to buy from it. Around the edge that same board keeps the time, the turn order and the score, which is why it looks more complicated than it is.</p>
 
-  <p>Your own board is the estate, plus a small clerical corner: three spaces where tiles wait before you place them, spaces for your goods, your money and your workers, and a spot to park dice you have already spent. Nothing in that corner scores. It is all working space.</p>
-
-  <div class="rule">
-    <b>The actual rule: what is on each board</b>
-    <div class="body">
-      <p><strong>The game board</strong> has 5 phase spaces (A to E), 5 round spaces, <span class="n">6 numbered depots</span> (1 to 6), each with four spaces for six-sided tiles and one large goods space, <span class="n">1 central black depot</span>, 12 spaces for bonus tiles, a turn order track and a victory point track from 0 to 100.</p>
-      <p><strong>Your player board</strong> has the estate (<span class="n">37 spaces</span> on board number 1, split into coloured regions), <span class="n">3 storage spaces</span> for six-sided tiles, <span class="n">3 goods storage spaces</span>, a space for sold goods, silverling storage, worker storage, used die storage, and printed summaries of the tiles and actions.</p>
-      <p>There are <span class="n">6 double-sided player boards</span>: board number 1 appears four times, boards 2 to 9 once each. Play your first game on number 1, the side the rules point you at.</p>
-    </div>
-    <span class="src">Rulebook: game setup, the player boards</span>
-  </div>
+  <p>Your own board is the estate, plus a small clerical corner: three spaces where tiles wait before you place them, room for your goods, your coins and your workers, and a parking spot for dice you have already spent. Nothing in that corner scores. It is all working space.</p>
 
   <div class="note">
     <span class="lab">Remember this</span>
@@ -244,41 +186,12 @@ a{color:var(--gold)}
 </article>
 
 <article class="pt">
-  <p class="num"><b>3</b> Setting up</p>
-  <h2>Ten minutes the first time, three minutes ever after.</h2>
+  <p class="num"><b>3</b> The clock</p>
+  <h2>Five phases of five rounds, and the reward for finishing shrinks in every one.</h2>
 
-  <p>The fiddliest part is sorting one hundred and sixty-four little hex tiles by the colour of their <em>backs</em>, not their fronts. Do it once into six bags or bowls and setup is quick forever after.</p>
+  <p>The game is five phases long, each five rounds, which gives you twenty-five turns and no more. At the start of each phase the shop is wiped and restocked, so the tile you were saving up for is gone. Within a phase, everybody rolls at the same time and then plays in turn order.</p>
 
-  <div class="rule">
-    <b>The actual rule: setup</b>
-    <div class="body">
-      <ol>
-        <li>Put the <strong>game board</strong> in the middle. Put the <span class="n">20 silverlings</span>, the <span class="n">30 worker tiles</span> and the <strong>white die</strong> beside it.</li>
-        <li>Sort the <span class="n">164 six-sided tiles</span> by the colour of their backs into separate face-down supplies beside the board.</li>
-        <li>Shuffle the <span class="n">42 goods tiles</span> face down. Make <span class="n">5 piles of 5</span> and put one on each phase space A to E. The remaining 17 stay in a face-down supply.</li>
-        <li>Put the <span class="n">12 bonus tiles</span> on their spaces on the board (one large and one small in each of the six colours).</li>
-        <li>Each player takes a <strong>player board</strong>, number 1 side up; <strong>1 castle tile</strong> placed face up on the dark green middle space (the one showing a 6); <span class="n">3 random goods tiles</span> from the supply of 17, put face up on the three goods storage spaces, same colours stacked together; their <span class="n">2 dice</span>; a playing piece on the 0/100 space of the victory point track; <span class="n">1 silverling</span>; and their 100/200 victory point tile set aside.</li>
-        <li>Roll to find a <strong>start player</strong>. The start player takes <span class="n">1 worker</span>, the next player clockwise <span class="n">2</span>, the third <span class="n">3</span>, the fourth <span class="n">4</span>.</li>
-        <li>Everyone puts their second playing piece on the first space of the <strong>turn order track</strong>, stacked so the start player is on top and the last player is at the bottom.</li>
-        <li>Give the start player the <strong>white die</strong>.</li>
-      </ol>
-    </div>
-    <span class="src">Rulebook: game setup</span>
-  </div>
-
-  <div class="note">
-    <span class="lab">Remember this</span>
-    <p>Going last is not a punishment: <strong>the last player starts with four workers</strong>, and workers are the thing that turns a bad roll into the roll you wanted.</p>
-  </div>
-</article>
-
-<article class="pt">
-  <p class="num"><b>4</b> The clock</p>
-  <h2>Five phases of five rounds, and the goods tiles count them down for you.</h2>
-
-  <p>Each phase begins by wiping the shop and restocking it, so the tiles you left behind are gone. Then five rounds happen. In each round everybody rolls at the same time and then plays in turn order.</p>
-
-  <p>There is one lovely piece of design here. At the start of each round the start player rolls a <strong>white die</strong> and puts one goods tile onto the depot matching it. Five goods tiles are dealt to the phase at the start, one goes out each round, so <strong>the goods still waiting to be dealt tell you exactly how many rounds are left</strong> in the phase, and how much of the game remains. You never have to ask.</p>
+  <p>The important thing is not the structure, it is the decay running through it. The bonus for completing a region is <strong>10 points in the first phase and 2 in the last</strong>, dropping by two each time. Nothing else in this game punishes dawdling so directly. A region sitting one hex short of finished is not "nearly there", it is losing you two points a phase.</p>
 
   <figure>
     <svg viewBox="0 0 780 210" role="img" aria-labelledby="t4t t4d">
@@ -307,156 +220,89 @@ a{color:var(--gold)}
           <text x="540" y="196">D</text><text x="692" y="196">E</text>
         </g>
         <g font-size="12.5" text-anchor="middle" fill="#A2977F">
-          <text x="84" y="76">rounds 1&ndash;5</text><text x="236" y="76">6&ndash;10</text><text x="388" y="76">11&ndash;15</text>
+          <text x="84" y="76">turns 1&ndash;5</text><text x="236" y="76">6&ndash;10</text><text x="388" y="76">11&ndash;15</text>
           <text x="540" y="76">16&ndash;20</text><text x="692" y="76">21&ndash;25</text>
         </g>
         <path d="M14 90 H762" stroke="rgba(242,234,217,.18)" stroke-width="1"/>
       </g>
     </svg>
-    <figcaption>THE BONUS FOR FINISHING A REGION SHRINKS EVERY PHASE. THE GAME IS A HURRY.</figcaption>
+    <figcaption>THE BONUS FOR FINISHING A REGION SHRINKS EVERY PHASE. THE GAME IS A HURRY IN DISGUISE.</figcaption>
   </figure>
 
-  <div class="rule">
-    <b>The actual rule: setting up a phase</b>
-    <div class="body">
-      <ul>
-        <li>Remove all six-sided tiles left on the board and return them <strong>to the box</strong>, not to the supply. (You may leave ships, mines and castles in place, since they are all identical anyway. Goods tiles on the depots stay put.)</li>
-        <li>Draw new tiles face up onto the matching-coloured spaces in the six numbered depots: in a 2-player game only the spaces marked 2 (<span class="n">12 spaces</span>), in a 3-player game those marked 2 and 3 (<span class="n">18 spaces</span>), in a 4-player game all <span class="n">24</span>.</li>
-        <li>Three-player exception: the dark green space in depot 6 gets a castle in phases A, C and E, but a <strong>mine</strong> in phases B and D.</li>
-        <li>Draw black-backed tiles face up onto the <strong>central black depot</strong>, between <span class="n">2 and 8</span> of them depending on the number of players.</li>
-        <li>Take the <span class="n">5 goods tiles</span> for this phase and lay them face up on the five round spaces.</li>
-      </ul>
-    </div>
-    <span class="src">Rulebook: setup for each phase</span>
-  </div>
-
-  <div class="rule">
-    <b>The actual rule: a round</b>
-    <div class="body">
-      <ul>
-        <li>All players roll their two dice <strong>at the same time</strong> and leave them in view. The start player also rolls the white die.</li>
-        <li>The start player takes the topmost goods tile from the round spaces and puts it on the goods space of the depot matching the <strong>white die</strong>.</li>
-        <li>The white die is then finished. It cannot be used for an action and <strong>can never be adjusted with workers</strong>.</li>
-        <li>Players then take their turns in turn order: right to left along the turn order track, and top to bottom within a stack.</li>
-      </ul>
-    </div>
-    <span class="src">Rulebook: the five game rounds</span>
-  </div>
+  <p>There is one small piece of design worth admiring. Each round begins with a goods tile being dealt onto the board, five per phase, so the goods still waiting to be dealt tell you exactly how many rounds are left. You never have to ask how long the game has to run. It is sitting there in front of you.</p>
 
   <div class="note">
     <span class="lab">Remember this</span>
-    <p>Everyone rolls at once, so <strong>plan while the others are playing</strong>. The goods tiles left on the round spaces are your countdown clock.</p>
+    <p>Everyone rolls at once, so <strong>plan while other people are playing</strong>. And the longer a region stays open, the less it will ever pay you.</p>
   </div>
 </article>
 
 <article class="pt">
-  <p class="num"><b>5</b> Your turn</p>
+  <p class="num"><b>4</b> Your turn</p>
   <h2>Two dice, two actions, four things they can be.</h2>
 
-  <p>A turn is over fast. You have two dice. Each die buys exactly one action, in whichever order you like, and doing the same thing twice is allowed. Then both dice go on the used die space and the next player goes.</p>
-
-  <p>There are only four actions in the whole game:</p>
+  <p>A turn is over fast. You have two dice, each buys exactly one action, in either order, and doing the same thing twice is fine. There are only four actions in the entire game:</p>
 
   <ul class="clean">
-    <li><strong>Take a tile</strong> from the depot matching your die, into your storage.</li>
-    <li><strong>Place a tile</strong> from your storage onto the estate space matching your die.</li>
-    <li><strong>Sell goods</strong> of the colour matching your die.</li>
-    <li><strong>Take 2 workers</strong>, which any die can do, whatever it shows.</li>
+    <li><strong>Take a tile</strong> from the depot matching your die, into your storage</li>
+    <li><strong>Place a tile</strong> from storage onto an estate space matching your die</li>
+    <li><strong>Sell goods</strong> of the colour matching your die</li>
+    <li><strong>Take workers</strong>, which any die can do, whatever it shows</li>
   </ul>
 
-  <p>Read that list again and notice the tension it creates. A tile takes <strong>two dice to get onto your board</strong>: one to buy it, one to place it. Every tile you want costs you a whole turn, and there are only twenty-five of those.</p>
-
-  <div class="rule">
-    <b>The actual rule: a turn</b>
-    <div class="body">
-      <ul>
-        <li>A turn is <strong>exactly two actions</strong>, one per die. Any combination, any order, repeats allowed.</li>
-        <li>A used die goes on the used die storage space in the top right of your board.</li>
-        <li>Every action needs a die, with one exception: the "take workers" action ignores what the die shows, and buying from the black depot (point 9) uses money instead.</li>
-      </ul>
-    </div>
-    <span class="src">Rulebook: a player's turn, the actions</span>
-  </div>
+  <p>Read that list again and notice what it does to you. A tile takes <strong>two dice to get onto your board</strong>: one to buy it, one to place it. Fifty dice actions in the whole game, and every tile eats two of them. You will place roughly twenty tiles all game, so treat each one as the expensive thing it is.</p>
 
   <div class="note">
     <span class="lab">Remember this</span>
-    <p>Fifty dice actions, and a tile eats two of them. <strong>You will place roughly twenty tiles all game</strong>, so choose them like they cost something.</p>
+    <p>Buying and building are separate actions. <strong>A tile you cannot place is half a turn already spent</strong> and nothing to show for it.</p>
   </div>
 </article>
 
 <article class="pt">
-  <p class="num"><b>6</b> Workers</p>
+  <p class="num"><b>5</b> Workers</p>
   <h2>The dice tell you what you rolled. The workers tell you what you meant.</h2>
 
-  <p>This is the rule that keeps a dice game from being a dice game. A worker tile turns one die up or down by one pip, and you can spend as many as you like on the same die. Rolled a 2 and needed a 5? Three workers. The wheel even wraps, so 6 goes to 1 for a single worker.</p>
+  <p>This is the rule that stops a dice game from being a dice game. A worker turns one die up or down by a pip, you can spend several on the same die, and the wheel wraps, so a 6 becomes a 1 for a single worker. Rolled badly? Pay your way out of it.</p>
 
-  <p>The catch is what workers cost. Getting two of them takes a whole die, which is half a turn, and at the end of the game two leftover workers are worth a single point. So workers are not a resource to save. They are a resource to spend the moment they buy you a placement you wanted.</p>
-
-  <div class="rule">
-    <b>The actual rule: workers</b>
-    <div class="body">
-      <ul>
-        <li>A worker tile may be used <strong>at any time</strong> during your turn to adjust one die result by <span class="n">1</span>, up or down. Used workers go back to the supply.</li>
-        <li>Going from <strong>1 to 6, or 6 to 1</strong>, is allowed and costs one worker.</li>
-        <li>You may use several workers on the same die.</li>
-        <li>The <strong>take worker tiles</strong> action: use any die, whatever it shows, to take <span class="n">2 workers</span> from the supply.</li>
-        <li>You may never adjust the white die.</li>
-        <li>At the end of the game, <strong>every 2 leftover workers are worth 1 victory point</strong>.</li>
-      </ul>
-    </div>
-    <span class="src">Rulebook: worker tiles, the actions, game end</span>
-  </div>
+  <p>The catch is the exchange rate. Workers arrive two at a time and cost a whole die to fetch, which is half a turn, and at the end of the game two leftover workers are worth a single point. So workers are not savings. They are a lubricant, and the only bad worker is one still sitting on your board when the game ends.</p>
 
   <div class="trap">
     <b>The trap</b>
-    <p>Sitting on eight workers at the end of the game means you spent two dice earning four points. <strong>Workers unspent are workers wasted.</strong></p>
+    <p>Finishing with a tidy pile of eight workers. That is two dice spent to earn four points. <strong>Spend them the moment they buy you a placement you actually wanted.</strong></p>
   </div>
 
   <div class="note">
     <span class="lab">Remember this</span>
-    <p>Workers are how you stop apologising for your dice. Spend them freely; <strong>the only bad worker is the one still on your board at the end</strong>.</p>
+    <p>Workers are how you stop apologising for your dice. They are worth far more mid-game than they will ever be worth at the end.</p>
   </div>
 </article>
 
 <article class="pt">
-  <p class="num"><b>7</b> Taking a tile</p>
-  <h2>Three storage spaces, and a full shelf is a real problem.</h2>
+  <p class="num"><b>6</b> Storage</p>
+  <h2>Three chairs in the waiting room, and a full room is a real problem.</h2>
 
-  <p>A die matching a depot number lets you take any one tile sitting in that depot. It does not go into your estate. It goes onto one of the three storage spaces in the bottom left of your board, where it waits until a future die matches the space you want to put it on.</p>
+  <p>Tiles you buy do not go into your estate. They go to a holding area with exactly <strong>three spaces</strong>, where they wait for a future die to match the space you want them on. Take a fourth tile and one of the old ones is thrown out of the game entirely.</p>
 
-  <p>Three spaces sounds like plenty and it is not. If all three are full and you take a fourth tile, you must throw one of the old ones <strong>out of the game</strong>. Every discarded tile is half a turn you paid for and set on fire.</p>
-
-  <div class="rule">
-    <b>The actual rule: taking a tile</b>
-    <div class="body">
-      <ul>
-        <li>The die shows which numbered depot you may take from. Take <strong>any one tile</strong> from that depot.</li>
-        <li>It goes onto an empty <strong>storage space</strong> in the bottom left of your board. Never straight into the estate, even if you plan to place it with your other die this turn.</li>
-        <li>If all <span class="n">3 storage spaces</span> are full, you must first discard one tile from storage, removing it from the game, then put the new tile in that space.</li>
-        <li>Tiles left in storage at the end of the game are worth <strong>nothing</strong>.</li>
-      </ul>
-    </div>
-    <span class="src">Rulebook: action "take six-sided tile from the game board", additional rules</span>
-  </div>
+  <p>Three sounds generous until you remember what a tile needs before it can leave the waiting room: the right number, on a space of the right colour, next to something you have already built. A tile that fails any of those is furniture.</p>
 
   <div class="trap">
     <b>The trap</b>
-    <p>Hoovering up attractive tiles you have no space for. A tile is only useful if you can eventually roll its <strong>number</strong>, on a space of its <strong>colour</strong>, next to something you have already placed. Grab the tile you can place next turn, not the one you love.</p>
+    <p>Hoovering up gorgeous tiles because they were there. If you cannot point at the space a tile is going to live on, do not buy it. <strong>Every discarded tile is half a turn you paid for and set on fire.</strong></p>
   </div>
 
   <div class="note">
     <span class="lab">Remember this</span>
-    <p>Storage is a waiting room with three chairs. <strong>Take tiles you can place soon</strong>, and take with the second die when you can, so you know what your first die already did.</p>
+    <p>Buy for next turn, not for one day. <strong>Storage is a waiting room, not a collection.</strong></p>
   </div>
 </article>
 
 <article class="pt">
-  <p class="num"><b>8</b> Placing a tile</p>
+  <p class="num"><b>7</b> Placing</p>
   <h2>Number, colour, neighbour. All three, every single time.</h2>
 
-  <p>Placing is the heart of the game and it has three locks on it. The die tells you <strong>which numbered space</strong> you may fill. The tile's colour must match <strong>that space's colour</strong>. And the space must touch at least one hex you have already filled, which at the start of the game means it must touch your starting castle.</p>
+  <p>Placing is the heart of the game and it has three locks on it. The die says <strong>which numbered space</strong> you may fill. The tile's colour must match <strong>that space's colour</strong>. And the space must touch something you have already built, which at the start of the game means it must touch the castle sitting in the middle of your estate.</p>
 
-  <p>That last lock is the one beginners underrate. Your estate grows outward like frost on a window, and if you build in one direction only, half the board becomes unreachable for a very long time. Once a tile is down it never moves again.</p>
+  <p>That third lock is the one beginners underrate. Your estate grows outward like frost across a window and it never jumps a gap, so if you build hard in one direction the far side of the board stays unreachable for hours. Once a tile is down it never moves again.</p>
 
   <figure>
     <svg viewBox="0 0 780 352" role="img" aria-labelledby="t8t t8d">
@@ -464,24 +310,24 @@ a{color:var(--gold)}
       <desc id="t8d">A dark green start castle showing a 6 sits at the centre, surrounded by six hexes: a beige city space numbered 3, a blue river space numbered 5, a light green pasture numbered 2, a grey mine numbered 4, a yellow knowledge space numbered 1 and a beige city space numbered 4. Only these six spaces are legal for your first tile.</desc>
       <g stroke="rgba(14,19,25,.75)" stroke-width="2">
         <polygon points="230.0,122.0 280.2,151.0 280.2,209.0 230.0,238.0 179.8,209.0 179.8,151.0" fill="#3E7A57"/>
-        <polygon points="179.8,35.0 230.0,64.0 230.0,122.0 179.8,151.0 129.5,122.0 129.5,64.0" fill="#CDA97C"/>
-        <polygon points="280.2,35.0 330.5,64.0 330.5,122.0 280.2,151.0 230.0,122.0 230.0,64.0" fill="#4E8FBE"/>
-        <polygon points="330.5,122.0 380.7,151.0 380.7,209.0 330.5,238.0 280.2,209.0 280.2,151.0" fill="#8FBB5F"/>
-        <polygon points="280.2,209.0 330.5,238.0 330.5,296.0 280.2,325.0 230.0,296.0 230.0,238.0" fill="#98A2B0"/>
-        <polygon points="179.8,209.0 230.0,238.0 230.0,296.0 179.8,325.0 129.5,296.0 129.5,238.0" fill="#C9A227"/>
-        <polygon points="129.5,122.0 179.8,151.0 179.8,209.0 129.5,238.0 79.3,209.0 79.3,151.0" fill="#CDA97C"/>
+        <polygon points="179.8,35.0 230.0,64.0 230.0,122.0 179.8,151.0 129.6,122.0 129.6,64.0" fill="#CDA97C"/>
+        <polygon points="280.2,35.0 330.4,64.0 330.4,122.0 280.2,151.0 230.0,122.0 230.0,64.0" fill="#4E8FBE"/>
+        <polygon points="330.4,122.0 380.6,151.0 380.6,209.0 330.4,238.0 280.2,209.0 280.2,151.0" fill="#8FBB5F"/>
+        <polygon points="280.2,209.0 330.4,238.0 330.4,296.0 280.2,325.0 230.0,296.0 230.0,238.0" fill="#98A2B0"/>
+        <polygon points="179.8,209.0 230.0,238.0 230.0,296.0 179.8,325.0 129.6,296.0 129.6,238.0" fill="#C9A227"/>
+        <polygon points="129.6,122.0 179.8,151.0 179.8,209.0 129.6,238.0 79.4,209.0 79.4,151.0" fill="#CDA97C"/>
       </g>
       <g font-family="Cormorant Garamond, serif" font-weight="700" font-size="30" text-anchor="middle" fill="#12161C">
         <text x="230.0" y="191.0">6</text>
         <text x="179.8" y="104.0">3</text>
         <text x="280.2" y="104.0">5</text>
-        <text x="330.5" y="191.0">2</text>
+        <text x="330.4" y="191.0">2</text>
         <text x="280.2" y="278.0">4</text>
         <text x="179.8" y="278.0">1</text>
-        <text x="129.5" y="191.0">4</text>
+        <text x="129.6" y="191.0">4</text>
       </g>
       <g font-family="IBM Plex Mono, monospace" font-size="11.5" letter-spacing="1" fill="#A2977F">
-        <text x="440" y="96">THE START CASTLE IS ALREADY THERE.</text>
+        <text x="440" y="96">THE CASTLE IS ALREADY THERE.</text>
         <text x="440" y="120">YOUR FIRST TILE MUST TOUCH IT.</text>
         <text x="440" y="176" fill="#E8D48A">ROLLED A 4?</text>
         <text x="440" y="200">TWO SPACES ARE OPEN TO YOU:</text>
@@ -491,63 +337,20 @@ a{color:var(--gold)}
       </g>
       <path d="M430 148 H770" stroke="rgba(242,234,217,.16)"/>
     </svg>
-    <figcaption>NUMBER, COLOUR, NEIGHBOUR. THE ESTATE GROWS OUTWARD FROM THE CASTLE AND NEVER JUMPS A GAP.</figcaption>
+    <figcaption>NUMBER, COLOUR, NEIGHBOUR. THE ESTATE GROWS OUT FROM THE CASTLE AND NEVER JUMPS A GAP.</figcaption>
   </figure>
 
-  <div class="rule">
-    <b>The actual rule: adding a tile to your estate</b>
-    <div class="body">
-      <ul>
-        <li>Take one tile from your storage. The die used shows <strong>which empty space</strong> of that number you may fill.</li>
-        <li>The tile's colour must <strong>match the colour of the space</strong>.</li>
-        <li>The space must be <strong>directly adjacent to at least one tile already placed</strong>. Your first tile can therefore only go on one of the six spaces around the start castle.</li>
-        <li>Tiles in your estate <strong>may never be moved or removed</strong>.</li>
-        <li>Whatever type of tile it is, its effect happens <strong>immediately</strong> after placing. Those effects are points 11 to 14.</li>
-      </ul>
-    </div>
-    <span class="src">Rulebook: action "add six-sided tile to your estate"</span>
-  </div>
-
   <div class="note">
     <span class="lab">Remember this</span>
-    <p>Number, colour, neighbour. <strong>Grow in two directions early</strong>, or you will be holding perfect tiles with nowhere legal to put them.</p>
+    <p>Number, colour, neighbour. <strong>Grow in two directions early</strong>, or you will sit holding perfect tiles with nowhere legal to put them.</p>
   </div>
 </article>
 
 <article class="pt">
-  <p class="num"><b>9</b> The black depot</p>
-  <h2>Two silverlings buys a tile without spending a die.</h2>
+  <p class="num"><b>8</b> Completing regions</p>
+  <h2>This is where the points are, and they leak away while you admire your board.</h2>
 
-  <p>The black depot is the small central pool of tiles on the game board, and it is the only place in the game where money turns directly into board position. Once per turn, at any point in your turn, you may pay two silverlings and take a tile from it. It costs you no die at all.</p>
-
-  <p>That makes silverlings quietly powerful. Two coins are effectively half a turn of yours that you did not have to spend, and they let you fetch exactly the tile you need instead of hoping a depot offers it.</p>
-
-  <div class="rule">
-    <b>The actual rule: buying</b>
-    <div class="body">
-      <ul>
-        <li><span class="n">Once per turn</span>, before, between or after your two dice actions, you may return <span class="n">2 silverlings</span> to the supply and take <strong>one tile of your choice from the central black depot</strong>.</li>
-        <li>It goes to your storage spaces like any other tile, and the storage limit of 3 still applies.</li>
-        <li>The black depot is restocked with black-backed tiles at the start of every phase.</li>
-        <li>One yellow knowledge tile lets you buy from all seven depots instead of only the black one. Even then, still only <strong>one purchase per turn</strong>.</li>
-      </ul>
-    </div>
-    <span class="src">Rulebook: the central black depot</span>
-  </div>
-
-  <div class="note">
-    <span class="lab">Remember this</span>
-    <p>A silverling is worth 1 point at the end and <strong>half a die in the middle</strong>. Spend them while they can still buy tiles.</p>
-  </div>
-</article>
-
-<article class="pt">
-  <p class="num"><b>10</b> Completing regions</p>
-  <h2>This is where the points are, and they leak away every phase.</h2>
-
-  <p>Fill every space of one coloured region and it scores at once, in two separate helpings. The first depends on how big the region is, and it grows viciously: one space is worth 1 point, but eight spaces are worth 36. The second depends on <strong>when</strong> you did it, and it shrinks: 10 points in phase A, dropping by two each phase, down to 2 in phase E.</p>
-
-  <p>Put those together and you get the real clock of the game. The same five-space region is worth 25 points finished in phase A and 17 points finished in phase E. Nothing else in Castles of Burgundy punishes dawdling the way this does. A region sitting one hex short is not "nearly done", it is <strong>losing you two points a phase</strong>.</p>
+  <p>Fill every space of one coloured region and it scores at once, in two helpings. The first depends on how big the region was, and the curve is savage: one space is worth 1 point, but a region of eight is worth 36. The second is the phase bonus from point 3, the same for every region regardless of size, falling from 10 to 2 as the game runs out.</p>
 
   <div class="scroll">
     <table>
@@ -555,34 +358,16 @@ a{color:var(--gold)}
         <tr><th>Region size</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th></tr>
       </thead>
       <tbody>
-        <tr><td>Points for size</td><td class="n">1</td><td class="n">3</td><td class="n">6</td><td class="n">10</td><td class="n">15</td><td class="n">21</td><td class="n">28</td><td class="n">36</td></tr>
+        <tr><td>Points when finished</td><td class="n">1</td><td class="n">3</td><td class="n">6</td><td class="n">10</td><td class="n">15</td><td class="n">21</td><td class="n">28</td><td class="n">36</td></tr>
       </tbody>
     </table>
   </div>
 
-  <div class="scroll">
-    <table>
-      <thead><tr><th>Finished in phase</th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th></tr></thead>
-      <tbody><tr><td>Extra points, any size</td><td class="n">10</td><td class="n">8</td><td class="n">6</td><td class="n">4</td><td class="n">2</td></tr></tbody>
-    </table>
-  </div>
-
-  <div class="rule">
-    <b>The actual rule: completing a region</b>
-    <div class="body">
-      <ul>
-        <li>A coloured region is complete as soon as <strong>every one of its spaces is covered</strong>. It scores immediately, whatever its size.</li>
-        <li><strong>Size bonus:</strong> 1, 3, 6, 10, 15, 21, 28 or 36 victory points for a region of 1 to 8 spaces.</li>
-        <li><strong>Phase bonus:</strong> additionally, the empty phase space on the board shows the current phase's bonus, <span class="n">10 / 8 / 6 / 4 / 2</span> for phases A to E. Every completed region scores it, regardless of size.</li>
-        <li>Both are scored on the victory point track the moment the region is finished.</li>
-      </ul>
-    </div>
-    <span class="src">Rulebook: additional rules for placing six-sided tiles</span>
-  </div>
+  <p>Put the two together and you have the real clock of the game. A five-space region finished early is 25 points. The identical region finished in the last phase is 17. Same tiles, same work, eight points poorer.</p>
 
   <div class="trap">
     <b>The trap</b>
-    <p>Spreading tiles evenly over a beautiful, balanced, half-finished estate. <strong>An unfinished region has paid you almost nothing.</strong> Close the small ones early and the big ones before the phase bonus rots.</p>
+    <p>Spreading tiles evenly across a beautiful, balanced, half-finished estate. <strong>An unfinished region has paid you almost nothing at all.</strong> Close the small ones early and the big ones before the bonus rots.</p>
   </div>
 
   <div class="note">
@@ -592,39 +377,26 @@ a{color:var(--gold)}
 </article>
 
 <article class="pt">
-  <p class="num"><b>11</b> Ships</p>
-  <h2>Blue tiles buy you goods and shove you up the turn order.</h2>
+  <p class="num"><b>9</b> Ships</p>
+  <h2>Blue tiles buy you goods and shove you up the queue.</h2>
 
-  <p>Placing a ship does two things at once, and the second one is the reason experienced players fight over them. First you take goods, which are your future money and points. Second you move one space to the right on the turn order track, and since you land on top of whoever is already there, you jump ahead of them.</p>
+  <p>Place a ship and two things happen. You sweep up the goods piled on any one depot you like, which are your future money and points. Then you move up the turn order track, landing on top of whoever was there, which means you jump ahead of them.</p>
 
-  <p>Turn order matters more than it looks. The player who goes first sees the depots untouched, and the tile you desperately need is usually gone by the fourth player. A ship early in a phase can hand you the pick of the shop for the rest of it.</p>
-
-  <div class="rule">
-    <b>The actual rule: ships (blue)</b>
-    <div class="body">
-      <p>When you add a ship to your estate, which can happen up to <span class="n">6 times</span> on board 1, both of these happen immediately:</p>
-      <ol>
-        <li>Take <strong>all the goods tiles on any one depot's goods space</strong>. Which depot is entirely your choice and has <strong>nothing to do with the die</strong> you used to place the ship.</li>
-        <li>Move your piece <strong>one space to the right</strong> on the turn order track. If the space is occupied, put your piece on top of the others. If that makes you start player for the next round, take the white die.</li>
-      </ol>
-      <p>Your goods storage holds at most <span class="n">3 different colours</span>. Same colours stack without limit; different colours need separate spaces. If you cannot store everything from the depot you chose, leave the rest behind.</p>
-    </div>
-    <span class="src">Rulebook: ship (blue)</span>
-  </div>
+  <p>That second half is why experienced players fight over ships. Turn order matters much more than it looks in a game where everyone shops from the same six depots: the first player sees them untouched, and by the fourth player the tile you needed is usually gone. A ship early in a phase can hand you the pick of the shop for the rest of it.</p>
 
   <div class="note">
     <span class="lab">Remember this</span>
-    <p>Take the fattest goods space, not the one matching your die. And <strong>a ship is a queue jump</strong>, which in a game about a shared shop is worth real money.</p>
+    <p>Take the fattest pile of goods, not the tidy one. And remember that <strong>a ship is a queue jump</strong>, which in a game about a shared shop is worth real money.</p>
   </div>
 </article>
 
 <article class="pt">
-  <p class="num"><b>12</b> Animals</p>
-  <h2>A pasture pays for all its animals again every time you add to it.</h2>
+  <p class="num"><b>10</b> Animals</p>
+  <h2>A pasture pays for the whole herd again every time you add to it.</h2>
 
-  <p>Light green tiles show two to four animals of one kind. Place one and you score points equal to the animals on it. Here is the good part: if that pasture already holds animals <strong>of the same kind</strong>, every one of those tiles scores again as well.</p>
+  <p>Light green tiles show two to four animals of one kind. Place one and you score points for the animals on it. Here is the good part: if that pasture already holds animals <strong>of the same kind</strong>, every one of those tiles scores all over again.</p>
 
-  <p>So pastures reward concentration, not variety. Four cows into an empty pasture is 4 points. Four more cows into that same pasture is 4 plus the 3 already sitting there. Do it a third time and you are collecting for the whole herd all over again.</p>
+  <p>So pastures reward concentration, not variety. Four cows into an empty pasture is a modest four points. Four more cows into that same pasture pays for the new tile and the old one together. Do it a third time and you are collecting for the entire herd for the third time.</p>
 
   <figure>
     <svg viewBox="0 0 780 250" role="img" aria-labelledby="t12t t12d">
@@ -659,206 +431,95 @@ a{color:var(--gold)}
     <figcaption>PASTURES REWARD REPETITION. THE THIRD COW TILE IS WORTH FAR MORE THAN THE FIRST.</figcaption>
   </figure>
 
-  <div class="rule">
-    <b>The actual rule: animals (light green)</b>
-    <div class="body">
-      <ul>
-        <li>Each animal tile shows <span class="n">2 to 4</span> animals. When you place it, immediately score that many victory points.</li>
-        <li>If the <strong>pasture</strong> you placed into (a region of connected light green spaces) already contains tiles with the <strong>same animal type</strong>, score all of those tiles again too.</li>
-        <li>They must be in the same pasture, but they do <strong>not</strong> need to touch the new tile. Matching animals in a different pasture score nothing.</li>
-        <li>Up to <span class="n">6 animal tiles</span> fit on board 1.</li>
-      </ul>
-      <p>Example from the rulebook: adding a 4-cow tile to a pasture holding a 3-cow tile scores <span class="n">4 + 3 = 7</span>. Adding a second 4-cow tile there later scores <span class="n">4 + 4 + 3 = 11</span>.</p>
-    </div>
-    <span class="src">Rulebook: animal</span>
-  </div>
-
   <div class="note">
     <span class="lab">Remember this</span>
-    <p>One species per pasture, as many tiles as you can fit. <strong>A mixed pasture throws away most of the points.</strong></p>
+    <p>One species per pasture, as many tiles as will fit. <strong>A mixed pasture throws most of the points away.</strong></p>
   </div>
 </article>
 
 <article class="pt">
-  <p class="num"><b>13</b> Buildings</p>
-  <h2>Eight favours, each one usable once, and never two of a kind in one city.</h2>
+  <p class="num"><b>11</b> Buildings</p>
+  <h2>A city is a set, not a pile.</h2>
 
-  <p>Beige tiles are buildings and they are the flexible part of the game. Each one does a job the instant it is placed, and none of them needs a die to fire. The restriction that shapes everything is this: <strong>within one city, every building must be a different type</strong>. A five-space city needs five different buildings, so you cannot simply spam the one you like.</p>
+  <p>Beige tiles are buildings, and they are the flexible, opportunistic part of the game. Each does its job the instant it is placed and none of them needs a die to fire: a bank hands you coins, a boarding house hands you workers, a watchtower simply hands you points, and three of them reach onto the shared board and pull a tile off it for free.</p>
 
-  <p>Two of them are the ones to watch. The <strong>city hall</strong> places another tile from your storage for free, of any colour, with all its effects, which can chain into yet another building. The <strong>carpenter's workshop</strong> fetches a building off the board without spending a die.</p>
+  <p>The rule that shapes everything is this: <strong>within one city, no two buildings may be the same type</strong>. There are eight types, so a five-space city needs five different ones. You cannot simply build the good one over and over.</p>
 
-  <div class="scroll">
-    <table>
-      <thead><tr><th>Building</th><th>What it does the moment you place it</th></tr></thead>
-      <tbody>
-        <tr><td>Warehouse</td><td>Sell one goods type of your choice, exactly as the sell action, with no die</td></tr>
-        <tr><td>Carpenter's workshop</td><td>Take any beige building tile from a numbered depot into storage</td></tr>
-        <tr><td>Church</td><td>Take any mine, knowledge or castle tile from a numbered depot into storage</td></tr>
-        <tr><td>Market</td><td>Take any ship or animal tile from a numbered depot into storage</td></tr>
-        <tr><td>Boarding house</td><td>Take 4 worker tiles</td></tr>
-        <tr><td>Bank</td><td>Take 2 silverlings</td></tr>
-        <tr><td>City hall</td><td>Immediately place a second tile from storage, any colour, with all its effects</td></tr>
-        <tr><td>Watchtower</td><td>Score 4 victory points</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="rule">
-    <b>The actual rule: buildings (beige)</b>
-    <div class="body">
-      <ul>
-        <li>Placing a building triggers its advantage <strong>once, immediately</strong>. No die is needed to activate it.</li>
-        <li><strong>Each of the 8 building types may appear only once per city</strong>, a city being one region of connected beige spaces. Estate 1 has 4 cities: one of size 1, one of size 5 and two of size 3.</li>
-        <li>The three fetching buildings (carpenter, church, market) take from the <strong>numbered depots only</strong>, never the black depot.</li>
-        <li>If the advantage cannot be used, for example there are no blue or green tiles left when you place a market, you may still place the building; the advantage is simply lost.</li>
-        <li>Up to <span class="n">12 buildings</span> fit on board 1.</li>
-      </ul>
-    </div>
-    <span class="src">Rulebook: building (beige), the buildings</span>
-  </div>
+  <p>Two are worth naming. The <strong>city hall</strong> places another tile out of your storage immediately, any colour, with all of its effects, which can chain into a second building and occasionally a third. The <strong>carpenter's workshop</strong> fetches another building off the board without spending a die. Both quietly break the "two dice per turn" ceiling, and that is the whole trick of a strong Burgundy turn.</p>
 
   <div class="note">
     <span class="lab">Remember this</span>
-    <p>A city is a set, not a pile. <strong>Plan which eight buildings you need before you start filling one</strong>, and treat the city hall as a free extra placement.</p>
+    <p>Decide which types a city will hold before you start filling it. <strong>The buildings that give you extra actions are worth more than the ones that give you things.</strong></p>
   </div>
 </article>
 
 <article class="pt">
-  <p class="num"><b>14</b> Castles, mines and knowledge</p>
+  <p class="num"><b>12</b> Castles, mines and knowledge</p>
   <h2>An extra action, a wage packet, and a rule you get to bend.</h2>
 
-  <p>The three remaining colours are small in number and large in effect.</p>
+  <p>The three remaining colours are few in number and large in effect.</p>
 
-  <p><strong>Castles</strong> (dark green) hand you an extra action with a die of any value you choose. That is not a small thing: it is a third action in a game of two, and you get to pick the number, which means it is the perfect placement you could not otherwise reach.</p>
+  <p><strong>Castles</strong>, the dark green ones, hand you an extra action with a die of whatever value you choose. That is not a small favour. It is a third action in a game of two, and because you pick the number it is always exactly the placement you could not otherwise reach.</p>
 
-  <p><strong>Mines</strong> (grey) do nothing at all when placed. They pay one silverling each at the end of every phase, so the value of a mine is set entirely by when you build it. A mine placed in phase A pays five times. A mine placed in phase E pays once.</p>
+  <p><strong>Mines</strong>, the grey ones, do nothing whatsoever when placed. They pay you a coin at the end of every phase, which means their entire value is decided by when you build them. A mine built in the first phase pays five times. A mine built in the last phase pays once and then the game ends.</p>
 
-  <p><strong>Knowledge</strong> (yellow) is the toy box: twenty-six different tiles, no two alike. Some change a rule for the rest of the game, some quietly score at the end. Read them when they turn up, because the ones that grant permanent die adjustments change how your whole engine runs.</p>
-
-  <div class="rule">
-    <b>The actual rule: castles, mines and knowledge</b>
-    <div class="body">
-      <ul>
-        <li><strong>Castle (dark green)</strong>, up to <span class="n">3 times</span> on board 1: on placing, immediately take one additional action of your choice, as if you had an extra die showing <strong>any result you wish</strong>.</li>
-        <li><strong>Mine (grey)</strong>, up to <span class="n">3 times</span>: no effect when placed. At the <strong>end of each phase</strong>, take 1 silverling per mine in your estate.</li>
-        <li><strong>Knowledge (yellow)</strong>, up to <span class="n">6 times</span>: 26 different tiles. Broadly they do one of these:</li>
-      </ul>
-      <div class="scroll"><table>
-        <tbody>
-          <tr><td>Bend a rule</td><td>Duplicate buildings allowed in a city; buy from all seven depots; take goods from two neighbouring depots with one ship</td></tr>
-          <tr><td>Improve your dice</td><td>Workers adjust by 2 instead of 1; free plus or minus 1 when placing certain colours, or when taking tiles</td></tr>
-          <tr><td>Improve your income</td><td>2 silverlings per sale instead of 1; a worker with each sale; a worker per mine each phase; 4 workers per worker action instead of 2, or 2 workers plus a silverling</td></tr>
-          <tr><td>Score at the end</td><td>4 VP per copy of one named building type (eight such tiles); 4 VP per animal type; 3 VP per goods type sold; 1 VP per goods tile sold; 2 VP per bonus tile claimed; and 1 extra VP per animal tile whenever a pasture scores</td></tr>
-        </tbody>
-      </table></div>
-    </div>
-    <span class="src">Rulebook: castle, mine, the yellow tiles</span>
-  </div>
+  <p><strong>Knowledge</strong>, the yellow ones, are the toy box: twenty-six of them, no two alike. Some bend a rule for the rest of the game, some improve your dice or your income permanently, and some sit there quietly and pay out at the end for things you were doing anyway. Read them when they appear, because the rule-benders change how your whole engine runs.</p>
 
   <div class="note">
     <span class="lab">Remember this</span>
-    <p>Castles are extra turns, so take them early. <strong>Mines are a salary, so hire them early too.</strong> A phase E mine is one silverling and a wasted space.</p>
+    <p>Castles are extra turns and mines are a salary, so <strong>both want to be on your board early</strong>. A last-phase mine is one coin and a wasted space.</p>
   </div>
 </article>
 
 <article class="pt">
-  <p class="num"><b>15</b> Goods and selling</p>
-  <h2>Goods arrive by ship and leave in one lump, whether you like it or not.</h2>
+  <p class="num"><b>13</b> The three currencies</p>
+  <h2>Goods, coins and workers all turn into a trickle of points, and all are worth more spent.</h2>
 
-  <p>Goods tiles come in six colours and pile up in your goods storage, which holds three colours at most. Selling is one of your four actions: the die shows which colour goes, and <strong>all of that colour must go</strong>. You cannot hold a couple back for later.</p>
+  <p>Goods arrive by ship and pile up in your storage by colour. Selling is one of your four actions, and it is all or nothing: the die names a colour and every tile of that colour goes at once. You get a single coin for the sale no matter how big it was, plus points for each tile. The shape of that tells you exactly how to play it. <strong>Let a colour stack up, then sell the tall pile</strong>, because the coin is a flat fee and the points are per tile.</p>
 
-  <p>Each sale pays exactly one silverling no matter how many tiles you sold, plus points per tile. That shape tells you how to play it: sell a colour when the stack is tall, because the silverling is a flat fee and the points are per tile. Selling one lonely tile is a whole die for one coin and a couple of points.</p>
+  <p>Coins are the quiet powerhouse. Twice a turn is impossible, but once a turn you may pay two of them for a tile from the central pool without spending a die at all. That is the only place in the game where money turns straight into board position, and it is why a bank early is better than a bank late.</p>
 
-  <div class="rule">
-    <b>The actual rule: selling goods</b>
-    <div class="body">
-      <ul>
-        <li>The die used shows which <strong>goods colour</strong> you sell. You must sell <strong>every tile of that colour</strong> in your goods storage.</li>
-        <li>Sold tiles go face down onto the sold goods space on your board. You may look at them at any time.</li>
-        <li>You receive <strong>exactly 1 silverling</strong> per sale, however many tiles it was.</li>
-        <li>You also receive <span class="n">2 / 3 / 4 victory points per tile</span> in a 2 / 3 / 4 player game.</li>
-        <li>A <strong>warehouse</strong> building performs one sale for free, with no die.</li>
-        <li>Unsold goods left at the end of the game are worth <span class="n">1 victory point</span> each.</li>
-      </ul>
-    </div>
-    <span class="src">Rulebook: action "sell goods", game end</span>
+  <p>At the end, leftovers all convert into a thin dribble of points: a coin is one, a couple of workers is one, an unsold good is one. Tiles still sitting in storage are worth nothing at all.</p>
+
+  <div class="trap">
+    <b>The trap</b>
+    <p>Arriving at the end with a full purse and a full storage rack. Those were tiles, placements and extra actions you declined to take. <strong>The last phase is for converting, not saving.</strong></p>
   </div>
 
   <div class="note">
     <span class="lab">Remember this</span>
-    <p>Selling is all or nothing, so <strong>let a colour stack up before you spend a die on it</strong>. In a four-player game a stack of four is 16 points from one action.</p>
+    <p>Everything you hold is worth about one point. <strong>Everything you spend is worth a turn.</strong></p>
   </div>
 </article>
 
 <article class="pt">
-  <p class="num"><b>16</b> Bonuses and the final count</p>
-  <h2>Being first to finish a colour pays, and being second still pays.</h2>
-
-  <p>Alongside the region bonuses there is a race nobody mentions in your first game. The first player to cover <strong>every space of one colour anywhere in their whole estate</strong>, all three mines, say, or all six animals, takes the large bonus tile for that colour. The second player to manage it takes the small one. Third and fourth get nothing at all.</p>
-
-  <p>Grey and dark green are the easy ones, being only three spaces each, so they usually go first and go fast. If you are three phases in and still on your first mine, that race is over and you should stop looking at it.</p>
-
-  <div class="rule">
-    <b>The actual rule: colour bonus tiles</b>
-    <div class="body">
-      <ul>
-        <li>The first player to cover <strong>all spaces of one colour in their entire estate</strong> takes the large bonus tile of that colour and scores <span class="n">5 / 6 / 7 VP</span> with 2 / 3 / 4 players.</li>
-        <li>The second player to do it takes the small tile and scores <span class="n">2 / 3 / 4 VP</span>. Third and fourth score nothing.</li>
-      </ul>
-    </div>
-    <span class="src">Rulebook: additional rules for placing six-sided tiles</span>
-  </div>
-
-  <div class="rule">
-    <b>The actual rule: final scoring</b>
-    <div class="body">
-      <p>The game ends when the fifth phase finishes. Add:</p>
-      <ul>
-        <li><span class="n">1 VP</span> per unsold goods tile</li>
-        <li><span class="n">1 VP</span> per remaining silverling</li>
-        <li><span class="n">1 VP</span> per <strong>two</strong> remaining worker tiles</li>
-        <li>whatever your yellow knowledge tiles say</li>
-      </ul>
-      <p>Six-sided tiles still sitting in your storage spaces score <strong>nothing</strong>.</p>
-      <p>Most points wins. Tie: fewest empty estate spaces. Still tied: later in turn order.</p>
-    </div>
-    <span class="src">Rulebook: game end</span>
-  </div>
-
-  <div class="note">
-    <span class="lab">Remember this</span>
-    <p>The last phase is for converting. <strong>Sell everything, place everything, and leave nothing in storage</strong>, because storage is the one place that scores zero.</p>
-  </div>
-</article>
-
-<article class="pt">
-  <p class="num"><b>17</b> Your first game</p>
+  <p class="num"><b>14</b> Your first game</p>
   <h2>How not to lose it.</h2>
 
-  <p>Everything in Castles of Burgundy is legal, mild and reasonable, which is exactly why beginners lose by forty points without ever noticing where it went. Five habits fix most of it.</p>
+  <p>Everything in Castles of Burgundy is mild, legal and reasonable, which is exactly why beginners lose by forty points without ever spotting where it went. Five habits fix most of it.</p>
 
   <h3>1. Finish regions, do not decorate the estate</h3>
-  <p>A half-filled estate is worth almost nothing. Pick two or three regions, close them, then start the next. The size bonus is steeply curved and the phase bonus is draining away at two points a phase.</p>
+  <p>A half-filled estate has paid you almost nothing. Pick two or three regions, close them, then start the next. The size curve is steep and the phase bonus is draining at two points a phase while you think about it.</p>
 
-  <h3>2. Build early, score late is the wrong way round</h3>
-  <p>Mines, castles and knowledge tiles are engines, and an engine bought in phase D barely runs. Anything that pays out repeatedly should be on your board in phases A and B.</p>
+  <h3>2. Engines belong at the start</h3>
+  <p>Mines, castles and the knowledge tiles are machinery, and machinery bought late barely runs. Anything that pays out repeatedly wants to be on your board in the first two phases.</p>
 
   <h3>3. Never let storage clog</h3>
-  <p>Three tiles, and each needs a specific number on a specific colour next to something you own. If you cannot name the space a tile is going to, do not take it.</p>
+  <p>Three chairs, and every tile needs a specific number on a specific colour beside something you already own. If you cannot name the space it is going to, do not take it.</p>
 
-  <h3>4. Spend the workers and spend the silverlings</h3>
-  <p>Two workers is one point at the end, and one silverling is one point. Mid-game, two silverlings is a whole tile and three workers is any die face you want. Arriving at the end with a fat purse means you played the last hour poorer than you needed to.</p>
+  <h3>4. Spend the coins and spend the workers</h3>
+  <p>Held to the end they are worth a point each, or less. Spent mid-game, two coins are a whole tile and three workers are any die face you like. A fat purse at the finish means you played the last hour poorer than you had to.</p>
 
-  <h3>5. Watch the turn order track</h3>
-  <p>Four players all want the same tile out of the same depot, and the last player gets what is left. Ships move you up. If you are permanently last, a ship is worth more to you than the tile you were saving your die for.</p>
+  <h3>5. Watch the queue</h3>
+  <p>Four players want the same tile out of the same depot and the last one gets what is left. Ships move you up. If you are permanently last, a ship is worth more than the tile you were saving that die for.</p>
 
   <div class="note">
     <span class="lab">Remember this</span>
-    <p>Close regions, build engines early, keep storage moving, spend what you hold, and buy your way up the queue. <strong>Efficiency is the entire game; nobody is coming to stop you.</strong></p>
+    <p>Close regions, build engines early, keep the storage moving, spend what you hold, and buy your way up the queue. <strong>Efficiency is the entire game; nobody is coming to stop you.</strong></p>
   </div>
 </article>
 
-<footer>A teaching walkthrough of The Castles of Burgundy by Stefan Feld (alea / Ravensburger, 2011). The rules quoted here are from the English rulebook of the base game, played on estate board number 1; the rulebook remains the authority, especially for the 26 individual yellow knowledge tiles summarised in point 14. <a href="../">Back to the shelf</a>.</footer>
+<footer>A teaching walkthrough of The Castles of Burgundy by Stefan Feld (alea / Ravensburger, 2011). This page teaches what the game is and how it thinks; the rulebook in the box has the exact numbers, limits and edge cases. <a href="../">Back to the shelf</a>.</footer>
 
 </div>
 
@@ -872,8 +533,7 @@ a{color:var(--gold)}
 
   /* one hex per point, laid out as a honeycomb strip */
   var colours = ['#3E7A57','#CDA97C','#C9A227','#98A2B0','#4E8FBE','#CDA97C','#8FBB5F',
-                 '#3E7A57','#C9A227','#CDA97C','#4E8FBE','#8FBB5F','#CDA97C','#98A2B0',
-                 '#4E8FBE','#C9A227','#3E7A57'];
+                 '#3E7A57','#4E8FBE','#8FBB5F','#CDA97C','#98A2B0','#C9A227','#3E7A57'];
 
   var r = 9, w = r * Math.sqrt(3), cells = [];
   pts.forEach(function(_, i){

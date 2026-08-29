@@ -24,7 +24,7 @@ your first game.
 | `games/seasons.html` | Seasons, 12 points, complete |
 | `games/taverns-of-tiefenthal.html` | The Taverns of Tiefenthal, 14 points, complete, with the exact rules folded in |
 | `games/root.html` | Root, 16 points, complete |
-| `games/castles-of-burgundy.html` | The Castles of Burgundy, 17 points, complete, with the exact rules folded in |
+| `games/castles-of-burgundy.html` | The Castles of Burgundy, 14 points, complete |
 | `games/_template.html` | Starting point for a new briefing |
 | `assets/dossier.css` | Shared layout system, for pages that want one |
 | `assets/library.css` | Styles for the shelf |
@@ -76,13 +76,11 @@ The thing that makes these work is the format, so keep it:
   point is always "what kind of game is this and who are you playing against".
 - **Explain the why.** Never "you get three actions" alone, always "you get three
   actions, it's never enough, and that's the game."
+- **Teach the concept, not the rulebook.** Use whatever real numbers make an idea
+  concrete, and stop there. No setup checklists, no edge cases, no rulebook
+  citations: the publisher's rulebook does that job better and the reader has one.
 - **Second person, plain words.** No jargon before it's defined. Say "monster", not
   "non-player enemy unit".
-- **Give every point the actual rule.** The essay says why the rule exists; a
-  "the actual rule" box under it gives the real numbers, limits and edge cases,
-  taken from the publisher's rulebook, with a line naming the section it came
-  from. A reader should be able to play from the page, not just talk about the
-  game. `taverns-of-tiefenthal.html` is the reference for this.
 - **End each point with a `.note`**: the one sentence worth remembering.
 - **Finish with a "how not to lose your first game" point.** The instincts a normal
   board game trained into the reader are usually the ones that lose this one.
