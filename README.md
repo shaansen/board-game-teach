@@ -53,6 +53,9 @@ browser and it works.
    </a>
    ```
 
+   Keep the shelf **alphabetical by title**, ignoring a leading *The*, so
+   *The Castles of Burgundy* files under C.
+
    The search box on the shelf matches the title, the hook and `data-keywords`,
    so put the words a reader would search for (mechanisms, designer, weight,
    player count) in that attribute rather than on the card. Every term typed has
