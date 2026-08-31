@@ -24,6 +24,7 @@ your first game.
 | `games/seasons.html` | Seasons, 12 points, complete |
 | `games/taverns-of-tiefenthal.html` | The Taverns of Tiefenthal, 14 points, complete, with the exact rules folded in |
 | `games/root.html` | Root, 16 points, complete |
+| `games/sleeping-gods-distant-skies.html` | Sleeping Gods: Distant Skies, 14 points, complete |
 | `games/castles-of-burgundy.html` | The Castles of Burgundy, 14 points, complete |
 | `games/_template.html` | Starting point for a new briefing |
 | `assets/dossier.css` | Shared layout system, for pages that want one |
@@ -101,7 +102,8 @@ hands you two working production wheels to spin; `through-the-ages.html` fills a
 bank of population cubes as you read; `seasons.html` turns a season wheel in the
 rail; `taverns-of-tiefenthal.html` chalks up a bar tab; `root.html` tints each
 point with the faction it belongs to; `castles-of-burgundy.html` fills a honeycomb
-estate in the rail, one hex per point.
+estate in the rail, one hex per point; `sleeping-gods-distant-skies.html` flies a
+plane across the horizon while a pocket watch hand comes round.
 
 Every page is **one continuous scroll**. Progress indicators that follow the
 reader are welcome, but no page should hide a point behind a click.

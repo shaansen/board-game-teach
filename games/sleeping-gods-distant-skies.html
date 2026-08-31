@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sleeping Gods: Distant Skies: Five Ticks of the Watch</title>
+<meta name="description" content="A briefing that teaches Sleeping Gods: Distant Skies in fourteen points, for someone who has never opened the box.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Lora:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --dusk:#131A28;
+  --dusk-2:#1A2334;
+  --paper:#F0E7D8;
+  --paper-dim:#AEA894;
+  --gold:#E3A94A;
+  --teal:#6FB3B8;
+  --rust:#C9552F;
+  --violet:#8C7BB8;
+  --moss:#6E9A5E;
+  --line:rgba(240,231,216,.13);
+  --display:"Playfair Display",Georgia,serif;
+  --body:"Lora",Georgia,serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;color:var(--paper);font-family:var(--body);
+  font-size:19px;line-height:1.66;-webkit-font-smoothing:antialiased;
+  background:
+    radial-gradient(1000px 620px at 8% -10%, rgba(227,169,74,.13), transparent 62%),
+    radial-gradient(900px 620px at 92% 2%, rgba(111,179,184,.12), transparent 62%),
+    var(--dusk);
+}
+.wrap{max-width:800px;margin:0 auto;padding:0 22px 90px}
+
+/* ---------- the flight rail ---------- */
+.rail{
+  position:sticky;top:0;z-index:20;
+  background:rgba(19,26,40,.94);backdrop-filter:blur(7px);
+  border-bottom:1px solid var(--line);padding:9px 22px;
+}
+.rail-in{max-width:800px;margin:0 auto;display:flex;align-items:center;gap:14px}
+.watch{width:32px;height:32px;flex:0 0 auto}
+.watch .hand{transform-origin:20px 21px;transition:transform .45s ease}
+.sky{position:relative;flex:1;min-width:110px;height:22px}
+.sky .horizon{
+  position:absolute;left:0;right:0;top:15px;height:1px;
+  background:repeating-linear-gradient(90deg,rgba(240,231,216,.3) 0 6px,transparent 6px 12px);
+}
+.plane{
+  position:absolute;top:0;left:0;width:22px;height:22px;color:var(--gold);
+  transition:left .45s ease;
+}
+.plane svg{display:block;width:100%;height:100%}
+.rail-count{font-family:var(--mono);font-size:11px;color:var(--gold);white-space:nowrap}
+
+/* ---------- head ---------- */
+.backlink{
+  display:inline-block;margin-top:26px;font-family:var(--mono);font-size:11px;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--paper-dim);
+  text-decoration:none;border-bottom:1px solid transparent;
+}
+.backlink:hover{color:var(--gold);border-bottom-color:var(--gold)}
+header.top{padding:30px 0 44px;border-bottom:1px solid var(--line)}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);margin:22px 0 20px}
+h1{
+  font-family:var(--display);font-weight:700;font-size:clamp(40px,8vw,72px);
+  line-height:1.02;margin:0 0 8px;
+}
+h1 span{
+  background:linear-gradient(100deg,var(--gold),var(--rust) 45%,var(--violet));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.sub{font-family:var(--display);font-style:italic;font-size:clamp(21px,3.6vw,28px);color:var(--paper-dim);margin:0 0 20px}
+.lede{font-size:21px;font-style:italic;color:var(--paper-dim);max-width:54ch;margin:0}
+
+/* ---------- points ---------- */
+.pt{border-top:1px solid var(--line);padding:46px 0 10px;scroll-margin-top:60px}
+.pt:first-of-type{border-top:none}
+.num{
+  display:inline-flex;align-items:center;gap:10px;margin-bottom:14px;
+  font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--band,var(--gold));
+}
+.num b{
+  font-family:var(--display);font-size:15px;letter-spacing:0;
+  width:30px;height:30px;border-radius:50%;display:grid;place-items:center;
+  background:var(--band,var(--gold));color:var(--dusk);
+}
+.pt[data-band="sky"]{--band:var(--teal)}
+.pt[data-band="ground"]{--band:var(--moss)}
+.pt[data-band="story"]{--band:var(--violet)}
+.pt[data-band="peril"]{--band:var(--rust)}
+h2{
+  font-family:var(--display);font-weight:600;font-size:clamp(26px,4.4vw,36px);
+  line-height:1.16;margin:0 0 18px;max-width:24ch;
+}
+h3{font-family:var(--display);font-weight:600;font-size:21px;margin:26px 0 8px;color:var(--paper)}
+.pt p{max-width:60ch;margin:0 0 16px}
+strong{font-weight:600;color:#fff}
+em.t{font-style:normal;font-family:var(--mono);font-size:.76em;letter-spacing:.02em;
+  background:rgba(240,231,216,.08);padding:2px 7px;border-radius:2px}
+.aside{
+  border-left:3px solid var(--band,var(--gold));padding:2px 0 2px 18px;margin:24px 0;
+  font-style:italic;color:var(--paper-dim);max-width:58ch;
+}
+.trap{
+  margin:26px 0;border:1px solid rgba(201,85,47,.45);background:rgba(201,85,47,.09);
+  border-radius:3px;padding:16px 20px;max-width:60ch;
+}
+.trap b{
+  display:block;font-family:var(--mono);font-size:10px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--rust);margin-bottom:8px;font-weight:500;
+}
+.trap p{margin:0}
+.note{
+  margin:30px 0 0;padding:18px 22px;border-radius:3px;
+  background:rgba(111,179,184,.09);border:1px solid rgba(111,179,184,.3);max-width:60ch;
+}
+.note .lab{
+  display:block;font-family:var(--mono);font-size:10px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--teal);margin-bottom:8px;
+}
+.note p{margin:0}
+ul.clean{list-style:none;padding:0;margin:0 0 16px;max-width:60ch}
+ul.clean li{padding:8px 0 8px 24px;position:relative;border-bottom:1px dashed rgba(240,231,216,.1)}
+ul.clean li:last-child{border-bottom:none}
+ul.clean li::before{
+  content:"";position:absolute;left:2px;top:19px;width:8px;height:8px;
+  background:var(--band,var(--gold));transform:rotate(45deg);
+}
+figure{margin:28px 0;padding:18px;background:rgba(240,231,216,.035);border:1px solid var(--line);border-radius:4px}
+figure svg{display:block;width:100%;height:auto}
+figcaption{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;color:var(--paper-dim);
+  margin-top:12px;text-align:center;line-height:1.6}
+.f-paper{fill:var(--paper)}
+.f-gold{fill:var(--gold)}
+.f-teal{fill:var(--teal)}
+.f-rust{fill:var(--rust)}
+.f-spent{fill:rgba(240,231,216,.22)}
+.tt{font-family:var(--mono);font-size:11px;fill:var(--paper)}
+.ts{font-family:var(--mono);font-size:9.5px;fill:var(--paper-dim)}
+.scroll{overflow-x:auto;margin:24px 0}
+table{border-collapse:collapse;width:100%;min-width:440px;font-size:17px}
+th,td{text-align:left;padding:9px 14px 9px 0;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--paper-dim);font-weight:500}
+footer{
+  margin:64px 0 0;padding-top:24px;border-top:1px solid var(--line);
+  color:var(--paper-dim);font-size:16px;
+}
+a{color:var(--gold)}
+@media(max-width:620px){body{font-size:18px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+@media print{.rail{display:none}}
+</style>
+</head>
+<body>
+
+<div class="rail">
+  <div class="rail-in">
+    <svg class="watch" viewBox="0 0 40 42" aria-hidden="true">
+      <path d="M16 3h8v3h-8z" fill="#AEA894"/>
+      <circle cx="20" cy="21" r="15" fill="none" stroke="#E3A94A" stroke-width="1.6"/>
+      <circle cx="20" cy="21" r="1.6" fill="#E3A94A"/>
+      <path class="hand" d="M20 21V10" stroke="#F0E7D8" stroke-width="1.6" stroke-linecap="round"/>
+    </svg>
+    <div class="sky" id="sky">
+      <div class="horizon"></div>
+      <div class="plane" id="plane">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round">
+          <path d="M2.6 13.4 21.4 8.2l-3 4.4-7.8 2.2-2.2 4-2-.6.6-3-3.8 1Z"/>
+        </svg>
+      </div>
+    </div>
+    <span class="rail-count" id="count">1 / 14</span>
+  </div>
+</div>
+
+<div class="wrap">
+
+<a class="backlink" href="../">&larr; the shelf</a>
+
+<header class="top">
+  <p class="eyebrow">Learn the whole game &middot; 14 points</p>
+  <h1>Sleeping <span>Gods</span></h1>
+  <p class="sub">Distant Skies</p>
+  <p class="lede">A cargo plane, a portal that closed behind you, and a spiral-bound world that only ever gets smaller. You are not playing against a person. You are playing against a book that remembers everything you did.</p>
+</header>
+
+<article class="pt" data-band="story">
+  <p class="num"><b>1</b> The big picture</p>
+  <h2>A cooperative campaign where the opponent is a storybook.</h2>
+
+  <p>One to four of you crew a cargo plane that flew through a hole in the sky over San Francisco in 1937 and came out somewhere else. That somewhere is an <strong>atlas</strong>: a spiral-bound book of illustrated map pages, one enormous continuous world, and your plane sits on it as a single marker.</p>
+
+  <p>Nobody controls the world. A second book, the <strong>storybook</strong>, does. Every interesting place on the map has a number; you go there, you look the number up, you read the passage aloud, and the passage offers you choices. That is the entire loop of the game, and everything else on the table exists to decide whether your choices are allowed to work.</p>
+
+  <p class="aside">This is a campaign, not an evening. You play a session, write down where the plane is and what state the crew is in, put the box away, and come back to the same world next week. A full campaign is typically several sessions long.</p>
+
+  <p>The goal is to get home. Doing that means finding and restoring dormant <strong>totems</strong> scattered across the world, which wakes the gods who can open the way back. But there are far more totems in the atlas than you need, and far more world than you will see. You are not trying to finish the map. You are trying to finish before your time runs out.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>You are three books and a plane: an atlas that says where, a storybook that says what happens, and a deck of cards that says whether you are good enough. <strong>The cards exist to buy you passages in the book.</strong></p>
+  </div>
+</article>
+
+<article class="pt" data-band="story">
+  <p class="num"><b>2</b> The atlas</p>
+  <h2>Everywhere you look is spent forever.</h2>
+
+  <p>The atlas pages tile into one map. Your plane marker moves across it, and dotted onto it are numbered spots: villages, ruins, coastlines, strange lights on a ridge. When you spend an action to <em class="t">Explore</em> one, you read the matching storybook passage.</p>
+
+  <p>Then you <strong>cross the number off</strong>. That location is done for the rest of the campaign, whether the passage gave you a totem, a quest, a friend, a mauling, or two lines of scenery and nothing else.</p>
+
+  <p>This is the quiet cruelty of the design and the thing that makes it a game rather than a novel. Exploration is not free browsing. Each number is a card you get to turn over once, and turning over the wrong ones is how campaigns are lost.</p>
+
+  <div class="trap">
+    <b>The trap</b>
+    <p>Sweeping the map. Beginners explore every number they fly over "to see what's there", burn a quarter of the campaign clock on scenery, and arrive at the endgame with two totems and no fuel. Curiosity is the expensive resource here, not fuel.</p>
+  </div>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Every number on the atlas is one-use. Explore <strong>on purpose</strong>, with a reason you could say out loud.</p>
+  </div>
+</article>
+
+<article class="pt" data-band="sky">
+  <p class="num"><b>3</b> Your turn</p>
+  <h2>Five ticks of a pocket watch, and everything costs one or two.</h2>
+
+  <p>A turn is small and completely legible. You draw ability cards up to your hand limit, you resolve an event, and then you have <strong>five time</strong> on the watch track to spend. When it runs out, your turn ends and the next player starts theirs.</p>
+
+  <div class="scroll">
+  <table>
+    <tr><th>Action</th><th>Time</th><th>What it does</th></tr>
+    <tr><td>Travel</td><td>1&ndash;2</td><td>Move on foot across the map; rough terrain costs the extra</td></tr>
+    <tr><td>Fly</td><td>2</td><td>Move the plane a longer hop, burning fuel and inviting damage</td></tr>
+    <tr><td>Explore</td><td>2</td><td>Read the numbered passage where you are standing</td></tr>
+    <tr><td>Repair</td><td>1</td><td>Patch health back onto the plane</td></tr>
+    <tr><td>Camp</td><td>&mdash;</td><td>Free in time, but crosses a camp icon off your journey log</td></tr>
+  </table>
+  </div>
+
+  <p>There is one lovely wrinkle. If you stop with one tick left rather than spending it, the next player gets a <strong>bonus time token</strong>: an extra tick on their turn. A tick you cannot use well is worth more handed sideways than dribbled away on half a move.</p>
+
+  <figure>
+    <svg viewBox="0 0 560 118" role="img" aria-labelledby="t-time d-time">
+      <title id="t-time">The five-time turn track</title>
+      <desc id="d-time">A five-space time track. Two spaces are spent on an Explore action, two on a Fly action, and the last space is left unspent, which passes a bonus time token to the next player.</desc>
+      <text class="ts" x="0" y="14">YOUR TURN</text>
+      <g>
+        <rect x="0" y="26" width="96" height="34" rx="4" class="f-teal" opacity=".85"/>
+        <rect x="104" y="26" width="96" height="34" rx="4" class="f-teal" opacity=".85"/>
+        <rect x="208" y="26" width="96" height="34" rx="4" class="f-gold" opacity=".85"/>
+        <rect x="312" y="26" width="96" height="34" rx="4" class="f-gold" opacity=".85"/>
+        <rect x="416" y="26" width="96" height="34" rx="4" fill="none" stroke="#AEA894" stroke-width="1.4" stroke-dasharray="4 4"/>
+      </g>
+      <text class="tt" x="48" y="48" text-anchor="middle" fill="#131A28">1</text>
+      <text class="tt" x="152" y="48" text-anchor="middle" fill="#131A28">2</text>
+      <text class="tt" x="256" y="48" text-anchor="middle" fill="#131A28">3</text>
+      <text class="tt" x="360" y="48" text-anchor="middle" fill="#131A28">4</text>
+      <text class="tt" x="464" y="48" text-anchor="middle">5</text>
+      <text class="ts" x="100" y="80" text-anchor="middle">explore &middot; 2 time</text>
+      <text class="ts" x="308" y="80" text-anchor="middle">fly &middot; 2 time</text>
+      <text class="ts" x="464" y="80" text-anchor="middle">left unspent</text>
+      <text class="ts" x="464" y="96" text-anchor="middle">&darr;</text>
+      <text class="ts" x="464" y="112" text-anchor="middle" fill="#E3A94A">next player +1</text>
+    </svg>
+    <figcaption>Five ticks, two actions, and a tip for the crew member after you.</figcaption>
+  </figure>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Five time is two real actions and a bit. Plan the turn as a pair of decisions, not as five small ones.</p>
+  </div>
+</article>
+
+<article class="pt" data-band="ground">
+  <p class="num"><b>4</b> The crew</p>
+  <h2>Five people, six skills, and two things that run out.</h2>
+
+  <p>There are five characters. In a full game each player runs their own; solo you run two; and whoever is taking the current turn also has Claire, the captain, on loan. Each has a board with a portrait, a set of skill numbers, and two tracks that matter constantly.</p>
+
+  <ul class="clean">
+    <li><strong>Health</strong> is how much punishment the character can take. At zero they are incapacitated: out of challenges and combat until somebody spends time restoring them.</li>
+    <li><strong>Stamina</strong>, up to three tokens, is how often they can be <em>useful</em>. Joining a challenge costs a stamina. Many equipped abilities cost a stamina too.</li>
+  </ul>
+
+  <p>The six skills are <strong>Strength, Cunning, Savvy, Perception, Craft and Moxie</strong>, and each character is strong in two or three of them and hopeless in the rest. The storybook constantly asks for one specific skill, so the crew is a keyring: the question is never "are we good enough", it is "did we bring the right person and does she have a stamina left".</p>
+
+  <div class="trap">
+    <b>The trap</b>
+    <p>Treating stamina as a health bar and hoarding it. Stamina comes back every time you camp; unspent stamina at the campfire is a challenge you declined to attempt for free.</p>
+  </div>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Health is whether a character exists. <strong>Stamina is whether they can help today.</strong> They are refilled by the same thing, and it is not free.</p>
+  </div>
+</article>
+
+<article class="pt" data-band="ground">
+  <p class="num"><b>5</b> Ability cards</p>
+  <h2>One deck that is your hand, your dice and your equipment at the same time.</h2>
+
+  <p>Distant Skies has no dice. It has a single deck of ability cards, and that deck does three unrelated jobs, which is the cleverest thing in the box.</p>
+
+  <ul class="clean">
+    <li><strong>Randomiser.</strong> Every card has a fate number printed on it. Turning the top card over is how the game rolls.</li>
+    <li><strong>Fuel.</strong> Cards in hand can be discarded during a challenge for +1 each, provided they match the skill being tested.</li>
+    <li><strong>Gear.</strong> Cards can instead be equipped to a character, paying their cost in other cards from your hand. Equipped, they add a permanent skill bonus and usually a special ability.</li>
+  </ul>
+
+  <p>So every card in your hand is a small dilemma. Spend it now to squeak past a target number, or pay it into a piece of equipment that makes every future check of that skill easier. A hand of seven is not seven resources; it is roughly two equipment purchases or seven one-point nudges.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Cards spent on a challenge are gone the moment the passage is read. <strong>Cards spent on equipment work for the rest of the campaign.</strong></p>
+  </div>
+</article>
+
+<article class="pt" data-band="ground">
+  <p class="num"><b>6</b> The challenge</p>
+  <h2>Skill plus fate plus whatever you are willing to burn.</h2>
+
+  <p>The storybook says something like <em class="t">Perception 9</em>. Here is the whole procedure, and it does not get more complicated than this all campaign:</p>
+
+  <ul class="clean">
+    <li>Decide which characters are joining. Each one who does spends a stamina.</li>
+    <li>Add up their skill in the tested skill, plus bonuses from anything they have equipped.</li>
+    <li>Draw fate: flip the top ability card and add its fate number.</li>
+    <li>Now, knowing the total, discard matching cards from hand for +1 each, and fire off any abilities you want to pay for.</li>
+    <li>Meet or beat the target and you get the good branch. Fall short and the passage tells you exactly what it costs you.</li>
+  </ul>
+
+  <figure>
+    <svg viewBox="0 0 560 130" role="img" aria-labelledby="t-chal d-chal">
+      <title id="t-chal">Anatomy of a skill challenge</title>
+      <desc id="d-chal">Four stacked contributions: base skill four, equipment plus two, a drawn fate card worth one, and two discarded cards worth plus two, totalling nine against a target of nine.</desc>
+      <text class="ts" x="0" y="14">TARGET 9</text>
+      <line x1="0" y1="22" x2="560" y2="22" stroke="#C9552F" stroke-width="1.4" stroke-dasharray="5 4"/>
+      <g>
+        <rect x="0" y="34" width="180" height="26" rx="3" class="f-teal" opacity=".85"/>
+        <text class="tt" x="12" y="52" fill="#131A28">skill 4</text>
+        <rect x="188" y="34" width="92" height="26" rx="3" class="f-gold" opacity=".85"/>
+        <text class="tt" x="200" y="52" fill="#131A28">gear +2</text>
+        <rect x="288" y="34" width="46" height="26" rx="3" class="f-paper" opacity=".8"/>
+        <text class="tt" x="298" y="52" fill="#131A28">+1</text>
+        <rect x="342" y="34" width="92" height="26" rx="3" fill="none" stroke="#AEA894" stroke-width="1.4"/>
+        <text class="tt" x="352" y="52">burn +2</text>
+      </g>
+      <text class="ts" x="0" y="78">two crew, two stamina spent</text>
+      <text class="ts" x="288" y="78">fate draw</text>
+      <text class="ts" x="342" y="94">two cards from hand,</text>
+      <text class="ts" x="342" y="108">discarded after seeing the fate</text>
+      <text class="tt" x="446" y="52" fill="#E3A94A">= 9</text>
+    </svg>
+    <figcaption>You see the fate card before you decide how much of your hand to spend. That ordering is the whole tactical game.</figcaption>
+  </figure>
+
+  <p>Note the order. Because the fate draw happens <em>before</em> you commit cards, you are never guessing. You are looking at an exact shortfall and deciding whether this particular passage is worth two cards out of your hand.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>You always know the price of success before you pay it. <strong>The skill is deciding when the answer is no.</strong></p>
+  </div>
+</article>
+
+<article class="pt" data-band="peril">
+  <p class="num"><b>7</b> Failure</p>
+  <h2>Missing a check is a plot point, not a dead end.</h2>
+
+  <p>Come up short and the storybook simply reads you the other paragraph. Sometimes that is damage to a character, sometimes a status effect, sometimes losing a resource, and quite often it is just a worse version of the same story that still moves you forward.</p>
+
+  <p>This matters for how you should feel at the table. In most cooperative games a failed roll is a punch in the face. Here it is usually a toll. A campaign in which you never fail a check is a campaign in which you were too cautious to be anywhere interesting.</p>
+
+  <div class="aside">The real cost of a failure is rarely the damage. It is that you spent two time and a crossed-off location to get the mediocre outcome, and neither of those is coming back.</div>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Budget for failure. Deciding to attempt a nine with a seven is a legitimate play when the downside is a single wound.</p>
+  </div>
+</article>
+
+<article class="pt" data-band="peril">
+  <p class="num"><b>8</b> The campfire</p>
+  <h2>Camping is the only way to recover, and the number of camps is your campaign clock.</h2>
+
+  <p>Camping costs no time at all. It refills stamina to full, restores health, clears a status effect, and refreshes what you have available. It is the single most restorative thing you can do, and it is the thing that ends your campaign.</p>
+
+  <p>Because camping does not cost time. It costs a <strong>camp icon crossed off your journey log</strong>, and there is a finite printed row of them. Every campfire is a permanent tick towards the end of the story. That row, not the map, is the game's timer.</p>
+
+  <p>So the actual shape of Distant Skies is: push the crew until they are empty, wring the last useful action out of them, and only then pay a camp. Every camp taken while people still had stamina is a slice of campaign thrown away.</p>
+
+  <figure>
+    <svg viewBox="0 0 560 78" role="img" aria-labelledby="t-log d-log">
+      <title id="t-log">The journey log's camp icons</title>
+      <desc id="d-log">A row of twelve camp icons; the first five are crossed out as spent, the remaining seven are still available.</desc>
+      <g>
+        <g class="f-spent">
+          <path d="M8 44 20 20 32 44Z"/><path d="M48 44 60 20 72 44Z"/><path d="M88 44 100 20 112 44Z"/>
+          <path d="M128 44 140 20 152 44Z"/><path d="M168 44 180 20 192 44Z"/>
+        </g>
+        <g stroke="#C9552F" stroke-width="1.8">
+          <path d="M8 44 32 20M8 20 32 44"/><path d="M48 44 72 20M48 20 72 44"/><path d="M88 44 112 20M88 20 112 44"/>
+          <path d="M128 44 152 20M128 20 152 44"/><path d="M168 44 192 20M168 20 192 44"/>
+        </g>
+        <g class="f-gold">
+          <path d="M208 44 220 20 232 44Z"/><path d="M248 44 260 20 272 44Z"/><path d="M288 44 300 20 312 44Z"/>
+          <path d="M328 44 340 20 352 44Z"/><path d="M368 44 380 20 392 44Z"/><path d="M408 44 420 20 432 44Z"/>
+          <path d="M448 44 460 20 472 44Z"/>
+        </g>
+      </g>
+      <text class="ts" x="8" y="66">spent nights</text>
+      <text class="ts" x="208" y="66">what is left of the journey</text>
+    </svg>
+    <figcaption>The journey log. Rest is not free; it is measured out in advance.</figcaption>
+  </figure>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Camps are the hourglass. <strong>Never camp with stamina still on the boards.</strong></p>
+  </div>
+</article>
+
+<article class="pt" data-band="peril">
+  <p class="num"><b>9</b> Events</p>
+  <h2>The world takes a turn before you do.</h2>
+
+  <p>Every player's turn opens with an event card read aloud: weather, wildlife, strangers, a piece of luck, a demand for a challenge. Some are pure gift, some are a bill, and a good many hand you a choice with a cost attached.</p>
+
+  <p>Events are the reason plans decay. You cannot line up a perfect five-tick turn the night before, because the first thing that happens is the world reminding you it was here first. Treat your plan as a preference and the event as an amendment.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>The event happens before your time, not during it. Read it, then decide the turn.</p>
+  </div>
+</article>
+
+<article class="pt" data-band="sky">
+  <p class="num"><b>10</b> The plane</p>
+  <h2>Your fourth character has its own health bar and it bleeds nights.</h2>
+
+  <p>The plane is a card with a health track and a fuel requirement. Flying is fast, and it is the only way to cross the world at any speed, but it takes damage from what you fly through, and refuelling costs real resources at specific places.</p>
+
+  <p>Here is the vicious bit. When the plane takes damage at zero health, you do not lose the plane. You cross off a camp icon. Neglected maintenance is paid for directly in nights of your campaign, which makes the one-time <em class="t">Repair</em> action the best-value tick on the whole track when the plane is looking rough.</p>
+
+  <div class="trap">
+    <b>The trap</b>
+    <p>Flying everywhere because walking feels slow. Fly costs two time, fuel, and hull. Travel costs one and asks for nothing. Long hops are for crossing regions, not for hopping between two places on the same page.</p>
+  </div>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>An unrepaired plane converts every future knock straight into lost campaign. <strong>Repair is cheap; the alternative is not.</strong></p>
+  </div>
+</article>
+
+<article class="pt" data-band="story">
+  <p class="num"><b>11</b> Quests and keywords</p>
+  <h2>The book's memory, kept in your hands.</h2>
+
+  <p>The storybook cannot remember what you did, so you remember it for it. Two components do that job.</p>
+
+  <p><strong>Quest cards</strong> come out of passages and sit in front of you: go here, bring this, find them. They tell you what to do and where, and completing one usually means opening a specific numbered location with a specific thing in hand.</p>
+
+  <p><strong>Keywords</strong> are the subtler one. Certain passages hand you a keyword, and later passages, sometimes an ocean away, are gated behind it: this option is only available if you have <em class="t">that keyword</em>. Without it you read a shorter, worse paragraph and never learn what you missed.</p>
+
+  <p class="aside">This is why aimless exploring hurts twice. It burns the clock, and it also means the keyword you needed for the good branch of the totem passage is sitting unclaimed in a village three pages away.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Open quests are a to-do list with map references on it. <strong>Play the list, not the map.</strong></p>
+  </div>
+</article>
+
+<article class="pt" data-band="peril">
+  <p class="num"><b>12</b> Combat</p>
+  <h2>A separate little card game, and it starts when the story says so.</h2>
+
+  <p>Fights are not resolved with skill checks. They pull out a different deck, a combat deck you build up over the campaign, and play out over rounds on a small board of enemies.</p>
+
+  <p>Each round the crew plays a handful of cards, each assigned to a character and aimed at an enemy. Damage lands on that enemy's grid, and where it lands matters: a grid fills according to adjacency rules, and an enemy is only defeated when every heart on its grid is covered. Other cards strip power tokens, or gain you block instead of dealing damage.</p>
+
+  <p>Then the enemies hit back immediately, for their base attack plus whatever power tokens they still hold. That is the tension: a card spent removing power is a card not spent covering hearts, and the fight goes long, which means it hurts more.</p>
+
+  <div class="trap">
+    <b>The trap</b>
+    <p>Spreading damage across every enemy so nothing dies. Damage is only worth anything when a grid is completely covered, and a wounded enemy hits exactly as hard as a fresh one. Kill things one at a time.</p>
+  </div>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Fights are not scored on damage dealt; they are scored on <strong>enemies removed</strong>. Everything else is delay.</p>
+  </div>
+</article>
+
+<article class="pt" data-band="story">
+  <p class="num"><b>13</b> Totems and the ending</p>
+  <h2>You do not finish the world. You finish the errand and leave.</h2>
+
+  <p>Scattered through the atlas are dormant totems. Restoring one takes the right quest resources delivered to the right place, and each one you wake marks an achievement box and brings the way home closer. There are many more of them out there than a single campaign needs, so which ones you go for is genuinely your plan, not the game's.</p>
+
+  <p>When enough are awake, the storybook's ending sections open up and the campaign concludes with a final confrontation. Reaching and completing an ending is worth a large chunk of your final score, and around it you count up the rest:</p>
+
+  <div class="scroll">
+  <table>
+    <tr><th>Source</th><th>Worth</th></tr>
+    <tr><td>Reaching an ending</td><td>10</td></tr>
+    <tr><td>Adventure cards</td><td>2 each, and totems 5</td></tr>
+    <tr><td>Quest cards completed</td><td>1 each</td></tr>
+    <tr><td>Equipped ability cards</td><td>1 each</td></tr>
+    <tr><td>Common resources</td><td>1 per four</td></tr>
+    <tr><td>Difficulty</td><td>+10 normal, +20 hard</td></tr>
+  </table>
+  </div>
+
+  <p>Achievements also carry forward: they unlock cards you start a future campaign with, so the world you leave behind is a slightly kinder one for the next crew. Losing is rare and blunt, and mostly means the whole crew hit zero health.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Totems are the win condition and the biggest scoring cards in the game. <strong>Everything else on the scoresheet is a rounding error you picked up on the way.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>14</b> Your first campaign</p>
+  <h2>How not to lose it: five habits to pick up immediately.</h2>
+
+  <h3>1. Pick a totem and go</h3>
+  <p>Within your first session or two, name a target out loud and fly at it. Wandering is what the game wants you to do and what the clock punishes you for. You can always look at the pretty ruin next campaign; that is what the atlas is for.</p>
+
+  <h3>2. Never camp early</h3>
+  <p>Before you cross that icon off, look at every character board. Stamina left? Health nearly full? Then you are throwing away a night of the journey. Push one more turn.</p>
+
+  <h3>3. Equip in the first hour</h3>
+  <p>New crews spend their whole hand one point at a time on checks and end the campaign with bare character boards. Two or three good pieces of equipment early are worth more than a dozen +1s, because every check afterwards starts higher.</p>
+
+  <h3>4. Repair before it costs a night</h3>
+  <p>A single tick of time spent patching the plane is nothing. A knock on a plane at zero health costs a camp icon, and a camp icon is a chunk of your ending.</p>
+
+  <h3>5. Let checks fail</h3>
+  <p>You will be tempted to make every number. Do not. Look at the failure text, and if it is one wound and a shrug, take the shrug and keep your cards. The hand you saved is what gets you through the check that actually matters.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Aim at a totem, camp late, equip early, and treat your hand of cards as a war chest for the checks you cannot afford to miss.</p>
+  </div>
+</article>
+
+<footer>A teaching walkthrough of Sleeping Gods: Distant Skies by Ryan Laukat (Red Raven Games, 2024). Rules summarised for learning; the rulebook is still the authority, especially for exact action costs, combat card timing, damage placement and the setup and save procedures. <a href="../">Back to the shelf</a>.</footer>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var pts = Array.prototype.slice.call(document.querySelectorAll('.pt'));
+  var plane = document.getElementById('plane');
+  var sky = document.getElementById('sky');
+  var count = document.getElementById('count');
+  var hand = document.querySelector('.watch .hand');
+
+  var at = 0;
+  function paint(n){
+    if(n === at) return;
+    at = n;
+    var frac = pts.length > 1 ? (n - 1) / (pts.length - 1) : 0;
+    plane.style.left = (frac * (sky.clientWidth - 22)) + 'px';
+    hand.style.transform = 'rotate(' + Math.round(frac * 360) + 'deg)';
+    count.textContent = n + ' / ' + pts.length;
+    sky.setAttribute('aria-label', 'Point ' + n + ' of ' + pts.length);
+  }
+
+  var ticking = false;
+  function measure(){
+    ticking = false;
+    var mark = window.innerHeight * 0.45, n = 1;
+    for(var i = 0; i < pts.length; i++){
+      if(pts[i].getBoundingClientRect().top <= mark){ n = i + 1; }
+    }
+    at = 0;
+    paint(n);
+  }
+  window.addEventListener('scroll', function(){
+    if(!ticking){ ticking = true; window.requestAnimationFrame(measure); }
+  }, {passive:true});
+  window.addEventListener('resize', measure);
+  paint(1);
+  measure();
+})();
+</script>
+</body>
+</html>
