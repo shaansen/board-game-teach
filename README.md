@@ -13,6 +13,7 @@ your first game.
 | Path | What it is |
 | --- | --- |
 | `index.html` | The shelf: the landing page, with a search box that filters the briefings |
+| `games/architects-of-the-west-kingdom.html` | Architects of the West Kingdom, 14 points, complete |
 | `games/arkham-horror-lcg.html` | Arkham Horror: The Card Game, 15 points, complete |
 | `games/spirit-island.html` | Spirit Island, 12 pieces, complete |
 | `games/troyes.html` | Troyes, 14 chapters, complete |
@@ -102,7 +103,9 @@ hands you two working production wheels to spin; `through-the-ages.html` fills a
 bank of population cubes as you read; `seasons.html` turns a season wheel in the
 rail; `taverns-of-tiefenthal.html` chalks up a bar tab; `root.html` tints each
 point with the faction it belongs to; `castles-of-burgundy.html` fills a honeycomb
-estate in the rail, one hex per point; `sleeping-gods-distant-skies.html` flies a
+estate in the rail, one hex per point;
+`architects-of-the-west-kingdom.html` sends a worker out of the crew in the rail for
+every point; `sleeping-gods-distant-skies.html` flies a
 plane across the horizon while a pocket watch hand comes round.
 
 Every page is **one continuous scroll**. Progress indicators that follow the
