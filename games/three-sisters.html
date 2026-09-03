@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Three Sisters: Learn It Properly</title>
+<meta name="description" content="Learn what Three Sisters actually is: fourteen points on the die that tells you where, the space that tells you what else, and the corn that has to grow before the beans can be planted at all.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,600;0,700;1,400&family=Karla:ital,wght@0,400;0,500;0,700;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#26261C;
+  --ink-2:#4B4A3B;
+  --paper:#F2F1E2;
+  --paper-2:#E7E7D3;
+  --card:#FBFAF0;
+  --dim:#7B7863;
+  --grid:rgba(38,38,28,.09);
+  --line:rgba(38,38,28,.18);
+  --corn:#C79210;
+  --bean:#4C7A3E;
+  --bean-pale:#E2EBDA;
+  --squash:#C0541D;
+  --soil:#7A5230;
+  --display:"Bitter",Georgia,serif;
+  --body:"Karla",system-ui,sans-serif;
+  --mono:"Space Mono",ui-monospace,Menlo,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;color:var(--ink);font-family:var(--body);font-size:19px;line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  background:
+    radial-gradient(720px 420px at 6% -3%, rgba(199,146,16,.13), transparent 62%),
+    radial-gradient(640px 460px at 97% 10%, rgba(76,122,62,.12), transparent 60%),
+    repeating-linear-gradient(0deg, var(--grid) 0 1px, transparent 1px 26px),
+    repeating-linear-gradient(90deg, var(--grid) 0 1px, transparent 1px 26px),
+    linear-gradient(180deg,var(--paper),var(--paper-2) 85%);
+  background-attachment:fixed;
+}
+.wrap{max-width:800px;margin:0 auto;padding:0 22px 90px}
+
+/* ---------- the seed row rail: one box pencilled in per point ---------- */
+.rail{
+  position:sticky;top:0;z-index:20;background:rgba(242,241,226,.95);
+  backdrop-filter:blur(6px);border-bottom:1px solid var(--line);padding:7px 22px;
+}
+.rail-in{max-width:800px;margin:0 auto;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.rail-lab{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+#row{flex:1;min-width:160px;max-width:320px;height:34px}
+#row .box{fill:rgba(251,250,240,.9);stroke:rgba(38,38,28,.32);stroke-width:1}
+#row .mark{stroke:var(--soil);stroke-width:1.7;stroke-linecap:round;opacity:0;transition:opacity .35s}
+#row g.on .mark{opacity:1}
+#row g.on .box{fill:#EFEBD8;stroke:var(--ink)}
+#sprout{transition:transform .4s ease}
+#sprout .stem{stroke:var(--bean);stroke-width:1.6;fill:none}
+#sprout .leaf{fill:var(--bean)}
+.rail-count{font-family:var(--mono);font-size:12px;color:var(--bean);white-space:nowrap}
+
+.backlink{
+  display:inline-block;margin-top:26px;font-family:var(--mono);font-size:11px;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--dim);text-decoration:none;
+  border-bottom:1px solid transparent;
+}
+.backlink:hover{color:var(--squash);border-bottom-color:var(--squash)}
+
+header.top{padding:28px 0 42px;border-bottom:3px double var(--line)}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--squash);margin:22px 0 14px}
+h1{
+  font-family:var(--display);font-weight:700;font-size:clamp(44px,9vw,80px);
+  line-height:.97;letter-spacing:-.015em;margin:0 0 8px;color:var(--ink);
+}
+h1 small{display:block;font-family:var(--body);font-size:.2em;font-weight:700;letter-spacing:.2em;
+  color:var(--corn);margin-bottom:12px;text-transform:uppercase}
+.lede{font-size:21px;color:var(--ink-2);max-width:54ch;margin:18px 0 0}
+
+.pt{border-top:1px solid var(--line);padding:44px 0 8px;scroll-margin-top:60px}
+.pt:first-of-type{border-top:none}
+.num{
+  display:inline-flex;align-items:center;gap:12px;margin-bottom:12px;
+  font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--squash);
+}
+.num b{
+  width:32px;height:32px;display:grid;place-items:center;border-radius:3px;
+  background:var(--bean);color:#F7F6EA;font-family:var(--display);font-weight:700;font-size:18px;
+}
+h2{
+  font-family:var(--display);font-weight:700;font-size:clamp(28px,5.1vw,41px);
+  line-height:1.1;margin:0 0 16px;max-width:25ch;
+}
+h3{font-family:var(--display);font-weight:700;font-size:24px;margin:30px 0 6px}
+.pt p{max-width:62ch;margin:0 0 16px}
+strong{font-weight:700}
+em.t{font-style:normal;font-family:var(--mono);font-size:.82em;background:rgba(76,122,62,.14);
+  padding:2px 6px;border-radius:2px}
+.aside{
+  border-left:3px solid var(--corn);padding:2px 0 2px 18px;margin:24px 0;
+  font-style:italic;color:var(--ink-2);max-width:58ch;
+}
+.trap{
+  margin:26px 0;border:1px solid rgba(192,84,29,.45);background:rgba(192,84,29,.07);
+  padding:16px 20px;max-width:62ch;
+}
+.trap b{
+  display:block;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--squash);margin-bottom:8px;
+}
+.trap p{margin:0}
+.note{
+  margin:30px 0 0;padding:18px 22px;max-width:62ch;
+  background:var(--bean-pale);border:1px solid rgba(76,122,62,.38);
+}
+.note .lab{
+  display:block;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--bean);margin-bottom:8px;
+}
+.note p{margin:0}
+ul.clean{list-style:none;padding:0;margin:0 0 16px;max-width:62ch}
+ul.clean li{padding:8px 0 8px 26px;position:relative;border-bottom:1px dashed rgba(38,38,28,.16)}
+ul.clean li:last-child{border-bottom:none}
+ul.clean li::before{
+  content:"";position:absolute;left:3px;top:17px;width:9px;height:9px;background:var(--corn);
+  border-radius:1px;transform:rotate(45deg);
+}
+.eg{
+  margin:26px 0;max-width:62ch;border-left:3px solid var(--soil);
+  background:rgba(122,82,48,.08);padding:16px 20px 16px 18px;
+}
+.eg b{
+  display:block;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--soil);margin-bottom:8px;
+}
+.eg p{margin:0 0 10px}
+.eg p:last-child{margin:0}
+.eg .out{font-family:var(--mono);font-size:.86em;color:var(--squash)}
+figure{margin:28px 0;padding:18px;background:var(--card);border:1px solid var(--line)}
+figure svg{display:block;width:100%;height:auto}
+figcaption{font-family:var(--mono);font-size:11px;color:var(--dim);margin-top:12px;text-align:center;line-height:1.6}
+.scroll{overflow-x:auto;margin:24px 0}
+table{border-collapse:collapse;width:100%;min-width:430px;font-size:17px}
+th,td{text-align:left;padding:9px 14px 9px 0;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);font-weight:400}
+td.n{font-family:var(--mono);color:var(--bean)}
+footer{margin:64px 0 0;padding-top:24px;border-top:3px double var(--line);color:var(--dim);font-size:16px}
+a{color:var(--bean)}
+@media(max-width:620px){body{font-size:18px}#row{max-width:210px;height:30px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+@media print{.rail{display:none}}
+</style>
+</head>
+<body>
+
+<div class="rail">
+  <div class="rail-in">
+    <span class="rail-lab">boxes filled in</span>
+    <svg id="row" viewBox="0 0 320 34" role="img" aria-label="Progress through the briefing" preserveAspectRatio="xMinYMid meet"></svg>
+    <span class="rail-count" id="count">1 / 14</span>
+  </div>
+</div>
+
+<div class="wrap">
+
+<a class="backlink" href="../">&larr; the shelf</a>
+
+<header class="top">
+  <p class="eyebrow">Learn it properly &middot; 14 points</p>
+  <h1><small>A backyard almanac for</small>Three Sisters</h1>
+  <p class="lede">Six dice, eight rounds, and a pencil. The number on the die says which patch of garden you may touch, the space it was sitting on says what else you get, and the beans cannot go in until the corn is tall enough to hold them.</p>
+</header>
+
+<article class="pt">
+  <p class="num"><b>1</b> The big picture</p>
+  <h2>A roll-and-write where the only thing you share is the dice.</h2>
+
+  <p>You are tending a backyard garden over one summer: eight rounds, and then it is over. Everything you do is a pencil mark on your own two scoresheets. Nobody can plant in your zones, take your tools, or knock anything over. There is no board state to fight for beyond a handful of dice sitting on a wheel in the middle of the table.</p>
+
+  <p>That makes the contest unusually clean. You are not playing against your neighbours' gardens, you are playing against <strong>the eight rounds</strong> and against <strong>the roll</strong>. Your opponents matter for exactly one reason: they take dice before you do, and the die they take is the die you cannot have.</p>
+
+  <p>What you are building is a set of small tracks that pay each other. Crops grow box by box until they are ripe. Ripe pumpkins pay goods. Goods hand out bonus actions. Bonus actions climb flowers and hives, which hand out more actions, which grow more crops. A good round in this game is not one action, it is four actions falling out of one die.</p>
+
+  <p class="aside">Playing alone, the difference is that Farmer Edith stops being a marker and becomes an opponent: she takes dice too, and every action she takes crosses something off <em>your</em> sheet so you can never have it.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Nothing you build can be taken away. The whole game is <strong>how much you can get out of eight rounds of dice</strong>, so every rule below is really a rule about squeezing more actions out of one die.</p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>2</b> The round</p>
+  <h2>One person rolls, and the shape of that roll builds the menu for everybody.</h2>
+
+  <p>The pool is two dice more than the player count: four dice at two players, five at three, six at four. The first player rolls all of them, then <strong>groups them by value</strong>: all the 1s together, all the 2s together, and so on.</p>
+
+  <p>Those groups go onto the action wheel in ascending order. The lowest group lands on the space where the Farmer Edith pawn is standing, the next group on the next space clockwise, the next on the space after that, until every group is placed. Edith then walks on past them all, to the space after the highest group, and waits there for next round.</p>
+
+  <p>The consequence is worth sitting with. <strong>The dice do not choose their own spaces, the spread of the roll does.</strong> Six dice that come up 3, 3, 3, 3, 5, 5 make only two groups, so only two action spaces are live this round and one of them holds four dice. Six dice that all come up different make six groups, and the wheel is offering six different second actions.</p>
+
+  <figure>
+    <svg viewBox="0 0 760 300" role="img" aria-labelledby="ron-t ron-d">
+      <title id="ron-t">How a roll is laid out on the action wheel</title>
+      <desc id="ron-d">A roll of six dice showing two ones, two twos, one four and one six. The dice are grouped by value and placed on consecutive spaces of the action wheel, starting from the space where the Farmer Edith pawn stands. The two ones go on Apiary or Fruit, the two twos on Plant or Water, the four on Shed Time, the six on One Compost and Four Goods, and Edith then moves to the next space after them.</desc>
+      <g font-family="Space Mono, monospace" font-size="11" letter-spacing="1" fill="#7B7863">
+        <text x="0" y="14">THE ROLL, GROUPED BY VALUE</text>
+        <text x="0" y="106">CONSECUTIVE SPACES, STARTING WHERE EDITH STANDS</text>
+      </g>
+      <g font-family="Karla, sans-serif" font-size="15">
+        <g>
+          <rect x="0" y="26" width="30" height="30" rx="5" fill="#FBFAF0" stroke="#26261C" stroke-width="1.5"/>
+          <circle cx="15" cy="41" r="3" fill="#26261C"/>
+          <rect x="36" y="26" width="30" height="30" rx="5" fill="#FBFAF0" stroke="#26261C" stroke-width="1.5"/>
+          <circle cx="51" cy="41" r="3" fill="#26261C"/>
+          <rect x="110" y="26" width="30" height="30" rx="5" fill="#FBFAF0" stroke="#26261C" stroke-width="1.5"/>
+          <circle cx="119" cy="34" r="3" fill="#26261C"/><circle cx="131" cy="48" r="3" fill="#26261C"/>
+          <rect x="146" y="26" width="30" height="30" rx="5" fill="#FBFAF0" stroke="#26261C" stroke-width="1.5"/>
+          <circle cx="155" cy="34" r="3" fill="#26261C"/><circle cx="167" cy="48" r="3" fill="#26261C"/>
+          <rect x="220" y="26" width="30" height="30" rx="5" fill="#FBFAF0" stroke="#26261C" stroke-width="1.5"/>
+          <circle cx="229" cy="34" r="3" fill="#26261C"/><circle cx="241" cy="34" r="3" fill="#26261C"/>
+          <circle cx="229" cy="48" r="3" fill="#26261C"/><circle cx="241" cy="48" r="3" fill="#26261C"/>
+          <rect x="294" y="26" width="30" height="30" rx="5" fill="#FBFAF0" stroke="#26261C" stroke-width="1.5"/>
+          <circle cx="303" cy="33" r="3" fill="#26261C"/><circle cx="315" cy="33" r="3" fill="#26261C"/>
+          <circle cx="303" cy="41" r="3" fill="#26261C"/><circle cx="315" cy="41" r="3" fill="#26261C"/>
+          <circle cx="303" cy="49" r="3" fill="#26261C"/><circle cx="315" cy="49" r="3" fill="#26261C"/>
+          <text x="340" y="46" font-family="Space Mono, monospace" font-size="12" fill="#7B7863">four groups, so four spaces get used</text>
+        </g>
+      </g>
+      <g font-family="Karla, sans-serif" font-size="13" text-anchor="middle">
+        <rect x="0" y="122" width="142" height="66" rx="4" fill="#E2EBDA" stroke="#4C7A3E" stroke-width="2"/>
+        <text x="71" y="146" fill="#26261C">APIARY OR FRUIT</text>
+        <text x="71" y="168" font-family="Space Mono, monospace" font-size="12" fill="#4C7A3E">the two 1s</text>
+
+        <rect x="154" y="122" width="142" height="66" rx="4" fill="#E2EBDA" stroke="#4C7A3E" stroke-width="2"/>
+        <text x="225" y="146" fill="#26261C">PLANT OR WATER</text>
+        <text x="225" y="168" font-family="Space Mono, monospace" font-size="12" fill="#4C7A3E">the two 2s</text>
+
+        <rect x="308" y="122" width="142" height="66" rx="4" fill="#E2EBDA" stroke="#4C7A3E" stroke-width="2"/>
+        <text x="379" y="146" fill="#26261C">SHED TIME</text>
+        <text x="379" y="168" font-family="Space Mono, monospace" font-size="12" fill="#4C7A3E">the 4</text>
+
+        <rect x="462" y="122" width="142" height="66" rx="4" fill="#E2EBDA" stroke="#4C7A3E" stroke-width="2"/>
+        <text x="533" y="142" fill="#26261C">1 COMPOST</text>
+        <text x="533" y="158" fill="#26261C">AND 4 GOODS</text>
+        <text x="533" y="178" font-family="Space Mono, monospace" font-size="12" fill="#4C7A3E">the 6</text>
+
+        <rect x="616" y="122" width="142" height="66" rx="4" fill="#FBFAF0" stroke="#7B7863" stroke-width="2" stroke-dasharray="5 4"/>
+        <text x="687" y="146" fill="#7B7863">APIARY OR FRUIT</text>
+        <text x="687" y="168" font-family="Space Mono, monospace" font-size="12" fill="#C0541D">EDITH WAITS HERE</text>
+      </g>
+      <g stroke="#C0541D" stroke-width="1.8" fill="none">
+        <defs>
+          <marker id="ar1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+            <path d="M0 0 L10 5 L0 10 z" fill="#C0541D"/>
+          </marker>
+        </defs>
+        <path d="M40 208 H 690" marker-end="url(#ar1)"/>
+      </g>
+      <text x="0" y="236" font-family="Space Mono, monospace" font-size="11" fill="#C0541D">EDITH WALKS PAST EVERY GROUP, SO NEXT ROUND'S DICE START FROM A NEW PLACE ON THE WHEEL</text>
+      <text x="0" y="270" font-family="Bitter, serif" font-size="17" fill="#26261C">A tight roll lights up two spaces. A spread roll lights up six. Nobody chose that.</text>
+    </svg>
+    <figcaption>THE WHEEL DOES NOT RESET. WHERE THE DICE LAND THIS ROUND DEPENDS ON WHERE THEY LANDED LAST ROUND.</figcaption>
+  </figure>
+
+  <p>After the drafting is done, everyone resolves the round's <strong>event</strong>, which is printed on the round track and known from the first minute of the game. Then the first player marker passes left, and the next person rolls.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>The roll does not just give you numbers, it <strong>decides which second actions exist this round</strong>. Look at the wheel before you look at your sheet.</p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>3</b> One die, two actions</p>
+  <h2>The number tells you where. The space tells you what else.</h2>
+
+  <p>When your turn comes you take one die off the wheel and get two things from it, in either order.</p>
+
+  <ul class="clean">
+    <li><strong>The garden action.</strong> The value of the die names a garden zone, 1 to 6. In that zone, and only that zone, you may plant or you may water.</li>
+    <li><strong>The rondel action.</strong> The space the die was sitting on gives you a second, separate action: Shed Time, 1 Compost and 4 Goods, Apiary or Fruit, Farmer's Market, or another Plant or Water in the same zone.</li>
+  </ul>
+
+  <p>Those two halves are independent, and that is the whole decision in the game. A 4 sitting on Shed Time is a 4 <em class="t">and</em> a shed mark. The same 4 sitting on Farmer's Market is the same garden action attached to a completely different payoff. You are never picking a number, you are picking a pair.</p>
+
+  <p>It is rare to want both halves equally. Most turns you want the number badly and can live with the space, or you want the space badly and the number is wrong. Point 7 is about the one way out of that.</p>
+
+  <div class="eg">
+    <b>What the choice actually looks like</b>
+    <p>Zone 3 is full of corn that is one water away from ripe. On the wheel there is a 3 on Farmer's Market and a 5 on Apiary or Fruit.</p>
+    <p class="out">TAKE THE 3: harvest a row of corn, plus a market visit you did not especially want.<br>TAKE THE 5: a good hive mark, and a garden action wasted in a zone you have barely planted.</p>
+  </div>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>A die is a <strong>zone and an action stapled together</strong>. Judging dice on their number alone is how you spend a whole round taking second actions you had no use for.</p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>4</b> The leftover die</p>
+  <h2>Everyone gets the lowest die nobody took, so drafting is partly about what you leave behind.</h2>
+
+  <p>Once every player has chosen a die and used it, there are still dice on the wheel. Look at the ones remaining, find the <strong>lowest value among them</strong>, and every player uses that die at the same time: its garden action and its rondel action, for all of you.</p>
+
+  <p>So each round you get four actions from dice, not two: your own die's pair, and the shared die's pair. And the shared die is not random. It is a consequence of what everybody left, and everybody knows in advance which die it is likely to be.</p>
+
+  <p>This is the only place where another player's decision touches yours, and it cuts both ways. If a 2 and a 6 are left and you take the 6, you have just handed the whole table the 2. If you desperately want that 2 for zone 2, taking a different die and letting it survive to the end is often better than taking it yourself.</p>
+
+  <div class="eg">
+    <b>Reading the leftovers</b>
+    <p>Three dice remain when your turn comes: a 1 on Shed Time, a 4 on Apiary or Fruit, a 6 on Farmer's Market. One opponent still has to choose.</p>
+    <p>If you take the 4 and they take the 6, the 1 is the shared die and everybody gardens in zone 1. If you take the 1, the shared die becomes the 4 or the 6 instead.</p>
+    <p class="out">You are choosing two dice at once: yours, and the one you make likely for everyone.</p>
+  </div>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Low dice tend to survive to the end of the draft, which means <strong>zone 1 and zone 2 get watered communally far more often than zone 6 does</strong>. Plant accordingly.</p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>5</b> Plant against water</p>
+  <h2>Planting costs you two boxes. Watering pays you every box you planted earlier.</h2>
+
+  <p>Whichever zone a die sends you to, you choose one of two things.</p>
+
+  <ul class="clean">
+    <li><strong>Plant:</strong> fill in the bottom box of up to two crops in that zone. That is it. Two pencil marks, no growth, no points, no goods.</li>
+    <li><strong>Water:</strong> fill in the next empty box of <em class="t">every</em> crop already planted in that zone. Two crops planted means two marks. Six crops planted means six marks, from one action.</li>
+  </ul>
+
+  <p>Watering is the multiplier and planting is the setup, so the natural rhythm in a zone is: plant, plant, plant, then water it over and over while everything climbs together. A zone you keep half planted waters badly forever.</p>
+
+  <figure>
+    <svg viewBox="0 0 760 260" role="img" aria-labelledby="pw-t pw-d">
+      <title id="pw-t">The same water action in a thin zone and a full zone</title>
+      <desc id="pw-d">Two garden zones side by side. The thin zone has two planted crops, so one water action fills two boxes. The full zone has six planted crops, so the same single water action fills six boxes.</desc>
+      <g font-family="Space Mono, monospace" font-size="11" letter-spacing="1" fill="#7B7863">
+        <text x="0" y="16">ZONE 2, PLANTED TWICE</text>
+        <text x="400" y="16">ZONE 5, PLANTED SIX TIMES OVER THREE EARLIER TURNS</text>
+      </g>
+      <g stroke="#26261C" stroke-width="1.3" fill="#FBFAF0">
+        <rect x="0" y="34" width="22" height="22"/><rect x="0" y="60" width="22" height="22"/>
+        <rect x="30" y="34" width="22" height="22"/><rect x="30" y="60" width="22" height="22"/>
+      </g>
+      <g fill="#4C7A3E" opacity=".55">
+        <rect x="2" y="62" width="18" height="18"/><rect x="32" y="62" width="18" height="18"/>
+      </g>
+      <g fill="#C79210" opacity=".85">
+        <rect x="2" y="36" width="18" height="18"/><rect x="32" y="36" width="18" height="18"/>
+      </g>
+      <text x="70" y="52" font-family="Karla, sans-serif" font-size="15" fill="#26261C">one water action</text>
+      <text x="70" y="74" font-family="Space Mono, monospace" font-size="14" fill="#C0541D">2 boxes filled</text>
+
+      <g stroke="#26261C" stroke-width="1.3" fill="#FBFAF0">
+        <rect x="400" y="34" width="22" height="22"/><rect x="400" y="60" width="22" height="22"/>
+        <rect x="430" y="34" width="22" height="22"/><rect x="430" y="60" width="22" height="22"/>
+        <rect x="460" y="34" width="22" height="22"/><rect x="460" y="60" width="22" height="22"/>
+        <rect x="490" y="34" width="22" height="22"/><rect x="490" y="60" width="22" height="22"/>
+        <rect x="520" y="34" width="22" height="22"/><rect x="520" y="60" width="22" height="22"/>
+        <rect x="550" y="34" width="22" height="22"/><rect x="550" y="60" width="22" height="22"/>
+      </g>
+      <g fill="#4C7A3E" opacity=".55">
+        <rect x="402" y="62" width="18" height="18"/><rect x="432" y="62" width="18" height="18"/>
+        <rect x="462" y="62" width="18" height="18"/><rect x="492" y="62" width="18" height="18"/>
+        <rect x="522" y="62" width="18" height="18"/><rect x="552" y="62" width="18" height="18"/>
+      </g>
+      <g fill="#C79210" opacity=".85">
+        <rect x="402" y="36" width="18" height="18"/><rect x="432" y="36" width="18" height="18"/>
+        <rect x="462" y="36" width="18" height="18"/><rect x="492" y="36" width="18" height="18"/>
+        <rect x="522" y="36" width="18" height="18"/><rect x="552" y="36" width="18" height="18"/>
+      </g>
+      <text x="590" y="52" font-family="Karla, sans-serif" font-size="15" fill="#26261C">one water action</text>
+      <text x="590" y="74" font-family="Space Mono, monospace" font-size="14" fill="#C0541D">6 boxes filled</text>
+
+      <line x1="0" y1="112" x2="760" y2="112" stroke="#26261C" stroke-opacity=".18"/>
+      <g font-family="Karla, sans-serif" font-size="16" fill="#26261C">
+        <text x="0" y="146">Both actions cost exactly one die. The difference is what you did three turns ago.</text>
+      </g>
+      <g font-family="Space Mono, monospace" font-size="11" fill="#7B7863">
+        <text x="0" y="184">GREEN = THE PLANTED BOTTOM BOX &#183; GOLD = THE BOX THIS WATER ACTION FILLS</text>
+      </g>
+      <g font-family="Bitter, serif" font-size="17" fill="#4C7A3E">
+        <text x="0" y="222">The rain event later in the game waters every zone at once, and it pays the same way:</text>
+        <text x="0" y="246">a garden that is planted wide turns one event into thirty pencil marks.</text>
+      </g>
+    </svg>
+    <figcaption>PLANTING IS AN INVESTMENT THAT PAYS OUT EVERY SINGLE TIME YOU LATER WATER THAT ZONE.</figcaption>
+  </figure>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Water actions are worth whatever the zone is holding. <strong>Plant early and plant deep, because late planting never gets watered enough to ripen.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>6</b> The three sisters</p>
+  <h2>Corn holds the beans up, so the corn has to grow before the beans can go in at all.</h2>
+
+  <p>Every zone holds the same trio, and they are shaped differently on purpose.</p>
+
+  <ul class="clean">
+    <li><strong>Corn</strong> is four boxes tall. Ripe corn is worth <strong>3 points</strong>, the best crop points in the game, and each zone has three to five of them.</li>
+    <li><strong>Beans</strong> are two boxes tall and sit next to a corn. A bean is worth 1 point. The catch: <strong>you cannot plant a bean until the corn beside it is at least two boxes tall.</strong></li>
+    <li><strong>Pumpkins</strong> sit around the outside edge and vary from one to four boxes. They are worth <strong>zero points</strong>, and you want them anyway, for reasons in a moment.</li>
+  </ul>
+
+  <p>That one gating rule is the engine of the whole garden. You cannot open a zone by planting everything at once. You plant corn, you water it twice, and only then does the zone become plantable again for its beans, which then need two waters of their own. A zone takes several visits before it is even fully seeded.</p>
+
+  <figure>
+    <svg viewBox="0 0 760 320" role="img" aria-labelledby="sis-t sis-d">
+      <title id="sis-t">The order the three sisters have to be planted in</title>
+      <desc id="sis-d">Four steps. First, plant a corn, filling its bottom box. Second, water the zone twice so the corn stands two boxes tall, which unlocks the bean beside it. Third, plant the bean. Fourth, keep watering so both climb together, the corn ripening at four boxes for three points and the bean at two boxes for one point.</desc>
+      <g font-family="Space Mono, monospace" font-size="11" letter-spacing="1" fill="#7B7863">
+        <text x="0" y="14">1. PLANT CORN</text>
+        <text x="190" y="14">2. WATER TWICE</text>
+        <text x="380" y="14">3. NOW THE BEAN CAN GO IN</text>
+        <text x="600" y="14">4. WATER, AND BOTH RIPEN</text>
+      </g>
+
+      <g stroke="#26261C" stroke-width="1.3" fill="#FBFAF0">
+        <rect x="20" y="40" width="26" height="26"/><rect x="20" y="70" width="26" height="26"/>
+        <rect x="20" y="100" width="26" height="26"/><rect x="20" y="130" width="26" height="26"/>
+        <rect x="60" y="100" width="26" height="26"/><rect x="60" y="130" width="26" height="26"/>
+      </g>
+      <rect x="22" y="132" width="22" height="22" fill="#C79210"/>
+      <text x="20" y="180" font-family="Space Mono, monospace" font-size="11" fill="#C0541D">BEAN LOCKED</text>
+
+      <g stroke="#26261C" stroke-width="1.3" fill="#FBFAF0">
+        <rect x="210" y="40" width="26" height="26"/><rect x="210" y="70" width="26" height="26"/>
+        <rect x="210" y="100" width="26" height="26"/><rect x="210" y="130" width="26" height="26"/>
+        <rect x="250" y="100" width="26" height="26"/><rect x="250" y="130" width="26" height="26"/>
+      </g>
+      <rect x="212" y="132" width="22" height="22" fill="#C79210"/>
+      <rect x="212" y="102" width="22" height="22" fill="#C79210"/>
+      <rect x="212" y="72" width="22" height="22" fill="#C79210"/>
+      <text x="210" y="180" font-family="Space Mono, monospace" font-size="11" fill="#4C7A3E">CORN IS TALL ENOUGH</text>
+
+      <g stroke="#26261C" stroke-width="1.3" fill="#FBFAF0">
+        <rect x="420" y="40" width="26" height="26"/><rect x="420" y="70" width="26" height="26"/>
+        <rect x="420" y="100" width="26" height="26"/><rect x="420" y="130" width="26" height="26"/>
+        <rect x="460" y="100" width="26" height="26"/><rect x="460" y="130" width="26" height="26"/>
+      </g>
+      <rect x="422" y="132" width="22" height="22" fill="#C79210"/>
+      <rect x="422" y="102" width="22" height="22" fill="#C79210"/>
+      <rect x="422" y="72" width="22" height="22" fill="#C79210"/>
+      <rect x="462" y="132" width="22" height="22" fill="#4C7A3E"/>
+      <text x="420" y="180" font-family="Space Mono, monospace" font-size="11" fill="#4C7A3E">TWO CROPS CLIMBING</text>
+
+      <g stroke="#26261C" stroke-width="1.3" fill="#FBFAF0">
+        <rect x="630" y="40" width="26" height="26"/><rect x="630" y="70" width="26" height="26"/>
+        <rect x="630" y="100" width="26" height="26"/><rect x="630" y="130" width="26" height="26"/>
+        <rect x="670" y="100" width="26" height="26"/><rect x="670" y="130" width="26" height="26"/>
+      </g>
+      <rect x="632" y="132" width="22" height="22" fill="#C79210"/>
+      <rect x="632" y="102" width="22" height="22" fill="#C79210"/>
+      <rect x="632" y="72" width="22" height="22" fill="#C79210"/>
+      <rect x="632" y="42" width="22" height="22" fill="#C79210"/>
+      <circle cx="643" cy="53" r="7" fill="none" stroke="#26261C" stroke-width="2"/>
+      <rect x="672" y="132" width="22" height="22" fill="#4C7A3E"/>
+      <rect x="672" y="102" width="22" height="22" fill="#4C7A3E"/>
+      <circle cx="683" cy="113" r="7" fill="none" stroke="#26261C" stroke-width="2"/>
+      <text x="630" y="180" font-family="Space Mono, monospace" font-size="12" fill="#C0541D">3 PTS + 1 PT</text>
+
+      <line x1="0" y1="206" x2="760" y2="206" stroke="#26261C" stroke-opacity=".18"/>
+      <g font-family="Karla, sans-serif" font-size="16" fill="#26261C">
+        <text x="0" y="238">Circles are harvests. Filling a crop's circled box is the moment it counts for anything.</text>
+      </g>
+      <g font-family="Bitter, serif" font-size="17" fill="#4C7A3E">
+        <text x="0" y="276">A corn planted in round seven is four waters from ripe, and there are not four waters left.</text>
+        <text x="0" y="300">A bean planted in round seven often is, which is why beans are the late crop.</text>
+      </g>
+    </svg>
+    <figcaption>THE PLANTING ORDER IS NOT ADVICE, IT IS A RULE: NO BEAN GOES IN BESIDE A CORN UNDER TWO BOXES TALL.</figcaption>
+  </figure>
+
+  <h3>What pumpkins are actually for</h3>
+  <p>Pumpkins score nothing, but harvesting one gives you <strong>goods</strong> (1, 2 or 3, depending on the pumpkin), and when you harvest <strong>two pumpkins that sit next to each other</strong>, you take the perennial action printed between them. Goods and perennial actions are the two things that make the rest of your sheet move, so the crop worth no points is often the crop that wins the game.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Corn is points, beans are cheap points that need corn first, and <strong>pumpkins are not points at all, they are fuel</strong>. A garden planted only for points is a garden with no engine.</p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>7</b> Compost</p>
+  <h2>The cure for the die you wanted being gone.</h2>
+
+  <p>You start the game with one compost. Whenever you plant or water, you may spend compost to <strong>shift the die value by 1, up or down</strong>, so it points at a different zone. You can spend several on the same die: a 5 with two compost spent becomes a 3. The values wrap, so a 6 can become a 1 for one compost.</p>
+
+  <p>This is the release valve for everything above. The wheel offers you a 5 when your whole garden is in zone 2; without compost that turn is close to wasted, with two compost it is exactly the turn you wanted. Compost turns the draft from "what is left" into "what can I afford to fix".</p>
+
+  <figure>
+    <svg viewBox="0 0 760 220" role="img" aria-labelledby="cmp-t cmp-d">
+      <title id="cmp-t">Spending compost to move a die to the zone you want</title>
+      <desc id="cmp-d">A five die, with two compost boxes crossed off, becomes a three, letting you water garden zone three. A second example shows a six shifting by one to become a one, because die values wrap around.</desc>
+      <g font-family="Space Mono, monospace" font-size="11" letter-spacing="1" fill="#7B7863">
+        <text x="0" y="14">THE DIE YOU COULD GET</text>
+        <text x="250" y="14">COMPOST SPENT</text>
+        <text x="520" y="14">THE ZONE YOU WANTED</text>
+      </g>
+      <rect x="0" y="30" width="44" height="44" rx="7" fill="#FBFAF0" stroke="#26261C" stroke-width="1.8"/>
+      <g fill="#26261C"><circle cx="12" cy="42" r="4"/><circle cx="32" cy="42" r="4"/><circle cx="22" cy="52" r="4"/><circle cx="12" cy="62" r="4"/><circle cx="32" cy="62" r="4"/></g>
+      <g stroke="#7A5230" stroke-width="2">
+        <rect x="250" y="34" width="30" height="30" fill="#FBFAF0" stroke="#26261C" stroke-width="1.3"/>
+        <path d="M254 38 L276 60 M276 38 L254 60"/>
+        <rect x="292" y="34" width="30" height="30" fill="#FBFAF0" stroke="#26261C" stroke-width="1.3"/>
+        <path d="M296 38 L318 60 M318 38 L296 60"/>
+      </g>
+      <text x="334" y="56" font-family="Space Mono, monospace" font-size="12" fill="#7A5230">MINUS 2</text>
+      <rect x="520" y="30" width="44" height="44" rx="7" fill="#E2EBDA" stroke="#4C7A3E" stroke-width="1.8"/>
+      <g fill="#26261C"><circle cx="532" cy="42" r="4"/><circle cx="542" cy="52" r="4"/><circle cx="552" cy="62" r="4"/></g>
+      <text x="580" y="58" font-family="Karla, sans-serif" font-size="16" fill="#26261C">water everything in zone 3</text>
+      <g stroke="#26261C" stroke-width="1.6" fill="none">
+        <defs><marker id="ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#26261C"/></marker></defs>
+        <path d="M56 52 H 238" marker-end="url(#ar2)"/>
+        <path d="M408 52 H 508" marker-end="url(#ar2)"/>
+      </g>
+      <line x1="0" y1="104" x2="760" y2="104" stroke="#26261C" stroke-opacity=".18"/>
+      <g font-family="Karla, sans-serif" font-size="16" fill="#26261C">
+        <text x="0" y="136">Values wrap, so a 6 is one compost away from zone 1 and never a dead die.</text>
+      </g>
+      <g font-family="Bitter, serif" font-size="17" fill="#C0541D">
+        <text x="0" y="176">Careful: if the space you took the die from is also Plant or Water,</text>
+        <text x="0" y="200">the adjusted value applies to both actions. You cannot split a die across two zones.</text>
+      </g>
+    </svg>
+    <figcaption>COMPOST IS NOT A RESOURCE YOU HOARD, IT IS THE PRICE OF NOT BEING FIRST PLAYER.</figcaption>
+  </figure>
+
+  <p>There is a permanent version of this too. Climbing the <strong>iris</strong> perennial gives you a free plus one or minus one whenever you plant or water, and climbing it further gives you a second one, stacking with the first. An iris player is drafting from a wheel two zones wider than everybody else's, every single turn, for free.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Running dry on compost is how a good garden stalls. <strong>Every time you take a die you did not want, that was compost you should have banked earlier.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>8</b> Goods and the stars</p>
+  <h2>Goods are not money. They are a track, and the stars on it are free actions.</h2>
+
+  <p>You start with zero goods. Harvesting pumpkins gives goods, harvesting raspberries gives 3 goods, harvesting wax in the hive gives 4, and one rondel space simply hands out 4 goods and a compost. Whenever you gain goods you fill in that many boxes on the goods track, left to right, top to bottom, and you never rub them out again.</p>
+
+  <p>Scattered along the track are <strong>stars</strong>. Fill a star and you immediately get a <strong>bonus action</strong>: fill in the next empty box anywhere in your perennials, apiary, fruit or shed. One restriction matters enormously: <strong>bonus actions can never be spent in the garden.</strong> The garden is fed by dice, and only by dice.</p>
+
+  <p>Because a bonus action can itself trigger a harvest that pays goods, which can fill another star, the track is where the game's famous chains happen.</p>
+
+  <figure>
+    <svg viewBox="0 0 760 250" role="img" aria-labelledby="chn-t chn-d">
+      <title id="chn-t">A goods chain firing off a single harvest</title>
+      <desc id="chn-d">Harvesting a raspberry gives three goods, which fills a star on the goods track. The star gives a bonus action, spent in the apiary to harvest wax, which gives four more goods, which fills another star, giving another bonus action.</desc>
+      <g font-family="Karla, sans-serif" font-size="14" text-anchor="middle">
+        <rect x="0" y="30" width="132" height="58" rx="4" fill="#FBFAF0" stroke="#26261C" stroke-width="1.6"/>
+        <text x="66" y="54" fill="#26261C">harvest a raspberry</text>
+        <text x="66" y="74" font-family="Space Mono, monospace" font-size="12" fill="#C79210">+3 GOODS</text>
+
+        <rect x="156" y="30" width="132" height="58" rx="4" fill="#FBF3D8" stroke="#C79210" stroke-width="1.6"/>
+        <text x="222" y="54" fill="#26261C">a star is filled</text>
+        <text x="222" y="74" font-family="Space Mono, monospace" font-size="12" fill="#C79210">BONUS ACTION</text>
+
+        <rect x="312" y="30" width="132" height="58" rx="4" fill="#FBFAF0" stroke="#26261C" stroke-width="1.6"/>
+        <text x="378" y="54" fill="#26261C">spend it on wax</text>
+        <text x="378" y="74" font-family="Space Mono, monospace" font-size="12" fill="#C79210">+4 GOODS</text>
+
+        <rect x="468" y="30" width="132" height="58" rx="4" fill="#FBF3D8" stroke="#C79210" stroke-width="1.6"/>
+        <text x="534" y="54" fill="#26261C">another star</text>
+        <text x="534" y="74" font-family="Space Mono, monospace" font-size="12" fill="#C79210">BONUS ACTION</text>
+
+        <rect x="624" y="30" width="132" height="58" rx="4" fill="#E2EBDA" stroke="#4C7A3E" stroke-width="1.6"/>
+        <text x="690" y="54" fill="#26261C">and onward</text>
+        <text x="690" y="74" font-family="Space Mono, monospace" font-size="11" fill="#4C7A3E">FLOWERS, FRUIT, SHED</text>
+      </g>
+      <g stroke="#4C7A3E" stroke-width="1.8" fill="none">
+        <defs><marker id="ar3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#4C7A3E"/></marker></defs>
+        <path d="M134 59 H 150" marker-end="url(#ar3)"/>
+        <path d="M290 59 H 306" marker-end="url(#ar3)"/>
+        <path d="M446 59 H 462" marker-end="url(#ar3)"/>
+        <path d="M602 59 H 618" marker-end="url(#ar3)"/>
+      </g>
+      <g font-family="Space Mono, monospace" font-size="11" fill="#7B7863">
+        <text x="0" y="126">ONE HARVEST, FOUR MARKS. NONE OF THEM COST A DIE.</text>
+      </g>
+      <line x1="0" y1="146" x2="760" y2="146" stroke="#26261C" stroke-opacity=".18"/>
+      <g font-family="Bitter, serif" font-size="17" fill="#26261C">
+        <text x="0" y="182">The chain stops the moment it would enter the garden. Bonus actions cannot plant</text>
+        <text x="0" y="206">and cannot water, so the garden's only clock is still the eight rounds of dice.</text>
+      </g>
+    </svg>
+    <figcaption>THE GOODS TRACK IS THE PART OF THE SHEET THAT PAYS YOU FOR HAVING BUILT THE OTHER PARTS.</figcaption>
+  </figure>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Goods do two jobs at once: they <strong>hand out free actions on the way past the stars</strong> and they set your standing at the farmer's market. That is the next point.</p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>9</b> The farmer's market</p>
+  <h2>You never spend goods, so the market is a ratchet you climb once and keep.</h2>
+
+  <p>When you visit the farmer's market, whether by taking that rondel space or resolving the round's event, you look at your goods total and take everything on the highest row you have reached. Nothing is deducted. Your total only ever goes up, so every market visit for the rest of the game is at least as good as this one.</p>
+
+  <div class="scroll"><table>
+    <tr><th>Goods</th><th>What a market visit gives you</th></tr>
+    <tr><td class="n">0+</td><td>1 compost</td></tr>
+    <tr><td class="n">4+</td><td>1 perennial action and 1 compost</td></tr>
+    <tr><td class="n">20+</td><td>1 perennial action and 1 fruit action</td></tr>
+    <tr><td class="n">35+</td><td>2 perennial actions and 1 compost</td></tr>
+    <tr><td class="n">50+</td><td>2 perennial actions and 1 fruit action</td></tr>
+    <tr><td class="n">70+</td><td>2 perennial actions and 1 bonus action</td></tr>
+  </table></div>
+
+  <p>Read that table as a schedule rather than a shop. The 20 goods row is worth roughly twice the 4 row, and there are several market visits in a game between the rondel space and the events. Crossing a threshold <strong>before</strong> a market round is worth more than crossing it after, and the difference is often two or three whole actions.</p>
+
+  <p>It also tells you what pumpkins and raspberries are really doing. A pumpkin worth 3 goods is not a small pumpkin, it is three steps closer to a permanently better market, plus whatever stars it fills on the way.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Goods are cumulative and never spent, so <strong>the question is never "can I afford it", it is "am I above the line yet"</strong>. Time your goods to arrive before the market does.</p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>10</b> Perennials</p>
+  <h2>Six flowers that pay you on the way up and score you at the top.</h2>
+
+  <p>Down one side of your sheet are six perennials: tulip, hydrangea, iris, hyacinth, crocus and daffodil. Each is a short column filled bottom to top, one box per perennial action. Most boxes give you something the instant you fill them, and finishing a flower is worth points at the end.</p>
+
+  <div class="scroll"><table>
+    <tr><th>Flower</th><th>What it gives on the way up</th><th>Finished</th></tr>
+    <tr><td>Iris</td><td class="n">a permanent plus one or minus one on your plant and water dice, then a second one that stacks</td><td class="n">12 pts</td></tr>
+    <tr><td>Hyacinth</td><td class="n">2 goods, three times over</td><td class="n">10 pts</td></tr>
+    <tr><td>Hydrangea</td><td class="n">a raspberry, a blackberry, an apple and a peach action</td><td class="n">7 pts</td></tr>
+    <tr><td>Crocus</td><td class="n">6 compost in total, in four helpings</td><td class="n">6 pts</td></tr>
+    <tr><td>Daffodil</td><td class="n">four shed actions</td><td class="n">4 pts</td></tr>
+    <tr><td>Tulip</td><td class="n">a fruit action, then goods every time you harvest a peach</td><td class="n">1 pt per harvested fruit</td></tr>
+  </table></div>
+
+  <p>Notice the trade the table is making. The flowers with the biggest lump of points at the top give you the least along the way; daffodil is only 4 points but hands you four shed actions, which are four permanent rule changes. Iris is the exception that does both, which is why it is the flower everyone reaches for.</p>
+
+  <p>Perennial actions come from a lot of places at once: adjacent harvested pumpkins, every market visit, the shed's Fancy Labels, and any bonus action you choose to spend there. That is a lot of small taps, which is why committing to one or two flowers early beats sprinkling a mark on each.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>A half climbed flower scores nothing at all. <strong>Pick the two flowers your garden actually feeds and finish them</strong>, rather than owning six impressive-looking stubs.</p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>11</b> The apiary and the orchard</p>
+  <h2>Two tracks whose payoff is not points, it is more actions.</h2>
+
+  <p>The <strong>apiary</strong> starts as one column, the main hive. Filling its circles hands you fruit actions on the way. When you finish it, the hive splits into three shorter sections and every later apiary action can go into whichever you like:</p>
+
+  <ul class="clean">
+    <li><strong>Wax</strong>, three of them. Each harvested wax gives you <strong>4 goods</strong> immediately and scores 2, 2 and 5 points.</li>
+    <li><strong>Honey</strong>, three of them. No goods, but the biggest points on the sheet: 5, 5 and 8.</li>
+    <li><strong>Split hive</strong>, worth 3 points, and a run of action bursts: a plant action in any zone, three fruit actions, and two more plant or water actions in zones of your choice.</li>
+  </ul>
+
+  <p>That split hive line deserves a second read. Bonus actions can never touch the garden, but the split hive can. It is one of the few ways to plant and water without spending a die.</p>
+
+  <p>The <strong>orchard</strong> is four rows filled left to right. Apples are 3 points each, blackberries 2, raspberries pay 3 goods every time and score at 1, 2 and 5, and peaches score nothing but <strong>give you a water action in any zone you like</strong> when harvested. Peaches are the orchard's version of pumpkins: no points, quietly excellent.</p>
+
+  <div class="eg">
+    <b>Why the two tracks are really one track</b>
+    <p>Hive circles give fruit actions. Fruit gives goods and water actions. Goods fill stars. Stars give bonus actions, which can go back into the hive.</p>
+    <p class="out">Nothing here scores much on its own. Together they turn one die into five or six marks.</p>
+  </div>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Wax pays goods, honey pays points, peaches pay water. <strong>Decide which of those three your sheet is short of</strong>, because you will not have the actions to chase all of them.</p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>12</b> The shed</p>
+  <h2>Fifteen tools, each one a permanent change to the rules you are playing under.</h2>
+
+  <p>The shed is a row of tools, each two or three boxes wide, filled left to right by shed actions. Finishing a tool unlocks it for the rest of the game. Some are pure points, but the good ones rewrite something.</p>
+
+  <ul class="clean">
+    <li><strong>Seed Spreader:</strong> a plant action now plants up to <em class="t">three</em> crops instead of two. That is fifty percent more garden per planting turn, for the rest of the game.</li>
+    <li><strong>Rain Barrel:</strong> after each rain event, take another water action in any zone. Rain is already the biggest turn of the round.</li>
+    <li><strong>Shovel:</strong> at any time, spend 3 compost for a bonus action. It gives your compost a second use, so a quiet turn is never wasted.</li>
+    <li><strong>Wheelbarrow:</strong> every shed action also gives a good, so the shed starts paying for itself.</li>
+    <li><strong>Mulch:</strong> you may throw away a rondel action to take 2 perennial actions instead, which quietly fixes every bad space on the wheel.</li>
+    <li><strong>Hive Tool, Pie Safe, Mason Jars, Pitchfork, Fancy Labels:</strong> small triggers that fire on things you were already doing.</li>
+    <li><strong>Shiny New Tractor:</strong> 15 points and nothing else. String Trimmer: 6 points and nothing else.</li>
+    <li><strong>Fruit Bowl:</strong> 1, 4, 7 or 11 points for having harvested 1, 2, 3 or 4 different kinds of fruit. Casserole Dish: a point per two harvested beans. Pumpkin Carving Kit: a point per pumpkin in your longest unbroken run of harvested pumpkins.</li>
+  </ul>
+
+  <p>The important line runs between the two kinds. A tool that changes a rule is worth many times its printed score if you finish it in round two, and almost nothing if you finish it in round eight. A tool that is just points is worth exactly the same whenever you complete it.</p>
+
+  <div class="trap">
+    <b>The trap</b>
+    <p>New players complete the Shiny New Tractor early because 15 points is the biggest number on the sheet. It is also 15 points at the end of round one and 15 points at the end of round eight. <strong>Buy your rule changes first and your points last</strong>, and the tractor is a fine way to spend leftover late actions.</p>
+  </div>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Shed actions are cheap and everywhere: a rondel space, an event, a daffodil, any bonus action. <strong>What is scarce is the rounds a finished tool has left to work in.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>13</b> Events and the clock</p>
+  <h2>Every round ends with a free action, and it is printed on the board from the start.</h2>
+
+  <p>After the drafting, all players resolve the round's event together. There are three kinds: <strong>Shed</strong> (one shed action), <strong>Farmer's Market</strong> (a market visit at your current goods), and <strong>Rain</strong> (a water action in every zone, 1 through 6, in order).</p>
+
+  <p>Rain is the largest single thing that happens in the game. A garden with crops planted in all six zones turns one rain into dozens of pencil marks and a wave of harvests; a garden concentrated in two zones gets a fraction of that. And because the round track is face up on the board from setup, you can see rain coming rounds in advance.</p>
+
+  <p>This is where the eight round clock becomes real. Corn needs four boxes and a bean needs two. Work backwards from the last rain: anything planted after it needs its own dice to finish, and dice are exactly the thing you are short of.</p>
+
+  <div class="eg">
+    <b>Planning around a printed event</b>
+    <p>Rain is coming at the end of this round. You have two dice worth of garden actions before it.</p>
+    <p>Spending both on <em>watering</em> duplicates work the rain will do for free. Spending both on <em>planting</em>, in two different zones, means the rain waters six or eight more crops than it otherwise would.</p>
+    <p class="out">Plant before the rain, water after it.</p>
+  </div>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Nothing in this game is a surprise except the dice. <strong>The events are a timetable</strong>, and playing to it is most of the difference between a 45 point garden and a 75 point one.</p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>14</b> Your first game</p>
+  <h2>How not to lose it.</h2>
+
+  <p>Everything above is the game. This is where the instincts other games gave you get in the way.</p>
+
+  <ul class="clean">
+    <li><strong>Plant much earlier than feels right.</strong> Watering is the payoff action, and it pays per crop already in the ground. A first game spent watering thin zones scores about half of what it should.</li>
+    <li><strong>Get corn to two boxes fast in the zones you care about.</strong> Until then, half of that zone's crops are unplantable and every water action there is running at reduced value.</li>
+    <li><strong>Do not chase points with pumpkins and peaches, chase fuel.</strong> They score zero and they are still where the goods, perennial actions and free waters come from.</li>
+    <li><strong>Keep compost in hand.</strong> One compost turns a wrong die into the right one. Being compost-poor in the second half means taking whatever is left and liking it.</li>
+    <li><strong>Look at the wheel before you look at your garden.</strong> The value and the space come as a pair, and the pair that suits you may only exist this round.</li>
+    <li><strong>Notice which die you are leaving.</strong> The lowest die left over is used by everybody, including you, so leaving a good low die is often stronger than taking it.</li>
+    <li><strong>Buy the rule-changing tools early.</strong> Seed Spreader, Rain Barrel and Shovel are worth several actions a round from the moment they land. The 15 point tractor is worth the same in round eight.</li>
+    <li><strong>Finish what you start.</strong> Perennials score only when completed, and a bare shed item scores nothing. Two finished columns beat five started ones.</li>
+    <li><strong>Read the round track before round one.</strong> Plant into the rain, and drive your goods across a market threshold just before a market round.</li>
+  </ul>
+
+  <div class="scroll"><table>
+    <tr><th>At the end you score</th><th>Which mostly means</th></tr>
+    <tr><td class="n">3 per harvested corn, 1 per harvested bean</td><td>The garden is usually the biggest single block, and pumpkins add none of it</td></tr>
+    <tr><td class="n">completed perennials</td><td>Up to 12 for a finished iris, 10 for a hyacinth, nothing for an unfinished one</td></tr>
+    <tr><td class="n">wax at 2/2/5, honey at 5/5/8, split hive 3</td><td>Honey is the densest scoring on the sheet if you get the hive open in time</td></tr>
+    <tr><td class="n">3 per apple, 2 per blackberry, raspberries at 1/2/5</td><td>Peaches score nothing and were never meant to</td></tr>
+    <tr><td class="n">completed shed items</td><td>Where the flat lumps live, tractor included</td></tr>
+  </table></div>
+
+  <p>For calibration: the solo scoring chart treats 40 as a respectable first summer, 50 to 64 as a blue ribbon, and 65 to 79 as a state champion. The rulebook's own worked example totals 77.</p>
+
+  <div class="note">
+    <span class="lab">The whole game in one line</span>
+    <p>The die says where and the space says what else, so the player who wins is the one whose <strong>garden is planted wide enough that any zone is worth watering</strong>, and whose <strong>sheet turns every harvest into two more actions</strong>.</p>
+  </div>
+</article>
+
+<footer>A teaching walkthrough of Three Sisters by Ben Pinchback and Matt Riddle (Motor City Gameworks and 25th Century Games, 2021, now published by AllPlay). This page teaches what the game is and how it thinks; the rulebook in the box has the exact numbers, limits and edge cases. <a href="../">Back to the shelf</a>.</footer>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var pts = Array.prototype.slice.call(document.querySelectorAll('.pt'));
+  var svg = document.getElementById('row');
+  var count = document.getElementById('count');
+  var NS = 'http://www.w3.org/2000/svg';
+
+  var step = 20, x0 = 4, top = 12, side = 15, cells = [];
+  pts.forEach(function(_, i){
+    var x = x0 + i * step;
+    var g = document.createElementNS(NS, 'g');
+    var box = document.createElementNS(NS, 'rect');
+    box.setAttribute('class', 'box');
+    box.setAttribute('x', x);
+    box.setAttribute('y', top);
+    box.setAttribute('width', side);
+    box.setAttribute('height', side);
+    box.setAttribute('rx', 1.5);
+    var mark = document.createElementNS(NS, 'path');
+    mark.setAttribute('class', 'mark');
+    mark.setAttribute('d',
+      'M' + (x + 3.5) + ',' + (top + 3.5) + ' L' + (x + side - 3.5) + ',' + (top + side - 3.5) +
+      ' M' + (x + side - 3.5) + ',' + (top + 3.5) + ' L' + (x + 3.5) + ',' + (top + side - 3.5));
+    g.appendChild(box);
+    g.appendChild(mark);
+    svg.appendChild(g);
+    cells.push(g);
+  });
+
+  var sprout = document.createElementNS(NS, 'g');
+  sprout.setAttribute('id', 'sprout');
+  var stem = document.createElementNS(NS, 'path');
+  stem.setAttribute('class', 'stem');
+  stem.setAttribute('d', 'M7.5,10 C7.5,6 7.5,4 7.5,1');
+  var leafL = document.createElementNS(NS, 'path');
+  leafL.setAttribute('class', 'leaf');
+  leafL.setAttribute('d', 'M7.5,5 C4,5 2,3.6 1,1.6 C4,1 6.4,2.4 7.5,5 Z');
+  var leafR = document.createElementNS(NS, 'path');
+  leafR.setAttribute('class', 'leaf');
+  leafR.setAttribute('d', 'M7.5,6.4 C11,6.4 13,5 14,3 C11,2.4 8.6,3.8 7.5,6.4 Z');
+  sprout.appendChild(stem);
+  sprout.appendChild(leafL);
+  sprout.appendChild(leafR);
+  svg.appendChild(sprout);
+
+  var width = Math.ceil(x0 * 2 + (pts.length - 1) * step + side);
+  svg.setAttribute('viewBox', '0 0 ' + width + ' 34');
+
+  var at = 0;
+  function paint(n){
+    if(n === at) return;
+    at = n;
+    cells.forEach(function(c, i){ c.classList.toggle('on', i < n); });
+    sprout.setAttribute('transform', 'translate(' + (x0 + (n - 1) * step) + ',0)');
+    count.textContent = n + ' / ' + pts.length;
+    svg.setAttribute('aria-label', 'Point ' + n + ' of ' + pts.length);
+  }
+
+  var ticking = false;
+  function measure(){
+    ticking = false;
+    var mark = window.innerHeight * 0.45, n = 1;
+    for(var i = 0; i < pts.length; i++){
+      if(pts[i].getBoundingClientRect().top <= mark){ n = i + 1; }
+    }
+    paint(n);
+  }
+  window.addEventListener('scroll', function(){
+    if(!ticking){ ticking = true; window.requestAnimationFrame(measure); }
+  }, {passive:true});
+  window.addEventListener('resize', measure);
+  paint(1);
+  measure();
+})();
+</script>
+</body>
+</html>

@@ -20,6 +20,8 @@ your first game.
 | `games/aeons-end.html` | Aeon's End, 10 points, complete |
 | `games/obsession.html` | Obsession, 22 points, complete |
 | `games/paperback.html` | Paperback, 10 points, complete |
+| `games/harvest.html` | Harvest, 14 points, complete |
+| `games/three-sisters.html` | Three Sisters, 14 points, complete |
 | `games/glass-road.html` | Glass Road, 14 points, complete |
 | `games/through-the-ages.html` | Through the Ages, 20 points, complete |
 | `games/seasons.html` | Seasons, 12 points, complete |
@@ -105,7 +107,9 @@ rail; `taverns-of-tiefenthal.html` chalks up a bar tab; `root.html` tints each
 point with the faction it belongs to; `castles-of-burgundy.html` fills a honeycomb
 estate in the rail, one hex per point;
 `architects-of-the-west-kingdom.html` sends a worker out of the crew in the rail for
-every point; `sleeping-gods-distant-skies.html` flies a
+every point;
+`harvest.html` ripens a field of seedlings in the rail; `three-sisters.html` pencils an
+X into a row of scoresheet boxes with a sprout walking along it; `sleeping-gods-distant-skies.html` flies a
 plane across the horizon while a pocket watch hand comes round.
 
 Every page is **one continuous scroll**. Progress indicators that follow the

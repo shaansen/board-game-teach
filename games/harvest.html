@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Harvest: Learn It Properly</title>
+<meta name="description" content="Learn what Harvest actually is: fourteen points on the twelve wheelbarrows you get for the whole game, the sunrise tile that sells you turn order, and the field action that does unlimited work for one placement.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,600;0,800;1,500&family=Mulish:ital,wght@0,400;0,600;0,800;1,400&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#2E1D10;
+  --ink-2:#57402C;
+  --dim:#8A7458;
+  --husk:#FBF4E5;
+  --husk-2:#F0E3C8;
+  --pumpkin:#C0561F;
+  --russet:#8E3A12;
+  --berry:#3E4384;
+  --berry-pale:#E3E4F1;
+  --wheat:#BC8A23;
+  --leaf:#5C7B35;
+  --line:rgba(46,29,16,.16);
+  --display:"Bitter",Georgia,serif;
+  --body:"Mulish",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;color:var(--ink);font-family:var(--body);font-size:19px;line-height:1.66;
+  -webkit-font-smoothing:antialiased;
+  background:
+    radial-gradient(760px 420px at 88% -6%, rgba(192,86,31,.20), transparent 62%),
+    radial-gradient(640px 480px at 4% 16%, rgba(188,138,35,.16), transparent 60%),
+    repeating-linear-gradient(90deg, rgba(46,29,16,.020) 0 1px, transparent 1px 4px),
+    linear-gradient(180deg,var(--husk),var(--husk-2) 86%);
+  background-attachment:fixed;
+}
+.wrap{max-width:800px;margin:0 auto;padding:0 22px 90px}
+
+/* ---------- the ripening field rail ---------- */
+.rail{
+  position:sticky;top:0;z-index:20;background:rgba(251,244,229,.94);
+  backdrop-filter:blur(6px);border-bottom:1px solid var(--line);padding:7px 22px;
+}
+.rail-in{max-width:800px;margin:0 auto;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.rail-lab{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+#field{flex:1;min-width:150px;max-width:310px;height:32px}
+#field g .stem{stroke:rgba(46,29,16,.30);stroke-width:1.2;fill:none;transition:stroke .4s}
+#field g .ear{fill:transparent;stroke:rgba(46,29,16,.30);stroke-width:1;transition:fill .4s,stroke .4s}
+#field g .soil{fill:rgba(46,29,16,.16);transition:fill .4s}
+#field g.on .stem{stroke:var(--leaf)}
+#field g.on .ear{fill:var(--wheat);stroke:var(--russet)}
+#field g.on .soil{fill:var(--russet)}
+.rail-count{font-family:var(--mono);font-size:12px;color:var(--pumpkin);white-space:nowrap}
+
+.backlink{
+  display:inline-block;margin-top:26px;font-family:var(--mono);font-size:11px;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--dim);text-decoration:none;
+  border-bottom:1px solid transparent;
+}
+.backlink:hover{color:var(--pumpkin);border-bottom-color:var(--pumpkin)}
+
+header.top{padding:28px 0 42px;border-bottom:3px double var(--line)}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--russet);margin:22px 0 14px}
+h1{
+  font-family:var(--display);font-weight:800;font-size:clamp(46px,10vw,90px);
+  line-height:.95;letter-spacing:-.02em;margin:0 0 8px;color:var(--ink);
+}
+h1 small{display:block;font-family:var(--body);font-size:.17em;font-weight:800;letter-spacing:.22em;
+  color:var(--wheat);margin-bottom:14px;text-transform:uppercase}
+.lede{font-size:21px;color:var(--ink-2);max-width:54ch;margin:18px 0 0}
+
+.pt{border-top:1px solid var(--line);padding:44px 0 8px;scroll-margin-top:56px}
+.pt:first-of-type{border-top:none}
+.num{
+  display:inline-flex;align-items:center;gap:12px;margin-bottom:12px;
+  font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--russet);
+}
+.num b{
+  width:32px;height:32px;display:grid;place-items:center;border-radius:50%;
+  background:var(--pumpkin);color:#FDF7EA;font-family:var(--display);font-weight:800;font-size:17px;
+}
+h2{
+  font-family:var(--display);font-weight:800;font-size:clamp(28px,5.2vw,40px);
+  line-height:1.1;margin:0 0 16px;max-width:24ch;letter-spacing:-.015em;
+}
+h3{font-family:var(--display);font-weight:600;font-size:24px;margin:30px 0 6px}
+.pt p{max-width:62ch;margin:0 0 16px}
+strong{font-weight:800}
+em.t{font-style:normal;font-family:var(--mono);font-size:.82em;background:rgba(192,86,31,.13);
+  padding:2px 6px;border-radius:2px}
+.aside{
+  border-left:3px solid var(--wheat);padding:2px 0 2px 18px;margin:24px 0;
+  font-style:italic;color:var(--ink-2);max-width:58ch;
+}
+.trap{
+  margin:26px 0;border:1px solid rgba(142,58,18,.42);background:rgba(142,58,18,.07);
+  padding:16px 20px;max-width:62ch;
+}
+.trap b{
+  display:block;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--russet);margin-bottom:8px;
+}
+.trap p{margin:0}
+.note{
+  margin:30px 0 0;padding:18px 22px;max-width:62ch;
+  background:var(--berry-pale);border:1px solid rgba(62,67,132,.34);
+}
+.note .lab{
+  display:block;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--berry);margin-bottom:8px;
+}
+.note p{margin:0}
+ul.clean{list-style:none;padding:0;margin:0 0 16px;max-width:62ch}
+ul.clean li{padding:8px 0 8px 26px;position:relative;border-bottom:1px dashed rgba(46,29,16,.16)}
+ul.clean li:last-child{border-bottom:none}
+ul.clean li::before{
+  content:"";position:absolute;left:4px;top:18px;width:9px;height:9px;background:var(--leaf);
+  border-radius:50% 0 50% 50%;
+}
+.eg{
+  margin:26px 0;max-width:62ch;border-left:3px solid var(--leaf);
+  background:rgba(92,123,53,.10);padding:16px 20px 16px 18px;
+}
+.eg b{
+  display:block;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--leaf);margin-bottom:8px;
+}
+.eg p{margin:0 0 10px}
+.eg p:last-child{margin:0}
+.eg .out{font-family:var(--mono);font-size:.86em;color:var(--russet)}
+figure{margin:28px 0;padding:18px;background:rgba(255,251,241,.76);border:1px solid var(--line)}
+figure svg{display:block;width:100%;height:auto}
+figcaption{font-family:var(--mono);font-size:11px;color:var(--dim);margin-top:12px;text-align:center;line-height:1.6}
+.scroll{overflow-x:auto;margin:24px 0}
+table{border-collapse:collapse;width:100%;min-width:460px;font-size:17px}
+th,td{text-align:left;padding:9px 14px 9px 0;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);font-weight:600}
+td.n{font-family:var(--mono);color:var(--pumpkin)}
+footer{margin:64px 0 0;padding-top:24px;border-top:3px double var(--line);color:var(--dim);font-size:16px}
+a{color:var(--russet)}
+@media(max-width:620px){body{font-size:18px}#field{max-width:200px;height:28px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+@media print{.rail{display:none}}
+</style>
+</head>
+<body>
+
+<div class="rail">
+  <div class="rail-in">
+    <span class="rail-lab">field ripening</span>
+    <svg id="field" viewBox="0 0 310 32" role="img" aria-label="Progress through the briefing" preserveAspectRatio="xMinYMid meet"></svg>
+    <span class="rail-count" id="count">1 / 14</span>
+  </div>
+</div>
+
+<div class="wrap">
+
+<a class="backlink" href="../">&larr; the shelf</a>
+
+<header class="top">
+  <p class="eyebrow">Learn it properly &middot; 14 points</p>
+  <h1><small>Four rounds in</small>Harvest</h1>
+  <p class="lede">You get twelve wheelbarrow placements for the entire game. Nobody can stop you doing what you want with them. All anybody can do is take the version of the space that lets you do it three times, and leave you the one that lets you do it once.</p>
+</header>
+
+<article class="pt">
+  <p class="num"><b>1</b> The big picture</p>
+  <h2>A four round farm puzzle where the opponents cannot block you, only shrink you.</h2>
+
+  <p>You are a new resident of Furroughfield, a small town of well dressed animals, and you have been handed a patch of land that is mostly trees. Over four rounds you buy seeds, plant them into a grid, water them until they spread, harvest them for points, and put up buildings on the ground you clear. Whoever has the most points at the end wins. That is the whole shape of it.</p>
+
+  <p>The number that governs everything is <strong>twelve</strong>. You have three wheelbarrows. You place all three every round. There are four rounds. Twelve placements is the entire game, from the first seed to the last pumpkin, and there is no way to earn a thirteenth.</p>
+
+  <p>So the interesting thing about Harvest is not the competition. It is not a knife fight over spaces. Every district in town offers the same actions at three different sizes, marked <em class="t">3</em>, <em class="t">2</em> and <em class="t">1</em>, and when somebody takes the big one you take the small one. You are never locked out of an idea. You are only ever <strong>charged more turns for it</strong>, and turns are the one thing you cannot buy.</p>
+
+  <p class="aside">The player across the table is not your problem. Twelve is your problem. Everything that follows is about squeezing more out of a single placement than the placement looks like it can give.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Harvest is a game about <strong>how much you can load onto one wheelbarrow</strong>. Access is never the question. Volume always is.</p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>2</b> The round</p>
+  <h2>Sunrise, then three placements, then sunset. Do that four times and the game is over.</h2>
+
+  <p>Every round runs the same three phases.</p>
+
+  <ul class="clean">
+    <li><strong>Sunrise.</strong> Three sunrise tiles sit face up. In order, each player swaps their old tile for one of them and collects what it pays. The number on the tile you took is your seat in this round's turn order.</li>
+    <li><strong>Action.</strong> In that order, players place one wheelbarrow at a time onto an open space in town and resolve it immediately, going around until all three of everyone's wheelbarrows are down.</li>
+    <li><strong>Sunset.</strong> Everyone takes their wheelbarrows back. The buildings for sale all slide one row cheaper, and the cheapest row falls off the board entirely. The top tile of the Farmer's Market is discarded, revealing different actions for next round. The round marker moves on.</li>
+  </ul>
+
+  <p>After the fourth action phase, the game simply stops. There is no engine race, no trigger somebody can pull early, no catching up because a rival ended it before you were ready. <strong>The clock is a calendar.</strong> You know on turn one exactly how many turns you have, which is unusually kind and also unusually merciless: there is no excuse for being caught with an unharvested field, because the last round was never a surprise.</p>
+
+  <p>Notice what sunset does to the shape of the game. Two things in town decay on their own: buildings get cheaper and then vanish, and the market keeps rewriting itself. Waiting is not free and it is not neutral. It changes the board.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Four rounds, three placements each. Count backwards from the end at every sunrise: <strong>how many placements are left, and what still has to happen in them?</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>3</b> The sunrise draft</p>
+  <h2>Every round you buy your place in the turn order, and the good tiles are at the back.</h2>
+
+  <p>There are ten sunrise tiles in the deck and three of them are face up at any moment. Each one shows two things: a payout, and a number. The payout is a handful of coins plus one small bonus, which might be a seed, a seed upgrade, a scoop of fertilizer, or, on the very best ones, an entire field action for free. The number is your position in the turn order for the round about to happen. <strong>Low numbers go first.</strong></p>
+
+  <p>The tiles are built so the two things fight. The generous payouts sit on the high numbers. If you want the tile that hands you a free field action, you take the 8, and you will be moving after everybody else. If you want to move first and take the fat spaces before they are gone, you take the 2 and you take the thin payout that comes with it.</p>
+
+  <p>The order in which you choose is set by the tile you took <em>last</em> round. So a player who went early last round gets first refusal on the display, which quietly punishes them: they picked the cheap seat, so they get to keep picking cheap seats unless they pay to move back.</p>
+
+  <figure>
+    <svg viewBox="0 0 760 250" role="img" aria-labelledby="sun-t sun-d">
+      <title id="sun-t">The three face up sunrise tiles and what they cost you in turn order</title>
+      <desc id="sun-d">Three tiles side by side. The first pays three coins and a seed upgrade and is numbered 3. The second pays three coins and a wheat seed and is numbered 4. The third pays three coins and a whole free field action and is numbered 8. An arrow beneath runs from left to right, labelled acts first on the left and acts last on the right, showing that the richest tile puts you last.</desc>
+      <g font-family="Mulish, sans-serif" font-size="15">
+        <rect x="10" y="20" width="220" height="112" rx="6" fill="#FFFBF1" stroke="#BC8A23" stroke-width="2"/>
+        <text x="30" y="52" fill="#2E1D10" font-weight="800">3 coins</text>
+        <text x="30" y="78" fill="#57402C">and: upgrade a seed</text>
+        <text x="200" y="118" text-anchor="end" font-family="Bitter, serif" font-size="46" font-weight="800" fill="#BC8A23">3</text>
+
+        <rect x="270" y="20" width="220" height="112" rx="6" fill="#FFFBF1" stroke="#C0561F" stroke-width="2"/>
+        <text x="290" y="52" fill="#2E1D10" font-weight="800">3 coins</text>
+        <text x="290" y="78" fill="#57402C">and: a wheat seed</text>
+        <text x="460" y="118" text-anchor="end" font-family="Bitter, serif" font-size="46" font-weight="800" fill="#C0561F">4</text>
+
+        <rect x="530" y="20" width="220" height="112" rx="6" fill="#F6EEDC" stroke="#8E3A12" stroke-width="2.5"/>
+        <text x="550" y="52" fill="#2E1D10" font-weight="800">3 coins</text>
+        <text x="550" y="78" fill="#8E3A12" font-weight="800">and: a whole field action</text>
+        <text x="720" y="118" text-anchor="end" font-family="Bitter, serif" font-size="46" font-weight="800" fill="#8E3A12">8</text>
+      </g>
+      <g stroke="#2E1D10" stroke-width="1.8" fill="none">
+        <defs>
+          <marker id="sa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+            <path d="M0 0 L10 5 L0 10 z" fill="#2E1D10"/>
+          </marker>
+        </defs>
+        <path d="M20 172 H740" marker-end="url(#sa)"/>
+      </g>
+      <g font-family="IBM Plex Mono, monospace" font-size="12" fill="#8A7458">
+        <text x="20" y="196">ACTS FIRST THIS ROUND</text>
+        <text x="740" y="196" text-anchor="end">ACTS LAST THIS ROUND</text>
+        <text x="20" y="230" fill="#3E4384">THIN PAYOUT, PICK OF THE BOARD</text>
+        <text x="740" y="230" text-anchor="end" fill="#3E4384">FAT PAYOUT, WHATEVER IS LEFT</text>
+      </g>
+    </svg>
+    <figcaption>THE SAME THREE COINS EVERY TIME. WHAT YOU ARE REALLY BUYING IS THE NUMBER IN THE CORNER.</figcaption>
+  </figure>
+
+  <p>How much going first is worth depends entirely on what you need this round. If your plan is a big field action, you need the space that grants three of them, and there is exactly one of those. If your plan is to buy two seeds you could get from any of three places, turn order barely matters and you should take the money.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Do not draft the sunrise tile with the biggest payout. <strong>Draft the tile that matches the one space you cannot do without this round.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>4</b> The town</p>
+  <h2>A space does not say whether you may do the thing. It says how many times.</h2>
+
+  <p>The town board has five districts, and a wheelbarrow goes on one space in one district.</p>
+
+  <div class="scroll"><table>
+    <tr><th>District</th><th>What the space buys</th><th>The catch</th></tr>
+    <tr><td>General Store</td><td class="n">3, 2 or 1 purchases</td><td>Seeds, fertilizer, and filling your bucket. Wheat is free, a pumpkin seed is 3 coins</td></tr>
+    <tr><td>The Fields</td><td class="n">3, 2 or 1 field actions</td><td>The 3 space costs coins equal to the round number. The 1 space hands you a water or a fertilizer as a consolation</td></tr>
+    <tr><td>The Workshop</td><td class="n">3, 2 or 1 actions, no repeats</td><td>Upgrade your bucket, clear land, or buy a building. Three actions here means three <em>different</em> ones</td></tr>
+    <tr><td>Farmer's Market</td><td class="n">whatever is printed</td><td>Combination deals that cost coins, and the whole menu changes every sunset</td></tr>
+    <tr><td>Trading Post</td><td class="n">2 or 1 trades</td><td>Turn one seed, or two fertilizer, or three water into a field action, a clear, or a seed upgrade</td></tr>
+  </table></div>
+
+  <p>Read that table again for what is missing: there is no district you can be shut out of. When a rival puts a wheelbarrow on the Fields 3 space, the Fields 2 space and the Fields 1 space are both still open, and the Trading Post will sell you a field action for three water. This is why the game feels friendly at the table. Somebody taking your space is a tax, not a wall.</p>
+
+  <p>Two of the districts even keep an <strong>always open space</strong> that any number of wheelbarrows can share, so there is a floor under how bad your options can get. It is a small floor. It is still a floor.</p>
+
+  <figure>
+    <svg viewBox="0 0 760 250" role="img" aria-labelledby="tn-t tn-d">
+      <title id="tn-t">The five districts and their three sizes of space</title>
+      <desc id="tn-d">Five labelled blocks in a row: General Store, The Fields, The Workshop, Farmer's Market and Trading Post. The first three each show three ovals numbered three, two and one, standing for three, two or one actions. A note under the Fields says its three space costs coins equal to the round number. A note under the Trading Post says its smallest space is always open to everybody.</desc>
+      <g font-family="Mulish, sans-serif" font-size="13" text-anchor="middle">
+        <g>
+          <rect x="6" y="14" width="140" height="140" rx="5" fill="#FFFBF1" stroke="#2E1D10" stroke-width="1.6"/>
+          <text x="76" y="36" font-weight="800" fill="#2E1D10">GENERAL STORE</text>
+          <ellipse cx="76" cy="60" rx="44" ry="14" fill="#F0E3C8" stroke="#8E3A12"/><text x="76" y="65" fill="#8E3A12" font-weight="800">3</text>
+          <ellipse cx="76" cy="94" rx="44" ry="14" fill="#F0E3C8" stroke="#C0561F"/><text x="76" y="99" fill="#C0561F" font-weight="800">2</text>
+          <ellipse cx="76" cy="128" rx="44" ry="14" fill="#F0E3C8" stroke="#BC8A23"/><text x="76" y="133" fill="#BC8A23" font-weight="800">1</text>
+          <text x="76" y="176" font-family="IBM Plex Mono, monospace" font-size="10" fill="#8A7458">PURCHASES</text>
+        </g>
+        <g>
+          <rect x="158" y="14" width="140" height="140" rx="5" fill="#FFFBF1" stroke="#2E1D10" stroke-width="1.6"/>
+          <text x="228" y="36" font-weight="800" fill="#2E1D10">THE FIELDS</text>
+          <ellipse cx="228" cy="60" rx="44" ry="14" fill="#EAF0E0" stroke="#8E3A12"/><text x="228" y="65" fill="#8E3A12" font-weight="800">3</text>
+          <ellipse cx="228" cy="94" rx="44" ry="14" fill="#EAF0E0" stroke="#C0561F"/><text x="228" y="99" fill="#C0561F" font-weight="800">2</text>
+          <ellipse cx="228" cy="128" rx="44" ry="14" fill="#EAF0E0" stroke="#BC8A23"/><text x="228" y="133" fill="#BC8A23" font-weight="800">1</text>
+          <text x="228" y="176" font-family="IBM Plex Mono, monospace" font-size="10" fill="#8A7458">FIELD ACTIONS</text>
+          <text x="228" y="192" font-family="IBM Plex Mono, monospace" font-size="10" fill="#8E3A12">3 COSTS ROUND NO. IN COINS</text>
+        </g>
+        <g>
+          <rect x="310" y="14" width="140" height="140" rx="5" fill="#FFFBF1" stroke="#2E1D10" stroke-width="1.6"/>
+          <text x="380" y="36" font-weight="800" fill="#2E1D10">THE WORKSHOP</text>
+          <ellipse cx="380" cy="60" rx="44" ry="14" fill="#F5E4D8" stroke="#8E3A12"/><text x="380" y="65" fill="#8E3A12" font-weight="800">3</text>
+          <ellipse cx="380" cy="94" rx="44" ry="14" fill="#F5E4D8" stroke="#C0561F"/><text x="380" y="99" fill="#C0561F" font-weight="800">2</text>
+          <ellipse cx="380" cy="128" rx="44" ry="14" fill="#F5E4D8" stroke="#BC8A23"/><text x="380" y="133" fill="#BC8A23" font-weight="800">1</text>
+          <text x="380" y="176" font-family="IBM Plex Mono, monospace" font-size="10" fill="#8A7458">DIFFERENT ACTIONS</text>
+        </g>
+        <g>
+          <rect x="462" y="14" width="140" height="140" rx="5" fill="#FFFBF1" stroke="#2E1D10" stroke-width="1.6"/>
+          <text x="532" y="36" font-weight="800" fill="#2E1D10">FARMER'S MARKET</text>
+          <rect x="486" y="52" width="92" height="22" rx="3" fill="#F7E0E2" stroke="#8E3A12"/>
+          <rect x="486" y="82" width="92" height="22" rx="3" fill="#F7E0E2" stroke="#C0561F"/>
+          <rect x="486" y="112" width="92" height="22" rx="3" fill="#F7E0E2" stroke="#BC8A23"/>
+          <text x="532" y="176" font-family="IBM Plex Mono, monospace" font-size="10" fill="#8A7458">DEALS, PAID IN COINS</text>
+          <text x="532" y="192" font-family="IBM Plex Mono, monospace" font-size="10" fill="#8E3A12">NEW MENU EVERY SUNSET</text>
+        </g>
+        <g>
+          <rect x="614" y="14" width="140" height="140" rx="5" fill="#FFFBF1" stroke="#2E1D10" stroke-width="1.6"/>
+          <text x="684" y="36" font-weight="800" fill="#2E1D10">TRADING POST</text>
+          <ellipse cx="684" cy="70" rx="44" ry="14" fill="#E3E4F1" stroke="#C0561F"/><text x="684" y="75" fill="#C0561F" font-weight="800">2</text>
+          <ellipse cx="684" cy="116" rx="52" ry="18" fill="#E3E4F1" stroke="#3E4384" stroke-width="2"/><text x="684" y="122" fill="#3E4384" font-weight="800">1 &#8734;</text>
+          <text x="684" y="176" font-family="IBM Plex Mono, monospace" font-size="10" fill="#8A7458">TRADES</text>
+          <text x="684" y="192" font-family="IBM Plex Mono, monospace" font-size="10" fill="#3E4384">ALWAYS OPEN TO EVERYBODY</text>
+        </g>
+      </g>
+      <text x="380" y="232" text-anchor="middle" font-family="Bitter, serif" font-size="18" fill="#2E1D10">Taking a space from somebody costs them a size, never the action.</text>
+    </svg>
+    <figcaption>NOBODY GETS LOCKED OUT. THE FIGHT IS OVER THE TOP ROW OF EACH DISTRICT.</figcaption>
+  </figure>
+
+  <p>The Fields deserve one extra note. Its 3 space is the single most contested square inch of the board, and it charges you coins equal to the current round: 1 coin in round one, rising to 4 in round four. So it gets more valuable and more expensive at exactly the same rate, which is a very tidy way of stopping one player from simply owning it all game.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Ask what size you need, not what action you need. <strong>Losing the 3 space costs you a wheelbarrow, not a plan.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>5</b> Your land</p>
+  <h2>The farm is a grid, the crops are shapes, and most of the grid is trees.</h2>
+
+  <p>Your farm board is a grid of small brown squares called field spaces. At the start only a corner of it is bare earth. Six thick <strong>forest tiles</strong> cover the rest, each smothering a two by two block of squares, and your farmhouse sits in the corner. So your opening farm has room for about six squares of crops and a lot of scenery.</p>
+
+  <p>Crops are not tokens you drop on a square. They are shapes, and they have to fit:</p>
+
+  <ul class="clean">
+    <li><strong>Strawberry:</strong> one square.</li>
+    <li><strong>Blueberry bush:</strong> two squares in a line, and it never moves again.</li>
+    <li><strong>Wheat:</strong> three squares in a straight line.</li>
+    <li><strong>Pumpkin:</strong> three squares in an L.</li>
+  </ul>
+
+  <p>You may rotate a shape however you like when you place it, but you may not overlap and you may not hang off the edge. That turns planting into a small tiling puzzle played inside a space that starts out roughly the size of two pumpkins.</p>
+
+  <p>This is the pressure the whole game sits on. Coins are gettable. Water and fertilizer are gettable. <strong>Space is the thing you actually run out of</strong>, and the only two ways to get more are to chop down a forest tile or to harvest what is already growing.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Before you buy a seed, look at your board and find where it goes. <strong>A seed you cannot fit is a coin you set on fire.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>6</b> The field action</p>
+  <h2>Plant, tend or harvest. Whichever you choose, you may do as much of it as you can pay for.</h2>
+
+  <p>This is the rule the game is built around, and it is easy to read straight past. A <strong>field action</strong> is one of three things:</p>
+
+  <ul class="clean">
+    <li><strong>Plant.</strong> Put seeds from your supply into empty field spaces, paying each one's fertilizer cost.</li>
+    <li><strong>Tend.</strong> Spend water on crops already in the ground to make more of them appear next to them.</li>
+    <li><strong>Harvest.</strong> Pull every crop out of your fields at once and score them.</li>
+  </ul>
+
+  <p>Now the part that matters. <strong>Each of those counts as one field action no matter how much you do.</strong> Planting one strawberry is a field action. Planting a pumpkin, a blueberry bush and two strawberries in the same breath is also a field action. Tending one crop is a field action. Tending nine crops, if you have nine water, is still one field action.</p>
+
+  <p>So a wheelbarrow on the Fields 3 space is not three seeds. It is <em>plant everything, then tend everything, then harvest everything</em>, in one placement, for as long as your fertilizer and water hold out. That single space can be an entire farming season.</p>
+
+  <figure>
+    <svg viewBox="0 0 760 300" role="img" aria-labelledby="cy-t cy-d">
+      <title id="cy-t">One visit to the fields doing all three field actions</title>
+      <desc id="cy-d">Three farm boards side by side. In the first, seeds are planted into empty squares, paying fertilizer. In the second, water is spent to make matching crops appear next to the planted ones. In the third, everything is pulled up at once and turned into points and coins. A bar underneath shows all three happening on a single wheelbarrow placed on the fields three space.</desc>
+      <g font-family="IBM Plex Mono, monospace" font-size="11" letter-spacing="1" fill="#8A7458">
+        <text x="10" y="18">1. PLANT, PAID IN FERTILIZER</text>
+        <text x="270" y="18">2. TEND, PAID IN WATER</text>
+        <text x="530" y="18">3. HARVEST, PAID IN NOTHING</text>
+      </g>
+      <g stroke="#8A7458" stroke-width="1" fill="#F6EEDC">
+        <rect x="10" y="30" width="180" height="180"/>
+        <rect x="270" y="30" width="180" height="180"/>
+        <rect x="530" y="30" width="180" height="180"/>
+      </g>
+      <g stroke="rgba(46,29,16,.22)" stroke-width="1" fill="none">
+        <path d="M55 30 V210 M100 30 V210 M145 30 V210 M10 75 H190 M10 120 H190 M10 165 H190"/>
+        <path d="M315 30 V210 M360 30 V210 M405 30 V210 M270 75 H450 M270 120 H450 M270 165 H450"/>
+        <path d="M575 30 V210 M620 30 V210 M665 30 V210 M530 75 H710 M530 120 H710 M530 165 H710"/>
+      </g>
+      <g>
+        <rect x="12" y="32" width="41" height="41" fill="#C0561F" opacity=".85"/>
+        <rect x="57" y="32" width="41" height="41" fill="#C0561F" opacity=".85"/>
+        <rect x="57" y="77" width="41" height="41" fill="#C0561F" opacity=".85"/>
+        <rect x="102" y="122" width="41" height="41" fill="#D2455E" opacity=".85"/>
+      </g>
+      <g>
+        <rect x="272" y="32" width="41" height="41" fill="#C0561F" opacity=".85"/>
+        <rect x="317" y="32" width="41" height="41" fill="#C0561F" opacity=".85"/>
+        <rect x="317" y="77" width="41" height="41" fill="#C0561F" opacity=".85"/>
+        <rect x="362" y="32" width="41" height="41" fill="#C0561F" opacity=".45"/>
+        <rect x="407" y="32" width="41" height="41" fill="#C0561F" opacity=".45"/>
+        <rect x="407" y="77" width="41" height="41" fill="#C0561F" opacity=".45"/>
+        <rect x="362" y="122" width="41" height="41" fill="#D2455E" opacity=".85"/>
+        <rect x="317" y="122" width="41" height="41" fill="#D2455E" opacity=".45"/>
+        <rect x="362" y="167" width="41" height="41" fill="#D2455E" opacity=".45"/>
+      </g>
+      <g font-family="Bitter, serif" font-size="20" fill="#8E3A12">
+        <text x="560" y="105" font-weight="800">12 points</text>
+        <text x="560" y="135" font-weight="800">3 points</text>
+        <text x="560" y="170" font-size="16" fill="#3E4384">+ 2 coins for two</text>
+        <text x="560" y="190" font-size="16" fill="#3E4384">different crop types</text>
+      </g>
+      <text x="545" y="70" font-family="IBM Plex Mono, monospace" font-size="11" fill="#8A7458">EMPTY AGAIN</text>
+      <g>
+        <rect x="10" y="238" width="700" height="42" rx="4" fill="#EAF0E0" stroke="#5C7B35" stroke-width="1.6"/>
+        <text x="360" y="264" text-anchor="middle" font-family="Bitter, serif" font-size="18" fill="#2E1D10">All three of those happened on one wheelbarrow, on the Fields 3 space.</text>
+      </g>
+    </svg>
+    <figcaption>THE ACTION IS FREE. THE FUEL IS NOT. THAT IS WHERE THE GAME LIVES.</figcaption>
+  </figure>
+
+  <p>Once you see it, your whole plan reorganises itself. You stop asking "how do I get to the fields more often" and start asking "how do I arrive at the fields carrying more". A visit with two water and one fertilizer is a wasted visit. A visit with eight water and six fertilizer is a scoring turn.</p>
+
+  <div class="trap">
+    <b>The trap</b>
+    <p>New players spend a placement on the fields as soon as they have anything to plant, then spend another one later to tend two crops. Both trips did the work of a fraction of a trip. There are only twelve.</p>
+  </div>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Placements are not currency. <strong>Water and fertilizer are the currency</strong>, and a field action just lets you spend all of it at once.</p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>7</b> Fertilizer and water</p>
+  <h2>Two tracks on your board. One of them has a lid, and it starts almost closed.</h2>
+
+  <p>Down the sides of your farm board run two tracks, each numbered 0 to 9. Fertilizer is on one, water on the other, and they are not interchangeable. <strong>Fertilizer plants. Water grows.</strong> If you have six fertilizer and no water you can fill your farm with seeds and never make a single one multiply.</p>
+
+  <p>Fertilizer is straightforward: you gain it, the marker goes up, you spend it planting and it goes down. Wheat costs none, a strawberry costs one, a blueberry bush two, a pumpkin three. It caps at nine and you get it from the store, from sunrise tiles, from harvesting wheat, and from the odd building.</p>
+
+  <h3>The bucket</h3>
+  <p>Water has an extra piece: the <strong>bucket token</strong>, sitting on your water track. Your water marker can never reach the bucket, only sit below it. Your bucket starts on the 3 space, which means at the start of the game <strong>you can hold a maximum of two water</strong>. Two water is enough to tend a blueberry bush once. It is not enough to do anything interesting.</p>
+
+  <p>Two separate things therefore exist in the game, and beginners conflate them constantly. "Fill your bucket" moves your water up to whatever your bucket allows. "Upgrade your bucket" costs a coin at the Workshop and raises the lid by one, without adding a drop. <strong>Raising the lid does nothing today and everything for the rest of the game.</strong> Filling a bucket you never upgraded is like buying a bigger drink in the same small cup.</p>
+
+  <div class="eg">
+    <b>The shape of it</b>
+    <p>Round one, you upgrade your bucket twice at the Workshop for 2 coins. Nothing visible happens. Your bucket sits on 5.</p>
+    <p>Round two, one action fills you to 4 water, and a field action turns that into four tends.</p>
+    <p class="out">Two coins in round one bought you double the field action in round two, and again in three, and again in four.</p>
+  </div>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Upgrade the bucket early or not at all. <strong>A ceiling raised in round four has one round left to pay you back.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>8</b> What the crops pay</p>
+  <h2>Every crop turns one water into two points. The difference is how much land and money it takes to get there.</h2>
+
+  <p>There are four crops, and at first they look like a ladder from cheap and weak to expensive and strong. They are not. Look at what a single unit of water buys:</p>
+
+  <div class="scroll"><table>
+    <tr><th>Crop</th><th>Seed</th><th>To plant</th><th>Footprint</th><th>To tend</th><th>Tend gives</th><th>Points each</th></tr>
+    <tr><td>Wheat</td><td class="n">free</td><td class="n">0 fertilizer</td><td class="n">3 in a line</td><td class="n">1 water</td><td>one more wheat</td><td class="n">1 point + 1 fertilizer</td></tr>
+    <tr><td>Strawberry</td><td class="n">1 coin</td><td class="n">1 fertilizer</td><td class="n">1 square</td><td class="n">1 water</td><td><strong>two</strong> more strawberries</td><td class="n">1 point</td></tr>
+    <tr><td>Blueberry bush</td><td class="n">2 coins</td><td class="n">2 fertilizer</td><td class="n">2 squares, permanent</td><td class="n">2 water</td><td>one blueberry, on the bush</td><td class="n">4 points</td></tr>
+    <tr><td>Pumpkin</td><td class="n">3 coins</td><td class="n">3 fertilizer</td><td class="n">3 in an L</td><td class="n">3 water</td><td>one more pumpkin</td><td class="n">6 points</td></tr>
+  </table></div>
+
+  <p>Two points per water, all the way down. Strawberries give two crops worth one each; a blueberry costs two water and pays four; a pumpkin costs three water and pays six. The crops are not better and worse. <strong>They are the same rate, priced differently in the two things you are actually short of: land and coins.</strong></p>
+
+  <figure>
+    <svg viewBox="0 0 760 260" role="img" aria-labelledby="cr-t cr-d">
+      <title id="cr-t">The four crops as shapes, with what each costs and pays</title>
+      <desc id="cr-d">Four columns. Wheat is a straight line of three squares, free to buy, costs no fertilizer, pays one point and one fertilizer. A strawberry is one square, costs one coin and one fertilizer, pays one point. A blueberry bush is two squares and permanent, costs two coins and two fertilizer, and each blueberry grown on it pays four points. A pumpkin is an L of three squares, costs three coins and three fertilizer, pays six points. A line beneath compares points per square of land: wheat one third, strawberry one, blueberry two, pumpkin two.</desc>
+      <g font-family="Mulish, sans-serif" font-size="14" text-anchor="middle">
+        <g>
+          <rect x="18" y="24" width="34" height="34" fill="#BC8A23" stroke="#2E1D10"/>
+          <rect x="52" y="24" width="34" height="34" fill="#BC8A23" stroke="#2E1D10"/>
+          <rect x="86" y="24" width="34" height="34" fill="#BC8A23" stroke="#2E1D10"/>
+          <text x="69" y="90" font-weight="800" fill="#2E1D10">WHEAT</text>
+          <text x="69" y="114" fill="#57402C">free, 0 fertilizer</text>
+          <text x="69" y="136" fill="#8E3A12">1 water &#8594; 1 point</text>
+          <text x="69" y="158" fill="#5C7B35">and 1 fertilizer back</text>
+        </g>
+        <g>
+          <rect x="222" y="24" width="34" height="34" fill="#D2455E" stroke="#2E1D10"/>
+          <text x="239" y="90" font-weight="800" fill="#2E1D10">STRAWBERRY</text>
+          <text x="239" y="114" fill="#57402C">1 coin, 1 fertilizer</text>
+          <text x="239" y="136" fill="#8E3A12">1 water &#8594; 2 points</text>
+          <text x="239" y="158" fill="#5C7B35">spreads fastest</text>
+        </g>
+        <g>
+          <rect x="404" y="24" width="34" height="34" fill="#3E4384" stroke="#2E1D10"/>
+          <rect x="438" y="24" width="34" height="34" fill="#3E4384" stroke="#2E1D10"/>
+          <text x="438" y="90" font-weight="800" fill="#2E1D10">BLUEBERRY BUSH</text>
+          <text x="438" y="114" fill="#57402C">2 coins, 2 fertilizer</text>
+          <text x="438" y="136" fill="#8E3A12">2 water &#8594; 4 points</text>
+          <text x="438" y="158" fill="#5C7B35">the bush never leaves</text>
+        </g>
+        <g>
+          <rect x="616" y="24" width="34" height="34" fill="#C0561F" stroke="#2E1D10"/>
+          <rect x="650" y="24" width="34" height="34" fill="#C0561F" stroke="#2E1D10"/>
+          <rect x="650" y="58" width="34" height="34" fill="#C0561F" stroke="#2E1D10"/>
+          <text x="654" y="124" font-weight="800" fill="#2E1D10">PUMPKIN</text>
+          <text x="654" y="148" fill="#57402C">3 coins, 3 fertilizer</text>
+          <text x="654" y="170" fill="#8E3A12">3 water &#8594; 6 points</text>
+        </g>
+      </g>
+      <line x1="18" y1="190" x2="742" y2="190" stroke="#2E1D10" stroke-width="1"/>
+      <g font-family="IBM Plex Mono, monospace" font-size="11" fill="#8A7458" text-anchor="middle">
+        <text x="380" y="210">POINTS PER SQUARE OF LAND AT HARVEST</text>
+        <text x="69" y="234" fill="#2E1D10">0.3</text>
+        <text x="239" y="234" fill="#2E1D10">1.0</text>
+        <text x="438" y="234" fill="#8E3A12">2.0, again next harvest</text>
+        <text x="654" y="234" fill="#8E3A12">2.0</text>
+      </g>
+    </svg>
+    <figcaption>SAME RATE PER WATER. WILDLY DIFFERENT RATE PER SQUARE, WHICH IS THE ONE THAT BITES.</figcaption>
+  </figure>
+
+  <p>Once you divide by land instead of water, the crops separate properly. Wheat is dreadful: three squares for one point. It is not a scoring crop at all, it is a <strong>fertilizer mine</strong>, because it costs nothing to buy, nothing to plant, and hands you a fertilizer back for every one you harvest. Strawberries are one point per square, but they double every time you tend them, so they fill a farm in a hurry and are wonderful if you have space and nothing to fill it with. Pumpkins are two points per square, the best land use going, and they demand the most coins, fertilizer and water to reach.</p>
+
+  <h3>The bush is the odd one</h3>
+  <p>A blueberry bush is planted <strong>empty</strong> and it is never harvested. It sits in its two squares for the rest of the game. Tending it for two water puts a single blueberry on top, worth four points, and it will hold only one at a time. Harvest takes the blueberry and leaves the bush.</p>
+
+  <p>That makes it the only crop that is a piece of <em>infrastructure</em>. Two squares of land bought once, paying four points every single time you can spare two water and a harvest, and worth two more points at the end of the game just for standing there. Land you spend on a bush is land you never have to spend again.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Water is the same value in every crop. <strong>Choose crops by how much land and money you have, not by the points printed on them.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>9</b> Harvesting</p>
+  <h2>You cannot pick one pumpkin. Harvest takes the entire farm, and that is the timing problem of the game.</h2>
+
+  <p>Harvest is a single field action and it is all or nothing: every crop in your field spaces comes up at once, goes back to the supply, and pays you. You do not choose which. You cannot leave the strawberries in for another round of spreading while you cash the pumpkins.</p>
+
+  <p>On top of the points, you gain <strong>1 coin for each different type of crop you harvested</strong>. Not per crop: per type. A field of thirty strawberries pays a single coin. A field with one wheat, one strawberry, a blueberry and a pumpkin pays four. Coins are how you buy seeds, buckets, land clearance and buildings, so a monoculture that scores beautifully can quietly starve your economy.</p>
+
+  <p>So every harvest decision is the same question in two halves. <strong>Am I better off tending one more time first?</strong> A pumpkin sitting in the ground is doing nothing; tended once more it doubles. And <strong>do I have the placements left to refill this land?</strong> Harvesting empties the farm. Empty land scores nothing at all.</p>
+
+  <div class="eg">
+    <b>A worked round</b>
+    <p>You arrive at the Fields 3 space in round three with 6 water and 4 fertilizer. Growing already: one pumpkin and two strawberries.</p>
+    <p>Field action one, <strong>plant</strong>: a blueberry bush for 2 fertilizer and a strawberry for 1.</p>
+    <p>Field action two, <strong>tend</strong>: 3 water on the pumpkin for a second pumpkin, 2 water on the bush for a blueberry, 1 water on a strawberry for two more.</p>
+    <p>Field action three, <strong>harvest</strong>: two pumpkins at 6 is 12, a blueberry at 4, five strawberries at 1 each.</p>
+    <p class="out">21 points and 3 coins for the three crop types, off one wheelbarrow. The bush stays put for next time.</p>
+  </div>
+
+  <p>Realistically, in four rounds, you will harvest once or twice. Once is a farm that grew fat and cashed out late. Twice is a farm that cashed out in round two and had to be rebuilt, which is only worth it if the second planting was faster than the first, which is exactly what a blueberry bush and a full bucket give you.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Harvesting is not collecting your winnings, it is <strong>clearing your own land</strong>. Never harvest without knowing what goes back in the hole.</p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>10</b> Clearing land</p>
+  <h2>The forest on your farm is not scenery. It is six buildings, face down, and they belong to the town.</h2>
+
+  <p>Those six thick tiles smothering your grid have buildings printed on the other side, dealt to you at setup without looking. <strong>Clear Land</strong>, at the Workshop for 2 coins, takes one off your board and does three things at once: it opens up a two by two patch of bare earth, it lets you roll the forest die for a small bonus, and it flips the tile over and puts the building into the <strong>Workshop's shared shop</strong>, where it goes on sale to everyone at the table.</p>
+
+  <p>Read that last part again, because it is the most surprising rule in the game. The building you find under your own trees is not yours. You revealed it; anyone can buy it. Half the buildings on offer in town got there because somebody else was making room in their own back garden.</p>
+
+  <p>This does two lovely things. It means every player is constantly stocking a shop they might not shop at, so the market has interesting things in it. And it means clearing land is never purely selfish or purely generous: you needed the space, and the town got a bakery.</p>
+
+  <p class="aside">The Trading Post will also clear land for you, without the die roll, in exchange for a seed or two fertilizer or three water. If your coins are tight and your water is not, that is the cheap door in.</p>
+
+  <p>Weigh the cost honestly. Clearing costs a placement (shared with whatever else you do at the Workshop) plus 2 coins, and the payoff is four squares of land. Four squares is a pumpkin and a strawberry, which is seven points a harvest. That is a good trade in round one and a poor one in round four, when there is no time to plant, tend and harvest what you just uncovered.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Clearing is <strong>an investment in future land</strong>, so it belongs at the front of the game. Clearing late buys you scenery you never get to farm.</p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>11</b> Buildings</p>
+  <h2>Everything for sale gets cheaper every sunset, and then it falls off the board.</h2>
+
+  <p>The Workshop shop is three rows deep, priced <strong>3 coins, 2 coins and 1 coin</strong>. A newly revealed building enters at the top. Every sunset, every building slides down a row: the 3s become 2s, the 2s become 1s, and whatever was sitting in the 1 row is <strong>discarded from the game entirely</strong>.</p>
+
+  <figure>
+    <svg viewBox="0 0 760 280" role="img" aria-labelledby="wk-t wk-d">
+      <title id="wk-t">The workshop price ladder over four sunsets</title>
+      <desc id="wk-d">A three row shop priced three coins, two coins and one coin. A building revealed by clearing land enters the top row at three coins. Each sunset it slides down a row and gets a coin cheaper. After it has spent a round in the one coin row, the next sunset pushes it off the board and it is discarded from the game.</desc>
+      <g font-family="Mulish, sans-serif" font-size="14">
+        <rect x="120" y="40" width="520" height="56" fill="#F6EEDC" stroke="#8E3A12" stroke-width="1.6"/>
+        <rect x="120" y="104" width="520" height="56" fill="#F6EEDC" stroke="#C0561F" stroke-width="1.6"/>
+        <rect x="120" y="168" width="520" height="56" fill="#F6EEDC" stroke="#BC8A23" stroke-width="1.6"/>
+        <g font-family="Bitter, serif" font-size="22" font-weight="800" text-anchor="end">
+          <text x="106" y="76" fill="#8E3A12">3&#162;</text>
+          <text x="106" y="140" fill="#C0561F">2&#162;</text>
+          <text x="106" y="204" fill="#BC8A23">1&#162;</text>
+        </g>
+        <g text-anchor="middle" font-size="12" fill="#2E1D10">
+          <rect x="150" y="50" width="86" height="36" rx="3" fill="#FFFBF1" stroke="#2E1D10"/><text x="193" y="73">BAKERY</text>
+          <rect x="256" y="50" width="86" height="36" rx="3" fill="#FFFBF1" stroke="#2E1D10"/><text x="299" y="73">SILO</text>
+          <rect x="150" y="114" width="86" height="36" rx="3" fill="#FFFBF1" stroke="#2E1D10"/><text x="193" y="137">CAF&#201;</text>
+          <rect x="150" y="178" width="86" height="36" rx="3" fill="#FFFBF1" stroke="#2E1D10"/><text x="193" y="201">WELL</text>
+        </g>
+      </g>
+      <g stroke="#3E4384" stroke-width="1.8" fill="none">
+        <defs>
+          <marker id="wa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+            <path d="M0 0 L10 5 L0 10 z" fill="#3E4384"/>
+          </marker>
+        </defs>
+        <path d="M660 68 V128" marker-end="url(#wa)"/>
+        <path d="M660 132 V192" marker-end="url(#wa)"/>
+        <path d="M660 196 V252" marker-end="url(#wa)"/>
+      </g>
+      <g font-family="IBM Plex Mono, monospace" font-size="11" fill="#3E4384">
+        <text x="674" y="102">SUNSET</text>
+        <text x="674" y="166">SUNSET</text>
+        <text x="674" y="230">SUNSET</text>
+      </g>
+      <g font-family="IBM Plex Mono, monospace" font-size="11" fill="#8A7458">
+        <text x="10" y="30">YOU CLEAR LAND, THE BUILDING YOU FIND ENTERS HERE, ON SALE TO EVERYONE</text>
+        <text x="120" y="252" fill="#8E3A12">DISCARDED FROM THE GAME</text>
+      </g>
+      <line x1="120" y1="238" x2="640" y2="238" stroke="#8E3A12" stroke-width="1.4" stroke-dasharray="5 4"/>
+      <text x="120" y="272" font-family="Bitter, serif" font-size="17" fill="#2E1D10">Wait for the discount and you may find you waited past it.</text>
+    </svg>
+    <figcaption>THE SHOP IS A CONVEYOR BELT. EVERY BUILDING IS ON A TIMER FROM THE MOMENT IT APPEARS.</figcaption>
+  </figure>
+
+  <p>Buying one costs a Workshop action plus its current price, and then you must <strong>place it on a cleared two by two patch of your own farm</strong>. That is the sting: the four squares you cleared to reveal the thing are exactly the four squares it eats when you own it. A building is land converted into a permanent ability, and you can only make that trade if you have the land spare.</p>
+
+  <p>They come in two flavours, and the icon tells you which:</p>
+
+  <ul class="clean">
+    <li><strong>When built.</strong> Fires once, the moment you place it, and then it is inert. A Barn fills your bucket and hands you a field action. A Longhouse gives you two field actions. These are effectively a second wheelbarrow bolted onto the turn you bought them.</li>
+    <li><strong>End game.</strong> Does nothing all game, then scores. A Bed and Breakfast is worth 5 points instead of 2. Cold Storage scores 3 points for every different crop type sitting next to it. An Outhouse pays a point for each leftover fertilizer.</li>
+  </ul>
+
+  <p>Every building is also worth points on its own at the end, so buying one is never wasted. But note how the two flavours want opposite timing: a when-built building is worth most in round one and worthless in round four, and an end-game building is worth exactly the same whenever you buy it, which makes it the perfect thing to spend a late, awkward placement on.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>A building you want is getting cheaper and closer to the bin at the same rate. <strong>Decide now whether you are buying it or letting it die</strong>, and stop hoping.</p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>12</b> Your character and your farmhouse</p>
+  <h2>Two small pieces of asymmetry that fire every single round, which in a twelve turn game is enormous.</h2>
+
+  <p>At setup you keep one <strong>character card</strong> and one <strong>farmhouse tile</strong>. Neither is dramatic on its own. Both are permanent, and permanent is the point.</p>
+
+  <p>The character bends one rule for the whole game. Penny the Pig makes every crop cost one less fertilizer, so wheat and strawberries plant for nothing and a pumpkin goes in for two. Floyd the Beaver never pays the coin cost for a building. Leland the Frog starts with the bucket on 6 instead of 3, so his water ceiling is double everyone's on turn one. Mick the Badger gets an extra field action every time he takes any. River the Fox may pay a coin cost using fertilizer and water instead.</p>
+
+  <p>The farmhouse tile is smaller and steadier: a little benefit collected during <strong>every sunrise phase</strong>, all four rounds, no placement required. A coin here, a fertilizer there, a clear-land or a seed.</p>
+
+  <p>Work out what your pair is telling you before you buy a single seed. Penny wants a farm stuffed with expensive crops, so she wants land and water. Floyd wants to clear aggressively and hoover up the shop. Leland can tend early and often, so he can afford to harvest twice. <strong>The character is not a bonus. It is your opening plan, handed to you.</strong></p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>An ability that triggers every round fires four times. In a game of twelve placements, <strong>that is worth more than any one turn you will ever take</strong>.</p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>13</b> The end</p>
+  <h2>Crops left in the ground score one point each, whatever they are.</h2>
+
+  <p>The game stops the instant the fourth action phase is over. There is no fifth round, no last chance, no final harvest handed out for free. Then you score, in this order:</p>
+
+  <div class="scroll"><table>
+    <tr><th>Source</th><th>Worth</th><th>What it means</th></tr>
+    <tr><td>End-game buildings</td><td class="n">as printed</td><td>Resolve them first, in whatever order you like, then score every building you own</td></tr>
+    <tr><td>Unharvested crops</td><td class="n">1 point each</td><td>Anything still growing in your fields, pumpkin or strawberry alike</td></tr>
+    <tr><td>Blueberry bushes</td><td class="n">2 points each</td><td>The bushes themselves, which were never harvestable anyway</td></tr>
+    <tr><td>Leftover coins</td><td class="n">1 point per 2</td><td>Money is worth something, but only just</td></tr>
+  </table></div>
+
+  <p>The second line is the one that decides first games. A pumpkin harvested is 6 points. <strong>The same pumpkin left in the ground is 1 point.</strong> A blueberry left on its bush is 1 point instead of 4. Everything you built during four rounds of careful watering collapses to a flat one point a shape if you never spend a field action on the harvest.</p>
+
+  <p>Which is why the shape of a good final round is so predictable: plant nothing you cannot tend, tend everything you can afford, and get a harvest in before the wheelbarrows come home. If your last placement is not on the fields, you had better have a very good reason.</p>
+
+  <p>The score track runs to 49 with a flip side for anybody who goes past it, which tells you roughly what a strong game looks like. The tiebreaker is leftover resources: coins, water, fertilizer and seeds together.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>A crop in the ground at the end is a receipt, not a crop. <strong>Round four must contain a harvest.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>14</b> Your first game</p>
+  <h2>How not to lose it.</h2>
+
+  <p>Harvest is gentle. It will not punch you, and it will not stop you doing anything you want to do. It will simply let you spend twelve placements doing small versions of correct things, and then hand the win to the player who did four large ones.</p>
+
+  <h3>The instincts that will cost you</h3>
+
+  <ul class="clean">
+    <li><strong>Going to the fields whenever you have something to plant.</strong> This is the big one. Do not visit the fields to plant one seed. Visit when you are loaded, so that one placement is plant-everything and tend-everything. Fuel first, fields second.</li>
+    <li><strong>Never upgrading the bucket.</strong> You start able to hold two water, which is two points a round. A coin or two at the Workshop in round one is the cheapest thing on the board and it pays out three more times.</li>
+    <li><strong>Buying seeds you have no fertilizer or no space for.</strong> Seeds are only points once they are in the ground and watered. Count the squares before you count the coins.</li>
+    <li><strong>Planting wheat because it is free.</strong> Wheat is three squares for one point. It is a fertilizer engine, not a crop. Grow it deliberately or not at all.</li>
+    <li><strong>Farming a monoculture.</strong> Coins come from the number of different crop types in a harvest. All strawberries scores fine and leaves you broke.</li>
+    <li><strong>Clearing land in round four.</strong> Four fresh squares with no time to plant, tend and harvest them are worth nothing. Clear early, build late.</li>
+    <li><strong>Always taking the richest sunrise tile.</strong> Turn order is real. If your round depends on the Fields 3 space, buy the low number and take the small breakfast.</li>
+    <li><strong>Always taking the lowest sunrise tile.</strong> The reverse mistake. If nothing you need is contested this round, going first bought you nothing.</li>
+    <li><strong>Forgetting the last placement.</strong> Count backwards from the end at every sunrise. Twelve, then nine, then six, then three.</li>
+  </ul>
+
+  <h3>A serviceable first plan</h3>
+
+  <p>Round one: buy some seeds, and upgrade your bucket once or twice while you are at the Workshop. Clear one forest tile. Plant whatever you can, including a blueberry bush if you can manage the two fertilizer, because it will pay four points every harvest for the rest of the game and it only ever costs you land once.</p>
+
+  <p>Rounds two and three: fill up, then take a fat field action. Tend hard. If your farm is full and there is a round and a half left, harvest and replant; if not, keep growing.</p>
+
+  <p>Round four: fill up one last time, then plant, tend and harvest. Spend your leftover coins on an end-game building if one is cheap, because coins at the end are only worth half a point each.</p>
+
+  <p class="aside">If you take one thing to the table, take this: in Harvest nobody is stopping you. The gap between the winner and everybody else is entirely made of turns that did one thing when they could have done four.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Twelve placements. <strong>Load them.</strong> Everything else in this briefing is a detail of how.</p>
+  </div>
+</article>
+
+<footer>A teaching walkthrough of Harvest, designed by Trey Chambers with art by Tierra Connor (Keymaster Games, 2024), a reworked second edition of Chambers' 2017 game of the same name. This page teaches what the game is and how it thinks; the rulebook in the box has the exact numbers, limits and edge cases. <a href="../">Back to the shelf</a>.</footer>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var pts = Array.prototype.slice.call(document.querySelectorAll('.pt'));
+  var svg = document.getElementById('field');
+  var count = document.getElementById('count');
+  var NS = 'http://www.w3.org/2000/svg';
+
+  var step = 16, x0 = 9, base = 27, cells = [];
+  pts.forEach(function(_, i){
+    var x = x0 + i * step;
+    var g = document.createElementNS(NS, 'g');
+
+    var soil = document.createElementNS(NS, 'rect');
+    soil.setAttribute('class', 'soil');
+    soil.setAttribute('x', x - 5);
+    soil.setAttribute('y', base);
+    soil.setAttribute('width', 10);
+    soil.setAttribute('height', 2.4);
+
+    var stem = document.createElementNS(NS, 'path');
+    stem.setAttribute('class', 'stem');
+    stem.setAttribute('d', 'M' + x + ',' + base + ' C' + (x - 2) + ',' + (base - 8) + ' ' + (x + 2) + ',' + (base - 12) + ' ' + x + ',' + (base - 18));
+
+    var ear = document.createElementNS(NS, 'ellipse');
+    ear.setAttribute('class', 'ear');
+    ear.setAttribute('cx', x);
+    ear.setAttribute('cy', base - 20);
+    ear.setAttribute('rx', 3.1);
+    ear.setAttribute('ry', 5.2);
+
+    g.appendChild(soil);
+    g.appendChild(stem);
+    g.appendChild(ear);
+    svg.appendChild(g);
+    cells.push(g);
+  });
+  svg.setAttribute('viewBox', '0 0 ' + Math.ceil(x0 * 2 + (pts.length - 1) * step) + ' 32');
+
+  var at = 0;
+  function paint(n){
+    if(n === at) return;
+    at = n;
+    cells.forEach(function(c, i){ c.classList.toggle('on', i < n); });
+    count.textContent = n + ' / ' + pts.length;
+    svg.setAttribute('aria-label', 'Point ' + n + ' of ' + pts.length);
+  }
+
+  var ticking = false;
+  function measure(){
+    ticking = false;
+    var mark = window.innerHeight * 0.45, n = 1;
+    for(var i = 0; i < pts.length; i++){
+      if(pts[i].getBoundingClientRect().top <= mark){ n = i + 1; }
+    }
+    paint(n);
+  }
+  window.addEventListener('scroll', function(){
+    if(!ticking){ ticking = true; window.requestAnimationFrame(measure); }
+  }, {passive:true});
+  window.addEventListener('resize', measure);
+  paint(1);
+  measure();
+})();
+</script>
+
+</body>
+</html>
