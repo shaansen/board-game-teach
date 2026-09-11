@@ -20,6 +20,7 @@ your first game.
 | `games/aeons-end.html` | Aeon's End, 10 points, complete |
 | `games/obsession.html` | Obsession, 22 points, complete |
 | `games/paperback.html` | Paperback, 10 points, complete |
+| `games/fate-of-the-fellowship.html` | The Lord of the Rings: Fate of the Fellowship, 14 points, complete |
 | `games/harvest.html` | Harvest, 14 points, complete |
 | `games/three-sisters.html` | Three Sisters, 14 points, complete |
 | `games/glass-road.html` | Glass Road, 14 points, complete |
@@ -114,7 +115,8 @@ every point;
 `patchwork.html` sews one quilt square into the rail per point;
 `wyrmspan.html` lights one cave chamber per point and walks an adventurer along them;
 `harvest.html` ripens a field of seedlings in the rail;
-`great-western-trail.html` walks a steer up a line of trail posts toward Kansas City; `three-sisters.html` pencils an
+`great-western-trail.html` walks a steer up a line of trail posts toward Kansas City;
+`fate-of-the-fellowship.html` opens the Eye a little wider with every point; `three-sisters.html` pencils an
 X into a row of scoresheet boxes with a sprout walking along it; `sleeping-gods-distant-skies.html` flies a
 plane across the horizon while a pocket watch hand comes round.
 
