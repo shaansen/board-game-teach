@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wyrmspan: Learn It Properly</title>
+<meta name="description" content="Learn what Wyrmspan actually is: fourteen points on the six coins that are your whole turn budget, the three caves you dig out left to right, and the walk that gets longer every time you fill a chamber.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Spectral:ital,wght@0,300;0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --stone:#191320;
+  --stone-2:#0F0B14;
+  --parch:#EFE4D2;
+  --dim:#A395AE;
+  --crimson:#C4433C;
+  --gold:#D9A63C;
+  --amethyst:#9A6BD8;
+  --moss:#6E9A5A;
+  --line:rgba(239,228,210,.15);
+  --display:"Cinzel",Georgia,serif;
+  --body:"Spectral",Georgia,serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;color:var(--parch);font-family:var(--body);font-size:18px;line-height:1.68;
+  -webkit-font-smoothing:antialiased;
+  background:
+    radial-gradient(900px 520px at 8% -8%, rgba(196,67,60,.16), transparent 62%),
+    radial-gradient(820px 560px at 94% 4%, rgba(154,107,216,.16), transparent 60%),
+    radial-gradient(700px 420px at 50% 44%, rgba(217,166,60,.07), transparent 66%),
+    linear-gradient(180deg,var(--stone),var(--stone-2) 78%);
+  background-attachment:fixed;
+}
+.wrap{max-width:800px;margin:0 auto;padding:0 22px 90px}
+
+/* ---------- the excavation rail ---------- */
+.rail{
+  position:sticky;top:0;z-index:20;background:rgba(15,11,20,.94);
+  backdrop-filter:blur(6px);border-bottom:1px solid var(--line);padding:8px 22px;
+}
+.rail-in{max-width:800px;margin:0 auto;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.rail-lab{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+#cave{flex:1;min-width:160px;max-width:320px;height:34px}
+#cave .ch{fill:rgba(239,228,210,.05);stroke:rgba(239,228,210,.24);stroke-width:1;transition:fill .4s,stroke .4s}
+#cave .ch.on{stroke:rgba(239,228,210,.8)}
+#cave .walker{transition:transform .45s ease}
+.rail-count{font-family:var(--mono);font-size:12px;color:var(--gold);white-space:nowrap}
+
+.backlink{
+  display:inline-block;margin-top:26px;font-family:var(--mono);font-size:11px;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--dim);text-decoration:none;
+  border-bottom:1px solid transparent;
+}
+.backlink:hover{color:var(--gold);border-bottom-color:var(--gold)}
+
+header.top{padding:28px 0 44px;border-bottom:1px solid var(--line)}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin:22px 0 14px}
+h1{
+  font-family:var(--display);font-weight:700;font-size:clamp(44px,10vw,86px);
+  line-height:.96;letter-spacing:.005em;margin:0 0 8px;color:#FFF7E8;
+}
+h1 small{display:block;font-family:var(--body);font-size:.17em;font-weight:600;letter-spacing:.22em;
+  color:var(--amethyst);margin-bottom:14px;text-transform:uppercase}
+.lede{font-size:20px;color:var(--dim);max-width:56ch;margin:18px 0 0}
+
+.pt{border-top:1px solid var(--line);padding:46px 0 8px;scroll-margin-top:58px}
+.pt:first-of-type{border-top:none}
+.num{
+  display:inline-flex;align-items:center;gap:12px;margin-bottom:12px;
+  font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--amethyst);
+}
+.num b{
+  width:34px;height:34px;display:grid;place-items:center;
+  background:var(--gold);color:var(--stone-2);font-family:var(--display);font-weight:700;font-size:17px;
+  clip-path:polygon(50% 0,100% 26%,100% 74%,50% 100%,0 74%,0 26%);
+}
+h2{
+  font-family:var(--display);font-weight:700;font-size:clamp(26px,4.8vw,38px);
+  line-height:1.14;margin:0 0 16px;max-width:26ch;color:#FFF7E8;
+}
+h3{font-family:var(--display);font-weight:500;font-size:21px;margin:30px 0 6px;color:var(--parch);letter-spacing:.02em}
+.pt p{max-width:62ch;margin:0 0 16px}
+strong{font-weight:600;color:#FFF7E8}
+em.t{font-style:normal;font-family:var(--mono);font-size:.84em;background:rgba(239,228,210,.10);
+  padding:2px 6px;border-radius:2px}
+.aside{
+  border-left:3px solid var(--amethyst);padding:2px 0 2px 18px;margin:24px 0;
+  font-style:italic;color:var(--dim);max-width:58ch;
+}
+.trap{
+  margin:26px 0;border:1px solid rgba(196,67,60,.7);background:rgba(196,67,60,.14);
+  padding:16px 20px;max-width:62ch;
+}
+.trap b{
+  display:block;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:#E8837C;margin-bottom:8px;
+}
+.trap p{margin:0 0 10px}
+.trap p:last-child{margin:0}
+.note{
+  margin:30px 0 0;padding:18px 22px;max-width:62ch;
+  background:rgba(154,107,216,.14);border:1px solid rgba(154,107,216,.6);
+}
+.note .lab{
+  display:block;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:#C4A6F0;margin-bottom:8px;
+}
+.note p{margin:0}
+ul.clean{list-style:none;padding:0;margin:0 0 16px;max-width:62ch}
+ul.clean li{padding:8px 0 8px 26px;position:relative;border-bottom:1px solid rgba(239,228,210,.1)}
+ul.clean li:last-child{border-bottom:none}
+ul.clean li::before{
+  content:"";position:absolute;left:4px;top:18px;width:10px;height:10px;background:var(--gold);
+  clip-path:polygon(50% 0,100% 50%,50% 100%,0 50%);
+}
+.eg{
+  margin:26px 0;max-width:62ch;border-left:3px solid var(--moss);
+  background:rgba(110,154,90,.12);padding:16px 20px 16px 18px;
+}
+.eg b{
+  display:block;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:#9EC488;margin-bottom:8px;
+}
+.eg p{margin:0 0 10px}
+.eg p:last-child{margin:0}
+.eg .out{font-family:var(--mono);font-size:.9em;color:var(--gold)}
+figure{margin:28px 0;padding:18px;background:rgba(239,228,210,.045);border:1px solid var(--line)}
+figure svg{display:block;width:100%;height:auto}
+figcaption{font-family:var(--mono);font-size:11px;color:var(--dim);margin-top:12px;text-align:center;line-height:1.6;
+  letter-spacing:.06em;text-transform:uppercase}
+.scroll{overflow-x:auto;margin:24px 0}
+table{border-collapse:collapse;width:100%;min-width:460px;font-size:16px}
+th,td{text-align:left;padding:9px 14px 9px 0;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);font-weight:600}
+td.n{font-family:var(--mono);color:var(--gold);white-space:nowrap}
+footer{margin:64px 0 0;padding-top:24px;border-top:1px solid var(--line);color:var(--dim);font-size:15px}
+a{color:var(--gold)}
+@media(max-width:620px){body{font-size:17px}#cave{max-width:200px;height:30px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+@media print{.rail{display:none}}
+</style>
+</head>
+<body>
+
+<div class="rail">
+  <div class="rail-in">
+    <span class="rail-lab">cave excavated</span>
+    <svg id="cave" viewBox="0 0 320 34" role="img" aria-label="Progress through the briefing" preserveAspectRatio="xMinYMid meet"></svg>
+    <span class="rail-count" id="count">1 / 14</span>
+  </div>
+</div>
+
+<div class="wrap">
+
+<a class="backlink" href="../">&larr; the shelf</a>
+
+<header class="top">
+  <p class="eyebrow">Learn it properly &middot; 14 points</p>
+  <h1><small>Three caves, twelve dragons</small>Wyrmspan</h1>
+  <p class="lede">Nobody hands you eight turns and counts them down. You get six coins a round, and a turn costs a coin, so the question is never "what shall I do next" but "what can I still afford". Meanwhile the same walk through the same cave pays more every time you fill a chamber in it.</p>
+</header>
+
+<article class="pt">
+  <p class="num"><b>1</b> The big picture</p>
+  <h2>You are building a private dragon sanctuary, and almost nobody can touch it.</h2>
+
+  <p>Wyrmspan is a card engine game for one to five players, about ninety minutes, from Stonemaier Games. It is the dragon-shaped sibling of Wingspan: Connie Vogelmann designed it and Elizabeth Hargrave, who designed Wingspan, developed it. If you know Wingspan you will recognise the shape of a turn and almost nothing else.</p>
+
+  <p>Everything that matters happens on <strong>your own player mat</strong>. You dig chambers out of three caves, you lure dragons into those chambers, and then you send a little adventurer walking through the caves to collect what the dragons produce. Nobody blocks a space. Nobody steals a resource. Nobody attacks your cave.</p>
+
+  <p>So where is the game against other people? In exactly three places, and it is worth knowing them on turn one:</p>
+
+  <ul class="clean">
+    <li><strong>The face-up display</strong>: three dragons and three cave cards in the middle of the table, shared. The card you want is the card the person before you can take.</li>
+    <li><strong>The round objectives</strong>: four of them, one scored at the end of each round, and you are ranked against everybody else.</li>
+    <li><strong>The Dragon Guild tile</strong>: a small grid of squares in the middle of the table, and each square holds exactly one player's marker. First there, only there.</li>
+  </ul>
+
+  <p>The rest of the time you are solving your own puzzle at speed while four other people solve theirs. That is the genre. If you dislike it in Wingspan you will dislike it here; if you like it, this one has more teeth.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Your cave is yours alone. <strong>The only things anybody can take from you are cards off the display, a rank on the round objective, and a square on the guild tile.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>2</b> The mat</p>
+  <h2>Three caves, four chambers each, and every cave is a path rather than a shelf.</h2>
+
+  <p>Your mat has three rows, and they have names worth learning because the dragon cards refer to them: the <strong>Crimson Cavern</strong> on top, the <strong>Golden Grotto</strong> in the middle, the <strong>Amethyst Abyss</strong> at the bottom. Four chambers in each. Twelve dragons in a finished sanctuary, and almost nobody fills all twelve.</p>
+
+  <p>Here is the thing to see before any rule: <strong>a row is not a shelf, it is a corridor</strong>. There is a path drawn along the bottom of each cave, running left to right, and your adventurer walks that path. So the position of a dragon is not decoration. A dragon in the first chamber gets walked past every single time you explore that cave for the rest of the game. A dragon in the fourth chamber gets walked past only if you can afford to walk that far.</p>
+
+  <p>At the start only <strong>the leftmost chamber of each cave is already excavated</strong>. Everything else is bare rock. You cannot put a dragon in rock, and you cannot dig chamber three before chamber two: caves fill <strong>left to right</strong>, always.</p>
+
+  <figure>
+    <svg viewBox="0 0 720 300" role="img" aria-labelledby="mat-t mat-d">
+      <title id="mat-t">The player mat: three caves of four chambers</title>
+      <desc id="mat-d">Three horizontal rows labelled Crimson Cavern, Golden Grotto and Amethyst Abyss. Each row has four chambers. Only the leftmost chamber of each row is excavated at the start; the other three are shown as bare rock. A path runs along the bottom of each row from a base camp on the left, and a stop sign sits before every unexcavated chamber.</desc>
+      <g font-family="IBM Plex Mono, monospace" font-size="10.5" fill="#A395AE" letter-spacing="1">
+        <text x="10" y="34">CRIMSON CAVERN</text>
+        <text x="10" y="126">GOLDEN GROTTO</text>
+        <text x="10" y="218">AMETHYST ABYSS</text>
+        <text x="10" y="286">BASE CAMP &#8594; THE WALK ALWAYS STARTS AT THE LEFT</text>
+      </g>
+      <g stroke-width="1.5" fill="rgba(239,228,210,.05)">
+        <rect x="150" y="14" width="120" height="56" rx="4" stroke="#C4433C" fill="rgba(196,67,60,.2)"/>
+        <rect x="292" y="14" width="120" height="56" rx="4" stroke="rgba(239,228,210,.22)" stroke-dasharray="4 3"/>
+        <rect x="434" y="14" width="120" height="56" rx="4" stroke="rgba(239,228,210,.22)" stroke-dasharray="4 3"/>
+        <rect x="576" y="14" width="120" height="56" rx="4" stroke="rgba(239,228,210,.22)" stroke-dasharray="4 3"/>
+
+        <rect x="150" y="106" width="120" height="56" rx="4" stroke="#D9A63C" fill="rgba(217,166,60,.2)"/>
+        <rect x="292" y="106" width="120" height="56" rx="4" stroke="rgba(239,228,210,.22)" stroke-dasharray="4 3"/>
+        <rect x="434" y="106" width="120" height="56" rx="4" stroke="rgba(239,228,210,.22)" stroke-dasharray="4 3"/>
+        <rect x="576" y="106" width="120" height="56" rx="4" stroke="rgba(239,228,210,.22)" stroke-dasharray="4 3"/>
+
+        <rect x="150" y="198" width="120" height="56" rx="4" stroke="#9A6BD8" fill="rgba(154,107,216,.2)"/>
+        <rect x="292" y="198" width="120" height="56" rx="4" stroke="rgba(239,228,210,.22)" stroke-dasharray="4 3"/>
+        <rect x="434" y="198" width="120" height="56" rx="4" stroke="rgba(239,228,210,.22)" stroke-dasharray="4 3"/>
+        <rect x="576" y="198" width="120" height="56" rx="4" stroke="rgba(239,228,210,.22)" stroke-dasharray="4 3"/>
+      </g>
+      <g font-family="Spectral, serif" font-size="12.5" fill="#EFE4D2" text-anchor="middle">
+        <text x="210" y="46">excavated</text><text x="352" y="46" fill="#A395AE">rock</text>
+        <text x="494" y="46" fill="#A395AE">rock</text><text x="636" y="46" fill="#A395AE">rock</text>
+        <text x="210" y="138">excavated</text><text x="352" y="138" fill="#A395AE">rock</text>
+        <text x="494" y="138" fill="#A395AE">rock</text><text x="636" y="138" fill="#A395AE">rock</text>
+        <text x="210" y="230">excavated</text><text x="352" y="230" fill="#A395AE">rock</text>
+        <text x="494" y="230" fill="#A395AE">rock</text><text x="636" y="230" fill="#A395AE">rock</text>
+      </g>
+      <g stroke="rgba(239,228,210,.3)" stroke-width="1.5" fill="none">
+        <path d="M132 74 H700 M132 166 H700 M132 258 H700"/>
+      </g>
+      <g fill="#C4433C">
+        <circle cx="286" cy="74" r="6"/><circle cx="286" cy="166" r="6"/><circle cx="286" cy="258" r="6"/>
+      </g>
+      <g font-family="IBM Plex Mono, monospace" font-size="9.5" fill="#E8837C" text-anchor="middle">
+        <text x="286" y="92">STOP</text><text x="286" y="184">STOP</text><text x="286" y="276">STOP</text>
+      </g>
+      <g fill="#D9A63C">
+        <circle cx="132" cy="74" r="7"/><circle cx="132" cy="166" r="7"/><circle cx="132" cy="258" r="7"/>
+      </g>
+    </svg>
+    <figcaption>Fig. 1: three corridors, one excavated chamber each, and a red stop waiting just past it</figcaption>
+  </figure>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>A cave is a corridor walked from the left. <strong>Where a dragon sits decides how often it ever does anything.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>3</b> Coins are turns</p>
+  <h2>You are not given a number of turns. You are given six coins, and every action costs at least one.</h2>
+
+  <p>The game is <strong>four rounds</strong> long. At the start of each round you are handed <strong>6 coins and 1 egg</strong>, and then everybody takes single turns clockwise until they pass. There is no turn counter. You pass when you cannot pay for anything worth doing, or will not.</p>
+
+  <p>Every one of the five actions costs <strong>1 coin as its base price</strong>, and some cost eggs on top. So six coins is roughly six turns, and that is the honest way to read your round: a purse, not a schedule.</p>
+
+  <p>Two consequences make this game feel different from Wingspan, where you simply got eight turns and spent them.</p>
+
+  <p>First, <strong>coins carry over</strong>. So do resources, cards and eggs. If you pass early holding two coins, you start the next round with eight and take eight-ish turns. A short round can buy a long one, and there is a real strategy in taking a thin third round to have a monstrous fourth.</p>
+
+  <p>Second, coins are the one thing dragons and the guild hand out constantly, so a good engine does not just give you stuff, <strong>it gives you extra turns</strong>. That is the compounding this game is really about.</p>
+
+  <div class="eg">
+    <b>What six coins actually buys</b>
+    <p>Round one, a plain sequence: excavate the second chamber of your Golden Grotto (1 coin), entice a dragon into it (1 coin plus its resources), explore the Grotto (1 coin), explore the Crimson Cavern (1 coin). Four turns, four coins, two left in hand.</p>
+    <p class="out">CARRY 2 &#8594; ROUND TWO OPENS WITH 8 COINS</p>
+  </div>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Six coins a round, four rounds, and unspent coins survive. <strong>The purse is the clock, and you are allowed to hoard clock.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>4</b> The five actions</p>
+  <h2>Dig a chamber, move a dragon in, or walk one of the three caves.</h2>
+
+  <p>That is the whole action list. There are five choices, but really three ideas, and the three explores are the same idea aimed at three different rows.</p>
+
+  <div class="scroll"><table>
+    <tr><th>Action</th><th>Base cost</th><th>What it does</th><th>Why you take it</th></tr>
+    <tr><td><strong>Excavate</strong></td><td class="n">1 coin +</td><td>Play a cave card from your hand into the leftmost bare chamber of a cave</td><td>Makes room for a dragon, and pays you a small bonus on the way in</td></tr>
+    <tr><td><strong>Entice</strong></td><td class="n">1 coin +</td><td>Play a dragon from your hand into an excavated chamber, paying its printed resources</td><td>Points, an ability, and one more thing your adventurer walks past</td></tr>
+    <tr><td><strong>Explore</strong></td><td class="n">1 coin +</td><td>Walk your adventurer through one cave, collecting as it goes</td><td>This is your income: resources, eggs, cards, guild advances</td></tr>
+  </table></div>
+
+  <p>Notice what is missing. There is no "gain resources" action and no "draw cards" action. In Wingspan you could always just take food or take cards. Here, <strong>the only tap is the explore action</strong>, and how much comes out of it depends entirely on how much cave you have built.</p>
+
+  <p>That is the engine in one sentence: you spend turns making your caves longer so that the walking turns pay more. Everything else is detail.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Excavate, entice, explore. <strong>The first two are investment, the third is the only income, and the third gets better only because of the first two.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>5</b> Excavating</p>
+  <h2>Cave cards are the cheap half of your hand, and the deeper you dig the more eggs it costs.</h2>
+
+  <p>Your hand holds two kinds of card mixed together: <strong>dragons</strong> and <strong>cave cards</strong>. Cave cards are the humbler ones. A cave card is not a creature; it is a chamber. When you excavate, you play one into the leftmost bare chamber of the cave you choose, and you get whatever small "when played" bonus it shows.</p>
+
+  <p>The price is where the geometry bites:</p>
+
+  <div class="scroll"><table>
+    <tr><th>Chamber</th><th>Cost to excavate</th><th>What it means in practice</th></tr>
+    <tr><td>1st (leftmost)</td><td class="n">already open</td><td>Free, and it is the space your adventurer always reaches</td></tr>
+    <tr><td>2nd</td><td class="n">1 coin</td><td>Cheap. Almost always worth doing in all three caves</td></tr>
+    <tr><td>3rd</td><td class="n">1 coin + 1 egg</td><td>Now you are spending points to buy space</td></tr>
+    <tr><td>4th</td><td class="n">1 coin + 2 eggs</td><td>A serious commitment, and only in a cave you intend to walk often</td></tr>
+  </table></div>
+
+  <p>Each cave charges by column separately, so a fourth chamber in your Crimson Cavern costs the same two eggs whether or not you have already dug deep elsewhere.</p>
+
+  <p>Cave cards also do something quietly clever. A cave card sitting in a chamber shows a benefit, and when you later cover it with a dragon you often collect a <strong>"when covered"</strong> bonus. So the same card pays you twice: once for digging, once for filling.</p>
+
+  <div class="aside">A hand full of dragons and no cave cards is a common opening problem. You can be holding three glorious dragons and have nowhere to put any of them, and no way to dig without a cave card to lay down.</div>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Digging left to right means <strong>the second chamber of every cave is the best-value real estate in the game</strong>, and the fourth is a luxury you must plan to use.</p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>6</b> The walk</p>
+  <h2>Explore, and your adventurer walks until it hits bare rock. That is the whole engine.</h2>
+
+  <p>Pick a cave, pay the entry price, and take your adventurer out of <strong>Base Camp</strong>. It walks that cave's path from left to right, collecting the reward under each chamber it reaches and triggering the <strong>"if activated"</strong> ability of every dragon it passes, in order.</p>
+
+  <p>It stops the instant it reaches a <strong>stop sign</strong>, which is what sits in front of every chamber that has no dragon in it. Then it goes back to Base Camp and your turn is over.</p>
+
+  <p>So on turn one, exploring a cave gets you exactly one thing: you reach the first chamber, and the stop sign right behind it sends you home. Put a dragon in the second chamber, and the same coin now buys you two chambers' worth. Fill the third, and it buys three. <strong>The action does not improve. The corridor does.</strong></p>
+
+  <figure>
+    <svg viewBox="0 0 720 320" role="img" aria-labelledby="walk-t walk-d">
+      <title id="walk-t">The same explore action, at three stages of a cave</title>
+      <desc id="walk-d">Three snapshots of one cave. Early, only chamber one holds a dragon and the walk stops immediately after it, collecting one reward. Mid-game, chambers one and two hold dragons and the walk collects two rewards. Late, three chambers hold dragons and the same one-coin action collects three rewards plus two dragon abilities.</desc>
+      <g font-family="IBM Plex Mono, monospace" font-size="10.5" fill="#A395AE" letter-spacing="1">
+        <text x="10" y="24">EARLY &#183; 1 COIN</text>
+        <text x="10" y="130">MIDDLE &#183; 1 COIN</text>
+        <text x="10" y="236">LATE &#183; 1 COIN</text>
+      </g>
+      <g stroke-width="1.5">
+        <rect x="150" y="34" width="112" height="44" rx="4" stroke="#D9A63C" fill="rgba(217,166,60,.22)"/>
+        <rect x="286" y="34" width="112" height="44" rx="4" stroke="rgba(239,228,210,.2)" fill="none" stroke-dasharray="4 3"/>
+        <rect x="422" y="34" width="112" height="44" rx="4" stroke="rgba(239,228,210,.2)" fill="none" stroke-dasharray="4 3"/>
+
+        <rect x="150" y="140" width="112" height="44" rx="4" stroke="#D9A63C" fill="rgba(217,166,60,.22)"/>
+        <rect x="286" y="140" width="112" height="44" rx="4" stroke="#D9A63C" fill="rgba(217,166,60,.22)"/>
+        <rect x="422" y="140" width="112" height="44" rx="4" stroke="rgba(239,228,210,.2)" fill="none" stroke-dasharray="4 3"/>
+
+        <rect x="150" y="246" width="112" height="44" rx="4" stroke="#D9A63C" fill="rgba(217,166,60,.22)"/>
+        <rect x="286" y="246" width="112" height="44" rx="4" stroke="#D9A63C" fill="rgba(217,166,60,.22)"/>
+        <rect x="422" y="246" width="112" height="44" rx="4" stroke="#D9A63C" fill="rgba(217,166,60,.22)"/>
+      </g>
+      <g font-family="Spectral, serif" font-size="12.5" fill="#EFE4D2" text-anchor="middle">
+        <text x="206" y="61">dragon</text><text x="342" y="61" fill="#A395AE">empty</text><text x="478" y="61" fill="#A395AE">empty</text>
+        <text x="206" y="167">dragon</text><text x="342" y="167">dragon</text><text x="478" y="167" fill="#A395AE">empty</text>
+        <text x="206" y="273">dragon</text><text x="342" y="273">dragon</text><text x="478" y="273">dragon</text>
+      </g>
+      <g stroke="#6E9A5A" stroke-width="3" fill="none" stroke-linecap="round">
+        <path d="M126 88 H272"/><path d="M126 194 H408"/><path d="M126 300 H544"/>
+      </g>
+      <g fill="#C4433C">
+        <circle cx="280" cy="88" r="6"/><circle cx="416" cy="194" r="6"/><circle cx="552" cy="300" r="6"/>
+      </g>
+      <g font-family="IBM Plex Mono, monospace" font-size="10.5" fill="#D9A63C">
+        <text x="580" y="92">1 REWARD</text>
+        <text x="580" y="198">2 REWARDS</text>
+        <text x="580" y="304">3 REWARDS</text>
+      </g>
+    </svg>
+    <figcaption>Fig. 2: one coin, three different incomes, decided months earlier by where you dug</figcaption>
+  </figure>
+
+  <p>Walking the same cave again in the same round is allowed but priced to hurt. The <strong>second</strong> walk through a given cave in a round costs 1 coin and 1 egg, the <strong>third</strong> costs 1 coin and 2 eggs, and that is the ceiling. Each cave tracks this separately, and the tracking resets between rounds.</p>
+
+  <p>Read that price honestly: your best cave is the one you want to walk twice, and walking it twice costs you an egg, which is a point. A cave worth paying an egg to re-enter is a cave you should have kept extending.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>The stop sign is the tutor. <strong>Every dragon you place pushes the wall back one chamber, and every future walk down that corridor is longer for it.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>7</b> Depth versus width</p>
+  <h2>Three shallow caves pay broadly. One deep cave pays enormously, once.</h2>
+
+  <p>Now the central tension, and it is a real one. You have three corridors and a limited number of turns, so you can either extend all three a little or drive one of them deep.</p>
+
+  <p><strong>Wide</strong> means chambers one and two in all three caves. Six dragons, and any of your three explore actions pays two rewards. Cheap: no chamber past the second, so no eggs spent on digging at all. Flexible: whichever cave has the ability you need this turn, you can afford to walk it.</p>
+
+  <p><strong>Deep</strong> means one cave built out to four. That cave pays four rewards plus every ability along the way for a single coin, which is the best turn in the game. But you paid three eggs to dig chambers three and four, you needed four dragons that all wanted to live in that one habitat, and your other two caves still stop after one chamber.</p>
+
+  <div class="eg">
+    <b>Two players, both with eight coins in round three</b>
+    <p><strong>Wide Wanda</strong> has six dragons, two per cave. Each explore pays 2 rewards and she can pick her flavour. Eight coins spent mostly on exploring gets her roughly sixteen rewards and she never touched an egg.</p>
+    <p><strong>Deep Dennis</strong> has four dragons in his Amethyst Abyss and one each elsewhere. His Abyss walk pays 4 rewards plus abilities. He walks it, then walks it again for a coin and an egg, then a third time for a coin and two eggs. Twelve rewards from three turns, at a price of three eggs, and his other caves are stubs.</p>
+    <p class="out">BOTH ARE FINE. WHAT LOSES IS DIGGING DEEP AND THEN NOT WALKING IT.</p>
+  </div>
+
+  <p>The habitat icons on dragon cards are what decides this for you, not your preference. Every dragon shows which caves will accept it, and if the good cards flowing to you all want the Golden Grotto, the game is telling you to go deep in gold.</p>
+
+  <div class="trap">
+    <b>The classic first-game mistake</b>
+    <p>Excavating a fourth chamber because it is there. Two eggs is two points and roughly two turns of egg-gathering, and a fourth chamber returns nothing at all until you both fill it with a dragon and then spend coins walking that far, repeatedly.</p>
+    <p>Dig the fourth chamber in round one and you have bought a reward you will collect maybe three times. Dig it in round three, in the cave you have walked every round, and it is excellent.</p>
+  </div>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Depth is only worth what you walk. <strong>Ask "how many more times will I walk this cave" before every excavation, and if the answer is under three, dig somewhere shallower.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>8</b> Eggs</p>
+  <h2>An egg is one victory point and also the fee for almost everything ambitious.</h2>
+
+  <p>Eggs live in nests: two nest icons on your mat to begin with, and more on the dragon cards you play. You are handed one egg at the start of each round and you gather more from cave rewards, dragon abilities and the guild.</p>
+
+  <p>At the end of the game <strong>every egg you still have is worth 1 point</strong>. That is not a rounding error; a player finishing with nine eggs has nine points, which is a couple of good dragons' worth.</p>
+
+  <p>But look at what eggs pay for. Excavating the third chamber: one egg. The fourth: two. Walking a cave a second time in a round: one egg. A third time: two. Various dragon abilities ask for eggs as well.</p>
+
+  <p>So eggs are the game's tightest little currency, because <strong>spending one is always spending a point</strong>. There is no bad-money-good-money split here: the same object is the score and the fuel.</p>
+
+  <div class="aside">This is the cleanest test of whether you understand the game yet. A beginner sits on eggs because they are points. An intermediate player spends every egg on depth and re-entry. A strong player spends eggs early, when a converted egg still has three rounds to compound, and stops spending them in round four, when it does not.</div>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Eggs are points you can burn as fuel. <strong>Burn them early, hold them late</strong>, because an egg spent in round one buys you turns and an egg spent in round four buys you almost nothing.</p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>9</b> Resources</p>
+  <h2>Four resources, a brutal exchange rate, and a rule that you can trade at any moment.</h2>
+
+  <p>Dragons eat and hoard four things: <strong>gold, crystal, meat and milk</strong>. Every dragon card prints its cost in some combination of them, and that cost is what you pay on top of the coin when you entice it.</p>
+
+  <p>You may, at any point in the game, <strong>exchange any 2 resources for 1 resource of your choice</strong>. Two for one, always, no action needed, no limit.</p>
+
+  <p>Take that rule seriously, because it changes what a resource is. Nothing you gather is ever dead: a pile of meat you have no use for is still half a pile of crystal. It means you are never truly stuck, and it means a dragon that costs three of one specific thing is not really a three-cost dragon, it is a six-cost dragon if you are converting for all of it.</p>
+
+  <div class="eg">
+    <b>Paying for a fussy dragon</b>
+    <p>A dragon wants 2 crystal and 1 milk. You are holding 1 crystal, 3 meat and 2 gold. Convert 2 meat into 1 crystal, then convert 1 meat plus 1 gold into 1 milk. You have paid, and you have 1 gold left over.</p>
+    <p class="out">6 RESOURCES IN, 3 RESOURCES OUT. THE RATE IS THE REAL COST.</p>
+  </div>
+
+  <p>One more number to keep in the corner of your eye: at the end of your turn you may not hold more than <strong>9 coins, 9 cards or 9 resource tokens</strong>. Excess is discarded. This almost never bites in round one and bites hard in round four, when the guild and your dragons are throwing things at you faster than you can spend them.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Two of anything becomes one of anything. <strong>Never hesitate over the wrong resource; hesitate over whether you can afford the exchange rate.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>10</b> The dragons</p>
+  <h2>Four kinds of ability, and knowing which kind you are holding is most of the skill.</h2>
+
+  <p>There are 183 dragon cards and you will see a handful each game, so do not try to learn cards. Learn the four ability types, because the same printed points mean very different things depending on when the card fires.</p>
+
+  <div class="scroll"><table>
+    <tr><th>Type</th><th>When it fires</th><th>What it is really for</th></tr>
+    <tr><td><strong>When played</strong></td><td>Once, the moment it enters your cave</td><td>A rebate. Good early, and good in a turn you were short of something</td></tr>
+    <tr><td><strong>If activated</strong></td><td>Every time your adventurer walks past it</td><td>The engine. Position matters enormously: put these on the left</td></tr>
+    <tr><td><strong>Once per round</strong></td><td>Automatically, during end-of-round upkeep</td><td>Free income that needs no coin at all. Worth most when played early</td></tr>
+    <tr><td><strong>End of game</strong></td><td>Once, at scoring</td><td>Pure points, usually conditional on what your sanctuary looks like</td></tr>
+  </table></div>
+
+  <p>The one worth staring at is <strong>once per round</strong>. Those dragons pay you without a turn and without a coin, four times if played in round one and once if played in round four. A once-per-round dragon in your opening turns is frequently better than a dragon worth twice its points bought late.</p>
+
+  <p>Two other things dragon cards carry. Some show <strong>nest icons</strong>, which is where extra eggs live. Some let you <strong>tuck</strong> a card face down under a dragon, which is worth 1 point each and is how a hand of cards you cannot afford to play still becomes score.</p>
+
+  <div class="aside">A dragon's printed points are the least interesting number on it. A 4-point dragon with a strong "if activated" ability in your first chamber will out-earn a 9-point dragon parked in a fourth chamber you rarely reach.</div>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Read the timing before the points. <strong>Abilities that fire repeatedly want to be played early and placed left; end-of-game points do not care when you play them.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>11</b> The Dragon Guild</p>
+  <h2>A second engine you do not build, and a grid of squares where being first is the whole point.</h2>
+
+  <p>In the middle of the table is the <strong>Dragon Guild track</strong>, a loop of spaces, with your guild token on it. Certain icons, met mostly while walking your caves and sometimes printed on dragons and cave cards, grant an <strong>advancement</strong>: move your token one space clockwise and take the benefit of the space you land on.</p>
+
+  <p>The benefits are small and constant: resources, eggs, cards, coins. That makes the guild a second income stream, and unlike your caves you did not have to dig it. Any card that says "advance on the guild" is quietly paying you every game.</p>
+
+  <p>Two spaces on the loop are brown, at the top and bottom. Reaching one is the interesting event: you immediately place one of your <strong>player markers</strong> onto a square of the shared <strong>Dragon Guild tile</strong> and collect the bonus printed there. Each square holds one marker only, and you may place at most four markers in total. Once four are down, going round the loop still pays the space benefits, but no more squares.</p>
+
+  <figure>
+    <svg viewBox="0 0 720 260" role="img" aria-labelledby="guild-t guild-d">
+      <title id="guild-t">The guild loop and the shared guild tile</title>
+      <desc id="guild-d">A circular guild track on the left with a token moving clockwise, and two brown spaces marked at the top and bottom. An arrow leads to a shared guild tile on the right, a grid of squares, each of which can hold one player marker, with one wide rectangle at the bottom that holds any number.</desc>
+      <circle cx="150" cy="130" r="88" fill="none" stroke="rgba(239,228,210,.2)" stroke-width="18"/>
+      <g fill="rgba(239,228,210,.18)">
+        <circle cx="150" cy="42" r="13" fill="#8A5A3A"/>
+        <circle cx="150" cy="218" r="13" fill="#8A5A3A"/>
+        <circle cx="238" cy="130" r="11"/><circle cx="62" cy="130" r="11"/>
+        <circle cx="212" cy="68" r="11"/><circle cx="212" cy="192" r="11"/>
+        <circle cx="88" cy="68" r="11"/><circle cx="88" cy="192" r="11"/>
+      </g>
+      <circle cx="212" cy="68" r="8" fill="#9A6BD8"/>
+      <g font-family="IBM Plex Mono, monospace" font-size="10" fill="#C9A47A" text-anchor="middle">
+        <text x="150" y="20">BROWN</text><text x="150" y="248">BROWN</text>
+      </g>
+      <text x="150" y="134" font-family="Cinzel, serif" font-size="14" fill="#EFE4D2" text-anchor="middle">clockwise</text>
+      <path d="M258 130 H322" stroke="#D9A63C" stroke-width="2" fill="none" marker-end="url(#ar)"/>
+      <defs><marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+        <path d="M0 0 L10 5 L0 10 z" fill="#D9A63C"/></marker></defs>
+      <g stroke="rgba(239,228,210,.28)" stroke-width="1.4" fill="rgba(239,228,210,.05)">
+        <rect x="350" y="46" width="70" height="52" rx="3"/><rect x="430" y="46" width="70" height="52" rx="3"/>
+        <rect x="510" y="46" width="70" height="52" rx="3"/><rect x="590" y="46" width="70" height="52" rx="3"/>
+        <rect x="350" y="108" width="70" height="52" rx="3"/><rect x="430" y="108" width="70" height="52" rx="3"/>
+        <rect x="510" y="108" width="70" height="52" rx="3"/><rect x="590" y="108" width="70" height="52" rx="3"/>
+        <rect x="350" y="170" width="310" height="46" rx="3"/>
+      </g>
+      <g>
+        <circle cx="385" cy="72" r="9" fill="#C4433C"/><circle cx="465" cy="72" r="9" fill="#9A6BD8"/>
+        <circle cx="545" cy="134" r="9" fill="#D9A63C"/>
+        <circle cx="400" cy="193" r="9" fill="#C4433C"/><circle cx="430" cy="193" r="9" fill="#9A6BD8"/>
+        <circle cx="460" cy="193" r="9" fill="#D9A63C"/>
+      </g>
+      <g font-family="IBM Plex Mono, monospace" font-size="10" fill="#A395AE">
+        <text x="350" y="38">ONE MARKER PER SQUARE, FIRST COME</text>
+        <text x="500" y="240" text-anchor="middle" fill="#9EC488">THE LONG SPACE TAKES EVERYBODY</text>
+      </g>
+    </svg>
+    <figcaption>Fig. 3: the loop pays everyone, the tile pays whoever arrives first</figcaption>
+  </figure>
+
+  <p>The tile is the second real point of contact between players. Those squares score at the end, the good ones go early, and if you are third to the tile you take whatever is left. There is a long rectangle at the bottom right that accepts any number of markers, which is the polite way of saying "the consolation space".</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Guild advancement is free income you never had to dig for, <strong>and the squares on the tile are the one land grab in the game</strong>. Reaching a brown space early is worth engineering.</p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>12</b> The round objectives</p>
+  <h2>Four objectives, one per round, and they are the only time you are graded against other people.</h2>
+
+  <p>Before the game, four objectives are laid out along the round tracker: one for round one, one for round two, and so on. They ask you to have the most of something at that moment. Dragons in a particular cave, eggs on a particular kind of dragon, cave cards in a column, that sort of thing.</p>
+
+  <p>At the end of each round everybody is <strong>ranked</strong>, and you place a marker on the row that matches your position. First place scores best, second scores less, and the amounts get bigger for later rounds. <strong>Ties are friendly</strong>: everybody tied for first gets the full first-place points, and nobody is bumped down for sharing.</p>
+
+  <p>This is a smaller pile of points than your dragons and your guild will produce, so do not steer the whole game by it. But it is also the only place where looking at the table matters, and the round-four objective in particular has a habit of being decided by a single egg or a single tucked card on somebody's last turn.</p>
+
+  <div class="eg">
+    <b>The look-up-from-your-mat moment</b>
+    <p>It is late in round two and the objective is "most dragons in your Golden Grotto". You have two. The player to your left has two and is about to entice a third. You have a coin and a dragon in hand that will live in the Grotto.</p>
+    <p>Playing it does not just gain you a rank, it makes the tie, and a tie here pays you both in full. The turn is worth taking even if the dragon is mediocre.</p>
+    <p class="out">FRIENDLY TIES MEAN MATCHING THE LEADER IS AS GOOD AS BEATING THEM</p>
+  </div>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Objectives are the only race. <strong>Because ties pay in full, drawing level with the leader costs one turn and earns the same points as beating them.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>13</b> Where the points are</p>
+  <h2>Almost everything on your mat at the end is worth something, which is why nothing is wasted.</h2>
+
+  <p>When the fourth round ends, you count, and the list is long on purpose:</p>
+
+  <ul class="clean">
+    <li><strong>Printed points</strong> on every visible dragon in your caves.</li>
+    <li><strong>End-of-game abilities</strong> on those dragons, which is often a bigger pile than the printed points.</li>
+    <li><strong>Markers on the guild tile</strong>, whatever their squares say.</li>
+    <li><strong>Round objectives</strong>, all four rounds, already recorded on the tracker.</li>
+    <li><strong>1 point per egg</strong> in your nests.</li>
+    <li><strong>1 point per tucked card</strong> under your dragons.</li>
+    <li><strong>1 point per cached resource</strong>, meaning resources tucked onto dragons by their abilities, not the loose ones in your supply.</li>
+    <li><strong>1 point per leftover coin</strong>, and <strong>1 point per 4 leftover odds and ends</strong>, rounded down.</li>
+  </ul>
+
+  <p>Two lessons hide in that list. The first is that <strong>the game has no dead ends</strong>. Cards you never played, resources you never spent, coins you never used: they all trickle back as points. You do not need to play perfectly, you need to keep gathering.</p>
+
+  <p>The second is the reverse, and it is the one that decides close games. Because loose leftovers pay a miserable <strong>1 point per 4</strong>, while eggs, tucked cards and cached resources pay <strong>1 each</strong>, the last turns of round four are about upgrading your junk. An ability that converts three loose resources into cached ones has just turned most of a point into three points.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Everything counts, but not equally. <strong>Eggs, tucks and cached resources are 1 point each; loose leftovers are 1 point per 4.</strong> Spend round four converting the second kind into the first.</p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>14</b> How not to lose your first game</p>
+  <h2>Five instincts a normal card game gave you, all of them wrong here.</h2>
+
+  <p><strong>You will hoard the expensive dragons.</strong> A hand of big cards you cannot afford is a hand doing nothing, and a card in hand pays a quarter of a point. Play the cheap dragon into the second chamber on turn two. It will be walked past twelve more times.</p>
+
+  <p><strong>You will forget that cave cards are a resource.</strong> Excavation needs a cave card in hand, and if you spend every draw on dragons you eventually have three chambers of bare rock and nowhere to put anything. When you keep four cards at setup, keep cave cards among them.</p>
+
+  <p><strong>You will treat eggs as savings.</strong> They are points, so hoarding feels safe, and hoarding in round one is the single most expensive mistake available. An egg spent on chamber three in round one buys you a longer walk in rounds one through four. The same egg held to the end buys you one point.</p>
+
+  <p><strong>You will explore the cave with the best dragon in it, not the longest corridor.</strong> The walk collects everything it passes, so a corridor of three cheap dragons beats a corridor with one magnificent dragon and a stop sign behind it. Count the chambers before you spend the coin.</p>
+
+  <p><strong>You will pass when your coins run out.</strong> Sometimes correct, often not. Look at your hand first: if you have nothing worth buying next round either, spend the coins now. If your engine is about to get much better, pass with three coins in hand and open the next round with nine.</p>
+
+  <div class="trap">
+    <b>The one that actually loses games</b>
+    <p>Building three shallow caves, spending every round exploring them for two rewards each, gathering resources beautifully, and then discovering in round four that resources are not points. You gathered fuel for four rounds and never converted it into dragons, eggs, tucks or guild markers.</p>
+    <p>Income is not score. Every round, ask what you have actually banked, and if the answer is "a nice pile of milk", entice something.</p>
+  </div>
+
+  <div class="note">
+    <span class="lab">The whole briefing in one line</span>
+    <p><strong>Six coins a round, and every dragon you place makes the coin you spend walking worth more.</strong> Dig early, place your repeating abilities on the left, and spend your eggs while there is still game left for them to compound in.</p>
+  </div>
+</article>
+
+<footer>A teaching walkthrough of Wyrmspan, designed by Connie Vogelmann, developed by Elizabeth Hargrave and published by Stonemaier Games in 2024. This page teaches what the game is and how it thinks; the rulebook in the box has the exact numbers, limits and edge cases. <a href="../">Back to the shelf</a>.</footer>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var pts = Array.prototype.slice.call(document.querySelectorAll('.pt'));
+  var svg = document.getElementById('cave');
+  var count = document.getElementById('count');
+  var NS = 'http://www.w3.org/2000/svg';
+
+  var colours = ['#C4433C','#D9A63C','#9A6BD8'];
+  var w = 18, gap = 4, x0 = 4, cells = [];
+
+  pts.forEach(function(_, i){
+    var r = document.createElementNS(NS, 'rect');
+    r.setAttribute('class', 'ch');
+    r.setAttribute('x', x0 + i * (w + gap));
+    r.setAttribute('y', 8);
+    r.setAttribute('width', w);
+    r.setAttribute('height', 18);
+    r.setAttribute('rx', 2);
+    svg.appendChild(r);
+    cells.push(r);
+  });
+
+  var span = x0 * 2 + pts.length * (w + gap) - gap;
+  var walker = document.createElementNS(NS, 'circle');
+  walker.setAttribute('class', 'walker');
+  walker.setAttribute('cx', x0 + w / 2);
+  walker.setAttribute('cy', 30);
+  walker.setAttribute('r', 3);
+  walker.setAttribute('fill', '#EFE4D2');
+  svg.appendChild(walker);
+  svg.setAttribute('viewBox', '0 0 ' + Math.ceil(span) + ' 34');
+
+  var at = 0;
+  function paint(n){
+    if(n === at) return;
+    at = n;
+    cells.forEach(function(c, i){
+      var on = i < n;
+      c.classList.toggle('on', on);
+      c.style.fill = on ? colours[i % colours.length] : 'rgba(239,228,210,.05)';
+    });
+    walker.setAttribute('transform', 'translate(' + ((n - 1) * (w + gap)) + ',0)');
+    count.textContent = n + ' / ' + pts.length;
+    svg.setAttribute('aria-label', 'Point ' + n + ' of ' + pts.length);
+  }
+
+  var ticking = false;
+  function measure(){
+    ticking = false;
+    var mark = window.innerHeight * 0.45, n = 1;
+    for(var i = 0; i < pts.length; i++){
+      if(pts[i].getBoundingClientRect().top <= mark){ n = i + 1; }
+    }
+    paint(n);
+  }
+  window.addEventListener('scroll', function(){
+    if(!ticking){ ticking = true; window.requestAnimationFrame(measure); }
+  }, {passive:true});
+  window.addEventListener('resize', measure);
+  paint(1);
+  measure();
+})();
+</script>
+</body>
+</html>

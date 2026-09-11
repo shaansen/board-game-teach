@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Patchwork: Learn It Properly</title>
+<meta name="description" content="Learn what Patchwork actually is: twelve points on the time track that decides who moves, the three numbers on every patch, and the eighty one squares you are trying not to leave empty.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700;1,9..144,500&family=Work+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --denim:#1B2A3F;
+  --denim-2:#121C2A;
+  --calico:#F1EADC;
+  --dim:#93A3B8;
+  --thread:rgba(241,234,220,.55);
+  --rust:#C4593B;
+  --mustard:#D9A441;
+  --teal:#2E8B87;
+  --plum:#9A5F8E;
+  --sage:#7FA05A;
+  --line:rgba(241,234,220,.16);
+  --display:"Fraunces",Georgia,serif;
+  --body:"Work Sans",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;color:var(--calico);font-family:var(--body);font-size:18px;line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  background:
+    repeating-linear-gradient(45deg, rgba(241,234,220,.020) 0 2px, transparent 2px 9px),
+    radial-gradient(760px 480px at 12% -6%, rgba(217,164,65,.13), transparent 62%),
+    radial-gradient(700px 500px at 92% 8%, rgba(46,139,135,.12), transparent 60%),
+    linear-gradient(180deg,var(--denim),var(--denim-2) 74%);
+  background-attachment:fixed;
+}
+.wrap{max-width:800px;margin:0 auto;padding:0 22px 90px}
+
+/* ---------- the quilt rail ---------- */
+.rail{
+  position:sticky;top:0;z-index:20;background:rgba(18,28,42,.94);
+  backdrop-filter:blur(6px);border-bottom:1px solid var(--line);padding:8px 22px;
+}
+.rail-in{max-width:800px;margin:0 auto;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.rail-lab{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+#quilt{flex:1;min-width:150px;max-width:290px;height:32px}
+#quilt rect{
+  fill:transparent;stroke:rgba(241,234,220,.28);stroke-width:1;
+  stroke-dasharray:3 2.4;transition:fill .35s,stroke .35s;
+}
+#quilt rect.on{stroke:var(--calico)}
+.rail-count{font-family:var(--mono);font-size:12px;color:var(--mustard);white-space:nowrap}
+
+.backlink{
+  display:inline-block;margin-top:26px;font-family:var(--mono);font-size:11px;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--dim);text-decoration:none;
+  border-bottom:1px solid transparent;
+}
+.backlink:hover{color:var(--mustard);border-bottom-color:var(--mustard)}
+
+header.top{padding:28px 0 42px;border-bottom:1px dashed var(--thread)}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--mustard);margin:22px 0 14px}
+h1{
+  font-family:var(--display);font-weight:700;font-size:clamp(46px,10vw,88px);
+  line-height:.94;letter-spacing:-.015em;margin:0 0 8px;color:#FFFAF0;
+}
+h1 small{display:block;font-family:var(--body);font-size:.16em;font-weight:600;letter-spacing:.24em;
+  color:var(--teal);margin-bottom:14px;text-transform:uppercase}
+.lede{font-size:20px;color:var(--dim);max-width:54ch;margin:18px 0 0}
+
+.pt{border-top:1px dashed var(--thread);padding:44px 0 8px;scroll-margin-top:56px}
+.pt:first-of-type{border-top:none}
+.num{
+  display:inline-flex;align-items:center;gap:12px;margin-bottom:12px;
+  font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);
+}
+.num b{
+  width:32px;height:32px;display:grid;place-items:center;
+  background:var(--mustard);color:var(--denim-2);font-family:var(--display);font-weight:700;font-size:18px;
+  outline:1px dashed var(--denim-2);outline-offset:-4px;
+}
+h2{
+  font-family:var(--display);font-weight:700;font-size:clamp(28px,5.2vw,42px);
+  line-height:1.08;margin:0 0 16px;max-width:24ch;color:#FFFAF0;
+}
+h3{font-family:var(--display);font-weight:600;font-size:23px;margin:30px 0 6px;color:var(--calico)}
+.pt p{max-width:62ch;margin:0 0 16px}
+strong{font-weight:600;color:#FFFAF0}
+em.t{font-style:normal;font-family:var(--mono);font-size:.84em;background:rgba(241,234,220,.10);
+  padding:2px 6px;border-radius:2px}
+.aside{
+  border-left:3px dashed var(--plum);padding:2px 0 2px 18px;margin:24px 0;
+  font-style:italic;color:var(--dim);max-width:58ch;
+}
+.trap{
+  margin:26px 0;border:1px dashed rgba(196,89,59,.75);background:rgba(196,89,59,.14);
+  padding:16px 20px;max-width:62ch;
+}
+.trap b{
+  display:block;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:#E58A6C;margin-bottom:8px;
+}
+.trap p{margin:0}
+.note{
+  margin:30px 0 0;padding:18px 22px;max-width:62ch;
+  background:rgba(46,139,135,.14);border:1px dashed rgba(46,139,135,.7);
+}
+.note .lab{
+  display:block;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:#6FC7C2;margin-bottom:8px;
+}
+.note p{margin:0}
+ul.clean{list-style:none;padding:0;margin:0 0 16px;max-width:62ch}
+ul.clean li{padding:8px 0 8px 26px;position:relative;border-bottom:1px dashed rgba(241,234,220,.14)}
+ul.clean li:last-child{border-bottom:none}
+ul.clean li::before{
+  content:"";position:absolute;left:3px;top:17px;width:10px;height:10px;
+  background:var(--mustard);outline:1px dashed var(--denim-2);outline-offset:-3px;
+}
+.eg{
+  margin:26px 0;max-width:62ch;border-left:3px solid var(--sage);
+  background:rgba(127,160,90,.12);padding:16px 20px 16px 18px;
+}
+.eg b{
+  display:block;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:#A9CC7E;margin-bottom:8px;
+}
+.eg p{margin:0 0 10px}
+.eg p:last-child{margin:0}
+.eg .out{font-family:var(--mono);font-size:.9em;color:var(--mustard)}
+figure{margin:28px 0;padding:18px;background:rgba(241,234,220,.045);border:1px dashed var(--thread)}
+figure svg{display:block;width:100%;height:auto}
+figcaption{font-family:var(--mono);font-size:11px;color:var(--dim);margin-top:12px;text-align:center;line-height:1.6}
+.scroll{overflow-x:auto;margin:24px 0}
+table{border-collapse:collapse;width:100%;min-width:440px;font-size:16px}
+th,td{text-align:left;padding:9px 14px 9px 0;border-bottom:1px dashed var(--line);vertical-align:top}
+th{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);font-weight:600}
+td.n{font-family:var(--mono);color:var(--mustard)}
+footer{margin:64px 0 0;padding-top:24px;border-top:1px dashed var(--thread);color:var(--dim);font-size:15px}
+a{color:var(--mustard)}
+@media(max-width:620px){body{font-size:17px}#quilt{max-width:190px;height:28px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+@media print{.rail{display:none}}
+</style>
+</head>
+<body>
+
+<div class="rail">
+  <div class="rail-in">
+    <span class="rail-lab">quilt sewn</span>
+    <svg id="quilt" viewBox="0 0 290 32" role="img" aria-label="Progress through the briefing" preserveAspectRatio="xMinYMid meet"></svg>
+    <span class="rail-count" id="count">1 / 12</span>
+  </div>
+</div>
+
+<div class="wrap">
+
+<a class="backlink" href="../">&larr; the shelf</a>
+
+<header class="top">
+  <p class="eyebrow">Learn it properly &middot; 12 points</p>
+  <h1><small>Two players, one spool</small>Patchwork</h1>
+  <p class="lede">A quilt is eighty one squares and every square you fail to cover costs you two points. The clever part is that you do not take turns. You take whichever turns you can afford, and the person who is behind in time keeps going.</p>
+</header>
+
+<article class="pt">
+  <p class="num"><b>1</b> The big picture</p>
+  <h2>Two people, two quilts, and one shared circle of fabric between them.</h2>
+
+  <p>Patchwork is for exactly two players and takes about half an hour. You each have a <strong>9 by 9 quilt board</strong>, which is eighty one empty squares, and the entire game is the business of covering them with awkward polyomino patches bought from a shared circle of thirty three.</p>
+
+  <p>At the end you count buttons. Buttons are the money and also the points. Then comes the rule that reframes everything: <strong>every empty square left on your quilt costs you 2 buttons</strong>. Not zero. Minus two. A quilt with ten holes in it has handed back twenty points before you start counting what you earned.</p>
+
+  <p>So there are two ways to lose, and beginners only see one of them. You can be outscored by someone who built a better income engine. You can also simply fail to cover your board, which is quieter and much more common.</p>
+
+  <p>The interaction is real but gentle. You never touch the other person's quilt. You compete for exactly two things: the patches in the shared window, and time itself.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Eighty one squares, each worth 2 buttons if you leave it bare. <strong>Coverage is not the tidy part of the game, it is most of the score.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>2</b> The time track</p>
+  <h2>You do not alternate turns. Whoever is further behind goes next, again and again if they like.</h2>
+
+  <p>This is the idea the whole game is built on, and it is worth slowing down for. There is a shared <strong>time track</strong> of fifty three spaces, and each of you has a token on it. Both start at zero. Every action you take pushes your token forward, and here is the rule:</p>
+
+  <p><strong>The player whose token is further back takes the next turn.</strong> If both tokens sit on the same space, the one on top goes.</p>
+
+  <p>Nobody says "your turn". The board says it. If you buy a small patch that costs 1 time and your opponent has just spent 5, you take the next turn as well, and possibly the one after that, until your token catches up to theirs.</p>
+
+  <figure>
+    <svg viewBox="0 0 760 250" role="img" aria-labelledby="tt-t tt-d">
+      <title id="tt-t">How the time track decides who moves</title>
+      <desc id="tt-d">A horizontal time track. The opponent's token sits well ahead at space fourteen while yours sits at space six. Three consecutive turns are shown beneath, each advancing your token by two or three spaces, and only when your token passes the opponent's does the turn pass back to them.</desc>
+      <g stroke="rgba(241,234,220,.34)" stroke-width="1" fill="none">
+        <rect x="20" y="40" width="720" height="34" rx="4"/>
+      </g>
+      <g stroke="rgba(241,234,220,.22)" stroke-width="1">
+        <path d="M60 40 V74 M100 40 V74 M140 40 V74 M180 40 V74 M220 40 V74 M260 40 V74 M300 40 V74 M340 40 V74 M380 40 V74 M420 40 V74 M460 40 V74 M500 40 V74 M540 40 V74 M580 40 V74 M620 40 V74 M660 40 V74 M700 40 V74"/>
+      </g>
+      <g font-family="IBM Plex Mono, monospace" font-size="11" fill="#93A3B8">
+        <text x="20" y="30">START</text>
+        <text x="740" y="30" text-anchor="end">SPACE 53, THE END</text>
+      </g>
+      <circle cx="260" cy="57" r="11" fill="#D9A441" stroke="#121C2A" stroke-width="2"/>
+      <circle cx="500" cy="57" r="11" fill="#9A5F8E" stroke="#121C2A" stroke-width="2"/>
+      <g font-family="Work Sans, sans-serif" font-size="13" fill="#F1EADC" text-anchor="middle">
+        <text x="260" y="98" fill="#D9A441">you</text>
+        <text x="500" y="98" fill="#9A5F8E">them</text>
+      </g>
+      <text x="380" y="128" text-anchor="middle" font-family="Fraunces, serif" font-size="19" fill="#FFFAF0">You are behind, so you move. And you keep moving.</text>
+      <g font-family="IBM Plex Mono, monospace" font-size="11.5" fill="#93A3B8">
+        <text x="20" y="164">TURN 1: BUY A 2 TIME PATCH</text>
+        <text x="20" y="190">TURN 2: BUY A 3 TIME PATCH</text>
+        <text x="20" y="216">TURN 3: BUY A 4 TIME PATCH</text>
+        <text x="300" y="164" fill="#D9A441">YOU MOVE 260 &#8594; 300, STILL BEHIND, GO AGAIN</text>
+        <text x="300" y="190" fill="#D9A441">YOU MOVE 300 &#8594; 380, STILL BEHIND, GO AGAIN</text>
+        <text x="300" y="216" fill="#9A5F8E">YOU PASS THEM. NOW THEY TAKE EVERY TURN.</text>
+      </g>
+      <text x="20" y="242" font-family="Fraunces, serif" font-size="17" fill="#FFFAF0">Three patches, three turns in a row, because cheap time buys consecutive turns.</text>
+    </svg>
+    <figcaption>THE TRACK IS THE TURN ORDER. TIME SPENT IS TURNS SURRENDERED.</figcaption>
+  </figure>
+
+  <p>Two consequences fall straight out of this, and they take a game or two to feel properly.</p>
+
+  <p>First, <strong>a cheap patch in time is not the same as a cheap patch in buttons</strong>. A patch that costs 1 time hands the initiative back to you almost immediately. A patch that costs 6 time may buy your opponent four turns in a row while you sit and watch.</p>
+
+  <p>Second, the game is finite and visible. Fifty three spaces, shared. Every space you advance is a space you can never buy back, and when both tokens reach the end it stops. You can look at the track at any moment and know almost exactly how much game is left, for you and for them separately.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Time is the real currency. <strong>Buttons buy patches; time buys turns</strong>, and turns are what run out.</p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>3</b> Your turn</p>
+  <h2>Two options, and the second one is not a pass.</h2>
+
+  <p>On your turn you do exactly one of two things.</p>
+
+  <ul class="clean">
+    <li><strong>Buy a patch.</strong> Choose one of the three patches available (point 4 explains which three), pay its button cost, sew it onto your quilt, and advance your time token by the patch's time cost.</li>
+    <li><strong>Advance and get paid.</strong> Move your token to the space directly in front of your opponent's, and <strong>take 1 button for every space you moved</strong>.</li>
+  </ul>
+
+  <p>That second option is the one new players misread as giving up. It is not. It is a sale: you are selling time for money at a fixed rate of one button per space, and you are handing your opponent the initiative in exchange.</p>
+
+  <p>It is also the only move that is always available. You can be broke, you can hate all three patches, and you can still take a fistful of buttons and jump ahead.</p>
+
+  <div class="eg">
+    <b>What it looks like</b>
+    <p>Your token is on 12, theirs is on 19. The three patches on offer cost 7, 8 and 10 buttons and you have 4.</p>
+    <p>You advance instead: token from 12 to 20, one space past theirs, and collect <strong>8 buttons</strong>.</p>
+    <p class="out">You are now rich and it is their turn, probably for a while. That is the trade.</p>
+  </div>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Advancing is a transaction, not a surrender: <strong>one button per space, paid for with the initiative.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>4</b> The circle and the window of three</p>
+  <h2>You never choose from thirty three patches. You choose from three.</h2>
+
+  <p>All thirty three patches are laid out in a big circle at setup, in a random order that is different every game, with a wooden <strong>spool</strong> token parked in a gap in the ring. On your turn you may buy <strong>only one of the three patches immediately clockwise of the spool</strong>.</p>
+
+  <p>When you buy one, the spool moves forward to where that patch was. Everything you passed over is now behind the spool, and the ring never comes round again.</p>
+
+  <figure>
+    <svg viewBox="0 0 760 300" role="img" aria-labelledby="ci-t ci-d">
+      <title id="ci-t">The circle of patches and the three that are actually available</title>
+      <desc id="ci-d">Patches arranged in a ring with a spool token. The three patches clockwise of the spool are highlighted as the only ones you may buy. Buying the third one moves the spool past the first two, which are pushed to the back of the ring and are gone for a long time.</desc>
+      <g transform="translate(190,150)">
+        <circle r="104" fill="none" stroke="rgba(241,234,220,.20)" stroke-width="1" stroke-dasharray="4 4"/>
+        <g stroke="#121C2A" stroke-width="1.5">
+          <rect x="-14" y="-118" width="28" height="24" fill="#C4593B"/>
+          <rect x="38" y="-104" width="28" height="24" fill="#2E8B87"/>
+          <rect x="78" y="-64" width="28" height="24" fill="#D9A441"/>
+          <rect x="92" y="-12" width="28" height="24" fill="#9A5F8E" opacity=".45"/>
+          <rect x="78" y="40" width="28" height="24" fill="#7FA05A" opacity=".45"/>
+          <rect x="38" y="80" width="28" height="24" fill="#C4593B" opacity=".45"/>
+          <rect x="-14" y="94" width="28" height="24" fill="#2E8B87" opacity=".45"/>
+          <rect x="-66" y="80" width="28" height="24" fill="#D9A441" opacity=".45"/>
+          <rect x="-106" y="40" width="28" height="24" fill="#9A5F8E" opacity=".45"/>
+          <rect x="-120" y="-12" width="28" height="24" fill="#7FA05A" opacity=".45"/>
+          <rect x="-106" y="-64" width="28" height="24" fill="#C4593B" opacity=".45"/>
+          <rect x="-66" y="-104" width="28" height="24" fill="#2E8B87" opacity=".45"/>
+        </g>
+        <g fill="#F1EADC" font-family="IBM Plex Mono, monospace" font-size="10" text-anchor="middle">
+          <text x="0" y="-128" fill="#D9A441">1</text>
+          <text x="52" y="-114" fill="#D9A441">2</text>
+          <text x="92" y="-74" fill="#D9A441">3</text>
+        </g>
+        <g>
+          <circle cx="-52" cy="-118" r="12" fill="#F1EADC" stroke="#121C2A" stroke-width="2"/>
+          <circle cx="-52" cy="-118" r="4" fill="#121C2A"/>
+          <text x="-52" y="-138" font-family="IBM Plex Mono, monospace" font-size="10" fill="#F1EADC" text-anchor="middle">SPOOL</text>
+        </g>
+        <path d="M-34 -126 A 122 122 0 0 1 6 -132" fill="none" stroke="#D9A441" stroke-width="2"
+              marker-end="url(#ca)"/>
+        <defs>
+          <marker id="ca" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+            <path d="M0 0 L10 5 L0 10 z" fill="#D9A441"/>
+          </marker>
+        </defs>
+      </g>
+      <g font-family="Work Sans, sans-serif" font-size="15" fill="#F1EADC">
+        <text x="360" y="60" font-family="Fraunces, serif" font-size="21" fill="#FFFAF0">Only 1, 2 and 3 are for sale.</text>
+        <text x="360" y="98">Buy number 3 and the spool jumps to where it sat,</text>
+        <text x="360" y="124">so 1 and 2 go to the back of the ring behind it.</text>
+        <text x="360" y="164" fill="#93A3B8">The circle is walked once. Nothing you skip</text>
+        <text x="360" y="190" fill="#93A3B8">comes back until the spool has been all the way round,</text>
+        <text x="360" y="216" fill="#93A3B8">and it rarely gets the chance.</text>
+        <text x="360" y="258" font-family="IBM Plex Mono, monospace" font-size="12" fill="#D9A441">TAKING THE FAR PATCH THROWS AWAY THE NEAR ONES.</text>
+      </g>
+    </svg>
+    <figcaption>A THREE CARD MENU THAT REWRITES ITSELF EVERY PURCHASE, INCLUDING THE OTHER PLAYER'S.</figcaption>
+  </figure>
+
+  <p>This is where the two quilts touch. The window is shared, so the patch you want is a patch they can take, and the patch you take changes what they are offered. Buying the third patch in the window is a double move: you get the thing you wanted, and you push two patches out of reach for both of you.</p>
+
+  <p>It also means <strong>you should look at the next three before you buy</strong>. If the two patches you are about to skip are exactly what your opponent needs to close a hole, skipping them past the spool is worth real points.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>The spool only ever goes forwards. <strong>Every purchase is also a decision about what to bury.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>5</b> What is printed on a patch</p>
+  <h2>Three numbers, and the shape is a fourth.</h2>
+
+  <p>Every patch tile carries the same information, and reading it as a single price is the first real skill.</p>
+
+  <div class="scroll"><table>
+    <tr><th>On the tile</th><th>What it is</th><th>What it really costs you</th></tr>
+    <tr><td class="n">button cost</td><td>Buttons you pay now</td><td>Money, the least scarce of the three</td></tr>
+    <tr><td class="n">time cost</td><td>Spaces your token advances</td><td>Turns, and possibly several of them</td></tr>
+    <tr><td class="n">button income</td><td>Buttons printed on the patch itself</td><td>Nothing. This is the payoff</td></tr>
+    <tr><td class="n">the shape</td><td>Squares it covers, and how awkwardly</td><td>Board space, which is 2 points a square</td></tr>
+  </table></div>
+
+  <figure>
+    <svg viewBox="0 0 760 260" role="img" aria-labelledby="pa-t pa-d">
+      <title id="pa-t">Two patches compared on all three of their numbers</title>
+      <desc id="pa-d">Two patch tiles side by side. The left is a five square zigzag costing two buttons and two time with no income printed. The right is a four square shape costing seven buttons and one time with two button income symbols on it. A summary underneath compares them by squares covered, turns surrendered and income earned.</desc>
+      <g stroke="#121C2A" stroke-width="1.5">
+        <rect x="40" y="40" width="38" height="38" fill="#2E8B87"/>
+        <rect x="78" y="40" width="38" height="38" fill="#2E8B87"/>
+        <rect x="78" y="78" width="38" height="38" fill="#2E8B87"/>
+        <rect x="116" y="78" width="38" height="38" fill="#2E8B87"/>
+        <rect x="154" y="78" width="38" height="38" fill="#2E8B87"/>
+      </g>
+      <g stroke="#121C2A" stroke-width="1.5">
+        <rect x="440" y="40" width="38" height="38" fill="#C4593B"/>
+        <rect x="478" y="40" width="38" height="38" fill="#C4593B"/>
+        <rect x="440" y="78" width="38" height="38" fill="#C4593B"/>
+        <rect x="478" y="78" width="38" height="38" fill="#C4593B"/>
+        <circle cx="459" cy="59" r="9" fill="#F1EADC" stroke="#121C2A"/>
+        <circle cx="497" cy="97" r="9" fill="#F1EADC" stroke="#121C2A"/>
+      </g>
+      <g font-family="IBM Plex Mono, monospace" font-size="12" fill="#93A3B8">
+        <text x="40" y="146">COST: 2 BUTTONS</text>
+        <text x="40" y="168">TIME: 2 SPACES</text>
+        <text x="40" y="190" fill="#93A3B8">INCOME: NONE</text>
+        <text x="40" y="212" fill="#D9A441">COVERS: 5 SQUARES</text>
+        <text x="440" y="146">COST: 7 BUTTONS</text>
+        <text x="440" y="168">TIME: 1 SPACE</text>
+        <text x="440" y="190" fill="#D9A441">INCOME: 2 BUTTONS, EVERY PAYDAY</text>
+        <text x="440" y="212" fill="#D9A441">COVERS: 4 SQUARES</text>
+      </g>
+      <g font-family="Fraunces, serif" font-size="18" fill="#FFFAF0">
+        <text x="40" y="248">Cheap, big, and it costs you the initiative.</text>
+        <text x="440" y="248">Dear, small, and it pays rent all game.</text>
+      </g>
+    </svg>
+    <figcaption>NEITHER IS BETTER. THE ANSWER DEPENDS ENTIRELY ON WHERE THE TOKENS ARE SITTING.</figcaption>
+  </figure>
+
+  <p>A patch is therefore never simply "worth it". A five square patch for 2 buttons is a bargain if you have a five square hole shaped exactly like it and can spare the time; it is a disaster if it forces two ugly corners you can never fill.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Price it in all three currencies before you buy: <strong>buttons, time, and the shape of the hole it leaves behind.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>6</b> Button income</p>
+  <h2>Nine paydays, printed on the track, and the early ones are worth several of the late ones.</h2>
+
+  <p>Scattered along the time track are <strong>button symbols</strong>: nine of them. Whenever your token passes or lands on one, you stop and count <strong>every button printed on the patches sewn onto your quilt</strong>, and take that many buttons from the supply.</p>
+
+  <p>So a patch with 2 buttons on it is not worth 2 buttons. It is worth 2 buttons multiplied by <strong>the number of paydays you have left</strong>. Bought near the start, it will pay out eight or nine times. Bought at space 45, it pays once, maybe twice, and probably did not cover its own price.</p>
+
+  <figure>
+    <svg viewBox="0 0 760 230" role="img" aria-labelledby="in-t in-d">
+      <title id="in-t">Why the same income patch is worth more early</title>
+      <desc id="in-d">The time track drawn twice with its nine payday marks. In the top copy a patch with two button income is bought near the start and crosses eight remaining paydays, earning sixteen buttons. In the bottom copy the same patch is bought late and crosses only two, earning four.</desc>
+      <g font-family="IBM Plex Mono, monospace" font-size="11" fill="#93A3B8">
+        <text x="20" y="26">BOUGHT AT SPACE 6</text>
+        <text x="20" y="136">BOUGHT AT SPACE 41</text>
+      </g>
+      <g stroke="rgba(241,234,220,.30)" fill="none">
+        <rect x="20" y="36" width="720" height="26" rx="3"/>
+        <rect x="20" y="146" width="720" height="26" rx="3"/>
+      </g>
+      <g fill="#D9A441">
+        <circle cx="100" cy="49" r="7"/><circle cx="178" cy="49" r="7"/><circle cx="256" cy="49" r="7"/>
+        <circle cx="334" cy="49" r="7"/><circle cx="412" cy="49" r="7"/><circle cx="490" cy="49" r="7"/>
+        <circle cx="568" cy="49" r="7"/><circle cx="646" cy="49" r="7"/><circle cx="712" cy="49" r="7"/>
+      </g>
+      <g fill="rgba(217,164,65,.30)">
+        <circle cx="100" cy="159" r="7"/><circle cx="178" cy="159" r="7"/><circle cx="256" cy="159" r="7"/>
+        <circle cx="334" cy="159" r="7"/><circle cx="412" cy="159" r="7"/><circle cx="490" cy="159" r="7"/>
+        <circle cx="568" cy="159" r="7"/>
+      </g>
+      <g fill="#D9A441">
+        <circle cx="646" cy="159" r="7"/><circle cx="712" cy="159" r="7"/>
+      </g>
+      <rect x="56" y="34" width="6" height="30" fill="#2E8B87"/>
+      <rect x="600" y="144" width="6" height="30" fill="#2E8B87"/>
+      <g font-family="Work Sans, sans-serif" font-size="14" fill="#F1EADC">
+        <text x="20" y="86">Eight paydays still ahead of it. At 2 buttons each, the patch earns <tspan fill="#D9A441">16 buttons</tspan>.</text>
+        <text x="20" y="196">Two paydays left. The same patch earns <tspan fill="#C4593B">4 buttons</tspan>, and it cost 7.</text>
+      </g>
+      <text x="20" y="222" font-family="Fraunces, serif" font-size="17" fill="#FFFAF0">Identical tile. Identical price. Twelve buttons of difference.</text>
+    </svg>
+    <figcaption>INCOME PATCHES ARE AN INVESTMENT, AND INVESTMENTS ARE PRICED IN TIME REMAINING.</figcaption>
+  </figure>
+
+  <p>This gives the game its arc. The first third is about buying income, even at silly button prices, because everything you buy then pays you back nine times over. The last third is about buying coverage, because a hole is worth minus two whatever else is going on and income has run out of paydays to be collected on.</p>
+
+  <div class="trap">
+    <b>The trap</b>
+    <p>Spending the opening on big cheap patches because they look like good value per square. They are, in squares. But you reach the middle of the track with a half covered quilt and no income, and then you have to buy the rest of your fabric out of a wage of one button per space.</p>
+  </div>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Buy income early, buy coverage late. <strong>A button icon is worth roughly one button for every payday still in front of you.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>7</b> The quilt</p>
+  <h2>Eighty one squares, and the holes are what you will actually remember.</h2>
+
+  <p>Placing is simple: rotate or flip the patch however you like, put it anywhere on your 9 by 9 board, do not overlap, do not hang over the edge. Once sewn it never moves.</p>
+
+  <p>What makes it hard is that patches are irregular and the board is not. Every placement decides the shape of the space left over, and awkward leftovers are how quilts end up with single square gaps that nothing in the circle can fill.</p>
+
+  <figure>
+    <svg viewBox="0 0 760 340" role="img" aria-labelledby="qu-t qu-d">
+      <title id="qu-t">A quilt board part sewn, with its holes counted</title>
+      <desc id="qu-d">A nine by nine grid with several irregular patches sewn into it in different colours. Five single squares are left uncovered and marked with a cross, each labelled minus two. A dashed outline in the top left corner marks the seven by seven area that earns the bonus tile.</desc>
+      <g stroke="rgba(241,234,220,.20)" fill="rgba(241,234,220,.04)">
+        <rect x="30" y="20" width="288" height="288"/>
+      </g>
+      <g stroke="rgba(241,234,220,.16)" fill="none">
+        <path d="M62 20 V308 M94 20 V308 M126 20 V308 M158 20 V308 M190 20 V308 M222 20 V308 M254 20 V308 M286 20 V308"/>
+        <path d="M30 52 H318 M30 84 H318 M30 116 H318 M30 148 H318 M30 180 H318 M30 212 H318 M30 244 H318 M30 276 H318"/>
+      </g>
+      <g stroke="#121C2A" stroke-width="1.4">
+        <rect x="30" y="20" width="64" height="32" fill="#2E8B87"/>
+        <rect x="94" y="20" width="96" height="32" fill="#C4593B"/>
+        <rect x="190" y="20" width="32" height="64" fill="#D9A441"/>
+        <rect x="222" y="20" width="64" height="32" fill="#9A5F8E"/>
+        <rect x="286" y="20" width="32" height="96" fill="#7FA05A"/>
+        <rect x="30" y="52" width="32" height="64" fill="#D9A441"/>
+        <rect x="62" y="52" width="96" height="32" fill="#9A5F8E"/>
+        <rect x="158" y="52" width="32" height="64" fill="#2E8B87"/>
+        <rect x="222" y="52" width="64" height="32" fill="#7FA05A"/>
+        <rect x="62" y="84" width="64" height="32" fill="#C4593B"/>
+        <rect x="190" y="84" width="64" height="32" fill="#D9A441"/>
+        <rect x="30" y="116" width="96" height="32" fill="#7FA05A"/>
+        <rect x="126" y="116" width="32" height="64" fill="#9A5F8E"/>
+        <rect x="158" y="116" width="64" height="32" fill="#C4593B"/>
+        <rect x="222" y="116" width="96" height="32" fill="#2E8B87"/>
+        <rect x="30" y="148" width="64" height="32" fill="#C4593B"/>
+        <rect x="158" y="148" width="32" height="64" fill="#7FA05A"/>
+        <rect x="190" y="148" width="64" height="32" fill="#9A5F8E"/>
+        <rect x="254" y="148" width="64" height="32" fill="#D9A441"/>
+        <rect x="30" y="180" width="96" height="32" fill="#2E8B87"/>
+        <rect x="190" y="180" width="96" height="32" fill="#C4593B"/>
+      </g>
+      <g stroke="#C4593B" stroke-width="2.4" stroke-linecap="round">
+        <path d="M100 122 L120 142 M120 122 L100 142"/>
+        <path d="M132 186 L152 206 M152 186 L132 206"/>
+        <path d="M292 186 L312 206 M312 186 L292 206"/>
+        <path d="M36 218 L56 238 M56 218 L36 238"/>
+        <path d="M68 250 L88 270 M88 250 L68 270"/>
+      </g>
+      <g stroke="#D9A441" stroke-width="2" stroke-dasharray="6 4" fill="none">
+        <rect x="30" y="20" width="224" height="224"/>
+      </g>
+      <g font-family="IBM Plex Mono, monospace" font-size="12" fill="#93A3B8">
+        <text x="356" y="44" fill="#D9A441">THE DASHED SQUARE IS 7 BY 7.</text>
+        <text x="356" y="66">FILL IT COMPLETELY BEFORE YOUR</text>
+        <text x="356" y="88">OPPONENT AND TAKE THE 7 BUTTON TILE.</text>
+        <text x="356" y="136" fill="#C4593B">EVERY CROSS IS AN EMPTY SQUARE.</text>
+        <text x="356" y="158">FIVE OF THEM HERE.</text>
+      </g>
+      <g font-family="Fraunces, serif" font-size="20" fill="#FFFAF0">
+        <text x="356" y="200">5 holes = minus 10 buttons</text>
+        <text x="356" y="232" font-size="16" fill="#93A3B8">which is a whole payday, thrown away</text>
+        <text x="356" y="276" font-size="16" fill="#93A3B8">A one square hole can only ever be filled</text>
+        <text x="356" y="298" font-size="16" fill="#93A3B8">by a leather patch, and there are only five.</text>
+      </g>
+    </svg>
+    <figcaption>SEW OUTWARDS FROM A CORNER AND KEEP THE EDGE STRAIGHT. RAGGED EDGES BECOME HOLES.</figcaption>
+  </figure>
+
+  <p>The practical technique for a first game: work from one corner, keep the frontier of sewn fabric as straight as you can, and treat a patch that would leave a single square notch as more expensive than the tile says.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>You are not filling squares, you are <strong>managing the shape of the gap</strong>. Judge every patch by what it leaves, not by what it covers.</p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>8</b> The leather patches</p>
+  <h2>Five single squares, sitting on the track, free to whoever gets there first.</h2>
+
+  <p>Five small <strong>1 by 1 leather patches</strong> sit on marked spaces of the time track. When your token reaches or passes one, you take it immediately and sew it onto your quilt at once. It costs no buttons and no time.</p>
+
+  <p>They are the only single squares in the game. Every other patch is two squares or more, so a leather patch is the only thing that can ever fill a one square hole. That makes them worth far more than their size: a free 2 points of coverage, and an escape hatch for exactly the mistake this game punishes.</p>
+
+  <p>Because they are on the track, they belong to <strong>whoever advances past that space first</strong>, and advancing is precisely what the player who is behind keeps doing. So they change the maths of a big time purchase: sometimes buying the expensive six time patch is right simply because it carries you over a leather patch before your opponent gets there.</p>
+
+  <div class="eg">
+    <b>A small race</b>
+    <p>You are on 24, they are on 26, and a leather patch sits on space 27.</p>
+    <p>You buy a 4 time patch. Your token lands on 28, collecting the leather square on the way.</p>
+    <p class="out">Free square, and a hole you were dreading is now solved. They pass the same space later and get nothing.</p>
+  </div>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>The five leather squares are <strong>first come, first served</strong>. Know where the next one is before you decide how far to move.</p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>9</b> The 7 by 7 bonus</p>
+  <h2>Seven buttons for the first player to fill a seven by seven block, and only the first.</h2>
+
+  <p>There is one special tile in the box, worth <strong>7 buttons</strong>. It goes to the first player who completely fills any 7 by 7 area of their quilt. Once taken it is gone; second place gets nothing.</p>
+
+  <p>Seven buttons is a lot. For scale, it is roughly what a good income patch earns across the whole game, and it is enough to swing a close finish on its own. But it is also forty nine squares of perfectly packed fabric, which is most of your board with no holes at all in that region.</p>
+
+  <p>Treat it as a tiebreaker between plans rather than a plan. If you are already sewing tightly from a corner, orient your work so that the 7 by 7 is the block you are filling anyway. If you are chasing it with gaps behind you, you are paying 2 points a hole to win a 7 point race.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>The bonus rewards the habit that was going to win anyway: <strong>tight, corner outwards, no notches.</strong> Do not distort your game for it.</p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>10</b> The end</p>
+  <h2>The game stops when both tokens reach the last space, and they get there separately.</h2>
+
+  <p>Your game and their game do not end at the same moment. When your token reaches the final space of the track you are done: no more purchases, no more income. If your opponent is still short of the end, they carry on taking turn after turn on their own until they arrive.</p>
+
+  <p>That is worth planning for in both directions. Arriving early means the remaining paydays and leather patches all belong to them. Arriving late means you get a run of uncontested turns, but the patch window has been picked over and you are buying from what they left.</p>
+
+  <p>Then you score, and it is two lines:</p>
+
+  <div class="scroll"><table>
+    <tr><th>Line</th><th>Amount</th></tr>
+    <tr><td>Buttons in front of you</td><td class="n">1 point each</td></tr>
+    <tr><td>The 7 by 7 bonus tile, if you took it</td><td class="n">7 points</td></tr>
+    <tr><td>Every empty square on your quilt</td><td class="n">minus 2 points each</td></tr>
+  </table></div>
+
+  <p>Ties go to whoever reached the final space first. Scores in the twenties are respectable; a badly holed quilt can finish in single figures or below zero, which is a genuinely instructive way to lose a first game.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Your last few turns are almost always about <strong>covering squares, not earning</strong>. Two points a hole beats one button a space.</p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>11</b> Reading the other quilt</p>
+  <h2>You cannot attack them, but you can absolutely choose what they are offered.</h2>
+
+  <p>Patchwork looks solitary and is not quite. Three levers reach across the table.</p>
+
+  <ul class="clean">
+    <li><strong>The window.</strong> Buying the third patch buries the two you skipped. If one of them is the only piece that fits the notch in their quilt, burying it is worth more than the patch you bought.</li>
+    <li><strong>The initiative.</strong> A big time purchase hands them several turns in a row, and therefore several patches in a row. Check what the window will look like before you gift them three consecutive picks.</li>
+    <li><strong>The track.</strong> Leather patches and paydays are first come, first served. Sometimes moving further is worth more than what you bought to move with.</li>
+  </ul>
+
+  <p>Glance at their board every few turns and ask one question: what shape are they short of? Then decide whether the patch in the window is worth more to you as fabric or as denial.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Two quilts, one window. <strong>Every purchase you make edits their menu too.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>12</b> Your first game</p>
+  <h2>How not to lose it.</h2>
+
+  <ul class="clean">
+    <li><strong>Buy income in the first third, coverage in the last.</strong> A button icon bought early pays eight or nine times. The same tile bought late is just an expensive piece of cloth.</li>
+    <li><strong>Do not treat advancing as losing.</strong> One button per space, on demand, with no shape to fit anywhere. It is often the best move on the board.</li>
+    <li><strong>Count time, not turns.</strong> Before buying, ask how many turns the time cost hands your opponent, and what they will take with them.</li>
+    <li><strong>Sew from a corner and keep the edge straight.</strong> Holes are minus two each and single square holes are nearly unfixable. Five loose squares is a payday burned.</li>
+    <li><strong>Watch for the next leather patch.</strong> Free squares go to whoever crosses that space first, and there are only five all game.</li>
+    <li><strong>Look at the two patches you are about to bury.</strong> They are gone for both of you, which is sometimes the real reason to buy the third one.</li>
+    <li><strong>Do not chase the 7 by 7 unless it is on your way.</strong> Seven points is not worth four holes.</li>
+    <li><strong>Finish covered, not rich.</strong> A quilt with two holes and eight buttons beats a quilt with eight holes and fifteen.</li>
+  </ul>
+
+  <div class="eg">
+    <b>A reasonable shape for a first game</b>
+    <p>Opening: take patches with button icons even when they feel overpriced, and keep your time cheap so you keep the initiative.</p>
+    <p>Middle: collect paydays, grab any leather patch you can reach, and start closing your edge into a solid block.</p>
+    <p>End: stop caring about income entirely and buy whatever covers the most squares you can still fit.</p>
+    <p class="out">Rich early, tidy late. That is the whole curve.</p>
+  </div>
+
+  <div class="note">
+    <span class="lab">The whole game in one line</span>
+    <p>Time decides who moves, buttons decide what you can afford, and the quilt decides whether any of it counted. <strong>Cover the board.</strong></p>
+  </div>
+</article>
+
+<footer>A teaching walkthrough of Patchwork by Uwe Rosenberg (Lookout Games, 2014). This page teaches what the game is and how it thinks; the rulebook in the box has the exact numbers, limits and edge cases. <a href="../">Back to the shelf</a>.</footer>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var pts = Array.prototype.slice.call(document.querySelectorAll('.pt'));
+  var svg = document.getElementById('quilt');
+  var count = document.getElementById('count');
+  var NS = 'http://www.w3.org/2000/svg';
+
+  var colours = ['#2E8B87','#C4593B','#D9A441','#9A5F8E','#7FA05A','#2E8B87',
+                 '#D9A441','#C4593B','#9A5F8E','#7FA05A','#2E8B87','#D9A441'];
+
+  var size = 18, gap = 3, x0 = 4, cells = [];
+  pts.forEach(function(_, i){
+    var r = document.createElementNS(NS, 'rect');
+    r.setAttribute('x', x0 + i * (size + gap));
+    r.setAttribute('y', 7);
+    r.setAttribute('width', size);
+    r.setAttribute('height', size);
+    svg.appendChild(r);
+    cells.push(r);
+  });
+  svg.setAttribute('viewBox', '0 0 ' + Math.ceil(x0 * 2 + pts.length * (size + gap) - gap) + ' 32');
+
+  var at = 0;
+  function paint(n){
+    if(n === at) return;
+    at = n;
+    cells.forEach(function(c, i){
+      var on = i < n;
+      c.classList.toggle('on', on);
+      c.style.fill = on ? colours[i % colours.length] : 'transparent';
+    });
+    count.textContent = n + ' / ' + pts.length;
+    svg.setAttribute('aria-label', 'Point ' + n + ' of ' + pts.length);
+  }
+
+  var ticking = false;
+  function measure(){
+    ticking = false;
+    var mark = window.innerHeight * 0.45, n = 1;
+    for(var i = 0; i < pts.length; i++){
+      if(pts[i].getBoundingClientRect().top <= mark){ n = i + 1; }
+    }
+    paint(n);
+  }
+  window.addEventListener('scroll', function(){
+    if(!ticking){ ticking = true; window.requestAnimationFrame(measure); }
+  }, {passive:true});
+  window.addEventListener('resize', measure);
+  paint(1);
+  measure();
+})();
+</script>
+</body>
+</html>

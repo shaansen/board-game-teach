@@ -88,10 +88,27 @@
     <path d="M2.4 13.6 21.6 8.2l-3.1 4.6-8 2.2-2.2 4.1-2.1-.6.6-3.1Z"/>
     <path d="M3.4 5.4h5M2.6 8.4h3.4"/>
   </symbol>
+  <symbol id="e-patchwork" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round">
+    <path d="M3.4 3.4h7.2v7.2H3.4Z"/><path d="M13.4 3.4h7.2v4.8h-7.2Z"/>
+    <path d="M13.4 11h7.2v9.6h-7.2Z"/><path d="M3.4 13.4h7.2v7.2H3.4Z"/>
+    <path d="M10.6 6.6h2.8M10.6 17h2.8M7 10.6v2.8"/>
+  </symbol>
+  <symbol id="e-gwt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M7 8.4C4.6 7.6 2.8 8.4 2.6 10.8c2 1.1 3.7.8 4.9-.7"/>
+    <path d="M17 8.4c2.4-.8 4.2 0 4.4 2.4-2 1.1-3.7.8-4.9-.7"/>
+    <path d="M7 8.6c0-2.6 2.2-4.2 5-4.2s5 1.6 5 4.2v2.8c0 3.4-2.1 6.4-5 8.6-2.9-2.2-5-5.2-5-8.6Z"/>
+    <circle cx="10.2" cy="10.6" r=".9" fill="currentColor" stroke="none"/>
+    <circle cx="13.8" cy="10.6" r=".9" fill="currentColor" stroke="none"/>
+  </symbol>
   <symbol id="e-root" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round">
     <path d="M12 2.8v8.4"/><path d="M12 11.2 6.6 15v6M12 11.2 17.4 15v6"/>
     <circle cx="12" cy="11.2" r="2"/><circle cx="6.6" cy="21" r="1.4"/><circle cx="17.4" cy="21" r="1.4"/>
     <path d="M9.4 5.4 12 2.8l2.6 2.6"/>
+  </symbol>
+  <symbol id="e-wyrmspan" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M3 15.4c2.6-4 5.6-6 9-6 2.2 0 4 .7 5.4 2l3.2-2.6-1 4 2 2.6-3.6.4c-1.2 2.6-3.4 4-6.6 4-3.4 0-6.2-1.4-8.4-4.4Z"/>
+    <path d="M8.2 9.8 6.6 5.4l4 2.6"/>
+    <circle cx="16.4" cy="12.4" r=".9" fill="currentColor" stroke="none"/>
   </symbol>
 </svg>
 
@@ -117,7 +134,7 @@
     </span>
     <input id="q" type="search" placeholder="Search a game, a mechanism, a mood" autocomplete="off" spellcheck="false">
     <button id="clear" class="finder-clear" type="button" hidden>clear</button>
-    <span class="tally" id="tally" role="status" aria-live="polite">16 briefings</span>
+    <span class="tally" id="tally" role="status" aria-live="polite">19 briefings</span>
   </div>
 </div>
 
@@ -153,6 +170,12 @@
     <p class="hook">Two dials own your goods, and the moment you hold one of everything they spin whether you like it or not.</p>
   </a>
 
+  <a class="game" href="games/great-western-trail.html" data-keywords="deck building point to point movement cattle western cowboys alexander pfister eggertspiele heavy euro trail kansas city railroad trains delivery" style="--accent:#D8912F">
+    <span class="emblem"><svg><use href="#e-gwt"/></svg></span>
+    <h3>Great Western Trail</h3>
+    <p class="hook">You walk the same road five times. Every cow you buy today is a cow you will not see until the lap after next.</p>
+  </a>
+
   <a class="game" href="games/harvest.html" data-keywords="worker placement farming crops polyomino trey chambers keymaster turn order draft buildings light euro" style="--accent:#C0561F">
     <span class="emblem"><svg><use href="#e-harvest"/></svg></span>
     <h3>Harvest</h3>
@@ -169,6 +192,12 @@
     <span class="emblem"><svg><use href="#e-paperback"/></svg></span>
     <h3>Paperback</h3>
     <p class="hook">Scrabble and Dominion in a trench coat. Your wild cards spell anything and pay nothing.</p>
+  </a>
+
+  <a class="game" href="games/patchwork.html" data-keywords="two player abstract polyomino tile laying quilt uwe rosenberg lookout time track buttons puzzle short" style="--accent:#2E8B87">
+    <span class="emblem"><svg><use href="#e-patchwork"/></svg></span>
+    <h3>Patchwork</h3>
+    <p class="hook">You do not take turns. Whoever is further behind in time keeps going, and every hole in your quilt is minus two.</p>
   </a>
 
   <a class="game" href="games/root.html" data-keywords="asymmetric war game area control woodland factions cats birds mice vagabond cole wehrle" style="--accent:#E0862A">
@@ -217,6 +246,12 @@
     <span class="emblem"><svg><use href="#e-troyes"/></svg></span>
     <h3>Troyes</h3>
     <p class="hook">Your dice sit in the open, and anyone at the table can buy them out from under you.</p>
+  </a>
+
+  <a class="game" href="games/wyrmspan.html" data-keywords="engine building card game dragons caves stonemaier connie vogelmann elizabeth hargrave wingspan tableau euro solo" style="--accent:#9A6BD8">
+    <span class="emblem"><svg><use href="#e-wyrmspan"/></svg></span>
+    <h3>Wyrmspan</h3>
+    <p class="hook">Nobody counts your turns. You get six coins a round, and every dragon you place makes the next walk longer.</p>
   </a>
 
 </div>

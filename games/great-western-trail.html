@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Great Western Trail: Learn It Properly</title>
+<meta name="description" content="Learn what Great Western Trail actually is: a walk you take over and over, a hand of cows where duplicates are worth nothing, and a delivery in Kansas City that empties your hand and starts you again.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,600;0,800;1,500&family=Karla:ital,wght@0,400;0,500;0,700;1,400&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --night:#1B1511;
+  --night-2:#120D0A;
+  --paper:#F3E8D6;
+  --dim:#A9957C;
+  --ochre:#D8912F;
+  --rust:#B34B2A;
+  --sage:#83975E;
+  --sky:#5A8AA0;
+  --iron:#93887C;
+  --line:rgba(243,232,214,.15);
+  --hair:rgba(243,232,214,.42);
+  --display:"Bitter",Georgia,serif;
+  --body:"Karla",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;color:var(--paper);font-family:var(--body);font-size:18px;line-height:1.66;
+  -webkit-font-smoothing:antialiased;
+  background:
+    repeating-linear-gradient(180deg, rgba(243,232,214,.022) 0 1px, transparent 1px 6px),
+    radial-gradient(820px 520px at 10% -8%, rgba(216,145,47,.16), transparent 62%),
+    radial-gradient(720px 520px at 94% 6%, rgba(179,75,42,.13), transparent 60%),
+    linear-gradient(180deg,var(--night),var(--night-2) 76%);
+  background-attachment:fixed;
+}
+.wrap{max-width:800px;margin:0 auto;padding:0 22px 90px}
+
+/* ---------- the trail rail ---------- */
+.rail{
+  position:sticky;top:0;z-index:20;background:rgba(18,13,10,.94);
+  backdrop-filter:blur(6px);border-bottom:1px solid var(--line);padding:8px 22px;
+}
+.rail-in{max-width:800px;margin:0 auto;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.rail-lab{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+#trail{flex:1;min-width:170px;max-width:330px;height:34px}
+#trail .post{fill:none;stroke:rgba(243,232,214,.3);stroke-width:1.4;transition:fill .35s,stroke .35s}
+#trail .post.on{fill:var(--ochre);stroke:var(--ochre)}
+#trail .dust{stroke:rgba(243,232,214,.18);stroke-width:1;stroke-dasharray:3 4}
+#trail .steer{fill:var(--paper);transition:transform .45s ease}
+.rail-count{font-family:var(--mono);font-size:12px;color:var(--ochre);white-space:nowrap}
+
+.backlink{
+  display:inline-block;margin-top:26px;font-family:var(--mono);font-size:11px;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--dim);text-decoration:none;
+  border-bottom:1px solid transparent;
+}
+.backlink:hover{color:var(--ochre);border-bottom-color:var(--ochre)}
+
+header.top{padding:28px 0 44px;border-bottom:1px solid var(--hair)}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ochre);margin:22px 0 14px}
+h1{
+  font-family:var(--display);font-weight:800;font-size:clamp(42px,9vw,80px);
+  line-height:.96;letter-spacing:-.02em;margin:0 0 8px;color:#FFF7E7;
+}
+h1 small{display:block;font-family:var(--body);font-size:.17em;font-weight:700;letter-spacing:.24em;
+  color:var(--sage);margin-bottom:14px;text-transform:uppercase}
+.lede{font-size:20px;color:var(--dim);max-width:54ch;margin:18px 0 0}
+
+.pt{border-top:1px solid var(--hair);padding:46px 0 8px;scroll-margin-top:58px}
+.pt:first-of-type{border-top:none}
+.num{
+  display:inline-flex;align-items:center;gap:12px;margin-bottom:12px;
+  font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--sage);
+}
+.num b{
+  width:34px;height:34px;display:grid;place-items:center;border-radius:50%;
+  background:var(--ochre);color:var(--night-2);font-family:var(--display);font-weight:800;font-size:17px;
+  box-shadow:inset 0 0 0 2px var(--night-2), 0 0 0 1px rgba(216,145,47,.6);
+}
+h2{
+  font-family:var(--display);font-weight:800;font-size:clamp(27px,5vw,40px);
+  line-height:1.1;margin:0 0 16px;max-width:24ch;color:#FFF7E7;letter-spacing:-.01em;
+}
+h3{font-family:var(--display);font-weight:600;font-size:22px;margin:30px 0 6px;color:var(--paper)}
+.pt p{max-width:62ch;margin:0 0 16px}
+strong{font-weight:700;color:#FFF7E7}
+em.t{font-style:normal;font-family:var(--mono);font-size:.84em;background:rgba(243,232,214,.1);
+  padding:2px 6px;border-radius:2px}
+.aside{
+  border-left:3px solid var(--sky);padding:2px 0 2px 18px;margin:24px 0;
+  font-style:italic;color:var(--dim);max-width:58ch;
+}
+.trap{
+  margin:26px 0;border:1px solid rgba(179,75,42,.7);background:rgba(179,75,42,.15);
+  padding:16px 20px;max-width:62ch;border-radius:3px;
+}
+.trap b{
+  display:block;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:#E08663;margin-bottom:8px;
+}
+.trap p{margin:0}
+.note{
+  margin:30px 0 0;padding:18px 22px;max-width:62ch;border-radius:3px;
+  background:rgba(131,151,94,.15);border:1px solid rgba(131,151,94,.62);
+}
+.note .lab{
+  display:block;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:#AFC286;margin-bottom:8px;
+}
+.note p{margin:0}
+ul.clean{list-style:none;padding:0;margin:0 0 16px;max-width:62ch}
+ul.clean li{padding:9px 0 9px 26px;position:relative;border-bottom:1px solid rgba(243,232,214,.12)}
+ul.clean li:last-child{border-bottom:none}
+ul.clean li::before{
+  content:"";position:absolute;left:4px;top:19px;width:9px;height:9px;border-radius:50%;
+  background:var(--ochre);
+}
+.eg{
+  margin:26px 0;max-width:62ch;border-left:3px solid var(--ochre);
+  background:rgba(216,145,47,.12);padding:16px 20px 16px 18px;border-radius:0 3px 3px 0;
+}
+.eg b{
+  display:block;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:#EBB878;margin-bottom:8px;
+}
+.eg p{margin:0 0 10px}
+.eg p:last-child{margin:0}
+.eg .out{font-family:var(--mono);font-size:.9em;color:var(--ochre)}
+figure{margin:28px 0;padding:18px;background:rgba(243,232,214,.045);border:1px solid var(--line);border-radius:3px}
+figure svg{display:block;width:100%;height:auto}
+figcaption{font-family:var(--mono);font-size:11px;color:var(--dim);margin-top:12px;text-align:center;line-height:1.6}
+.scroll{overflow-x:auto;margin:24px 0}
+table{border-collapse:collapse;width:100%;min-width:440px;font-size:16px}
+th,td{text-align:left;padding:9px 14px 9px 0;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);font-weight:600}
+td.n{font-family:var(--mono);color:var(--ochre)}
+footer{margin:64px 0 0;padding-top:24px;border-top:1px solid var(--hair);color:var(--dim);font-size:15px}
+a{color:var(--ochre)}
+@media(max-width:620px){body{font-size:17px}#trail{max-width:200px;height:30px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+@media print{.rail{display:none}}
+</style>
+</head>
+<body>
+
+<div class="rail">
+  <div class="rail-in">
+    <span class="rail-lab">on the trail</span>
+    <svg id="trail" viewBox="0 0 330 34" role="img" aria-label="Progress through the briefing" preserveAspectRatio="xMinYMid meet"></svg>
+    <span class="rail-count" id="count">1 / 14</span>
+  </div>
+</div>
+
+<div class="wrap">
+
+<a class="backlink" href="../">&larr; the shelf</a>
+
+<header class="top">
+  <p class="eyebrow">Learn it properly &middot; 14 points</p>
+  <h1><small>Texas to Kansas City, again and again</small>Great Western Trail</h1>
+  <p class="lede">You walk a herd up a road to Kansas City, sell it, and walk back to the bottom to do it again. Everything interesting in this game is a question about that walk: where you stop, what you are carrying when you arrive, and how many more walks you have left.</p>
+</header>
+
+<article class="pt">
+  <p class="num"><b>1</b> The big picture</p>
+  <h2>A lap game wearing a cattle drive.</h2>
+
+  <p>Great Western Trail is a heavy game for two to four players that runs a couple of hours, and it looks intimidating because the board is busy. It is not as tangled as it looks. Underneath, the whole thing is one loop repeated:</p>
+
+  <ul class="clean">
+    <li>Start at the bottom of a long, winding trail with a hand of cattle cards.</li>
+    <li>Walk up the trail, stopping at <strong>one building per turn</strong> to use its action.</li>
+    <li>Reach <strong>Kansas City</strong> at the top, sell the herd you are holding, and ship it off by rail.</li>
+    <li>Throw away your entire hand, draw a fresh one, go back to the bottom, and do it all again.</li>
+  </ul>
+
+  <p>That loop is a <strong>lap</strong>, and a lap takes maybe four to seven of your turns. A whole game is perhaps five or six laps. Hold on to that number: it is small, and almost every mistake a new player makes is really a mistake about how few laps there are.</p>
+
+  <p>You are not fighting the other players. You are all walking the same road, and they get in your way mostly by being somewhere you wanted to stand, or by having already taken the thing you were saving up for.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Every single thing in this game is either <strong>improving the walk</strong> or <strong>improving what you are carrying when the walk ends.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>2</b> The trail is your action menu</p>
+  <h2>You do not pick an action. You pick a place to stand.</h2>
+
+  <p>On your turn you move your cowboy forward along the trail, from one to three spaces at the start of the game, and you must move at least one. Spaces you pass over do nothing. <strong>Only the space you stop on gives you anything.</strong></p>
+
+  <p>Most stopping places are buildings, and each building is an action: buy cattle, hire workers, move your train, clear an obstacle, gain money, build something of your own. So a turn is really the question <em class="t">which of the next three spaces is worth the most to me right now</em>, and the answer is constrained by the fact that you cannot stand still and cannot go backwards.</p>
+
+  <p>That is the elegant trick of the design. There is no action-selection board, no rondel, no menu of six options. The road is the menu, and your position on it decides what you are even allowed to consider. Three spaces ahead is a small, sharp choice; that is why the game moves along briskly despite its weight.</p>
+
+  <figure>
+    <svg viewBox="0 0 760 230" role="img" aria-labelledby="tr-t tr-d">
+      <title id="tr-t">Stopping on the trail</title>
+      <desc id="tr-d">A stretch of trail drawn as a row of spaces. The cowboy stands on the leftmost. The next three spaces are highlighted as the only legal stopping places: a cattle market, an empty hazard space that cannot be entered, and a building belonging to a rival. Spaces beyond three are greyed out and out of reach this turn.</desc>
+      <path d="M20 96 H740" stroke="rgba(243,232,214,.2)" stroke-width="26" stroke-linecap="round" fill="none"/>
+      <path d="M20 96 H740" stroke="rgba(243,232,214,.16)" stroke-width="1" stroke-dasharray="6 7" fill="none"/>
+      <g stroke="#120D0A" stroke-width="2">
+        <rect x="34" y="76" width="40" height="40" rx="4" fill="#93887C"/>
+        <rect x="140" y="76" width="40" height="40" rx="4" fill="#D8912F"/>
+        <rect x="246" y="76" width="40" height="40" rx="4" fill="#B34B2A"/>
+        <rect x="352" y="76" width="40" height="40" rx="4" fill="#5A8AA0"/>
+        <rect x="458" y="76" width="40" height="40" rx="4" fill="#4A423A"/>
+        <rect x="564" y="76" width="40" height="40" rx="4" fill="#4A423A"/>
+        <rect x="670" y="76" width="40" height="40" rx="4" fill="#4A423A"/>
+      </g>
+      <g font-family="IBM Plex Mono, monospace" font-size="10.5" fill="#A9957C" text-anchor="middle">
+        <text x="54" y="136">YOU</text>
+        <text x="160" y="136" fill="#D8912F">MARKET</text>
+        <text x="266" y="136" fill="#B34B2A">HAZARD</text>
+        <text x="372" y="136" fill="#5A8AA0">THEIRS</text>
+        <text x="488" y="136">OUT OF RANGE</text>
+        <text x="690" y="136">KANSAS CITY &#8594;</text>
+      </g>
+      <g stroke="#83975E" stroke-width="2" fill="none">
+        <path d="M140 58 H392" />
+        <path d="M140 58 V68 M392 58 V68"/>
+      </g>
+      <text x="266" y="46" text-anchor="middle" font-family="Bitter, serif" font-size="18" fill="#FFF7E7">three spaces: the whole of your choice</text>
+      <text x="20" y="186" font-family="Karla, sans-serif" font-size="16" fill="#F3E8D6">The hazard is not a stopping place, it is a wall in the road.</text>
+      <text x="20" y="212" font-family="Karla, sans-serif" font-size="16" fill="#F3E8D6">A rival's building you may enter, for a fee, and mostly you would rather not.</text>
+    </svg>
+    <figcaption>THE ROAD IS THE ACTION MENU. POSITION DECIDES WHAT YOU MAY EVEN CONSIDER.</figcaption>
+  </figure>
+
+  <p>Walking further is therefore a real upgrade, not a convenience. A cowboy who can take four or five steps is choosing from a wider menu every single turn, and can skip the junk a three-step cowboy is forced to settle for.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>You are not choosing an action from a list. <strong>You are choosing a place to stand, and the list is whatever happens to be within reach.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>3</b> Buildings, and the ones you put there yourself</p>
+  <h2>Some of the road came with the game. The rest of it you build.</h2>
+
+  <p>The trail starts out dotted with neutral buildings that everybody may use. They are the plain, reliable stuff: draw and discard cards, take money, move your train, hire a worker, buy cattle.</p>
+
+  <p>The far more interesting spaces are empty ones, because <strong>you can build your own buildings on the trail</strong>, and a building you built stays there for the rest of the game. It is not a one-off action. It is a permanent improvement to the road you are going to walk five more times.</p>
+
+  <p>This is where the game gets its shape. Your private buildings are tuned to what you are trying to do, they sit exactly where you like to stop, and they are free for you to use. For everyone else they are an obstacle: legal to enter, but it costs them, so in practice your buildings quietly make the trail worse for your opponents while making it better for you.</p>
+
+  <div class="aside">
+    Build early and the building pays you five times. Build the same thing on the last lap and it pays you once, plus whatever points are printed on it. The building itself has not changed; the number of laps left has.
+  </div>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>A building is not an action, it is <strong>an action you gave yourself for every remaining lap</strong>, and a small tax on everyone else.</p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>4</b> Your hand of cattle, and why copies are worthless</p>
+  <h2>Four cows in your hand, and the second Black Angus is worth nothing.</h2>
+
+  <p>You begin with a small, dreary deck of cattle: plain cows worth 0, 1, 2 and 3, the kind of herd nobody writes songs about. You draw four of them. That hand is what you will sell when you get to Kansas City.</p>
+
+  <p>Now the rule that defines the entire game. When you deliver, you add up the <strong>breeding values of the different breeds in your hand</strong>. Two cows of the same breed do not add together. The second copy is decoration.</p>
+
+  <figure>
+    <svg viewBox="0 0 760 250" role="img" aria-labelledby="hd-t hd-d">
+      <title id="hd-t">Why variety beats quality</title>
+      <desc id="hd-d">Two hands of four cattle cards compared. The first hand holds two identical high value cows and totals eight because the duplicate counts for nothing. The second hand holds four different breeds of lower value and totals eleven.</desc>
+      <g font-family="IBM Plex Mono, monospace" font-size="11" fill="#A9957C">
+        <text x="20" y="28">HAND A: THE EXPENSIVE MISTAKE</text>
+        <text x="20" y="148">HAND B: THE BORING WINNER</text>
+      </g>
+      <g stroke="#120D0A" stroke-width="2">
+        <rect x="20" y="42" width="78" height="62" rx="5" fill="#B34B2A"/>
+        <rect x="112" y="42" width="78" height="62" rx="5" fill="#B34B2A" opacity=".38"/>
+        <rect x="204" y="42" width="78" height="62" rx="5" fill="#D8912F"/>
+        <rect x="296" y="42" width="78" height="62" rx="5" fill="#93887C"/>
+        <rect x="20" y="162" width="78" height="62" rx="5" fill="#B34B2A"/>
+        <rect x="112" y="162" width="78" height="62" rx="5" fill="#D8912F"/>
+        <rect x="204" y="162" width="78" height="62" rx="5" fill="#83975E"/>
+        <rect x="296" y="162" width="78" height="62" rx="5" fill="#5A8AA0"/>
+      </g>
+      <g font-family="Bitter, serif" font-weight="800" font-size="26" fill="#120D0A" text-anchor="middle">
+        <text x="59" y="82">5</text><text x="151" y="82">5</text><text x="243" y="82">3</text><text x="335" y="82">0</text>
+        <text x="59" y="202">5</text><text x="151" y="202">3</text><text x="243" y="202">2</text><text x="335" y="202">1</text>
+      </g>
+      <g font-family="IBM Plex Mono, monospace" font-size="9.5" fill="#120D0A" text-anchor="middle">
+        <text x="59" y="98">ANGUS</text><text x="151" y="98">ANGUS</text><text x="243" y="98">HOLSTEIN</text><text x="335" y="98">PLAIN</text>
+        <text x="59" y="218">ANGUS</text><text x="151" y="218">HOLSTEIN</text><text x="243" y="218">GUERNSEY</text><text x="335" y="218">DUTCH</text>
+      </g>
+      <text x="151" y="126" text-anchor="middle" font-family="Karla, sans-serif" font-size="13" fill="#E08663">the copy counts for nothing</text>
+      <g font-family="Bitter, serif" font-size="22" fill="#FFF7E7">
+        <text x="404" y="82">5 + 3 + 0 = <tspan fill="#E08663" font-weight="800">8</tspan></text>
+        <text x="404" y="202">5 + 3 + 2 + 1 = <tspan fill="#AFC286" font-weight="800">11</tspan></text>
+      </g>
+      <text x="404" y="106" font-family="Karla, sans-serif" font-size="14" fill="#A9957C">the pricier herd</text>
+      <text x="404" y="226" font-family="Karla, sans-serif" font-size="14" fill="#A9957C">four different animals, no wasted card</text>
+    </svg>
+    <figcaption>DELIVERY VALUE COMES FROM VARIETY, NOT FROM BUYING THE BIGGEST COW TWICE.</figcaption>
+  </figure>
+
+  <p>So the cattle you own are not a pile of money, they are a <strong>vocabulary</strong>. What you want is to be able to say a different word with every card you draw. A deck of five identical fine animals delivers worse than a deck of five mediocre different ones.</p>
+
+  <div class="trap">
+    <b>The instinct to unlearn</b>
+    <p>Deck-building games have trained you to buy the best card and then buy it again. Here, the second copy is nearly dead weight. Buy breadth first, and buy depth only when you can draw enough cards to hold the breadth you already own.</p>
+  </div>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Cattle are a vocabulary, not a bank balance. <strong>Different beats bigger.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>5</b> Buying cattle takes two turns and you only feel one of them</p>
+  <h2>The cow you buy today is not in the hand you are holding today.</h2>
+
+  <p>Cattle are bought at markets on the trail. You pay money, and the value of what you can buy is limited by how good your cattle-handling is: an inexperienced outfit can only manage cheap animals, a practised one can lead a prize longhorn home.</p>
+
+  <p>Here is the part that catches everyone. <strong>A cow you buy goes into your discard pile, not your hand.</strong> You will not see it until your deck runs out and reshuffles, which is usually a lap or two away. Buying cattle is therefore an investment with a visible delay, and the delay is measured in laps, of which there are about six.</p>
+
+  <div class="eg">
+    <b>What it looks like</b>
+    <p>It is late in the game. You spend a turn and most of your money on a magnificent animal.</p>
+    <p>It goes to the discard pile. You deliver, you reshuffle, and it comes up in your hand on the final lap. It improves exactly one delivery.</p>
+    <p class="out">That purchase was a turn, a pile of money, and one delivery's worth of value. Early it would have been four.</p>
+  </div>
+
+  <p>The same delay is what makes buying early so strong. A good cow bought on lap one shows up in three or four deliveries. Nothing in the game rewards being early as bluntly as the cattle market does.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Cattle pay out <strong>per remaining lap</strong>. Late in the game they are almost decorative, so buy early and buy wide.</p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>6</b> Kansas City</p>
+  <h2>The lap ends, the herd is sold, and your hand is thrown in the river.</h2>
+
+  <p>When you reach the top of the trail you arrive in Kansas City, and the lap resolves in one satisfying lump:</p>
+
+  <ul class="clean">
+    <li>You total the different breeds in your hand, add any certificates you have earned (point 11), and that number is the size of the herd you are shipping.</li>
+    <li>You choose a city on the railway that your number can reach, and pay the cost of getting the cattle there.</li>
+    <li>You mark that city as one you have delivered to, and most cities will not take a second delivery from you.</li>
+    <li>Then you <strong>discard your entire hand</strong>, draw a fresh one, and your cowboy goes back to the start of the trail.</li>
+  </ul>
+
+  <p>That discard is the cleanest rule in the game and the one that reorganises your thinking. Cards you never managed to use are gone. Money you held on to stays, cattle you held on to do not. There is no such thing as saving a good hand for later: the hand exists only to be delivered.</p>
+
+  <p>It also means the rhythm of the game is not turn by turn. It is lap by lap. A lap is the real unit: a handful of stops, one delivery, one new hand. When you plan, plan in laps.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Kansas City cashes you out completely. <strong>Nothing in your hand survives the delivery, so nothing in your hand is worth hoarding.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>7</b> The railway is a permission track</p>
+  <h2>Your train does not score. It decides which cities will take your call.</h2>
+
+  <p>Running along the board is a railway line with your little train on it, and stations along the way. Certain trail actions push the train forward a space or two.</p>
+
+  <p>New players read the railway as a scoring track and ignore it, because moving a train feels like it does nothing. What it actually does is <strong>permission and price</strong>. The good cities, the ones worth real points, are far down the line. If your train is trailing behind, delivering to a distant city is either expensive or flatly out of reach, no matter how magnificent your herd.</p>
+
+  <figure>
+    <svg viewBox="0 0 760 210" role="img" aria-labelledby="rw-t rw-d">
+      <title id="rw-t">The railway decides the price of a delivery</title>
+      <desc id="rw-d">A railway line running left to right with stations marked. A train sits near the left. Two cities are marked further right: a near city that is cheap to reach and a distant high scoring city that costs far more because the train is a long way behind it.</desc>
+      <g stroke="rgba(243,232,214,.3)" stroke-width="2" fill="none">
+        <path d="M24 88 H736"/>
+        <path d="M24 96 H736"/>
+      </g>
+      <g stroke="rgba(243,232,214,.22)" stroke-width="2">
+        <path d="M40 82 V102 M100 82 V102 M160 82 V102 M220 82 V102 M280 82 V102 M340 82 V102 M400 82 V102 M460 82 V102 M520 82 V102 M580 82 V102 M640 82 V102 M700 82 V102"/>
+      </g>
+      <g stroke="#120D0A" stroke-width="2">
+        <rect x="120" y="62" width="16" height="16" rx="2" fill="#93887C"/>
+        <rect x="300" y="62" width="16" height="16" rx="2" fill="#93887C"/>
+        <rect x="480" y="62" width="16" height="16" rx="2" fill="#93887C"/>
+        <rect x="660" y="62" width="16" height="16" rx="2" fill="#93887C"/>
+      </g>
+      <g font-family="IBM Plex Mono, monospace" font-size="9.5" fill="#A9957C" text-anchor="middle">
+        <text x="128" y="54">STATION</text><text x="308" y="54">STATION</text>
+        <text x="488" y="54">STATION</text><text x="668" y="54">STATION</text>
+      </g>
+      <g stroke="#120D0A" stroke-width="2">
+        <rect x="150" y="80" width="44" height="24" rx="4" fill="#D8912F"/>
+        <circle cx="162" cy="108" r="5" fill="#D8912F"/><circle cx="182" cy="108" r="5" fill="#D8912F"/>
+      </g>
+      <text x="172" y="136" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" fill="#D8912F">YOUR TRAIN</text>
+      <g stroke="#120D0A" stroke-width="2">
+        <circle cx="280" cy="92" r="17" fill="#83975E"/>
+        <circle cx="640" cy="92" r="17" fill="#5A8AA0"/>
+      </g>
+      <g font-family="Bitter, serif" font-weight="800" font-size="15" fill="#120D0A" text-anchor="middle">
+        <text x="280" y="98">4</text><text x="640" y="98">16</text>
+      </g>
+      <g font-family="Karla, sans-serif" font-size="14" fill="#F3E8D6" text-anchor="middle">
+        <text x="280" y="164">near city, cheap trip,</text>
+        <text x="280" y="182">small points</text>
+        <text x="640" y="164">far city, long trip,</text>
+        <text x="640" y="182">the points that win games</text>
+      </g>
+      <path d="M198 92 H256" stroke="#83975E" stroke-width="2" marker-end="url(#ar)"/>
+      <path d="M198 68 H616" stroke="#5A8AA0" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#ar2)"/>
+      <defs>
+        <marker id="ar" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8Z" fill="#83975E"/></marker>
+        <marker id="ar2" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8Z" fill="#5A8AA0"/></marker>
+      </defs>
+    </svg>
+    <figcaption>THE HERD SAYS WHICH CITIES WILL TAKE YOU. THE TRAIN SAYS WHAT THE TRIP COSTS.</figcaption>
+  </figure>
+
+  <p>So the herd and the train are two halves of one lock. A huge herd with a stranded train delivers to somewhere near and cheap. A train parked at the far end with four bored cows in your hand delivers nothing worth having. Neither half wins alone, and a player who has quietly kept the two in step is usually the player winning.</p>
+
+  <p>Stations along the line are worth stopping at for their own sake: reaching one lets you spend something to claim a lasting benefit there, which is one of the better ways to pick up a permanent boost rather than a one-off.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>The train is not points, it is <strong>reach</strong>. Keep it moving alongside the herd, or one of them is wasted.</p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>8</b> The three kinds of worker</p>
+  <h2>Cowboys, craftsmen, engineers: one each for the three things you can be good at.</h2>
+
+  <p>Workers are hired from a job market in Kansas City, and they are the most literal statement of strategy in the game, because there are exactly three sorts and each one improves exactly one part of your loop.</p>
+
+  <div class="scroll">
+  <table>
+    <thead><tr><th>Worker</th><th>Makes you better at</th><th>Which means</th></tr></thead>
+    <tbody>
+      <tr><td class="n">Cowboy</td><td>Handling cattle</td><td>You may buy better animals, and buy them more cheaply</td></tr>
+      <tr><td class="n">Craftsman</td><td>Building</td><td>You may put up the bigger, better buildings on the trail</td></tr>
+      <tr><td class="n">Engineer</td><td>The railway</td><td>Your train moves further, so distant cities open up</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p>Hiring costs money, and the price of a worker climbs as the market fills up, so being the first to want something is cheaper than being the third. Workers never leave you, which makes them the safest investment on the board and also the slowest: like cattle, a worker hired on the last lap is a worker who barely works.</p>
+
+  <p>You cannot be excellent at all three. Most good games are built on two of them, with the third kept at a level that stops it embarrassing you.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Three workers, three strategies, and hiring is a statement. <strong>Pick the two you are actually going to use.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>9</b> Your own board is covered in discs, and lifting them is the engine</p>
+  <h2>Every upgrade you own was a wooden disc you took off a picture.</h2>
+
+  <p>Your player board starts blanketed in wooden discs, and under each one is a printed improvement: a bonus when you take a particular action, a better version of an action you already have, a permanent step up in what you are capable of.</p>
+
+  <p>Actions on the trail let you lift those discs. The act of lifting is doubly good, because the disc that comes off goes out onto the board or onto the thing you just claimed, marking it as yours. One motion, two benefits: your engine gets better, and something on the map gets your name on it.</p>
+
+  <p>This is the quiet growth curve of the game. A first-lap player and a fourth-lap player take the same actions at the same buildings, and the fourth-lap player simply gets more for them, because they have been peeling discs the whole time.</p>
+
+  <div class="aside">
+    If two options look equal, the one that lifts a disc is usually the better one, because it pays you now and pays you again for every lap that follows.
+  </div>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>The same action is worth more to a developed player. <strong>Peeling discs is how the actions you already take get stronger.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>10</b> Hazards and the road that shortens</p>
+  <h2>The trail starts blocked, and clearing it helps whoever walks it next.</h2>
+
+  <p>Scattered along the trail are hazards, the floods and rockfalls and droughts that make a cattle drive a story worth telling. They are not spaces you stop on. They are spaces you cannot pass through, forcing the road to bend the long way round.</p>
+
+  <p>Certain actions let you clear a hazard. You take the tile, which is worth points at the end, and the road behind you is now shorter for everybody, including the person who was three spaces behind you hoping exactly that would happen.</p>
+
+  <p>The same is true of the native encampments along the route: engaging with them gives you a tile and a place on a track that pays out at the end, and it also quietly changes the shape of the road.</p>
+
+  <p>So this is the one part of the game with real, sharp interaction. Clearing an obstacle is a genuine gift to the table, paid for out of your turn, and taken because the tile and the shortcut are worth more to you than to them. It is worth noticing when an opponent is about to be handed a route they could not otherwise take.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Hazards make the road longer for everyone. <strong>Clearing one buys you a tile and hands everybody else a shortcut.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>11</b> Certificates: value without cattle</p>
+  <h2>A way to deliver a bigger herd than you actually own.</h2>
+
+  <p>At delivery, the number you ship is your different breeds <em>plus</em> whatever certificates you are holding. Certificates come from actions along the trail and from improvements you have unlocked, and they add to the total exactly as a cow would.</p>
+
+  <p>This matters because breeding a top-class deck is slow. Certificates are the shortcut: they let a modest hand reach a city several rungs above its natural station. There is a ceiling on how many you may use in one delivery, and raising that ceiling is itself one of the upgrades worth chasing.</p>
+
+  <div class="eg">
+    <b>What it looks like</b>
+    <p>Your hand is worth 11 in different breeds, which reaches a perfectly ordinary city.</p>
+    <p>You are holding 4 in certificates, so you ship a herd of <strong>15</strong> instead, and the city you reach is three steps better.</p>
+    <p class="out">Same cows. Same lap. A delivery that is worth roughly twice as much.</p>
+  </div>
+
+  <p>Think of certificates as the tuning knob on a delivery. The cattle deck decides your rough range; certificates decide where in that range this particular lap lands.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Certificates are herd value you did not have to breed. <strong>They turn an ordinary hand into a good delivery.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>12</b> Objectives: a promise with a fine attached</p>
+  <h2>You may take on a goal, and you will be charged if you miss it.</h2>
+
+  <p>Objective cards ask you to have done a specific thing by the end: buildings of a certain kind, deliveries to particular cities, a presence somewhere on the board. Complete it and you score it. <strong>Fail it and it scores against you.</strong></p>
+
+  <p>That two-sided design is the whole point. An objective is not a free suggestion, it is a bet you are placing on your own plan. The right ones are the things you were going to do anyway, made worth more; the wrong ones are the ones that look impressive and drag you off your route for two laps.</p>
+
+  <p>They are also the game's way of telling a new player what a plan looks like. If you have no idea what you are aiming at on lap one, read an objective and let it choose for you. It is a better guide than wandering.</p>
+
+  <div class="trap">
+    <b>The instinct to unlearn</b>
+    <p>In most euros, a goal card you fail to finish simply scores nothing. Here it bites. Do not collect objectives the way you collect cattle; take the ones that describe your existing plan, and be honest about the laps you have left to finish them.</p>
+  </div>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>An objective is a bet, not a bonus. <strong>Take it because it matches the road you were already walking.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>13</b> Time is measured in laps, and there are about six</p>
+  <h2>The real clock is not the end trigger. It is how many more times you will see Kansas City.</h2>
+
+  <p>The game ends when the flow of new workers finally dries up, and everyone gets a last, equal run at it. That is the formal trigger, and it matters less than the informal one, which you should be tracking from the very first turn: <strong>how many more deliveries do I get?</strong></p>
+
+  <p>Almost every judgement in the game is really that question in disguise.</p>
+
+  <div class="scroll">
+  <table>
+    <thead><tr><th>The question</th><th>What it actually means</th></tr></thead>
+    <tbody>
+      <tr><td>Is this cow worth buying?</td><td class="n">Will it be drawn in enough remaining hands to repay a whole turn?</td></tr>
+      <tr><td>Is this building worth putting up?</td><td class="n">How many more times will I walk past it?</td></tr>
+      <tr><td>Should I hire this worker?</td><td class="n">Will they still be improving my laps, or have the laps run out?</td></tr>
+      <tr><td>Should I take the long way round for a better stop?</td><td class="n">Can I still reach Kansas City this lap, or have I just spent a lap on a detour?</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p>Early laps are for capability: workers, discs, buildings, breadth of cattle. Late laps are for cashing in: big deliveries, the distant cities, the objectives you promised. The change of gear happens somewhere in the middle and nobody rings a bell for it. If you are still building the engine on the last lap, you built a machine that never ran.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Count deliveries, not turns. <strong>Everything you buy has to pay for itself in the laps that are left.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>14</b> How not to lose your first game</p>
+  <h2>The habits other games gave you will walk you straight past Kansas City.</h2>
+
+  <p>Nobody plays this well the first time, and that is fine. But most first games are lost to the same five things, and all five are avoidable by knowing they exist.</p>
+
+  <ul class="clean">
+    <li><strong>Buying the same good cow twice.</strong> The duplicate adds nothing to a delivery. Your deck wants breadth long before it wants quality.</li>
+    <li><strong>Ignoring the train.</strong> It looks like it does nothing, and then on lap four you have a beautiful herd and nowhere worth sending it. Nudge it forward all game rather than trying to fix it at the end.</li>
+    <li><strong>Never learning to walk further.</strong> Three steps is a cramped menu. Extending your range improves every single remaining turn, which is a better return than almost any one-off action.</li>
+    <li><strong>Treating the last two laps like the first two.</strong> Cattle, workers and buildings bought late barely get used. Past the halfway mark, spend on the delivery in front of you, not on the machine behind it.</li>
+    <li><strong>Dawdling on the way up.</strong> A lap that takes eight turns instead of five is not a thorough lap, it is a lost delivery. Getting to Kansas City is the point of walking.</li>
+  </ul>
+
+  <p>And one habit to build instead: before you move, look at the three spaces in front of you and ask which one gets you closer to a delivery you can actually make this lap. Not the best action on the board. The best action within reach, on the road you are already on.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>You are not building a tableau, you are running a route. <strong>Every lap should end with a herd sold and the machine slightly better than it was.</strong></p>
+  </div>
+</article>
+
+<footer>
+  <p>That is Great Western Trail. Walk, stop once, sell the herd, walk again, and each time be a little better at it than the lap before.</p>
+  <p><a href="../">&larr; back to the shelf</a></p>
+</footer>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var pts = Array.prototype.slice.call(document.querySelectorAll('.pt'));
+  var svg = document.getElementById('trail');
+  var count = document.getElementById('count');
+  var NS = 'http://www.w3.org/2000/svg';
+
+  var gap = 21, x0 = 12, y = 22;
+  var width = x0 * 2 + (pts.length - 1) * gap + 26;
+
+  var dust = document.createElementNS(NS, 'path');
+  dust.setAttribute('class', 'dust');
+  dust.setAttribute('d', 'M' + x0 + ' ' + y + ' H' + (x0 + (pts.length - 1) * gap));
+  svg.appendChild(dust);
+
+  var posts = pts.map(function(_, i){
+    var c = document.createElementNS(NS, 'circle');
+    c.setAttribute('class', 'post');
+    c.setAttribute('cx', x0 + i * gap);
+    c.setAttribute('cy', y);
+    c.setAttribute('r', 4);
+    svg.appendChild(c);
+    return c;
+  });
+
+  var steer = document.createElementNS(NS, 'path');
+  steer.setAttribute('class', 'steer');
+  steer.setAttribute('d', 'M-6 0 c-2.4 -1 -3.6 -.4 -3.8 1.4 1.4 .8 2.6 .5 3.4 -.5 ' +
+                          'M6 0 c2.4 -1 3.6 -.4 3.8 1.4 -1.4 .8 -2.6 .5 -3.4 -.5 ' +
+                          'M-5.4 .6 h10.8 l-1.6 5.6 h-7.6 Z');
+  steer.setAttribute('fill', 'none');
+  steer.setAttribute('stroke', '#F3E8D6');
+  steer.setAttribute('stroke-width', '1.3');
+  steer.setAttribute('stroke-linejoin', 'round');
+  svg.appendChild(steer);
+
+  var kc = document.createElementNS(NS, 'text');
+  kc.setAttribute('x', x0 + (pts.length - 1) * gap + 10);
+  kc.setAttribute('y', y + 4);
+  kc.setAttribute('font-family', 'IBM Plex Mono, monospace');
+  kc.setAttribute('font-size', '9');
+  kc.setAttribute('fill', '#A9957C');
+  kc.textContent = 'KC';
+  svg.appendChild(kc);
+
+  svg.setAttribute('viewBox', '0 0 ' + width + ' 34');
+
+  var at = 0;
+  function paint(n){
+    if(n === at) return;
+    at = n;
+    posts.forEach(function(p, i){ p.classList.toggle('on', i < n); });
+    steer.setAttribute('transform', 'translate(' + (x0 + (n - 1) * gap) + ',' + (y - 10) + ')');
+    count.textContent = n + ' / ' + pts.length;
+    svg.setAttribute('aria-label', 'Point ' + n + ' of ' + pts.length);
+  }
+
+  var ticking = false;
+  function measure(){
+    ticking = false;
+    var mark = window.innerHeight * 0.45, n = 1;
+    for(var i = 0; i < pts.length; i++){
+      if(pts[i].getBoundingClientRect().top <= mark){ n = i + 1; }
+    }
+    paint(n);
+  }
+  window.addEventListener('scroll', function(){
+    if(!ticking){ ticking = true; window.requestAnimationFrame(measure); }
+  }, {passive:true});
+  window.addEventListener('resize', measure);
+  paint(1);
+  measure();
+})();
+</script>
+</body>
+</html>

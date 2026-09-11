@@ -23,12 +23,15 @@ your first game.
 | `games/harvest.html` | Harvest, 14 points, complete |
 | `games/three-sisters.html` | Three Sisters, 14 points, complete |
 | `games/glass-road.html` | Glass Road, 14 points, complete |
+| `games/great-western-trail.html` | Great Western Trail, 14 points, complete |
 | `games/through-the-ages.html` | Through the Ages, 20 points, complete |
 | `games/seasons.html` | Seasons, 12 points, complete |
 | `games/taverns-of-tiefenthal.html` | The Taverns of Tiefenthal, 14 points, complete, with the exact rules folded in |
+| `games/patchwork.html` | Patchwork, 12 points, complete |
 | `games/root.html` | Root, 16 points, complete |
 | `games/sleeping-gods-distant-skies.html` | Sleeping Gods: Distant Skies, 14 points, complete |
 | `games/castles-of-burgundy.html` | The Castles of Burgundy, 14 points, complete |
+| `games/wyrmspan.html` | Wyrmspan, 14 points, complete |
 | `games/_template.html` | Starting point for a new briefing |
 | `assets/dossier.css` | Shared layout system, for pages that want one |
 | `assets/library.css` | Styles for the shelf |
@@ -108,7 +111,10 @@ point with the faction it belongs to; `castles-of-burgundy.html` fills a honeyco
 estate in the rail, one hex per point;
 `architects-of-the-west-kingdom.html` sends a worker out of the crew in the rail for
 every point;
-`harvest.html` ripens a field of seedlings in the rail; `three-sisters.html` pencils an
+`patchwork.html` sews one quilt square into the rail per point;
+`wyrmspan.html` lights one cave chamber per point and walks an adventurer along them;
+`harvest.html` ripens a field of seedlings in the rail;
+`great-western-trail.html` walks a steer up a line of trail posts toward Kansas City; `three-sisters.html` pencils an
 X into a row of scoresheet boxes with a sprout walking along it; `sleeping-gods-distant-skies.html` flies a
 plane across the horizon while a pocket watch hand comes round.
 
