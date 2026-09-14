@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lost Ruins of Arnak: Learn It Properly</title>
+<meta name="description" content="Learn what Lost Ruins of Arnak actually is: fourteen points on the five short rounds, the card that is either a ride or a resource, the guardian you woke up, and the research ladder where most of the points live.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bevan&family=Karla:ital,wght@0,400;0,500;0,700;1,400&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --night:#0B1614;
+  --deep:#101F1C;
+  --panel:#152C27;
+  --bone:#EFE7D6;
+  --dim:#9DB0A8;
+  --jade:#46B48C;
+  --lantern:#F0A63C;
+  --fear:#D2604A;
+  --lapis:#6E9FC9;
+  --ruby:#C8455E;
+  --line:rgba(239,231,214,.16);
+  --display:"Bevan",Georgia,serif;
+  --body:"Karla",system-ui,sans-serif;
+  --mono:"Courier Prime",ui-monospace,Menlo,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;color:var(--bone);font-family:var(--body);font-size:18px;line-height:1.66;
+  -webkit-font-smoothing:antialiased;
+  background:
+    radial-gradient(900px 520px at 84% -6%, rgba(240,166,60,.13), transparent 62%),
+    radial-gradient(760px 480px at 6% 10%, rgba(70,180,140,.10), transparent 60%),
+    linear-gradient(180deg,var(--night),var(--deep) 78%);
+  background-attachment:fixed;
+}
+.wrap{max-width:800px;margin:0 auto;padding:0 22px 90px}
+
+/* ---------- the moon rail ---------- */
+.rail{
+  position:sticky;top:0;z-index:20;background:rgba(11,22,20,.94);
+  backdrop-filter:blur(6px);border-bottom:1px solid var(--line);padding:8px 22px;
+}
+.rail-in{max-width:800px;margin:0 auto;display:flex;align-items:center;gap:14px}
+.rail-lab{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);white-space:nowrap}
+#moon{flex:0 0 auto;width:30px;height:30px}
+#moon .disc{fill:var(--bone)}
+#moon .shade{fill:var(--night);transition:transform .4s ease}
+#moon .rim{fill:none;stroke:rgba(239,231,214,.35);stroke-width:1.4}
+.track{flex:1;height:3px;background:rgba(239,231,214,.14);border-radius:99px;overflow:hidden;min-width:40px}
+.track i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--jade),var(--lantern));transition:width .25s ease}
+.rail-count{font-family:var(--mono);font-size:12px;color:var(--lantern);white-space:nowrap}
+
+.backlink{
+  display:inline-block;margin-top:26px;font-family:var(--mono);font-size:11px;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--dim);text-decoration:none;
+  border-bottom:1px solid transparent;
+}
+.backlink:hover{color:var(--lantern);border-bottom-color:var(--lantern)}
+
+header.top{padding:28px 0 42px;border-bottom:1px solid var(--line)}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--lantern);margin:22px 0 14px}
+h1{
+  font-family:var(--display);font-weight:400;font-size:clamp(44px,9.4vw,82px);
+  line-height:.98;letter-spacing:-.005em;margin:0 0 8px;color:#FFF8E9;
+}
+h1 small{display:block;font-family:var(--body);font-size:.17em;font-weight:700;letter-spacing:.24em;
+  color:var(--jade);margin-bottom:16px;text-transform:uppercase}
+.lede{font-size:20px;color:var(--dim);max-width:54ch;margin:18px 0 0}
+
+.pt{border-top:1px solid var(--line);padding:44px 0 8px;scroll-margin-top:56px}
+.pt:first-of-type{border-top:none}
+.num{
+  display:inline-flex;align-items:center;gap:12px;margin-bottom:12px;
+  font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--jade);
+}
+.num b{
+  width:34px;height:34px;display:grid;place-items:center;border-radius:5px;
+  background:var(--lantern);color:var(--night);font-family:var(--display);font-weight:400;font-size:17px;
+}
+h2{
+  font-family:var(--display);font-weight:400;font-size:clamp(26px,4.8vw,38px);
+  line-height:1.14;margin:0 0 16px;max-width:26ch;color:#FFF8E9;
+}
+h3{font-family:var(--display);font-weight:400;font-size:21px;margin:30px 0 6px;color:var(--bone)}
+.pt p{max-width:62ch;margin:0 0 16px}
+strong{font-weight:700;color:#FFF8E9}
+em.t{font-style:normal;font-family:var(--mono);font-size:.84em;background:rgba(239,231,214,.10);
+  padding:2px 6px;border-radius:3px}
+.aside{
+  border-left:3px solid var(--lapis);padding:2px 0 2px 18px;margin:24px 0;
+  font-style:italic;color:var(--dim);max-width:58ch;
+}
+.trap{
+  margin:26px 0;border:1px solid rgba(210,96,74,.6);background:rgba(210,96,74,.13);
+  padding:16px 20px;max-width:62ch;border-radius:4px;
+}
+.trap b{
+  display:block;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:#E8917A;margin-bottom:8px;
+}
+.trap p{margin:0}
+.note{
+  margin:30px 0 0;padding:18px 22px;max-width:62ch;border-radius:4px;
+  background:rgba(70,180,140,.13);border:1px solid rgba(70,180,140,.55);
+}
+.note .lab{
+  display:block;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:#6FC7C2;margin-bottom:8px;
+}
+.note p{margin:0}
+ul.clean{list-style:none;padding:0;margin:0 0 16px;max-width:62ch}
+ul.clean li{padding:8px 0 8px 26px;position:relative;border-bottom:1px solid rgba(239,231,214,.10)}
+ul.clean li:last-child{border-bottom:none}
+ul.clean li::before{
+  content:"";position:absolute;left:4px;top:18px;width:9px;height:9px;border-radius:2px;
+  background:var(--lantern);
+}
+.eg{
+  margin:26px 0;max-width:62ch;border-left:3px solid var(--lantern);
+  background:rgba(240,166,60,.10);padding:16px 20px 16px 18px;border-radius:0 4px 4px 0;
+}
+.eg b{
+  display:block;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--lantern);margin-bottom:8px;
+}
+.eg p{margin:0 0 10px}
+.eg p:last-child{margin:0}
+.eg .out{font-family:var(--mono);font-size:.9em;color:var(--jade)}
+figure{margin:28px 0;padding:18px;background:rgba(239,231,214,.045);border:1px solid var(--line);border-radius:6px}
+figure svg{display:block;width:100%;height:auto}
+figcaption{font-family:var(--mono);font-size:11px;color:var(--dim);margin-top:12px;text-align:center;line-height:1.6}
+.scroll{overflow-x:auto;margin:24px 0}
+table{border-collapse:collapse;width:100%;min-width:440px;font-size:16px}
+th,td{text-align:left;padding:9px 14px 9px 0;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);font-weight:700}
+td.n{font-family:var(--mono);color:var(--lantern)}
+/* figure ink */
+.f-bone{fill:var(--bone)}.f-jade{fill:var(--jade)}.f-lantern{fill:var(--lantern)}
+.f-fear{fill:var(--fear)}.f-lapis{fill:var(--lapis)}.f-ruby{fill:var(--ruby)}
+.f-panel{fill:var(--panel)}.f-none{fill:none}
+.s-bone{stroke:var(--bone)}.s-dim{stroke:var(--dim)}.s-jade{stroke:var(--jade)}
+.s-lantern{stroke:var(--lantern)}.s-fear{stroke:var(--fear)}.s-lapis{stroke:var(--lapis)}
+.tt{font-family:"Karla",sans-serif;font-size:13px;fill:var(--bone)}
+.ts{font-family:"Courier Prime",monospace;font-size:10.5px;fill:var(--dim);letter-spacing:.06em}
+footer{margin:64px 0 0;padding-top:24px;border-top:1px solid var(--line);color:var(--dim);font-size:15px}
+a{color:var(--lantern)}
+@media(max-width:620px){body{font-size:17px}.rail-lab{display:none}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+@media print{.rail{display:none}}
+</style>
+</head>
+<body>
+
+<div class="rail">
+  <div class="rail-in">
+    <span class="rail-lab">the moon fills</span>
+    <svg id="moon" viewBox="0 0 40 40" role="img" aria-label="Progress through the briefing">
+      <defs><clipPath id="moonclip"><circle cx="20" cy="20" r="15"/></clipPath></defs>
+      <circle class="disc" cx="20" cy="20" r="15"/>
+      <g clip-path="url(#moonclip)"><circle class="shade" id="shade" cx="20" cy="20" r="15.6"/></g>
+      <circle class="rim" cx="20" cy="20" r="15"/>
+    </svg>
+    <span class="track"><i id="fill"></i></span>
+    <span class="rail-count" id="count">1 / 14</span>
+  </div>
+</div>
+
+<div class="wrap">
+
+<a class="backlink" href="../">&larr; the shelf</a>
+
+<header class="top">
+  <p class="eyebrow">Learn it properly &middot; 14 points</p>
+  <h1><small>Five rounds on an island that is not on any map</small>Lost Ruins of Arnak</h1>
+  <p class="lede">Two games are happening on the table at once. One is a deck of cards you are trying to improve. The other is a small island with a limited number of good spots on it. The reason Arnak works is that the same card pays for both, and it can only pay once.</p>
+</header>
+
+<article class="pt">
+  <p class="num"><b>1</b> The big picture</p>
+  <h2>Nobody finishes anything. The moon fills, the ship leaves, and you count.</h2>
+
+  <p>You are running an expedition onto an uncharted island for one to four players, and the game lasts <strong>five rounds</strong>. Not five rounds or until someone wins: exactly five. There is no race to a finish line, no engine that eventually pays off, no long game. You get five short days and then everyone stops mid-thought and adds up points.</p>
+
+  <p>That single fact is the one that should change how you play, because it means Arnak is not really a game about building something. It is a game about <strong>how many useful turns you can extract from a very small number of turns</strong>. Most new players spend rounds one and two setting up an engine that only gets three chances to run.</p>
+
+  <p>Points arrive from three different places, all running at the same time: the island (digging, idols, monsters), your deck (the cards you buy have points printed on them), and a research ladder up the side of the board where the largest single chunks of score live. None of the three is optional. You do not get to pick a lane.</p>
+
+  <p>There is almost no way to attack another player. You compete purely by <strong>getting somewhere first</strong>, which in Arnak means paying less for the same thing.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Five rounds is fewer than it sounds. <strong>Ask of every purchase: how many times will this actually get used?</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>2</b> The shape of a round</p>
+  <h2>Five cards in hand, one meaningful move per turn, and you drop out when you feel like it.</h2>
+
+  <p>Everyone draws up to a hand of five. Then you go round the table taking single turns, and on each of your turns you take <strong>one main action</strong> plus as many small free things as you want. When you have nothing left worth doing, you pass, and the rest of the table carries on without you.</p>
+
+  <p>Passing is individual, and that is more interesting than it sounds. If three people pass early, the last player left might take four turns in a row while everyone watches. Rounds do not have a fixed length; they have a length you negotiate with your own hand of cards.</p>
+
+  <p>The other half of the rhythm is the deck. Your cards are tiny at first: six of them, so your opening hand is nearly your whole deck. You never reshuffle in the middle of a round. Whatever you have played is gone until cleanup, so a round is not "what can I do", it is <strong>"how much can I wring out of these five cards before they run out"</strong>.</p>
+
+  <div class="trap">
+    <b>The instinct to unlearn</b>
+    <p>In most games passing is polite, cheap, or clever. Here it is the most expensive thing you can do, because the turns you skip are a fifth of a fifth of the entire game. If your turn looks feeble, take the feeble turn anyway.</p>
+  </div>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>A round ends for you when you say so. <strong>Say so as late as you possibly can.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>3</b> The signature tension</p>
+  <h2>Every card is a ride or a resource. Never both.</h2>
+
+  <p>This is the idea Arnak is built around, and if you understand only one thing before your first game, understand this one.</p>
+
+  <p>Look at any card. The top half shows a <strong>travel symbol</strong>: a boot, a jeep, a boat, a plane. The bottom half shows an <strong>effect</strong>: gain two coins, draw a card, something cleverer. When you use the card, you choose one half and throw the other away.</p>
+
+  <p>So that money card in your hand is two coins, or it is a jeep ride into the interior. Not both, and not two coins now and a ride later. This is why a six card hand feels so tight in a game that looks, on paper, generous.</p>
+
+  <figure>
+    <svg viewBox="0 0 700 250" role="img" aria-labelledby="c-t c-d">
+      <title id="c-t">One card, two mutually exclusive uses</title>
+      <desc id="c-d">A single card in the centre is split by a dashed line. Its top half shows a jeep travel symbol and an arrow leading left to the label "use it as a ride", its bottom half shows two coins and an arrow leading right to the label "or use it as money". Text below reads: pick one, the other half is lost.</desc>
+      <g class="f-panel"><rect x="282" y="20" width="136" height="180" rx="10" stroke="#F0A63C" stroke-width="2"/></g>
+      <rect x="282" y="20" width="136" height="70" rx="10" fill="rgba(110,159,201,.18)"/>
+      <line x1="282" y1="90" x2="418" y2="90" class="s-lantern" stroke-width="1.6" stroke-dasharray="5 4"/>
+      <g class="f-none s-bone" stroke-width="1.6" stroke-linejoin="round">
+        <path d="M322 66l7-18h12l6-8h16l4 8h9v18z"/>
+      </g>
+      <circle cx="330" cy="70" r="5" class="f-none s-bone" stroke-width="1.6"/>
+      <circle cx="360" cy="70" r="5" class="f-none s-bone" stroke-width="1.6"/>
+      <g class="f-lantern"><circle cx="330" cy="130" r="13"/><circle cx="360" cy="130" r="13"/></g>
+      <text x="350" y="172" class="ts" text-anchor="middle">GAIN 2 COINS</text>
+      <text x="350" y="190" class="ts" fill="#46B48C" text-anchor="middle">FREE ACTION</text>
+
+      <g class="f-none s-lapis" stroke-width="1.6"><path d="M278 55H150v14"/></g>
+      <text x="20" y="50" class="tt" fill="#6E9FC9">USE IT AS A RIDE</text>
+      <text x="20" y="86" class="ts">the jeep symbol pays a</text>
+      <text x="20" y="102" class="ts">travel cost, the coins</text>
+      <text x="20" y="118" class="ts">never happen</text>
+
+      <g class="f-none s-lantern" stroke-width="1.6"><path d="M422 132h128v-14"/></g>
+      <text x="470" y="108" class="tt" fill="#F0A63C">OR AS MONEY</text>
+      <text x="470" y="152" class="ts">two coins into your</text>
+      <text x="470" y="168" class="ts">supply, and you walk</text>
+      <text x="470" y="184" class="ts">nowhere this turn</text>
+
+      <text x="350" y="232" class="tt" fill="#D2604A" text-anchor="middle">pick one half, the other is gone</text>
+    </svg>
+    <figcaption>The same card produces two completely different turns. The question is never "is this card good", it is "which half do I need more today".</figcaption>
+  </figure>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Arnak's hand management is a series of small amputations. <strong>Every card you spend well costs you the other thing it could have been.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>4</b> Getting there</p>
+  <h2>Boots, jeeps, boats and planes, with one escape hatch you should memorise.</h2>
+
+  <p>Everywhere on the island costs a travel symbol to reach, and better places cost fancier rides. The pecking order has one wrinkle in it that catches everybody:</p>
+
+  <ul class="clean">
+    <li>A <strong>plane</strong> pays for anything at all.</li>
+    <li>A <strong>jeep</strong> and a <strong>boat</strong> are peers, and neither substitutes for the other. A jeep does not cross water. A boat does not drive into the jungle.</li>
+    <li>A <strong>boot</strong> is the floor. Anything covers a boot.</li>
+  </ul>
+
+  <p>And then the escape hatch: <strong>two coins hires a pilot</strong>, which counts as a plane, any time, for any cost. It is deliberately a bit expensive and it is the reason you are never truly stuck. New players forget it exists and give up on turns they could have taken.</p>
+
+  <div class="aside">Leftover travel symbols evaporate at the end of your turn. There is no saving half a boat trip for later, which is part of why the island rewards planning a turn ahead rather than a round ahead.</div>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>When a site looks unreachable, count your coins before you count your cards. <strong>Two coins is always a plane.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>5</b> The island</p>
+  <h2>Digging is the ordinary move, and the only prize for arriving first is a discount.</h2>
+
+  <p>The plain, dependable action is to send one of your two archaeologists out to a site: pay the travel cost, put the figure down, take what the site gives you. Two figures means <strong>two site visits a round at most</strong>, and they stay out there until cleanup.</p>
+
+  <p>Here is the elegant bit. Each site has two spaces, and they pay out <em class="t">exactly the same loot</em>. The difference is the price. The first person there takes the cheap space; the second pays more for identical goods. That is the entire worker placement contest of Arnak, and it is why turn order and tempo matter in a game with no conflict in it.</p>
+
+  <figure>
+    <svg viewBox="0 0 700 220" role="img" aria-labelledby="s-t s-d">
+      <title id="s-t">One dig site, two spaces, one price difference</title>
+      <desc id="s-d">A site panel shows a reward of one tablet and one coin. To its right, two worker spaces sit side by side. The first is labelled "first here" and shows a single boot cost. The second is labelled "second" and shows two boots. A caption notes that both spaces pay the same reward.</desc>
+      <rect x="10" y="18" width="680" height="152" rx="10" class="f-panel" stroke="rgba(239,231,214,.18)"/>
+      <text x="36" y="52" class="tt" font-size="16" fill="#FFF8E9">A site on the island</text>
+      <text x="36" y="76" class="ts">REWARD, IDENTICAL FOR BOTH SPACES</text>
+      <rect x="36" y="88" width="26" height="34" rx="3" fill="#C9B48A"/>
+      <g class="s-dim f-none" stroke-width="1.2"><path d="M42 98h14M42 106h14M42 114h10"/></g>
+      <circle cx="86" cy="105" r="14" class="f-lantern"/>
+
+      <rect x="372" y="70" width="136" height="86" rx="8" fill="rgba(70,180,140,.12)" stroke="#46B48C" stroke-width="1.8"/>
+      <text x="440" y="94" class="ts" fill="#46B48C" text-anchor="middle">FIRST HERE</text>
+      <path d="M430 104h13v22c0 5 3 7 8 9l10 4c4 2 6 4 6 8v8h-37z" class="f-none s-bone" stroke-width="1.6" stroke-linejoin="round"/>
+      <text x="440" y="176" class="ts" text-anchor="middle">cheap</text>
+
+      <rect x="528" y="70" width="152" height="86" rx="8" fill="rgba(240,166,60,.10)" stroke="#F0A63C" stroke-width="1.8"/>
+      <text x="604" y="94" class="ts" fill="#F0A63C" text-anchor="middle">SECOND</text>
+      <g class="f-none s-bone" stroke-width="1.6" stroke-linejoin="round">
+        <path d="M556 104h13v22c0 5 3 7 8 9l10 4c4 2 6 4 6 8v8h-37z"/>
+        <path d="M614 104h13v22c0 5 3 7 8 9l10 4c4 2 6 4 6 8v8h-37z"/>
+      </g>
+      <text x="604" y="176" class="ts" text-anchor="middle">same loot, worse price</text>
+
+      <text x="350" y="204" class="tt" text-anchor="middle">Nobody blocks you. They just make you pay a surcharge for being late.</text>
+    </svg>
+    <figcaption>Two spaces, one reward table. In a game with no combat, this is what competition looks like.</figcaption>
+  </figure>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>If a site is central to your plan, go early. <strong>Waiting does not lose you the site, it just taxes you for it.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>6</b> Two currencies and three treasures</p>
+  <h2>Coins and compasses buy things. Tablets, arrowheads and jewels buy points.</h2>
+
+  <p>Five resources, and they split cleanly into two groups that behave nothing alike.</p>
+
+  <p>The <strong>everyday pair</strong> flows through your hands every round. Coins buy equipment and hire planes. Compasses buy the stranger cards and pay to push into unexplored country. If you run dry of these, your turns get small.</p>
+
+  <p>The <strong>rare three</strong> mostly come out of the ground: tablets, arrowheads and jewels. They are what the research ladder, the monsters and the temple all demand, and they arrive in ones and twos rather than handfuls. Jewels in particular are the currency of the top of the board.</p>
+
+  <p>Here is the trap dressed up as a strategy: it is entirely possible to play a smooth, pleasant, well funded game in coins and compasses, buy a lovely deck, and finish last. Gold buys stuff. Only the rare three convert into score.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Coins and compasses are logistics. <strong>Tablets, arrowheads and jewels are the scoreboard.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>7</b> Discovery</p>
+  <h2>The loud action: an idol, a new site, a pile of loot, and a monster you just woke up.</h2>
+
+  <p>At the start of the game most of the island is blank. Pushing into it is the most expensive main action available and also the most generous, because one action hands you four things at once: the idol that was sitting there, a brand new site tile flipped face up with its reward paid straight to you, the standing of having been first to a place everyone will now use, and a <strong>guardian</strong> that wakes up on the spot.</p>
+
+  <p>Three of those four are wonderful. The fourth is the bill.</p>
+
+  <p>Discovery is also the only place idols come from, and it is one of the few reliable taps for rare resources. Deeper expeditions cost more and pay more, which is the usual bargain, but the real reason to go is that you are also <strong>writing the board other people will play on</strong>, and you get the cheap space on it first.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Discovery is four rewards and one debt. <strong>Never discover without a plan for the guardian, even if the plan is "ignore it".</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>8</b> Guardians and fear</p>
+  <h2>The monster does nothing to you. That is what makes it interesting.</h2>
+
+  <p>A woken guardian sits on its site and waits. It does not attack, chase, block the space, or stop anybody digging. All it does is make one promise: when an archaeologist comes home at the end of the round from a site that still has a guardian on it, that player takes a <strong>fear card</strong>.</p>
+
+  <p>A fear card is worth minus one point and, worse, it is a dead card clogging your little deck next round. Everyone starts with two of them already.</p>
+
+  <p>You can deal with a guardian by paying the price on its tile while standing there, usually in arrowheads and tablets. Doing so is worth a fat <strong>five points</strong> and hands you a one use bonus you can fire off later. That is a swing of six points against just taking the fear card, which sounds like an easy decision until you notice that the arrowheads it wants are the same arrowheads the research ladder wants.</p>
+
+  <div class="trap">
+    <b>The instinct to unlearn</b>
+    <p>You are not obliged to be a hero. Taking the minus one and spending your treasure somewhere better is a perfectly good play, and experienced players make it often. Walking away from a monster is a decision, not a failure.</p>
+  </div>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Fear is the only punishment in the game, and it is small. <strong>Fight the guardian when the price is convenient, not because it is there.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>9</b> Idols</p>
+  <h2>Three points in your pocket, or a favour that costs you the empty space.</h2>
+
+  <p>Every idol you hold is worth three points at the end. Straightforward. But your board also has a short row of <strong>idol slots</strong>, and pressing an idol into a slot lets you take a handy effect printed there, typically the exact resource you are one short of.</p>
+
+  <p>The catch is beautifully mean. Each slot is worth points <em class="t">for being left empty</em>, and they fill up in order, so the ones you use first are the cheap ones and the last is the expensive one. Slotting an idol does not cost you the idol's three points; it costs you the points the hole was worth.</p>
+
+  <p>And an idol in a slot never comes out again. Each slot is one favour for the whole game.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>An idol always scores three. <strong>The slot is where the real price is hiding, so spend one only to unlock something bigger.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>10</b> The card row</p>
+  <h2>Items are seeds you plant. Artifacts are fireworks you set off.</h2>
+
+  <p>The shop in the middle of the table sells two kinds of card and they behave in deliberately opposite ways.</p>
+
+  <p><strong>Items</strong> cost coins and go to the <em class="t">bottom of your deck</em>. You will usually see them at the start of the next round. An item is an investment: you pay now and it works for you on every remaining round.</p>
+
+  <p><strong>Artifacts</strong> cost compasses and go off <em class="t">the instant you buy them</em>. Their effects are stronger, and if you want to use one again later from your hand, it will cost you a tablet and your whole main action. An artifact is a burst, not an engine.</p>
+
+  <p>Both have points printed on them, so a well chosen deck is quietly also a pile of score. But notice what the timing does: an item bought on round one gets four uses, and the same item bought on round four gets roughly none.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Items early, artifacts late. <strong>An item's value is mostly the number of rounds left on the clock.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>11</b> The shop is on a timer</p>
+  <h2>The moon staff walks down the card row, eating one card from each side.</h2>
+
+  <p>The thing that counts the rounds sits <em class="t">inside</em> the shop, splitting the artifacts above it from the items below. Every cleanup it eats the two cards touching it, one of each kind, thrown out of the game entirely. Then it slides down a notch, and the row refills from the top with artifacts.</p>
+
+  <p>So the market drifts. Round one is nearly all items, cheap and practical. By the final round it is nearly all artifacts, expensive and dramatic. The island gets stranger the longer you stay.</p>
+
+  <figure>
+    <svg viewBox="0 0 700 250" role="img" aria-labelledby="m-t m-d">
+      <title id="m-t">The card row drifting from items to artifacts</title>
+      <desc id="m-d">Two columns of cards. The left column, labelled round one, has one artifact at the top, the moon staff line just below it, and five items beneath. The right column, labelled round five, has five artifacts, the staff line near the bottom, and one item below it. An arrow between them shows the staff sliding down.</desc>
+      <text x="120" y="24" class="ts" text-anchor="middle">ROUND I</text>
+      <text x="580" y="24" class="ts" text-anchor="middle">ROUND V</text>
+
+      <g>
+        <rect x="40" y="34" width="160" height="26" rx="4" fill="rgba(110,159,201,.16)" stroke="#6E9FC9"/><text x="120" y="52" class="ts" fill="#6E9FC9" text-anchor="middle">ARTIFACT</text>
+        <line x1="30" y1="70" x2="210" y2="70" class="s-lantern" stroke-width="2.4"/><circle cx="26" cy="70" r="5" class="f-bone"/>
+        <rect x="40" y="80" width="160" height="26" rx="4" fill="rgba(240,166,60,.12)" stroke="#F0A63C"/><text x="120" y="98" class="ts" fill="#F0A63C" text-anchor="middle">ITEM</text>
+        <rect x="40" y="112" width="160" height="26" rx="4" fill="rgba(240,166,60,.12)" stroke="#F0A63C"/><text x="120" y="130" class="ts" fill="#F0A63C" text-anchor="middle">ITEM</text>
+        <rect x="40" y="144" width="160" height="26" rx="4" fill="rgba(240,166,60,.12)" stroke="#F0A63C"/><text x="120" y="162" class="ts" fill="#F0A63C" text-anchor="middle">ITEM</text>
+        <rect x="40" y="176" width="160" height="26" rx="4" fill="rgba(240,166,60,.12)" stroke="#F0A63C"/><text x="120" y="194" class="ts" fill="#F0A63C" text-anchor="middle">ITEM</text>
+        <rect x="40" y="208" width="160" height="26" rx="4" fill="rgba(240,166,60,.12)" stroke="#F0A63C"/><text x="120" y="226" class="ts" fill="#F0A63C" text-anchor="middle">ITEM</text>
+      </g>
+
+      <g class="f-none s-dim" stroke-width="1.6"><path d="M240 130h180"/></g>
+      <path d="M424 130l-12-6v12z" class="f-none" fill="#9DB0A8"/>
+      <text x="330" y="118" class="ts" text-anchor="middle">the staff slides down,</text>
+      <text x="330" y="152" class="ts" text-anchor="middle">the row refills with artifacts</text>
+
+      <g>
+        <rect x="500" y="34" width="160" height="26" rx="4" fill="rgba(110,159,201,.16)" stroke="#6E9FC9"/><text x="580" y="52" class="ts" fill="#6E9FC9" text-anchor="middle">ARTIFACT</text>
+        <rect x="500" y="66" width="160" height="26" rx="4" fill="rgba(110,159,201,.16)" stroke="#6E9FC9"/><text x="580" y="84" class="ts" fill="#6E9FC9" text-anchor="middle">ARTIFACT</text>
+        <rect x="500" y="98" width="160" height="26" rx="4" fill="rgba(110,159,201,.16)" stroke="#6E9FC9"/><text x="580" y="116" class="ts" fill="#6E9FC9" text-anchor="middle">ARTIFACT</text>
+        <rect x="500" y="130" width="160" height="26" rx="4" fill="rgba(110,159,201,.16)" stroke="#6E9FC9"/><text x="580" y="148" class="ts" fill="#6E9FC9" text-anchor="middle">ARTIFACT</text>
+        <rect x="500" y="162" width="160" height="26" rx="4" fill="rgba(110,159,201,.16)" stroke="#6E9FC9"/><text x="580" y="180" class="ts" fill="#6E9FC9" text-anchor="middle">ARTIFACT</text>
+        <line x1="490" y1="198" x2="670" y2="198" class="s-lantern" stroke-width="2.4"/><circle cx="486" cy="198" r="5" class="f-bone"/>
+        <rect x="500" y="208" width="160" height="26" rx="4" fill="rgba(240,166,60,.12)" stroke="#F0A63C"/><text x="580" y="226" class="ts" fill="#F0A63C" text-anchor="middle">ITEM</text>
+      </g>
+    </svg>
+    <figcaption>The shop you are looking at will not be there later, and some of it will not be in the game at all.</figcaption>
+  </figure>
+
+  <div class="trap">
+    <b>The instinct to unlearn</b>
+    <p>"I will pick that up next round" is a sentence about a different game. The card you are eyeing may be exiled during cleanup. If an item is right for you, it is right for you now.</p>
+  </div>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>The market has a half life. <strong>Items are an early game purchase, always.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>12</b> The research ladder</p>
+  <h2>First you find it, then you write it down, and the notebook may never go first.</h2>
+
+  <p>Up the side of the board runs a ladder, and you have two markers climbing it: a magnifying glass and a notebook. A research action moves <strong>one marker up one rung</strong>, paying the price printed between where it is and where it is going.</p>
+
+  <p>One rule governs the whole ladder and it never bends: <strong>the notebook can never sit higher than the magnifying glass</strong>. You discover a thing before you record it. The pair leapfrogs upward, glass then notebook, glass then notebook, for the whole game.</p>
+
+  <p>What you get on arrival depends on which marker moved. Glass rungs tend to hand you resources. Notebook rungs tend to hand you <strong>assistants</strong>, people who join the expedition and can be used once per round, and upgrades that make those assistants better. On top of that, the first player to reach a rung takes the bonus tile sitting on it, and nobody else ever can.</p>
+
+  <p>And then the part that decides games: <strong>where your markers finish is worth points by itself</strong>, and the higher rungs are worth a great deal. Two markers climbing steadily beats one marker sprinting, because the notebook is dragging a hard ceiling behind it.</p>
+
+  <figure>
+    <svg viewBox="0 0 700 260" role="img" aria-labelledby="r-t r-d">
+      <title id="r-t">The research ladder with the notebook trailing the magnifying glass</title>
+      <desc id="r-d">Five stacked rungs rising to a top row labelled the lost temple, each rung showing an increasing point value. A magnifying glass marker sits two rungs above a notebook marker, with an arrow showing the notebook may only climb to where the glass already is.</desc>
+      <rect x="120" y="18" width="460" height="38" rx="6" fill="rgba(240,166,60,.14)" stroke="#F0A63C" stroke-width="1.8"/>
+      <text x="146" y="43" class="tt" fill="#F0A63C">THE LOST TEMPLE</text>
+      <text x="556" y="43" class="ts" fill="#F0A63C" text-anchor="end">the summit</text>
+
+      <rect x="120" y="70" width="460" height="34" rx="6" class="f-panel" stroke="rgba(239,231,214,.18)"/>
+      <text x="146" y="92" class="tt">rung four</text><text x="556" y="92" class="ts" text-anchor="end">big points</text>
+      <rect x="120" y="114" width="460" height="34" rx="6" class="f-panel" stroke="rgba(239,231,214,.18)"/>
+      <text x="146" y="136" class="tt">rung three</text><text x="556" y="136" class="ts" text-anchor="end">more points</text>
+      <rect x="120" y="158" width="460" height="34" rx="6" class="f-panel" stroke="rgba(239,231,214,.18)"/>
+      <text x="146" y="180" class="tt">rung two</text><text x="556" y="180" class="ts" text-anchor="end">some points</text>
+      <rect x="120" y="202" width="460" height="34" rx="6" class="f-panel" stroke="rgba(239,231,214,.18)"/>
+      <text x="146" y="224" class="tt">rung one</text><text x="556" y="224" class="ts" text-anchor="end">a point</text>
+
+      <g transform="translate(272,120)">
+        <circle cx="10" cy="10" r="9" fill="rgba(110,159,201,.35)" class="s-bone" stroke-width="2"/>
+        <path d="M17 17l9 9" class="s-bone" stroke-width="3" stroke-linecap="round"/>
+      </g>
+      <text x="320" y="136" class="tt" fill="#FFF8E9">magnifying glass</text>
+
+      <g transform="translate(272,208)">
+        <path d="M1 3c5-2 9-2 13 1 4-3 8-3 13-1v18c-5-2-9-2-13 1-4-3-8-3-13-1z" fill="#D8CBA6" stroke="#7A6741" stroke-width="1.3"/>
+      </g>
+      <text x="320" y="224" class="tt" fill="#FFF8E9">notebook, and it may not pass the glass</text>
+      <g class="f-none s-lantern" stroke-width="1.8"><path d="M284 202v-46"/><path d="M278 162l6-8 6 8"/></g>
+      <text x="350" y="256" class="ts" text-anchor="middle">pay the price between rungs, climb one, take what the rung gives</text>
+    </svg>
+    <figcaption>The glass leads, the notebook follows, and both of them are worth points where they stop.</figcaption>
+  </figure>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>The ladder is the largest reliable block of score in the game, and the bonus tiles go to whoever gets there first. <strong>Start climbing in round one, not round three.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>13</b> The summit</p>
+  <h2>The one place in Arnak where being early is worth more than being efficient.</h2>
+
+  <p>When your magnifying glass reaches the top rung, you have found the Lost Temple. Everywhere else on the board, arriving first buys you a discount. Here it buys you a bigger number: the earliest arrival takes the most valuable place left, so second and third are worth less for doing the same work. Your notebook cannot follow you up; the summit belongs to the glass alone.</p>
+
+  <p>After that, research actions stop being climbing and start being shopping. You spend combinations of the rare treasures on temple tiles, and the best of them demand all three at once, which is exactly as expensive as it sounds.</p>
+
+  <div class="aside">Is the temple a first game plan? It is a wonderful thing to aim at and a terrible thing to chase. It needs a steady supply of tablets and jewels arranged several rounds in advance. Aim at it if your board is feeding you those anyway; do not gut a working expedition for it.</div>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>The temple rewards the first expedition up the ladder twice over. <strong>Everyone else is paying full price for a souvenir.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>14</b> How not to lose your first game</p>
+  <h2>The five habits that cost beginners the most.</h2>
+
+  <p>Arnak is friendly. It will not punish you with monsters or take your things. It will let you lose quietly, in ways you will not notice until the scores go down on paper. These are the five.</p>
+
+  <h3>You passed too early</h3>
+  <p>This is the big one and it is almost universal. A turn that produces one tablet is worth more than the elegant turn you did not take. In a five round game you get perhaps twenty turns in total; do not voluntarily hand back three of them because nothing brilliant was available.</p>
+
+  <h3>You bought a beautiful deck and no treasure</h3>
+  <p>Coins and compasses feel like progress because they are constantly moving. They buy logistics. The score lives in tablets, arrowheads and jewels, in the two markers on the ladder, and in the idols and guardians on the island. If you finish round three having never climbed the ladder, you are already behind and the board will not tell you.</p>
+
+  <h3>You saved the item you needed</h3>
+  <p>The card row is being eaten from the middle every cleanup. There is no later. Meanwhile an item bought in round one works four more times and an item bought in round four barely works at all, so the early rounds are when your money is worth the most it will ever be worth.</p>
+
+  <h3>You woke something you could not feed</h3>
+  <p>Discovery is the best action in the game right up to the point where you do it on your last turn of a round with no arrowheads in hand. Then it is a monster, a fear card, and a dud in next round's tiny deck. Look at what the guardian will cost before you turn the tile over.</p>
+
+  <h3>You let your deck get fat</h3>
+  <p>You draw five cards a round out of a deck that started at six. Every card you add dilutes that hand, and every fear card you keep is a wasted slot and a lost point. Throwing a fear card out of your deck for good is one of the quietest strong plays available, and new players almost never bother.</p>
+
+  <div class="note">
+    <span class="lab">The whole game in one line</span>
+    <p>Five rounds, one main action a turn, and one card that cannot be both a ride and a resource. <strong>Take every turn, climb the ladder early, and spend your treasure on score rather than comfort.</strong></p>
+  </div>
+</article>
+
+<footer>A teaching walkthrough of Lost Ruins of Arnak by Michaela &Scaron;t&aacute;chov&aacute; &amp; Michal &Scaron;t&aacute;ch (Czech Games Edition, 2020). This page teaches what the game is and how it thinks; the rulebook in the box has the exact costs, symbols and edge cases. <a href="../">Back to the shelf</a>.</footer>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var pts = Array.prototype.slice.call(document.querySelectorAll('.pt'));
+  var shade = document.getElementById('shade');
+  var fill = document.getElementById('fill');
+  var count = document.getElementById('count');
+  var moon = document.getElementById('moon');
+  var at = 0;
+
+  function paint(n){
+    if(n === at) return;
+    at = n;
+    var p = n / pts.length;
+    shade.setAttribute('transform', 'translate(' + (-p * 31).toFixed(2) + ',0)');
+    fill.style.width = (p * 100).toFixed(1) + '%';
+    count.textContent = n + ' / ' + pts.length;
+    moon.setAttribute('aria-label', 'Point ' + n + ' of ' + pts.length);
+  }
+
+  var ticking = false;
+  function measure(){
+    ticking = false;
+    var mark = window.innerHeight * 0.45, n = 1;
+    for(var i = 0; i < pts.length; i++){
+      if(pts[i].getBoundingClientRect().top <= mark){ n = i + 1; }
+    }
+    paint(n);
+  }
+  window.addEventListener('scroll', function(){
+    if(!ticking){ ticking = true; window.requestAnimationFrame(measure); }
+  }, {passive:true});
+  window.addEventListener('resize', measure);
+  paint(1);
+  measure();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Manhattan Project: Learn It Properly</title>
+<meta name="description" content="Learn what The Manhattan Project actually is: fourteen points on the two turn game, the private factory nobody can block, the scientists everyone is short of, and the fact that only finished bombs score.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600&family=Barlow:ital,wght@0,400;0,500;0,600;1,400&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+:root{
+  --slate:#131A20;
+  --slate-2:#0D1317;
+  --panel:#1B252D;
+  --paper:#E8E4D9;
+  --dim:#94A3AE;
+  --blueprint:#4E8FB8;
+  --amber:#E0A33A;
+  --geiger:#8FBF4A;
+  --alarm:#C24B3A;
+  --plum:#8F6AA8;
+  --line:rgba(232,228,217,.15);
+  --display:"Oswald",Impact,sans-serif;
+  --body:"Barlow",system-ui,sans-serif;
+  --mono:"Share Tech Mono",ui-monospace,Menlo,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;color:var(--paper);font-family:var(--body);font-size:18px;line-height:1.66;
+  -webkit-font-smoothing:antialiased;
+  background:
+    repeating-linear-gradient(0deg, rgba(78,143,184,.045) 0 1px, transparent 1px 38px),
+    repeating-linear-gradient(90deg, rgba(78,143,184,.045) 0 1px, transparent 1px 38px),
+    radial-gradient(820px 500px at 88% -6%, rgba(224,163,58,.12), transparent 60%),
+    linear-gradient(180deg,var(--slate),var(--slate-2) 80%);
+  background-attachment:fixed;
+}
+.wrap{max-width:800px;margin:0 auto;padding:0 22px 90px}
+
+/* ---------- the core rail ---------- */
+.rail{
+  position:sticky;top:0;z-index:20;background:rgba(13,19,23,.95);
+  backdrop-filter:blur(6px);border-bottom:1px solid var(--line);padding:8px 22px;
+}
+.rail-in{max-width:800px;margin:0 auto;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.rail-lab{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);white-space:nowrap}
+#cores{flex:1;min-width:150px;max-width:300px;height:30px}
+#cores circle{fill:transparent;stroke:rgba(232,228,217,.3);stroke-width:1.3;transition:fill .35s,stroke .35s}
+#cores circle.on{fill:var(--amber);stroke:var(--amber)}
+#cores line{stroke:rgba(232,228,217,.18);stroke-width:1}
+.rail-count{font-family:var(--mono);font-size:12px;color:var(--amber);white-space:nowrap}
+
+.backlink{
+  display:inline-block;margin-top:26px;font-family:var(--mono);font-size:11px;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--dim);text-decoration:none;
+  border-bottom:1px solid transparent;
+}
+.backlink:hover{color:var(--amber);border-bottom-color:var(--amber)}
+
+header.top{padding:28px 0 42px;border-bottom:1px solid var(--line)}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--amber);margin:22px 0 14px}
+h1{
+  font-family:var(--display);font-weight:600;font-size:clamp(44px,9.6vw,86px);
+  line-height:.96;letter-spacing:-.01em;margin:0 0 8px;color:#FFFDF6;text-transform:uppercase;
+}
+h1 small{display:block;font-family:var(--body);font-size:.17em;font-weight:600;letter-spacing:.24em;
+  color:var(--blueprint);margin-bottom:16px;text-transform:uppercase}
+.lede{font-size:20px;color:var(--dim);max-width:54ch;margin:18px 0 0}
+
+.pt{border-top:1px solid var(--line);padding:44px 0 8px;scroll-margin-top:56px}
+.pt:first-of-type{border-top:none}
+.num{
+  display:inline-flex;align-items:center;gap:12px;margin-bottom:12px;
+  font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--blueprint);
+}
+.num b{
+  width:34px;height:34px;display:grid;place-items:center;
+  background:var(--amber);color:var(--slate-2);font-family:var(--display);font-weight:600;font-size:19px;
+  clip-path:polygon(0 0,100% 0,100% 74%,74% 100%,0 100%);
+}
+h2{
+  font-family:var(--display);font-weight:600;font-size:clamp(26px,5vw,40px);
+  line-height:1.1;margin:0 0 16px;max-width:26ch;color:#FFFDF6;
+}
+h3{font-family:var(--display);font-weight:600;font-size:22px;margin:30px 0 6px;color:var(--paper);text-transform:uppercase;letter-spacing:.01em}
+.pt p{max-width:62ch;margin:0 0 16px}
+strong{font-weight:600;color:#FFFDF6}
+em.t{font-style:normal;font-family:var(--mono);font-size:.88em;background:rgba(232,228,217,.10);
+  padding:2px 6px}
+.aside{
+  border-left:3px solid var(--plum);padding:2px 0 2px 18px;margin:24px 0;
+  font-style:italic;color:var(--dim);max-width:58ch;
+}
+.trap{
+  margin:26px 0;border:1px solid rgba(194,75,58,.65);background:rgba(194,75,58,.13);
+  padding:16px 20px;max-width:62ch;
+}
+.trap b{
+  display:block;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:#DE7A69;margin-bottom:8px;
+}
+.trap p{margin:0}
+.note{
+  margin:30px 0 0;padding:18px 22px;max-width:62ch;
+  background:rgba(78,143,184,.13);border:1px solid rgba(78,143,184,.6);
+}
+.note .lab{
+  display:block;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:#79B6DA;margin-bottom:8px;
+}
+.note p{margin:0}
+ul.clean{list-style:none;padding:0;margin:0 0 16px;max-width:62ch}
+ul.clean li{padding:8px 0 8px 26px;position:relative;border-bottom:1px solid rgba(232,228,217,.10)}
+ul.clean li:last-child{border-bottom:none}
+ul.clean li::before{
+  content:"";position:absolute;left:4px;top:19px;width:10px;height:10px;
+  background:var(--amber);clip-path:polygon(50% 0,100% 50%,50% 100%,0 50%);
+}
+.eg{
+  margin:26px 0;max-width:62ch;border-left:3px solid var(--geiger);
+  background:rgba(143,191,74,.11);padding:16px 20px 16px 18px;
+}
+.eg b{
+  display:block;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:#AFD873;margin-bottom:8px;
+}
+.eg p{margin:0 0 10px}
+.eg p:last-child{margin:0}
+.eg .out{font-family:var(--mono);font-size:.92em;color:var(--amber)}
+figure{margin:28px 0;padding:18px;background:rgba(232,228,217,.04);border:1px solid var(--line)}
+figure svg{display:block;width:100%;height:auto}
+figcaption{font-family:var(--mono);font-size:11px;color:var(--dim);margin-top:12px;text-align:center;line-height:1.6}
+.scroll{overflow-x:auto;margin:24px 0}
+table{border-collapse:collapse;width:100%;min-width:440px;font-size:16px}
+th,td{text-align:left;padding:9px 14px 9px 0;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);font-weight:400}
+td.n{font-family:var(--mono);color:var(--amber)}
+/* figure ink */
+.f-paper{fill:var(--paper)}.f-amber{fill:var(--amber)}.f-blue{fill:var(--blueprint)}
+.f-geiger{fill:var(--geiger)}.f-alarm{fill:var(--alarm)}.f-panel{fill:var(--panel)}.f-none{fill:none}
+.s-paper{stroke:var(--paper)}.s-dim{stroke:var(--dim)}.s-amber{stroke:var(--amber)}
+.s-blue{stroke:var(--blueprint)}.s-alarm{stroke:var(--alarm)}.s-geiger{stroke:var(--geiger)}
+.tt{font-family:"Barlow",sans-serif;font-size:13px;fill:var(--paper)}
+.ts{font-family:"Share Tech Mono",monospace;font-size:11px;fill:var(--dim);letter-spacing:.06em}
+footer{margin:64px 0 0;padding-top:24px;border-top:1px solid var(--line);color:var(--dim);font-size:15px}
+a{color:var(--amber)}
+@media(max-width:620px){body{font-size:17px}#cores{max-width:200px;height:26px}.rail-lab{display:none}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+@media print{.rail{display:none}}
+</style>
+</head>
+<body>
+
+<div class="rail">
+  <div class="rail-in">
+    <span class="rail-lab">cores machined</span>
+    <svg id="cores" viewBox="0 0 300 30" role="img" aria-label="Progress through the briefing" preserveAspectRatio="xMinYMid meet"></svg>
+    <span class="rail-count" id="count">1 / 14</span>
+  </div>
+</div>
+
+<div class="wrap">
+
+<a class="backlink" href="../">&larr; the shelf</a>
+
+<header class="top">
+  <p class="eyebrow">Learn it properly &middot; 14 points</p>
+  <h1><small>Five nations, one race, no rounds</small>The Manhattan Project</h1>
+  <p class="lede">Everything on this board is plumbing except three verbs. You build a bomb, you test a bomb, you load a bomb, and nothing else in the entire game is worth a single point. The skill is noticing how far away from those three verbs you have wandered.</p>
+</header>
+
+<article class="pt">
+  <p class="num"><b>1</b> The big picture</p>
+  <h2>A worker placement economy with exactly one thing to spend it on.</h2>
+
+  <p>Two to five players, an hour and a half or two, and each of you is running a nation's atomic weapons programme. You hire people, you mine and refine, you put up buildings, and you use all of that to finish bombs. Whoever crosses a points threshold first wins on the spot.</p>
+
+  <p>What makes it teach badly and play well is the asymmetry between how much board there is and how few things score. There are mines and universities and reactors and airfields and a market of buildings and two enrichment tracks and a spy track, and none of it is worth anything. <strong>Points come only from building, testing and loading bombs.</strong></p>
+
+  <p>The target moves with the player count, and it is worth knowing before you start because it tells you how long you have: <strong>70 points at two players, 60 at three, 50 at four, 45 at five</strong>. More players means a shorter game, because the board gets crowded and someone gets there faster.</p>
+
+  <p>There is a little aggression available too. You can bomb an opponent's factory and you can have your spies work in it. Both of these are real, and both of them are sideshows compared with the question of whether your own engine is producing finished weapons.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>The board is a machine for making bombs and bombs are the only score. <strong>Every turn that does not move a bomb closer is an investment that has to pay off later.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>2</b> The turn</p>
+  <h2>There are no rounds. On your turn you either place workers or take them back.</h2>
+
+  <p>This is the skeleton and it is startlingly small. Your whole turn is a choice between two things:</p>
+
+  <ul class="clean">
+    <li><strong>Place workers</strong>, and take the actions they trigger.</li>
+    <li><strong>Retrieve workers</strong>, pulling every one of your people back home and doing nothing else.</li>
+  </ul>
+
+  <p>Nobody says "end of round" and nothing refreshes on a schedule. You place until you run low, then you spend a whole turn collecting your staff, then you place again. If your supply of workers is empty you have no choice: you must retrieve.</p>
+
+  <p>That is the entire structure of the game, and it is the thing to teach first at the table, because everything else is detail hanging off it. The interesting consequence is that <strong>you set your own tempo</strong>. A player who places two workers at a time recovers quickly and acts often. A player who empties their whole workforce onto the board gets a huge turn and then a wasted one.</p>
+
+  <figure>
+    <svg viewBox="0 0 700 220" role="img" aria-labelledby="t-t t-d">
+      <title id="t-t">The two turn game</title>
+      <desc id="t-d">A loop between two boxes. The left box, place workers, shows one worker going onto a contested main board space and several going onto your own buildings. The right box, retrieve workers, shows all workers returning home. An arrow labelled "forced if your supply is empty" runs from left to right.</desc>
+      <rect x="20" y="30" width="290" height="140" rx="6" class="f-panel" stroke="#E0A33A" stroke-width="1.8"/>
+      <text x="44" y="58" class="tt" font-size="15" fill="#E0A33A">PLACE WORKERS</text>
+      <text x="44" y="84" class="ts">STEP 1, one worker on the shared board</text>
+      <circle cx="52" cy="104" r="8" class="f-amber"/>
+      <rect x="70" y="94" width="216" height="20" fill="rgba(78,143,184,.2)" stroke="#4E8FB8"/>
+      <text x="80" y="109" class="ts" fill="#79B6DA">A SPACE ANYONE COULD HAVE TAKEN</text>
+      <text x="44" y="138" class="ts">STEP 2, as many as you like at home</text>
+      <g class="f-paper"><circle cx="52" cy="156" r="8"/><circle cx="74" cy="156" r="8"/><circle cx="96" cy="156" r="8"/></g>
+      <rect x="112" y="146" width="174" height="20" fill="rgba(143,191,74,.16)" stroke="#8FBF4A"/>
+      <text x="122" y="161" class="ts" fill="#AFD873">YOUR OWN BUILDINGS</text>
+
+      <rect x="390" y="30" width="290" height="140" rx="6" class="f-panel" stroke="rgba(232,228,217,.3)" stroke-width="1.6"/>
+      <text x="414" y="58" class="tt" font-size="15">RETRIEVE WORKERS</text>
+      <text x="414" y="84" class="ts">EVERYONE COMES HOME</text>
+      <g class="f-paper"><circle cx="422" cy="112" r="8"/><circle cx="444" cy="112" r="8"/><circle cx="466" cy="112" r="8"/><circle cx="488" cy="112" r="8"/></g>
+      <text x="414" y="150" class="ts">AND THAT IS YOUR WHOLE TURN</text>
+
+      <g class="f-none s-dim" stroke-width="1.6"><path d="M316 74h68"/><path d="M384 126h-68"/></g>
+      <path d="M386 74l-12-6v12z" class="f-none" fill="#94A3AE"/>
+      <path d="M314 126l12-6v12z" class="f-none" fill="#94A3AE"/>
+      <text x="350" y="204" class="ts" text-anchor="middle">FORCED WHEN YOUR SUPPLY IS EMPTY, OPTIONAL OTHERWISE</text>
+    </svg>
+    <figcaption>Two turn types, and the second one produces nothing. How often you take it is your pace.</figcaption>
+  </figure>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Retrieving is the cost of having acted. <strong>The good players are the ones who spend the fewest turns doing nothing.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>3</b> Public board, private factory</p>
+  <h2>One worker goes where everyone is fighting. The rest go where nobody can touch you.</h2>
+
+  <p>A placement turn has two halves and the split between them is the cleverest idea in the game.</p>
+
+  <p>First you may put <strong>a single worker on the shared board</strong>. That is where the raw materials of the world are: labour, university places, mines, money, aircraft, refining. One space, one worker, and whoever got there first has it until they go home. This half of the game is a knife fight over about a dozen spaces.</p>
+
+  <p>Then you may put <strong>as many workers as you like onto your own buildings</strong>, over and over, as long as each building gets the exact staff it asks for. Nobody can block these. They are yours, they are always available, and using them is not rationed.</p>
+
+  <p>So the shared board is where you get things and your own buildings are where you convert things. A player with no buildings is entirely at the mercy of whoever moves before them. A player with a good factory can have an enormous turn without touching the contested board at all.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>The shared board is rented and your buildings are owned. <strong>Buying buildings is how you stop other people deciding what your turn looks like.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>4</b> Buildings</p>
+  <h2>You are not collecting cards. You are installing private action spaces.</h2>
+
+  <p>Buildings come off a market with prices on the slots, you pay cash, and the card goes onto your own board where it becomes a permanent place your workers can stand. Each one prints what it wants and what it gives: put this many of this kind of worker here, get that.</p>
+
+  <p>Two things follow, and both take a game or two to feel properly.</p>
+
+  <p>First, a building is only as good as your ability to staff it. A gorgeous plutonium reactor that wants two engineers is a decoration if you employ labourers. <strong>Buildings and workforce have to be bought as a matched pair</strong>, and buying either one alone is the most common way a first game stalls.</p>
+
+  <p>Second, buildings are compounding and the game is finite. A building bought early runs many times; the same building bought while somebody is loading their last bomb runs never. There is a point in every game after which you should stop shopping and start converting, and noticing that moment is most of the skill.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>A building is a private action space, not a possession. <strong>Buy the workers to run it in the same breath as the building.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>5</b> Three kinds of people</p>
+  <h2>Bodies are cheap. Qualifications are the actual bottleneck.</h2>
+
+  <p>You start with a handful of <strong>labourers</strong>: unskilled, plentiful, and welcome almost anywhere. They are the hands that dig ore and haul things about.</p>
+
+  <p>What you are perpetually short of are <strong>engineers and scientists</strong>. They are the ones who staff the interesting buildings, who design bombs, who make refining work. Getting more of them means spending turns on it, and the board never has enough of those spaces to go round.</p>
+
+  <p>Then there are <strong>contractors</strong>, a shared pool of temporary hires that anybody may use. They plug a hole in a turn, and they leave your service the moment you retrieve, so they are a loan, not a workforce.</p>
+
+  <p>This is where the pressure of the whole game concentrates. Almost every plan in Manhattan Project is limited by skilled staff: bomb designs need an engineer and a scientist together, good buildings want specialists, and the two of them are competing for the same people at the same time.</p>
+
+  <div class="trap">
+    <b>The instinct to unlearn</b>
+    <p>In most worker placement games a worker is a worker and more is better. Here a pile of labourers is a pile of people who cannot do the things that score. When you count your workforce, count the qualified ones and treat the rest as logistics.</p>
+  </div>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Labourers move material. <strong>Engineers and scientists move the game, and there are never enough.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>6</b> The chain</p>
+  <h2>Money to ore to fissile material to a finished weapon, and every link needs different staff.</h2>
+
+  <p>The economy is a pipeline, and seeing it as one pipeline rather than a menu of spaces is the moment the board stops looking busy.</p>
+
+  <ul class="clean">
+    <li><strong>Money</strong> hires people and buys buildings. It is the front of the pipe and it is boring, which is exactly why people neglect it.</li>
+    <li><strong>Yellowcake</strong> is raw ore, dug by unskilled hands. Useless as it stands.</li>
+    <li><strong>Enrichment and reactors</strong> turn ore into the two things bombs actually eat: <strong>enriched uranium</strong> and <strong>plutonium</strong>. Both are tracked on the board and both want skilled staff.</li>
+    <li><strong>Bomb work</strong> spends that fuel, plus the right people, and produces the only points in the game.</li>
+  </ul>
+
+  <p>Every link has a different bottleneck, which is why the pipeline is interesting and why you cannot simply spam the best space. Ore needs bodies. Refining needs specialists. Weapons need both, plus a design in hand, plus fuel of the right kind waiting.</p>
+
+  <figure>
+    <svg viewBox="0 0 700 200" role="img" aria-labelledby="ch-t ch-d">
+      <title id="ch-t">The production chain from money to finished bomb</title>
+      <desc id="ch-d">Four linked boxes reading money, yellowcake, uranium or plutonium, and bomb. Beneath each box a note says what the bottleneck is: cash, unskilled labour, skilled staff, and fuel plus staff plus a design. The final box is highlighted and marked as the only source of points.</desc>
+      <g>
+        <rect x="14" y="40" width="130" height="56" rx="4" class="f-panel" stroke="rgba(232,228,217,.3)"/>
+        <text x="79" y="66" class="tt" text-anchor="middle" fill="#FFFDF6">MONEY</text>
+        <text x="79" y="84" class="ts" text-anchor="middle">hires, buys</text>
+        <text x="79" y="124" class="ts" text-anchor="middle" fill="#94A3AE">bottleneck:</text>
+        <text x="79" y="140" class="ts" text-anchor="middle" fill="#E0A33A">board spaces</text>
+
+        <rect x="180" y="40" width="130" height="56" rx="4" class="f-panel" stroke="rgba(232,228,217,.3)"/>
+        <text x="245" y="66" class="tt" text-anchor="middle" fill="#FFFDF6">YELLOWCAKE</text>
+        <text x="245" y="84" class="ts" text-anchor="middle">raw ore</text>
+        <text x="245" y="124" class="ts" text-anchor="middle" fill="#94A3AE">bottleneck:</text>
+        <text x="245" y="140" class="ts" text-anchor="middle" fill="#E0A33A">plain bodies</text>
+
+        <rect x="346" y="40" width="150" height="56" rx="4" class="f-panel" stroke="#4E8FB8" stroke-width="1.6"/>
+        <text x="421" y="66" class="tt" text-anchor="middle" fill="#79B6DA">URANIUM OR</text>
+        <text x="421" y="84" class="tt" text-anchor="middle" fill="#79B6DA">PLUTONIUM</text>
+        <text x="421" y="124" class="ts" text-anchor="middle" fill="#94A3AE">bottleneck:</text>
+        <text x="421" y="140" class="ts" text-anchor="middle" fill="#E0A33A">skilled staff</text>
+
+        <rect x="532" y="34" width="154" height="68" rx="4" fill="rgba(224,163,58,.16)" stroke="#E0A33A" stroke-width="2"/>
+        <text x="609" y="64" class="tt" font-size="15" text-anchor="middle" fill="#FFFDF6">A FINISHED BOMB</text>
+        <text x="609" y="86" class="ts" text-anchor="middle" fill="#E0A33A">THE ONLY POINTS</text>
+        <text x="609" y="124" class="ts" text-anchor="middle" fill="#94A3AE">bottleneck:</text>
+        <text x="609" y="140" class="ts" text-anchor="middle" fill="#E0A33A">all of the above</text>
+      </g>
+      <g class="f-none s-dim" stroke-width="1.6"><path d="M148 68h26M314 68h26M500 68h26"/></g>
+      <g fill="#94A3AE"><path d="M176 68l-10-5v10z"/><path d="M342 68l-10-5v10z"/><path d="M528 68l-10-5v10z"/></g>
+      <text x="350" y="182" class="ts" text-anchor="middle">FOUR LINKS, FOUR DIFFERENT SHORTAGES. THE WEAK ONE SETS YOUR SPEED.</text>
+    </svg>
+    <figcaption>One pipeline, not a menu. Whichever link you have starved is the one deciding how fast you can score.</figcaption>
+  </figure>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>You are running a supply chain. <strong>Fix the narrowest link rather than doing more of whatever you are already good at.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>7</b> Bomb cards</p>
+  <h2>A bomb design is a contract you sign against your own factory.</h2>
+
+  <p>Bombs come as cards you acquire and hold, and each one prints three numbers: the workers it needs, the fuel it needs, and what it is worth. Taking new designs is itself an action, and a demanding one, because it wants an engineer and a scientist together and the designs get passed around the table so everybody sees what everybody else picked up.</p>
+
+  <p>The right way to think about a bomb in hand is as a commitment. It tells you precisely what your economy has to produce, and until it is built it is worth nothing at all. A hand full of gorgeous, expensive designs is not a strong position; it is a list of promises.</p>
+
+  <p>So the choice when drafting is not "which is worth the most points", it is <strong>"which one can my factory actually finish, and when"</strong>. A cheap bomb you can complete twice is better than a beautiful one you are still short of fuel for when somebody else ends the game.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Designs are debts until they are built. <strong>Take the bomb your pipeline can feed, not the one with the biggest number.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>8</b> The three scoring verbs</p>
+  <h2>Build, test, load. Nothing else on this table is worth a point.</h2>
+
+  <p>These can be done at any moment during a placement turn, in any order, as often as you can pay for them. They are not a space on the board and nobody can stop you, which is why they are so easy to forget in the middle of managing an economy.</p>
+
+  <p><strong>Build</strong> is the main one. Pay the design's costs, lay the card down, score its printed value.</p>
+
+  <p><strong>Test</strong> is the plutonium wrinkle, and it is a once in the game event, not something you do per bomb. Detonate one plutonium weapon you have built and from then on <em class="t">every</em> plutonium bomb you have built or ever will build scores its higher value. That is a retroactive raise on a whole strategy, which is why plutonium players want it early and uranium players can ignore it entirely.</p>
+
+  <p><strong>Load</strong> is the quiet one. Pay a loading cost, commit a bomber, and take <strong>five more points</strong> for putting the weapon on a plane. Five points for admin is a very good rate, and new players habitually finish bombs and never load them.</p>
+
+  <div class="eg">
+    <b>What a big turn looks like</b>
+    <p>Place a worker on the shared board for the last uranium you need. Place four more around your own buildings, refining and hauling. Then, with nobody able to interrupt, build a bomb, load it, and build a second one out of the fuel the buildings just made.</p>
+    <p class="out">one turn, three scoring actions, and then you spend the next turn collecting everybody</p>
+  </div>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Built is not finished. <strong>A bomb you have not loaded is five points you left on the runway.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>9</b> Two fuels, two temperaments</p>
+  <h2>Uranium is steady. Plutonium is a bet that pays twice if you commit.</h2>
+
+  <p>The two refining paths are genuinely different plans rather than two colours of the same resource.</p>
+
+  <p><strong>Enriched uranium</strong> is the straightforward road. Bombs that eat it are simpler, the route is shorter, and you can be scoring earlier without much of a special setup. It is the right first game plan.</p>
+
+  <p><strong>Plutonium</strong> asks for more infrastructure, more skilled staff and more patience, and pays for it with that one implosion test that upgrades your entire plutonium arsenal at once. It is a strategy with a lever in the middle, and pulling that lever late in a game where you built only one plutonium bomb is a wasted opportunity.</p>
+
+  <p>Mixing the two is possible and usually a trap. Both paths want different buildings and different staff, and half a pipeline twice over is slower than one pipeline done properly.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Pick a fuel and build the factory for it. <strong>Plutonium only makes sense if you intend enough of it to make the test worth pulling.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>10</b> The air force</p>
+  <h2>Planes are not a theme. They are a resource with two entirely separate jobs.</h2>
+
+  <p>You accumulate <strong>fighters</strong> and <strong>bombers</strong>, and it is easy to treat them as flavour until the first time somebody uses them on you.</p>
+
+  <p>Bombers do two things. They are what loading a bomb consumes, which makes them a scoring resource. They are also what lets you fly an <strong>air strike</strong> at another player's buildings, which damages the building so it cannot be used until it is repaired. Note what it does not do: it does not destroy the building, and it does not harm the workers standing in it, who simply come home as normal.</p>
+
+  <p>Fighters are the answer to that, defending your own factory against people who would rather you stopped refining for a while.</p>
+
+  <p>The reason this stays a sideshow rather than the point of the game is opportunity cost. An air strike is a turn, and a turn spent slowing an opponent is a turn not spent scoring. It is at its best used surgically: against the one building the leader's whole plan runs through, at the moment they most need it.</p>
+
+  <div class="trap">
+    <b>The instinct to unlearn</b>
+    <p>If the game looks like a fight, you will spend it punching and lose to the person who spent it refining. Air strikes are a brake you apply to the leader, not an engine of your own.</p>
+  </div>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Bombers both load bombs and break factories. <strong>Every strike you fly is a bomb you did not load.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>11</b> Espionage</p>
+  <h2>The cheapest factory on the table belongs to somebody else.</h2>
+
+  <p>Spies let you use other players' buildings as though they were your own, and it is the most elegantly nasty idea in the game, because the better their engine is, the better yours becomes.</p>
+
+  <p>Two things about it are misread constantly, and both are worth saying plainly at the table.</p>
+
+  <p>First, <strong>it only works on the turn you activate it</strong>. Your spies are permanent, but you cannot raid your neighbours freely forever. You get their use in the turn you commit a worker to espionage, and then it goes quiet again.</p>
+
+  <p>Second, your spy count limits <strong>how many different opponent buildings</strong> you may touch that turn, not how many workers you may place. Within those buildings you are not rationed.</p>
+
+  <p>Strategically it is the counter to being outbuilt. A player who has fallen behind on infrastructure can, instead of spending five turns catching up, simply visit the infrastructure that already exists. It also quietly punishes the table leader for having the nicest toys.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Espionage is a one turn tenancy in someone else's factory. <strong>It rewards the player who is behind, so use it before you have rebuilt from scratch.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>12</b> The ending is a cliff</p>
+  <h2>The game does not finish the round. It stops the instant somebody crosses the line.</h2>
+
+  <p>There is no final round, no equalising turn, no last go around the table. The moment a player's score reaches the target during a scoring action, the game is over and they have won. Nobody else gets to respond. There is no tiebreaker because the situation cannot arise.</p>
+
+  <p>Two consequences, and they should reshape your late game.</p>
+
+  <p>The first is that <strong>banked potential is worthless</strong>. Fuel in your yard, designs in your hand and a magnificent factory all score exactly zero. If someone is within reach of the target, your beautifully prepared two more turns may not exist.</p>
+
+  <p>The second is that the endgame is a visibility problem. Most information here is open, so you can see roughly how close everybody is. The player who works out that the leader can finish next turn, and responds by cashing in whatever is cashable now rather than optimising, comes second instead of fourth. Sometimes they win.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>There is no final round and no warning. <strong>Once anyone is in range, take points now over better points later.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>13</b> What the game is really about</p>
+  <h2>A race between four engines that all want the same scientists.</h2>
+
+  <p>Step back and the whole thing is one tension. You have four things worth doing: acquire buildings, acquire skilled staff, refine fuel, and finish bombs. All four are good. All four compete for the same turns, and three of them compete for the same small pool of qualified people.</p>
+
+  <p>The reason the two turn structure matters so much is that it turns this into a rhythm problem rather than an optimisation problem. Each placement turn, you are asking whether this is a turn that grows the machine or a turn that runs it, and you only get to retrieve so many times before somebody else has hit the target.</p>
+
+  <p>The arc most good games follow is simple, and it is the plan to take into a first game: <strong>buy and staff early, refine in the middle, and spend the last third converting everything you own into built and loaded weapons</strong>. The players who lose are almost never the ones who mismanaged a rule. They are the ones who were still improving their factory when the game ended.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Growing the machine and running the machine use the same turns. <strong>Switch from one to the other earlier than feels comfortable.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>14</b> How not to lose your first game</p>
+  <h2>Five habits that cost new players the whole game.</h2>
+
+  <h3>You built an economy and forgot the verbs</h3>
+  <p>This is the big one. The board is so absorbing that people play a full satisfying hour of industry and finish with two bombs. Check every single turn whether building, testing or loading is available to you, because they are free to squeeze in and they are the only points on the table.</p>
+
+  <h3>You hired hands instead of qualifications</h3>
+  <p>Labourers are easy to get and they cannot do the things that score. If you cannot staff a bomb design or your best building, you do not have a worker problem, you have a scientist problem, and the cure is spending turns on the spaces that produce specialists.</p>
+
+  <h3>You emptied your workforce every time</h3>
+  <p>Placing every worker you own feels powerful and then costs you a turn doing absolutely nothing while three people act. Leave yourself the ability to keep acting, especially when someone is closing in on the target, because a retrieve turn at the wrong moment can be the whole game.</p>
+
+  <h3>You went shopping in the last third</h3>
+  <p>A building bought late is a card with no time left to pay you back. Once the leader is within striking range of the threshold, every purchase has to justify itself against simply converting what you already have into a finished weapon.</p>
+
+  <h3>You fought instead of refining</h3>
+  <p>Air strikes and espionage are fun and they make the table loud. They are also turns. Use them when they cripple a specific plan at a specific moment, and the rest of the time remember that nobody has ever won this game by slowing everyone else down enough.</p>
+
+  <div class="note">
+    <span class="lab">The whole game in one line</span>
+    <p>Place or retrieve, grow the factory then run it, and remember there is no final round. <strong>Build, test, load. Everything else is plumbing.</strong></p>
+  </div>
+</article>
+
+<footer>A teaching walkthrough of The Manhattan Project by Brandon Tibbetts (Minion Games, 2012), base game only. This page teaches what the game is and how it thinks; the rulebook in the box has the exact costs, spaces and edge cases. <a href="../">Back to the shelf</a>.</footer>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var pts = Array.prototype.slice.call(document.querySelectorAll('.pt'));
+  var svg = document.getElementById('cores');
+  var count = document.getElementById('count');
+  var NS = 'http://www.w3.org/2000/svg';
+
+  var r = 6.4, gap = 6, x0 = 8, dots = [];
+  var span = r * 2 + gap;
+
+  var line = document.createElementNS(NS, 'line');
+  line.setAttribute('x1', x0);
+  line.setAttribute('y1', 15);
+  line.setAttribute('x2', x0 + (pts.length - 1) * span);
+  line.setAttribute('y2', 15);
+  svg.appendChild(line);
+
+  pts.forEach(function(_, i){
+    var c = document.createElementNS(NS, 'circle');
+    c.setAttribute('cx', x0 + i * span);
+    c.setAttribute('cy', 15);
+    c.setAttribute('r', r);
+    svg.appendChild(c);
+    dots.push(c);
+  });
+  svg.setAttribute('viewBox', '0 0 ' + Math.ceil(x0 * 2 + (pts.length - 1) * span) + ' 30');
+
+  var at = 0;
+  function paint(n){
+    if(n === at) return;
+    at = n;
+    dots.forEach(function(c, i){ c.classList.toggle('on', i < n); });
+    count.textContent = n + ' / ' + pts.length;
+    svg.setAttribute('aria-label', 'Point ' + n + ' of ' + pts.length);
+  }
+
+  var ticking = false;
+  function measure(){
+    ticking = false;
+    var mark = window.innerHeight * 0.45, n = 1;
+    for(var i = 0; i < pts.length; i++){
+      if(pts[i].getBoundingClientRect().top <= mark){ n = i + 1; }
+    }
+    paint(n);
+  }
+  window.addEventListener('scroll', function(){
+    if(!ticking){ ticking = true; window.requestAnimationFrame(measure); }
+  }, {passive:true});
+  window.addEventListener('resize', measure);
+  paint(1);
+  measure();
+})();
+</script>
+</body>
+</html>
