@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PARKS: Learn It Properly</title>
+<meta name="description" content="Learn what PARKS (Keymaster Games, first edition) actually is: fourteen points on the four seasons, the trail that is rebuilt every year, why moving forward is the only direction, and where the points really come from.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;500;600&family=Karla:ital,wght@0,400;0,500;0,700;1,400&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --night:#0C1411;
+  --deep:#111C17;
+  --panel:#18271F;
+  --bone:#F0EADC;
+  --dim:#9BAA9C;
+  --sun:#E8B33C;
+  --water:#4E9FC0;
+  --stone:#B0A899;
+  --forest:#5CA167;
+  --poster:#D96B3F;
+  --accent:#5CA167;
+  --line:rgba(240,234,220,.15);
+  --display:"Oswald",Impact,sans-serif;
+  --body:"Karla",system-ui,sans-serif;
+  --mono:"Courier Prime",ui-monospace,Menlo,monospace;
+}
+body[data-season="spring"]{--accent:#5CA167}
+body[data-season="summer"]{--accent:#E8B33C}
+body[data-season="autumn"]{--accent:#D96B3F}
+body[data-season="winter"]{--accent:#4E9FC0}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;color:var(--bone);font-family:var(--body);font-size:18px;line-height:1.66;
+  -webkit-font-smoothing:antialiased;
+  background:
+    radial-gradient(900px 540px at 82% -8%, rgba(232,179,60,.14), transparent 62%),
+    radial-gradient(760px 500px at 4% 8%, rgba(78,159,192,.10), transparent 60%),
+    linear-gradient(180deg,var(--night),var(--deep) 76%);
+  background-attachment:fixed;
+}
+.wrap{max-width:800px;margin:0 auto;padding:0 22px 90px}
+
+/* ---------- the trail rail ---------- */
+.rail{
+  position:sticky;top:0;z-index:20;background:rgba(12,20,17,.94);
+  backdrop-filter:blur(6px);border-bottom:1px solid var(--line);padding:9px 22px;
+}
+.rail-in{max-width:800px;margin:0 auto;display:flex;align-items:center;gap:14px}
+.rail-lab{
+  font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--accent);white-space:nowrap;min-width:5.6em;transition:color .5s ease;
+}
+.trail{
+  position:relative;flex:1;height:24px;min-width:60px;
+}
+.trail .bed{
+  position:absolute;left:0;right:0;top:11px;height:2px;border-radius:99px;
+  background:rgba(240,234,220,.16);
+}
+.trail .bed i{
+  display:block;height:100%;width:0;border-radius:99px;
+  background:var(--accent);transition:width .25s ease,background-color .5s ease;
+}
+.trail .posts{
+  position:absolute;left:0;right:0;top:8px;height:8px;
+  background-image:radial-gradient(circle at 50% 50%, rgba(240,234,220,.45) 1.7px, transparent 1.9px);
+  background-size:calc(100% / 14) 8px;
+}
+#hiker{
+  position:absolute;top:0;left:0;width:20px;height:24px;
+  transform:translateX(-50%);transition:left .25s ease;
+}
+#hiker path,#hiker circle{stroke:var(--accent);fill:none;stroke-width:1.7;
+  stroke-linecap:round;stroke-linejoin:round;transition:stroke .5s ease}
+.rail-count{font-family:var(--mono);font-size:12px;color:var(--dim);white-space:nowrap}
+
+.backlink{
+  display:inline-block;margin-top:26px;font-family:var(--mono);font-size:11px;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--dim);text-decoration:none;
+  border-bottom:1px solid transparent;
+}
+.backlink:hover{color:var(--sun);border-bottom-color:var(--sun)}
+
+header.top{padding:28px 0 42px;border-bottom:1px solid var(--line)}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--sun);margin:22px 0 14px}
+h1{
+  font-family:var(--display);font-weight:600;font-size:clamp(50px,11vw,96px);
+  line-height:.94;letter-spacing:.02em;margin:0 0 8px;color:#FFF8E9;text-transform:uppercase;
+}
+h1 small{display:block;font-family:var(--body);font-size:.15em;font-weight:700;letter-spacing:.22em;
+  color:var(--forest);margin-bottom:16px;text-transform:uppercase;line-height:1.5}
+.lede{font-size:20px;color:var(--dim);max-width:54ch;margin:18px 0 0}
+
+.pt{border-top:1px solid var(--line);padding:44px 0 8px;scroll-margin-top:56px}
+.pt:first-of-type{border-top:none}
+.num{
+  display:inline-flex;align-items:center;gap:12px;margin-bottom:12px;
+  font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);
+}
+.num b{
+  width:34px;height:34px;display:grid;place-items:center;border-radius:99px;
+  background:var(--sun);color:var(--night);font-family:var(--display);font-weight:600;font-size:17px;
+}
+h2{
+  font-family:var(--display);font-weight:500;font-size:clamp(27px,5vw,40px);
+  line-height:1.12;margin:0 0 16px;max-width:26ch;color:#FFF8E9;
+}
+h3{font-family:var(--display);font-weight:500;font-size:22px;margin:30px 0 6px;color:var(--bone)}
+.pt p{max-width:62ch;margin:0 0 16px}
+strong{font-weight:700;color:#FFF8E9}
+em.t{font-style:normal;font-family:var(--mono);font-size:.84em;background:rgba(240,234,220,.10);
+  padding:2px 6px;border-radius:3px}
+.aside{
+  border-left:3px solid var(--water);padding:2px 0 2px 18px;margin:24px 0;
+  font-style:italic;color:var(--dim);max-width:58ch;
+}
+.trap{
+  margin:26px 0;border:1px solid rgba(217,107,63,.6);background:rgba(217,107,63,.13);
+  padding:16px 20px;max-width:62ch;border-radius:4px;
+}
+.trap b{
+  display:block;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:#EE9166;margin-bottom:8px;
+}
+.trap p{margin:0}
+.note{
+  margin:30px 0 0;padding:18px 22px;max-width:62ch;border-radius:4px;
+  background:rgba(92,161,103,.14);border:1px solid rgba(92,161,103,.55);
+}
+.note .lab{
+  display:block;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:#86C68F;margin-bottom:8px;
+}
+.note p{margin:0}
+ul.clean{list-style:none;padding:0;margin:0 0 16px;max-width:62ch}
+ul.clean li{padding:8px 0 8px 26px;position:relative;border-bottom:1px solid rgba(240,234,220,.10)}
+ul.clean li:last-child{border-bottom:none}
+ul.clean li::before{
+  content:"";position:absolute;left:4px;top:19px;width:9px;height:9px;border-radius:99px;
+  background:var(--sun);
+}
+.eg{
+  margin:26px 0;max-width:62ch;border-left:3px solid var(--sun);
+  background:rgba(232,179,60,.10);padding:16px 20px 16px 18px;border-radius:0 4px 4px 0;
+}
+.eg b{
+  display:block;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--sun);margin-bottom:8px;
+}
+.eg p{margin:0 0 10px}
+.eg p:last-child{margin:0}
+.eg .out{font-family:var(--mono);font-size:.9em;color:var(--forest)}
+figure{margin:28px 0;padding:18px;background:rgba(240,234,220,.045);border:1px solid var(--line);border-radius:6px}
+figure svg{display:block;width:100%;height:auto}
+figcaption{font-family:var(--mono);font-size:11px;color:var(--dim);margin-top:12px;text-align:center;line-height:1.6}
+.scroll{overflow-x:auto;margin:24px 0}
+table{border-collapse:collapse;width:100%;min-width:440px;font-size:16px}
+th,td{text-align:left;padding:9px 14px 9px 0;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);font-weight:700}
+td.n{font-family:var(--mono);color:var(--sun)}
+/* figure ink */
+.f-bone{fill:var(--bone)}.f-sun{fill:var(--sun)}.f-water{fill:var(--water)}
+.f-stone{fill:var(--stone)}.f-forest{fill:var(--forest)}.f-poster{fill:var(--poster)}
+.f-panel{fill:var(--panel)}.f-none{fill:none}.f-dim{fill:var(--dim)}
+.s-bone{stroke:var(--bone)}.s-dim{stroke:var(--dim)}.s-forest{stroke:var(--forest)}
+.s-sun{stroke:var(--sun)}.s-poster{stroke:var(--poster)}.s-water{stroke:var(--water)}
+.tt{font-family:"Karla",sans-serif;font-size:13px;fill:var(--bone)}
+.ts{font-family:"Courier Prime",monospace;font-size:10.5px;fill:var(--dim);letter-spacing:.06em}
+footer{margin:64px 0 0;padding-top:24px;border-top:1px solid var(--line);color:var(--dim);font-size:15px}
+a{color:var(--sun)}
+@media(max-width:620px){body{font-size:17px}.rail-lab{display:none}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+@media print{.rail{display:none}}
+</style>
+</head>
+<body data-season="spring">
+
+<div class="rail">
+  <div class="rail-in">
+    <span class="rail-lab" id="season">spring</span>
+    <span class="trail">
+      <span class="bed"><i id="fill"></i></span>
+      <span class="posts"></span>
+      <svg id="hiker" viewBox="0 0 20 24" role="img" aria-label="Progress through the briefing">
+        <circle cx="10" cy="5" r="2.6"/>
+        <path d="M10 8v7"/>
+        <path d="M10 15l-3 6M10 15l3.4 5.6"/>
+        <path d="M10.4 10.4l4 2.2M6.2 12.4l3.4-2"/>
+      </svg>
+    </span>
+    <span class="rail-count" id="count">1 / 14</span>
+  </div>
+</div>
+
+<div class="wrap">
+
+<a class="backlink" href="../">&larr; the shelf</a>
+
+<header class="top">
+  <p class="eyebrow">Learn it properly &middot; 14 points &middot; first edition</p>
+  <h1><small>Four seasons on a trail that is never the same twice</small>PARKS</h1>
+  <p class="lede">It looks like the gentlest game on the shelf: beautiful posters, two little hikers, four short rounds. It is gentle. It is also a game about standing exactly where somebody else wanted to stand, and about the fact that you can only ever walk forwards.</p>
+</header>
+
+<article class="pt">
+  <p class="num"><b>1</b> The big picture</p>
+  <h2>You walk a trail, you pick things up, and you spend them on national parks.</h2>
+
+  <p>PARKS is for one to five people and it lasts <strong>four seasons</strong>: spring, summer, autumn, winter. That is the whole game. Four rounds, and then you count.</p>
+
+  <p>Each season, a trail is laid out across the middle of the table as a line of site tiles. You have <strong>two hikers</strong>. You walk them from the start of that trail to the end of it, taking whatever each site you stop at gives you, and most of what the sites give you is <strong>resources</strong>: sun, water, mountain, forest. At the far end of the trail those resources buy <strong>Park cards</strong>, and Park cards are where nearly all of your points live.</p>
+
+  <p>That is it. Gather along the way, cash in at the end, do it four times. There is no combat, no take-that card, nothing you can do to another player's stuff. The only way you interfere with anyone is by <strong>standing on the tile they were walking towards</strong>, and you will do that constantly, mostly by accident, and it will matter more than anything else on the table.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Resources are not points. Parks are points. <strong>Everything you collect is only worth what you manage to spend it on before winter ends.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>2</b> The board is temporary</p>
+  <h2>The trail is dealt out fresh every season, so there is no opening to memorise.</h2>
+
+  <p>Most games hand you a fixed board and ask you to learn it. PARKS deliberately refuses. The trail is built from a shuffled stack of site tiles, so the run of sites you walk in spring is not the run you walk in summer, and the summer trail your group played last week is not the one you get tonight.</p>
+
+  <p>This is why an experienced player cannot simply out-plan you with a memorised route. What they have instead is the habit of <strong>reading a trail quickly</strong>: glancing down the line, spotting the two tiles that actually matter this season, and noticing which of them everybody else is obviously heading for.</p>
+
+  <p>Site tiles are mostly small and generous. Take two of one resource. Take one of two different ones. Take whatever the season is handing out. A handful do something cleverer: let you swap resources, let you reserve a Park card so nobody else can take it, let you pick up gear. In any given season, one or two of the clever ones will be worth far more than anything else out there, and everyone can see which.</p>
+
+  <div class="aside">Because the trail changes, PARKS teaches quickly. Your fifth game is not "the same game again"; it is the same fifteen-minute judgement call about a different line of tiles.</div>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Read the trail before you move anything. <strong>Decide which single tile you must not miss this season, then work backwards to a route that reaches it.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>3</b> Your turn</p>
+  <h2>Move one hiker forward as far as you like. That is the entire turn.</h2>
+
+  <p>On your turn you pick one of your two hikers and move it <strong>forwards</strong> along the trail, to any open site you choose. One step, six steps, it costs nothing extra. Then you take that site's action, and your turn is over.</p>
+
+  <p>Two rules make this interesting, and they are both about the word "forwards":</p>
+
+  <ul class="clean">
+    <li>You may <strong>never move backwards</strong>. A site you have walked past is gone for the rest of the season.</li>
+    <li>You must <strong>move at least one space</strong>. There is no standing still and no passing. If it is your turn, a hiker is going somewhere.</li>
+  </ul>
+
+  <p>So the trail is a one-way ratchet. Every turn you take pushes one of your hikers permanently closer to the end of the season, and the moment both of them reach the end, your season is finished whether you are ready or not.</p>
+
+  <figure>
+    <svg viewBox="0 0 700 200" role="img" aria-labelledby="tr-t tr-d">
+      <title id="tr-t">A hiker moving forwards along the trail</title>
+      <desc id="tr-d">A horizontal trail of seven sites. A hiker stands on site two. Arrows curve forwards to site three, site five and site seven, all labelled "allowed, same cost". A crossed-out arrow points backwards to site one, labelled "never". Text below reads: one step or five, it is the same turn.</desc>
+      <line x1="40" y1="110" x2="660" y2="110" class="s-dim" stroke-width="2" stroke-dasharray="6 6"/>
+      <g class="f-panel" stroke-width="1.6">
+        <circle cx="60" cy="110" r="17" class="s-dim"/>
+        <circle cx="160" cy="110" r="17" class="s-forest"/>
+        <circle cx="260" cy="110" r="17" class="s-dim"/>
+        <circle cx="360" cy="110" r="17" class="s-dim"/>
+        <circle cx="460" cy="110" r="17" class="s-dim"/>
+        <circle cx="560" cy="110" r="17" class="s-dim"/>
+        <circle cx="650" cy="110" r="17" class="s-sun"/>
+      </g>
+      <circle cx="160" cy="110" r="6" class="f-forest"/>
+      <text x="160" y="150" class="ts" text-anchor="middle" fill="#5CA167">YOUR HIKER</text>
+      <text x="650" y="150" class="ts" text-anchor="middle" fill="#E8B33C">TRAIL END</text>
+      <g class="f-none s-forest" stroke-width="1.7">
+        <path d="M172 96q44-34 76 0" marker-end="none"/>
+        <path d="M172 92q112-56 276 0"/>
+        <path d="M172 88q186-74 466 0"/>
+      </g>
+      <g class="f-forest">
+        <path d="M244 92l8 6-9 5z"/><path d="M440 88l9 6-10 5z"/><path d="M630 86l9 6-10 5z"/>
+      </g>
+      <text x="350" y="42" class="tt" fill="#5CA167" text-anchor="middle">one space or five, the turn costs the same</text>
+      <g class="f-none s-poster" stroke-width="1.7"><path d="M148 124q-30 22-72 0"/></g>
+      <g class="f-poster"><path d="M86 116l-8 7 10 4z"/></g>
+      <g class="s-poster" stroke-width="2.4"><path d="M104 130l16 16M120 130l-16 16"/></g>
+      <text x="112" y="176" class="ts" text-anchor="middle" fill="#D96B3F">NEVER BACKWARDS</text>
+    </svg>
+    <figcaption>Distance is free, so the real cost of a move is everything you skipped to make it.</figcaption>
+  </figure>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Moving is not travelling, it is spending. <strong>Every space you jump over is a site you have chosen never to use again this season.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>4</b> The squeeze</p>
+  <h2>One hiker per site. That is the whole conflict, and it is enough.</h2>
+
+  <p>A site holds exactly one hiker. If somebody is standing on the tile you wanted, you cannot go there, and since you cannot go backwards either, your options are only ever the open tiles <em class="t">ahead</em> of you.</p>
+
+  <p>Watch what that does over the course of a season. Early on, the trail is wide open and everybody is relaxed. As hikers accumulate, the open spaces thin out, and the players who are furthest back find their choices narrowing to whatever nobody else wanted. Being behind on the trail is not restful; it is a slow loss of options.</p>
+
+  <p>There is one release valve: the <strong>campfire</strong>. Spend a campfire token and your hiker may stop on a site that is already occupied, sharing it. Campfires are collected off the trail like anything else, and they are the closest PARKS gets to an aggressive play, because a campfire means the blocking move somebody made against you simply did not work.</p>
+
+  <div class="trap">
+    <b>The instinct to unlearn</b>
+    <p>In most worker placement games you take the space you need when you need it. Here you also have to ask who else needs it. Taking a merely good tile a turn early, specifically because the player to your left has been staring at it, is often worth more than the great tile you were saving up for.</p>
+  </div>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>You block by existing. <strong>Look at where the other hikers are before you decide that your plan is safe.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>5</b> Two hikers, one clock</p>
+  <h2>Your front hiker is your deadline. Your back hiker is your freedom.</h2>
+
+  <p>You choose which hiker moves each turn, and this choice is the strategic heart of the game. Push one hiker all the way down the trail and it arrives at the end quickly, which is sometimes exactly what you want. But a hiker at the end of the trail is a hiker that cannot take any more sites, so from then on every turn you take has to come from the other one.</p>
+
+  <p>The healthy pattern is to keep them <strong>spread out</strong>: one well down the trail, ready to grab something before it goes, and one still near the start with the whole line of sites in front of it and a genuine choice every turn. Two hikers bunched together at the back are two hikers competing for the same handful of tiles.</p>
+
+  <div class="eg">
+    <b>What it looks like at the table</b>
+    <p>Your front hiker is four tiles from the end and there is a tile you want at the very end of the trail. You could rush it now and be safe. Instead you nudge your back hiker one space, take a resource, and watch.</p>
+    <p class="out">Two turns later somebody else takes the tile you wanted, and you learn the actual lesson: safety on this trail is not a plan you make, it is a tile you are standing on.</p>
+  </div>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Spend the hiker with the most road left in front of it. <strong>The one near the end has almost no choices left, so its moves are cheap only in the sense that they are nearly forced.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>6</b> Why the last player gets rich</p>
+  <h2>When your season is over, everyone else keeps walking.</h2>
+
+  <p>The season does not end when a timer runs out. It ends when <strong>every hiker at the table has reached the end of the trail</strong>. Players drop out one by one as both of their hikers arrive, and the ones still out there simply carry on taking turns.</p>
+
+  <p>So the player who finishes last takes several turns in a row with a nearly empty trail in front of them and nobody left to block anything. That is a real prize, and it is why hurrying is usually wrong. Rushing to the end of the trail feels efficient, but efficiency here means <strong>taking more actions than the other players</strong>, and you take more actions by staying out longer, not by arriving sooner.</p>
+
+  <p>The counterweight is that everything worth having thins out as the season runs down. Late turns on an empty trail are plentiful but weak; early turns are scarce but strong. Judging that trade is most of what improving at PARKS consists of.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>The end of the trail is not a finish line, it is a door out of the round. <strong>Go through it last if you can, and only when the trail behind you has nothing left worth taking.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>7</b> The trail grows</p>
+  <h2>Spring is cramped and mean. Winter is long and generous.</h2>
+
+  <p>The trail gets <strong>longer with every season</strong>: a short run of sites in spring, one more tile added each year, until winter is a properly long walk. The game slowly relaxes its grip.</p>
+
+  <p>The consequences are worth saying out loud, because new players plan their whole game as if every season were the same:</p>
+
+  <ul class="clean">
+    <li><strong>Spring is the tightest season.</strong> Few sites, everyone crowded together, and blocking bites hard. You will not gather much. Expect that instead of fighting it.</li>
+    <li><strong>Later seasons have room</strong> for longer routes, more turns per player, and plans that need two or three specific tiles to line up.</li>
+    <li>Which means your <strong>big park purchases realistically happen in autumn and winter</strong>, and spring's job is mostly to set them up: a piece of gear, a canteen, a reservation.</li>
+  </ul>
+
+  <figure>
+    <svg viewBox="0 0 700 230" role="img" aria-labelledby="se-t se-d">
+      <title id="se-t">The trail lengthening across four seasons</title>
+      <desc id="se-d">Four horizontal rows labelled spring, summer, autumn and winter. Each row is a line of site dots ending in a trail end marker, and each row is longer than the one above it. A note reads: more sites means more turns, more room and less blocking.</desc>
+      <g class="ts" text-anchor="end">
+        <text x="86" y="40">SPRING</text><text x="86" y="90">SUMMER</text>
+        <text x="86" y="140">AUTUMN</text><text x="86" y="190">WINTER</text>
+      </g>
+      <g class="f-forest">
+        <circle cx="120" cy="36" r="7"/><circle cx="170" cy="36" r="7"/><circle cx="220" cy="36" r="7"/>
+        <circle cx="270" cy="36" r="7"/><circle cx="320" cy="36" r="7"/>
+      </g>
+      <circle cx="370" cy="36" r="9" class="f-sun"/>
+      <g class="f-forest">
+        <circle cx="120" cy="86" r="7"/><circle cx="170" cy="86" r="7"/><circle cx="220" cy="86" r="7"/>
+        <circle cx="270" cy="86" r="7"/><circle cx="320" cy="86" r="7"/><circle cx="370" cy="86" r="7"/>
+      </g>
+      <circle cx="420" cy="86" r="9" class="f-sun"/>
+      <g class="f-forest">
+        <circle cx="120" cy="136" r="7"/><circle cx="170" cy="136" r="7"/><circle cx="220" cy="136" r="7"/>
+        <circle cx="270" cy="136" r="7"/><circle cx="320" cy="136" r="7"/><circle cx="370" cy="136" r="7"/>
+        <circle cx="420" cy="136" r="7"/>
+      </g>
+      <circle cx="470" cy="136" r="9" class="f-sun"/>
+      <g class="f-forest">
+        <circle cx="120" cy="186" r="7"/><circle cx="170" cy="186" r="7"/><circle cx="220" cy="186" r="7"/>
+        <circle cx="270" cy="186" r="7"/><circle cx="320" cy="186" r="7"/><circle cx="370" cy="186" r="7"/>
+        <circle cx="420" cy="186" r="7"/><circle cx="470" cy="186" r="7"/>
+      </g>
+      <circle cx="520" cy="186" r="9" class="f-sun"/>
+      <text x="560" y="40" class="ts">tight, crowded</text>
+      <text x="560" y="190" class="ts">room to plan</text>
+      <g class="f-none s-poster" stroke-width="1.6"><path d="M600 56v112"/></g>
+      <g class="f-poster"><path d="M596 168l4 10 4-10z"/></g>
+      <text x="650" y="120" class="ts" fill="#D96B3F" text-anchor="middle">more turns</text>
+    </svg>
+    <figcaption>Exact lengths depend on how many of you are playing, but the shape is always this: each season is longer than the last.</figcaption>
+  </figure>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Do not judge your position in spring. <strong>Spring buys you a tool; winter buys you a park.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>8</b> Four resources</p>
+  <h2>Sun, water, mountain, forest, and a shopping list you did not choose.</h2>
+
+  <p>The economy is deliberately flat. Four resources, all equal in dignity, none of them a currency you can convert freely. Sites hand them out in ones and twos.</p>
+
+  <p>What gives them shape is the Park cards. Each park costs a <strong>specific mixture</strong>: this many forest, that many water, and so on. So you are never collecting "resources" in the abstract. You are looking at a card you want, reading off the pile it demands, and then trying to find that exact pile on the trail before the season runs out.</p>
+
+  <p>This is why PARKS punishes greed in a way that surprises people. Seven resources spread evenly across four types can easily buy nothing at all, while five resources of the right two types buy a park worth serious points. Your hand is not a score. It is <strong>progress towards one particular purchase</strong>, and everything in it that does not serve that purchase is close to dead weight.</p>
+
+  <p>Two small pieces of equipment loosen the knots. Your <strong>canteen</strong> can be filled at certain sites and later spent as a flexible resource, which is exactly the thing a rigid shopping list needs. And <strong>gear cards</strong>, bought during the season, give you a permanent little edge: a discount, an extra pick up, a better version of an action you were taking anyway.</p>
+
+  <figure>
+    <svg viewBox="0 0 700 220" role="img" aria-labelledby="rs-t rs-d">
+      <title id="rs-t">Resources converting into a park card</title>
+      <desc id="rs-d">On the left, four resource icons: a sun, a water drop, a mountain and a tree. An arrow leads right to a park card showing a cost of two forest and two water and a value in points. A caption says: the card decides what you should have been collecting.</desc>
+      <g>
+        <circle cx="70" cy="60" r="16" class="f-sun"/>
+        <text x="70" y="100" class="ts" text-anchor="middle">SUN</text>
+        <path d="M150 44c14 16 18 22 18 30a18 18 0 0 1-36 0c0-8 4-14 18-30z" class="f-water"/>
+        <text x="150" y="100" class="ts" text-anchor="middle">WATER</text>
+        <path d="M212 76l20-32 12 19 8-11 18 24z" class="f-stone"/>
+        <text x="240" y="100" class="ts" text-anchor="middle">MOUNTAIN</text>
+        <path d="M330 40l20 34h-40zM330 58l24 22h-48z" class="f-forest"/>
+        <rect x="326" y="78" width="8" height="10" class="f-forest"/>
+        <text x="330" y="100" class="ts" text-anchor="middle">FOREST</text>
+      </g>
+      <g class="f-none s-sun" stroke-width="1.8"><path d="M390 62h60"/></g>
+      <g class="f-sun"><path d="M446 56l12 6-12 6z"/></g>
+      <g>
+        <rect x="474" y="14" width="150" height="190" rx="8" class="f-panel" stroke="#E8B33C" stroke-width="2"/>
+        <rect x="486" y="26" width="126" height="76" rx="4" fill="rgba(78,159,192,.22)"/>
+        <path d="M486 102l40-44 26 30 18-18 42 32z" class="f-stone" opacity=".8"/>
+        <text x="549" y="130" class="tt" text-anchor="middle">A NATIONAL PARK</text>
+        <g><path d="M498 148l18 30h-36zM498 162l22 22h-44z" class="f-forest"/>
+           <path d="M540 148l18 30h-36zM540 162l22 22h-44z" class="f-forest"/>
+           <path d="M586 146c12 14 15 19 15 26a15 15 0 0 1-30 0c0-7 3-12 15-26z" class="f-water"/>
+        </g>
+        <text x="549" y="198" class="ts" text-anchor="middle">PAY THIS, SCORE THE CARD</text>
+      </g>
+      <text x="350" y="212" class="ts" text-anchor="middle">a pile of everything buys nothing</text>
+    </svg>
+    <figcaption>Pick the park first and gather towards it. Gathering first and shopping afterwards is how you end a season holding six useless cubes.</figcaption>
+  </figure>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Collect towards a named card, not towards a full supply. <strong>The right five resources beat the wrong eight every time.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>9</b> The end of the trail</p>
+  <h2>The last tile is where the walking turns into points.</h2>
+
+  <p>The end of the trail is not just an exit. It is the place where you <strong>visit a park</strong>: hand back the resources a Park card asks for, take the card, and it is yours for scoring. It is also where you can pick up a piece of <strong>gear</strong>, so arriving is a genuine action rather than a formality.</p>
+
+  <p>This gives the trail its real shape. Everything in the middle of it is preparation, and the far end is the till. A season in which you walk beautifully, gather generously and arrive at the end unable to afford anything has produced, in scoring terms, almost nothing.</p>
+
+  <p>Note the pacing problem that creates. Your two hikers arrive at the end at two different moments, and each arrival is a chance to buy. If both of them get there while you are still two resources short, you have wasted the more valuable half of your season.</p>
+
+  <div class="trap">
+    <b>The instinct to unlearn</b>
+    <p>Gathering feels like progress because your supply visibly grows. It is not progress. The only turns that actually score in PARKS are the ones where a hiker reaches the end of the trail with enough in hand to buy something. Count backwards from those turns.</p>
+  </div>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Arrive solvent. <strong>Do not let a hiker reach the end of the trail until it can pay for something when it gets there.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>10</b> The parks themselves</p>
+  <h2>A small shared shop where the card you want is visible to everybody.</h2>
+
+  <p>Park cards sit face up in a row in the middle of the table. Everyone can see them, everyone can cost them out, and everyone can take them. There is no hidden market and no private supply: the card you have spent a season and a half gathering for is a card somebody else has been watching you gather for.</p>
+
+  <p>Two things follow. First, parks differ: some are cheap and modest, some are expensive and fat with points, and a few carry a bonus that rewards a particular way of playing. Second, <strong>reserving</strong> matters. Certain sites on the trail let you claim a park in advance and hold it, and in a game where the contest is entirely about who gets there first, taking a card off the market before anyone else can reach it is often worth more than the tempo it costs.</p>
+
+  <p>The rhythm of a good game is that everyone quietly settles on a different park, and the rhythm of a tense one is that two players have obviously settled on the same one. When that happens, the question stops being "can I afford it" and becomes "can I afford it a turn sooner than they can".</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>The park row is public information about everyone's plans. <strong>If your target is also somebody else's, either reserve it or pick another one; hoping is not a strategy.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>11</b> Gear, canteens and cameras</p>
+  <h2>Small permanent edges, in a game with only four seasons to use them.</h2>
+
+  <p>Gear cards are the closest thing PARKS has to an engine, and it is a very short one. A piece of gear makes some action you take repeatedly a bit better for the rest of the game, and the only question that matters about it is <strong>how many more times you will take that action</strong>.</p>
+
+  <p>The arithmetic is brutal and worth doing in your head. Gear bought in spring can work for you across three further seasons. The same gear bought in winter will fire perhaps twice before the game stops. Identical card, completely different purchase.</p>
+
+  <p>The <strong>camera</strong> deserves a separate mention because it behaves unlike anything else in the box: it turns a certain kind of stop on the trail into a small, steady trickle of points rather than resources. It is a fine plan and a real one, but it is a plan, not a bonus. Photographs taken by a player who is also trying to buy the biggest parks tend to be neither enough points nor enough resources.</p>
+
+  <div class="aside">The canteen is the humblest thing in the game and one of the most useful. A single flexible resource is exactly what a fixed shopping list is missing, and filling it early means a later season where the park you can afford is the park you wanted.</div>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Value equipment by seasons remaining, not by what it does. <strong>Buy it early or do not buy it at all.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>12</b> The season card</p>
+  <h2>Every year, the weather changes what is worth doing.</h2>
+
+  <p>Each season turns up its own card, and that card colours the whole round. It makes one resource abundant, nudges the value of certain actions, and generally tells you what this particular spring or autumn is good for.</p>
+
+  <p>Treat it as a suggestion with real weight behind it. When the season is handing out water, the sites that give water are the cheap and crowded ones, and the parks that need water suddenly look affordable to every player at once. When the season favours something you have no use for, the quiet play is to go where nobody else is fighting.</p>
+
+  <p>Because there are only four seasons, a season card is not a long-term trend you can lean into. It is a single round's worth of weather, and adjusting to it is a tactical decision you make once, at the start of the round, when the trail is laid out and before anybody has moved.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Read the season card and the trail together, once, before the first move. <strong>That is the one moment in the round when you can still plan rather than react.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>13</b> Scoring</p>
+  <h2>Parks, and then a scattering of small things that decide close games.</h2>
+
+  <p>When winter ends, you add up. The bulk of it is the <strong>Park cards</strong> you visited, printed points, plus whatever bonuses they carry for how you played. Around that sit the smaller sources: photographs, certain gear, a bonus for particular achievements over the game.</p>
+
+  <p>Two features of the final score are worth knowing before your first game rather than after it:</p>
+
+  <ul class="clean">
+    <li><strong>Leftover resources are worth nothing.</strong> A supply full of cubes at the end of winter is a monument to a season you did not spend.</li>
+    <li><strong>The totals are small and the margins are smaller.</strong> One mid-sized park is often the whole difference between first and third place, which means a single turn you gave away in spring is genuinely still on the scoresheet in winter.</li>
+  </ul>
+
+  <p>There is no runaway leader mechanism and no catch-up mechanism. The winner is usually the player who converted resources into cards most often, not the one who had the cleverest single plan.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Count parks, not stuff. <strong>Three ordinary parks beat one magnificent one and a supply you never got to spend.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>14</b> How not to lose your first game</p>
+  <h2>Five instincts that other board games gave you, and all five are wrong here.</h2>
+
+  <h3>You raced to the end of the trail</h3>
+  <p>It looks decisive and it feels productive. It is neither. Reaching the end retires a hiker, and a retired hiker takes no more actions in a round that ends only when everyone is done. The players still walking behind you are taking free turns on an empty trail while you watch.</p>
+
+  <h3>You collected without a target</h3>
+  <p>Taking two of whatever is nearest is a turn, but it is not a plan. Pick the park you intend to buy, read its cost, and take the sites that move you towards that cost. The most common first-game score is a middling one produced by a supply that never matched a card.</p>
+
+  <h3>You ignored where everyone else was standing</h3>
+  <p>The only interaction in PARKS is occupancy, so the only thing you can do wrong to another player is arrive first, and the only thing they can do to you is the same. Before you settle on a route, look at whose hikers are behind yours and what they obviously need.</p>
+
+  <h3>You bought gear in winter</h3>
+  <p>Equipment is worth the number of times it will still fire. In spring that is a lot; in winter it is close to nothing. Late in the game, resources are for parks, and almost nothing else is worth the tempo.</p>
+
+  <h3>You moved both hikers up the trail together</h3>
+  <p>Two hikers in the same neighbourhood want the same tiles and give you the same options twice. Keep one back where the trail is still open; that hiker is where your real choices come from, right up until the season ends.</p>
+
+  <div class="note">
+    <span class="lab">The whole game in one line</span>
+    <p>Four seasons, two hikers, and a trail you can only walk one way. <strong>Stay out longer than everyone else, gather towards a named park, and make sure both hikers reach the end with something to spend.</strong></p>
+  </div>
+</article>
+
+<footer>A teaching walkthrough of PARKS by Henry Audubon (Keymaster Games, 2019), the original first edition, illustrated with art from the Fifty-Nine Parks Print Series. This page teaches what the game is and how it thinks; the rulebook in the box has the exact costs, site icons and edge cases. <a href="../">Back to the shelf</a>.</footer>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var pts = Array.prototype.slice.call(document.querySelectorAll('.pt'));
+  var fill = document.getElementById('fill');
+  var hiker = document.getElementById('hiker');
+  var count = document.getElementById('count');
+  var seasonLab = document.getElementById('season');
+  var seasons = ['spring','spring','spring','spring','summer','summer','summer',
+                 'autumn','autumn','autumn','autumn','winter','winter','winter'];
+  var at = 0;
+
+  function paint(n){
+    if(n === at) return;
+    at = n;
+    var p = n / pts.length;
+    fill.style.width = (p * 100).toFixed(1) + '%';
+    hiker.style.left = (p * 100).toFixed(1) + '%';
+    count.textContent = n + ' / ' + pts.length;
+    hiker.setAttribute('aria-label', 'Point ' + n + ' of ' + pts.length);
+    var s = seasons[n - 1] || 'winter';
+    if(document.body.getAttribute('data-season') !== s){
+      document.body.setAttribute('data-season', s);
+      seasonLab.textContent = s;
+    }
+  }
+
+  var ticking = false;
+  function measure(){
+    ticking = false;
+    var mark = window.innerHeight * 0.45, n = 1;
+    for(var i = 0; i < pts.length; i++){
+      if(pts[i].getBoundingClientRect().top <= mark){ n = i + 1; }
+    }
+    paint(n);
+  }
+  window.addEventListener('scroll', function(){
+    if(!ticking){ ticking = true; window.requestAnimationFrame(measure); }
+  }, {passive:true});
+  window.addEventListener('resize', measure);
+  paint(1);
+  measure();
+})();
+</script>
+</body>
+</html>

@@ -29,6 +29,7 @@ your first game.
 | `games/seasons.html` | Seasons, 12 points, complete |
 | `games/taverns-of-tiefenthal.html` | The Taverns of Tiefenthal, 14 points, complete, with the exact rules folded in |
 | `games/patchwork.html` | Patchwork, 12 points, complete |
+| `games/parks.html` | PARKS (first edition), 14 points, complete |
 | `games/root.html` | Root, 16 points, complete |
 | `games/sleeping-gods-distant-skies.html` | Sleeping Gods: Distant Skies, 14 points, complete |
 | `games/castles-of-burgundy.html` | The Castles of Burgundy, 14 points, complete |
@@ -117,6 +118,7 @@ estate in the rail, one hex per point;
 `architects-of-the-west-kingdom.html` sends a worker out of the crew in the rail for
 every point;
 `patchwork.html` sews one quilt square into the rail per point;
+`parks.html` walks a hiker along a trail that turns through the four seasons as you read;
 `wyrmspan.html` lights one cave chamber per point and walks an adventurer along them;
 `harvest.html` ripens a field of seedlings in the rail;
 `lost-ruins-of-arnak.html` fills the moon a little further with every point;
