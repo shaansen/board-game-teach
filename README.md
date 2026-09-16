@@ -35,6 +35,8 @@ your first game.
 | `games/wyrmspan.html` | Wyrmspan, 14 points, complete |
 | `games/lost-ruins-of-arnak.html` | Lost Ruins of Arnak, 14 points, complete |
 | `games/the-manhattan-project.html` | The Manhattan Project, 14 points, complete |
+| `games/terra-mystica.html` | Terra Mystica, 14 points, complete |
+| `games/gaia-project.html` | Gaia Project, 14 points, complete |
 | `games/_template.html` | Starting point for a new briefing |
 | `assets/dossier.css` | Shared layout system, for pages that want one |
 | `assets/library.css` | Styles for the shelf |
@@ -119,6 +121,8 @@ every point;
 `harvest.html` ripens a field of seedlings in the rail;
 `lost-ruins-of-arnak.html` fills the moon a little further with every point;
 `the-manhattan-project.html` machines one bomb core per point along a line in the rail;
+`terra-mystica.html` cycles power through three bowls in the rail as you read;
+`gaia-project.html` lights one step of six research tracks per point;
 `great-western-trail.html` walks a steer up a line of trail posts toward Kansas City;
 `fate-of-the-fellowship.html` opens the Eye a little wider with every point; `three-sisters.html` pencils an
 X into a row of scoresheet boxes with a sprout walking along it; `sleeping-gods-distant-skies.html` flies a

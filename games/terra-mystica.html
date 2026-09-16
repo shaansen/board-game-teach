@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Terra Mystica: Learn It Properly</title>
+<meta name="description" content="Learn what Terra Mystica actually is: fourteen points on the terrain wheel, the spade economy, the power bowls, the neighbours who pay you to build next to them, and the six scoring tiles you should read before you take a single action.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alegreya:wght@500;700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --soil:#14100D;
+  --deep:#1C1713;
+  --panel:#241D18;
+  --bone:#F0E7D8;
+  --dim:#A79A88;
+  --clay:#C2663A;
+  --moss:#6E9B4E;
+  --lake:#5B8FB9;
+  --gold:#D9A441;
+  --plum:#8E5E8C;
+  --line:rgba(240,231,216,.15);
+  --display:"Alegreya",Georgia,serif;
+  --body:"Source Sans 3",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;color:var(--bone);font-family:var(--body);font-size:18px;line-height:1.66;
+  -webkit-font-smoothing:antialiased;
+  background:
+    radial-gradient(900px 540px at 88% -8%, rgba(194,102,58,.14), transparent 62%),
+    radial-gradient(720px 460px at 4% 12%, rgba(110,155,78,.10), transparent 60%),
+    linear-gradient(180deg,var(--soil),var(--deep) 76%);
+  background-attachment:fixed;
+}
+.wrap{max-width:800px;margin:0 auto;padding:0 22px 90px}
+
+/* ---------- the power rail ---------- */
+.rail{
+  position:sticky;top:0;z-index:20;background:rgba(20,16,13,.94);
+  backdrop-filter:blur(6px);border-bottom:1px solid var(--line);padding:8px 22px;
+}
+.rail-in{max-width:800px;margin:0 auto;display:flex;align-items:center;gap:14px}
+.rail-lab{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);white-space:nowrap}
+#bowls{flex:0 0 auto;width:86px;height:30px}
+#bowls .rim{fill:rgba(240,231,216,.06);stroke:rgba(240,231,216,.34);stroke-width:1.3}
+#bowls .lvl{fill:var(--clay);transition:y .35s ease}
+#bowls .cap{font-family:"IBM Plex Mono",monospace;font-size:7.5px;fill:var(--dim);letter-spacing:.08em}
+.track{flex:1;height:3px;background:rgba(240,231,216,.14);border-radius:99px;overflow:hidden;min-width:40px}
+.track i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--moss),var(--clay));transition:width .25s ease}
+.rail-count{font-family:var(--mono);font-size:12px;color:var(--gold);white-space:nowrap}
+
+.backlink{
+  display:inline-block;margin-top:26px;font-family:var(--mono);font-size:11px;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--dim);text-decoration:none;
+  border-bottom:1px solid transparent;
+}
+.backlink:hover{color:var(--clay);border-bottom-color:var(--clay)}
+
+header.top{padding:28px 0 42px;border-bottom:1px solid var(--line)}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--clay);margin:22px 0 14px}
+h1{
+  font-family:var(--display);font-weight:700;font-size:clamp(44px,9.2vw,80px);
+  line-height:.98;letter-spacing:-.01em;margin:0 0 8px;color:#FFF7E8;
+}
+h1 small{display:block;font-family:var(--body);font-size:.17em;font-weight:700;letter-spacing:.22em;
+  color:var(--moss);margin-bottom:16px;text-transform:uppercase}
+.lede{font-size:20px;color:var(--dim);max-width:54ch;margin:18px 0 0}
+
+.pt{border-top:1px solid var(--line);padding:44px 0 8px;scroll-margin-top:56px}
+.pt:first-of-type{border-top:none}
+.num{
+  display:inline-flex;align-items:center;gap:12px;margin-bottom:12px;
+  font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--moss);
+}
+.num b{
+  width:34px;height:34px;display:grid;place-items:center;border-radius:5px;
+  background:var(--clay);color:#1A120C;font-family:var(--display);font-weight:700;font-size:18px;
+}
+h2{
+  font-family:var(--display);font-weight:700;font-size:clamp(26px,4.8vw,38px);
+  line-height:1.16;margin:0 0 16px;max-width:26ch;color:#FFF7E8;
+}
+h3{font-family:var(--display);font-weight:700;font-size:22px;margin:30px 0 6px;color:var(--bone)}
+.pt p{max-width:62ch;margin:0 0 16px}
+strong{font-weight:700;color:#FFF7E8}
+em.t{font-style:normal;font-family:var(--mono);font-size:.84em;background:rgba(240,231,216,.10);
+  padding:2px 6px;border-radius:3px}
+.aside{
+  border-left:3px solid var(--lake);padding:2px 0 2px 18px;margin:24px 0;
+  font-style:italic;color:var(--dim);max-width:58ch;
+}
+.trap{
+  margin:26px 0;border:1px solid rgba(194,102,58,.62);background:rgba(194,102,58,.14);
+  padding:16px 20px;max-width:62ch;border-radius:4px;
+}
+.trap b{
+  display:block;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:#E39468;margin-bottom:8px;
+}
+.trap p{margin:0}
+.note{
+  margin:30px 0 0;padding:18px 22px;max-width:62ch;border-radius:4px;
+  background:rgba(110,155,78,.14);border:1px solid rgba(110,155,78,.6);
+}
+.note .lab{
+  display:block;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:#9DC97A;margin-bottom:8px;
+}
+.note p{margin:0}
+ul.clean{list-style:none;padding:0;margin:0 0 16px;max-width:62ch}
+ul.clean li{padding:8px 0 8px 26px;position:relative;border-bottom:1px solid rgba(240,231,216,.10)}
+ul.clean li:last-child{border-bottom:none}
+ul.clean li::before{
+  content:"";position:absolute;left:4px;top:18px;width:9px;height:9px;border-radius:2px;
+  background:var(--clay);
+}
+.eg{
+  margin:26px 0;max-width:62ch;border-left:3px solid var(--gold);
+  background:rgba(217,164,65,.10);padding:16px 20px 16px 18px;border-radius:0 4px 4px 0;
+}
+.eg b{
+  display:block;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:8px;
+}
+.eg p{margin:0 0 10px}
+.eg p:last-child{margin:0}
+.eg .out{font-family:var(--mono);font-size:.9em;color:var(--moss)}
+figure{margin:28px 0;padding:18px;background:rgba(240,231,216,.045);border:1px solid var(--line);border-radius:6px}
+figure svg{display:block;width:100%;height:auto}
+figcaption{font-family:var(--mono);font-size:11px;color:var(--dim);margin-top:12px;text-align:center;line-height:1.6}
+.scroll{overflow-x:auto;margin:24px 0}
+table{border-collapse:collapse;width:100%;min-width:440px;font-size:16px}
+th,td{text-align:left;padding:9px 14px 9px 0;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);font-weight:600}
+td.n{font-family:var(--mono);color:var(--clay)}
+/* figure ink */
+.f-bone{fill:var(--bone)}.f-clay{fill:var(--clay)}.f-moss{fill:var(--moss)}
+.f-lake{fill:var(--lake)}.f-gold{fill:var(--gold)}.f-plum{fill:var(--plum)}
+.f-panel{fill:var(--panel)}.f-none{fill:none}.f-dim{fill:var(--dim)}
+.s-bone{stroke:var(--bone)}.s-dim{stroke:var(--dim)}.s-moss{stroke:var(--moss)}
+.s-clay{stroke:var(--clay)}.s-gold{stroke:var(--gold)}.s-lake{stroke:var(--lake)}
+.tt{font-family:"Source Sans 3",sans-serif;font-size:13px;fill:var(--bone)}
+.ts{font-family:"IBM Plex Mono",monospace;font-size:10.5px;fill:var(--dim);letter-spacing:.06em}
+footer{margin:64px 0 0;padding-top:24px;border-top:1px solid var(--line);color:var(--dim);font-size:15px}
+a{color:var(--clay)}
+@media(max-width:620px){body{font-size:17px}.rail-lab{display:none}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+@media print{.rail{display:none}}
+</style>
+</head>
+<body>
+
+<div class="rail">
+  <div class="rail-in">
+    <span class="rail-lab">power cycles</span>
+    <svg id="bowls" viewBox="0 0 86 30" role="img" aria-label="Progress through the briefing">
+      <defs>
+        <clipPath id="c1"><circle cx="14" cy="15" r="10"/></clipPath>
+        <clipPath id="c2"><circle cx="43" cy="15" r="10"/></clipPath>
+        <clipPath id="c3"><circle cx="72" cy="15" r="10"/></clipPath>
+      </defs>
+      <rect class="lvl" id="l1" x="4" y="5" width="20" height="22" clip-path="url(#c1)"/>
+      <rect class="lvl" id="l2" x="33" y="25" width="20" height="22" clip-path="url(#c2)"/>
+      <rect class="lvl" id="l3" x="62" y="25" width="20" height="22" clip-path="url(#c3)"/>
+      <circle class="rim" cx="14" cy="15" r="10"/>
+      <circle class="rim" cx="43" cy="15" r="10"/>
+      <circle class="rim" cx="72" cy="15" r="10"/>
+      <text class="cap" x="14" y="29" text-anchor="middle">I</text>
+      <text class="cap" x="43" y="29" text-anchor="middle">II</text>
+      <text class="cap" x="72" y="29" text-anchor="middle">III</text>
+    </svg>
+    <span class="track"><i id="fill"></i></span>
+    <span class="rail-count" id="count">1 / 14</span>
+  </div>
+</div>
+
+<div class="wrap">
+
+<a class="backlink" href="../">&larr; the shelf</a>
+
+<header class="top">
+  <p class="eyebrow">Learn it properly &middot; 14 points</p>
+  <h1><small>Six rounds, one map, fourteen peoples who all want the same ground</small>Terra Mystica</h1>
+  <p class="lede">Nobody ever attacks you in Terra Mystica. There are no dice and no cards in hand, and everything on the table is face up from the first minute. It is still one of the most ruthless games you will play, because the whole thing is a fight over a fixed amount of land, and every hex you want is a hex somebody else can take first.</p>
+</header>
+
+<article class="pt">
+  <p class="num"><b>1</b> The big picture</p>
+  <h2>You are a people who can only live on one kind of ground, and the ground is wrong.</h2>
+
+  <p>Two to five players each take one of fourteen fantasy peoples. Each people lives on exactly one of seven terrain types: the Witches live on forest, the Dwarves on mountain, the Nomads on desert, and so on. Your buildings can only ever stand on your own colour of terrain.</p>
+
+  <p>The map is a single shared board of about eighty hexes in mixed colours, and it does not change between games. So the game starts with a problem rather than an opportunity: the land you want is scattered, and most of the hexes near you are the wrong type. <strong>Making them right is called terraforming, and it is the main thing you spend your life doing.</strong></p>
+
+  <p>You play <strong>six rounds</strong>. In each one you take income, then take actions one at a time until every player has passed. At the end you add up victory points, and the numbers are small: a decent first game is around 90 points, and the gap between winning and third place is often under ten. That matters more than it sounds. <strong>In a game where points are that tight, no single clever move wins it. Fifteen slightly cheaper moves do.</strong></p>
+
+  <p>There is no combat, no theft and no card you can play on another player's turn. Interaction comes from two places only: the land runs out, and your neighbours hand you power every time they build. Both of those are covered below, and both are the game.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Terra Mystica is not a game of big plays. <strong>It is a game about doing ordinary things for slightly less than everyone else pays.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>2</b> The terrain wheel</p>
+  <h2>Every hex on the map has a price, and the price is written on a wheel.</h2>
+
+  <p>The seven terrain types sit in a fixed circle: plains, swamp, lake, forest, mountain, wasteland, desert, and then back round to plains. To change a hex from one type to another you move around that circle one step at a time, and <strong>each step costs one spade</strong>.</p>
+
+  <p>So if you are the Witches, whose colour is forest, a lake hex is one step away and costs one spade. A desert hex is three steps away and costs three. The same hex has a different price for every player at the table, and you can read that price off the wheel before anyone tells you.</p>
+
+  <figure>
+    <svg viewBox="0 0 680 230" role="img" xmlns="http://www.w3.org/2000/svg">
+      <title>The terrain wheel and the cost in spades</title>
+      <desc>Seven terrain types arranged in a circle; the distance around the circle from your home terrain to a target terrain is the number of spades that hex costs you.</desc>
+      <circle class="f-none s-dim" cx="200" cy="115" r="78" stroke-dasharray="3 5"/>
+      <circle class="f-moss" cx="200" cy="37" r="16"/>
+      <circle class="f-panel" cx="261" cy="76" r="16"/>
+      <circle class="f-dim" cx="261" cy="154" r="16"/>
+      <circle class="f-clay" cx="200" cy="193" r="16"/>
+      <circle class="f-gold" cx="139" cy="154" r="16"/>
+      <circle class="f-lake" cx="139" cy="76" r="16"/>
+      <circle class="f-plum" cx="200" cy="115" r="0"/>
+      <text class="ts" x="200" y="18" text-anchor="middle">forest</text>
+      <text class="ts" x="292" y="80" text-anchor="middle">mountain</text>
+      <text class="ts" x="294" y="158" text-anchor="middle">wasteland</text>
+      <text class="ts" x="200" y="218" text-anchor="middle">desert</text>
+      <text class="ts" x="104" y="158" text-anchor="middle">plains</text>
+      <text class="ts" x="108" y="80" text-anchor="middle">lake</text>
+      <text class="tt" x="200" y="112" text-anchor="middle">you live</text>
+      <text class="tt" x="200" y="130" text-anchor="middle">on forest</text>
+
+      <path class="f-none s-clay" d="M380 60 h230" stroke-width="1.4"/>
+      <text class="tt" x="380" y="48">what a hex costs you</text>
+      <text class="ts" x="380" y="86">lake or mountain</text>
+      <text class="tt" x="620" y="86" text-anchor="end">1 spade</text>
+      <text class="ts" x="380" y="118">plains or wasteland</text>
+      <text class="tt" x="620" y="118" text-anchor="end">2 spades</text>
+      <text class="ts" x="380" y="150">desert or swamp</text>
+      <text class="tt" x="620" y="150" text-anchor="end">3 spades</text>
+      <path class="f-none s-dim" d="M380 172 h240" stroke-dasharray="3 4"/>
+      <text class="ts" x="380" y="196">a spade costs 3 workers,</text>
+      <text class="ts" x="380" y="212">then 2, then 1, as you upgrade</text>
+    </svg>
+    <figcaption>Fig. 1: the wheel never moves. Your home colour does, from faction to faction, which is why the same board plays differently every game.</figcaption>
+  </figure>
+
+  <p>A spade is not a thing you own, it is an amount of work. At the start it costs you <strong>three workers</strong> to produce one spade. Your player board has a terraforming track you can upgrade twice, dropping that to two workers, then one. Going from three workers per spade to one is the difference between a hex costing nine workers and costing three.</p>
+
+  <p>This is also why the wheel is the seating plan for the whole game. The factions sitting one or two steps from you on the wheel want hexes that are cheap for you, and you want hexes that are cheap for them. <strong>Your real opponent is not the loudest player, it is whoever shares your corner of the wheel.</strong></p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Before your first turn, look at the map and count steps. <strong>The hexes two spades away are the ones you will quietly never build on.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>3</b> One action at a time</p>
+  <h2>There is no big turn. There is a long sequence of small ones.</h2>
+
+  <p>A round is not "everyone takes a turn". Play passes round the table and each player takes <strong>exactly one action</strong>, then the next player does, and so on, for as long as people keep going. Build a dwelling. That is your turn. Upgrade a building. That is your turn.</p>
+
+  <p>You keep going round until you decide to <strong>pass</strong>, which takes you out of the round entirely. Everyone else carries on without you. When the last player passes, the round ends and a new one starts with income.</p>
+
+  <p>Two consequences fall straight out of this, and they are both larger than they look.</p>
+
+  <ul class="clean">
+    <li><strong>Resources are pace.</strong> A player with more workers and coins simply gets more turns this round than you do. Running out of things to spend is how you pass early, and passing early is how you watch three hexes you wanted get taken.</li>
+    <li><strong>The order of passing sets the next round.</strong> The first player to pass goes first next round. So passing early is not purely a loss: it buys you the first pick of the map next time, which in a tight game is sometimes exactly what you want.</li>
+  </ul>
+
+  <p>New players tend to think of the round as a budget to spend down. It is better to think of it as an auction where the currency is workers and the item is position. <strong>Every action you take is one the player after you now has to respond to.</strong></p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Whoever can still afford actions after everyone else has passed is the player shaping the map. <strong>Income is turns.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>4</b> The buildings are your income sheet</p>
+  <h2>You are not building a village. You are uncovering a printed track.</h2>
+
+  <p>You have five kinds of structure, and they live as physical pieces on your player board covering up numbers. Every time you build one, you take it off the board and reveal what was underneath, which is income you collect every round from then on.</p>
+
+  <div class="scroll"><table>
+    <tr><th>Structure</th><th>How you get it</th><th>What it mostly gives</th></tr>
+    <tr><td>Dwelling</td><td>Built on a hex of your colour</td><td>Workers, the base currency</td></tr>
+    <tr><td>Trading house</td><td>Upgrade a dwelling</td><td>Coins and power</td></tr>
+    <tr><td>Temple</td><td>Upgrade a trading house</td><td>Priests, and a favour tile</td></tr>
+    <tr><td>Stronghold</td><td>Upgrade a trading house</td><td>Your faction's special ability</td></tr>
+    <tr><td>Sanctuary</td><td>Upgrade a temple</td><td>Priests, and a favour tile</td></tr>
+  </table></div>
+
+  <p>Notice what upgrading really does: the dwelling piece goes <em class="t">back</em> onto your board, covering its worker income again, and a trading house comes off instead. <strong>Upgrading trades one kind of income for another, it does not stack them.</strong> A tableau of nothing but trading houses is a player with plenty of coins and nobody to do the work.</p>
+
+  <p>Three buildings matter beyond their income. Temples and sanctuaries each hand you a <strong>favour tile</strong>, which is a small permanent bonus plus a step up a cult track. The stronghold turns on the ability that makes your faction that faction, and it is usually the single most important build in your game. And every structure has a <strong>power value</strong>, one for a dwelling, two for most of the rest, three for stronghold and sanctuary, which is the number everything in points 6, 7 and 9 is counted in.</p>
+
+  <div class="trap">
+    <b>The most common first-game shape</b>
+    <p>Players build two dwellings, upgrade them both, and stall in round three with four coins and one worker. Dwellings are cheap and they make workers. <strong>Build more of them than feels elegant before you start upgrading.</strong></p>
+  </div>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Your board is a machine that pays out once a round for six rounds. <strong>A dwelling built in round one pays five more times; one built in round five pays once.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>5</b> You can only build where you already are</p>
+  <h2>The map is the clock, and it runs out faster than the rounds do.</h2>
+
+  <p>You cannot terraform or build just anywhere. A hex has to be <strong>adjacent to something you already own</strong>, either directly touching one of your structures or reachable across water by your shipping level, which is a track you can upgrade a few times over the game. Your first two dwellings are placed before the game starts, and everything you ever build grows out of those two seeds.</p>
+
+  <p>This is the constraint that turns a pleasant economic game into a knife fight. There are only so many hexes of each colour, they are in fixed places, and once someone builds on one it is gone for good. Nobody can remove a building in Terra Mystica. <strong>Every structure placed on the map is permanent.</strong></p>
+
+  <figure>
+    <svg viewBox="0 0 680 190" role="img" xmlns="http://www.w3.org/2000/svg">
+      <title>Reach on the map</title>
+      <desc>A cluster of your structures, the ring of hexes adjacent to them that you may terraform, and a distant hex that is out of reach until you either build towards it or upgrade shipping.</desc>
+      <g>
+        <polygon class="f-moss" points="120,40 150,57 150,91 120,108 90,91 90,57"/>
+        <polygon class="f-moss" points="180,40 210,57 210,91 180,108 150,91 150,57"/>
+        <polygon class="f-panel s-moss" points="150,92 180,109 180,143 150,160 120,143 120,109" stroke-dasharray="4 4"/>
+        <polygon class="f-panel s-moss" points="240,40 270,57 270,91 240,108 210,91 210,57" stroke-dasharray="4 4"/>
+        <polygon class="f-panel s-moss" points="90,92 120,109 120,143 90,160 60,143 60,109" stroke-dasharray="4 4"/>
+        <text class="ts" x="120" y="78" text-anchor="middle">yours</text>
+        <text class="ts" x="180" y="78" text-anchor="middle">yours</text>
+        <text class="ts" x="150" y="130" text-anchor="middle">reachable</text>
+        <text class="ts" x="240" y="78" text-anchor="middle">reachable</text>
+        <text class="ts" x="90" y="130" text-anchor="middle">reachable</text>
+      </g>
+      <polygon class="f-none s-dim" points="470,60 500,77 500,111 470,128 440,111 440,77" stroke-dasharray="3 5"/>
+      <text class="ts" x="470" y="98" text-anchor="middle">out of reach</text>
+      <path class="f-none s-clay" d="M300 95 h110" stroke-width="1.4" stroke-dasharray="6 5"/>
+      <text class="ts" x="355" y="80" text-anchor="middle">shipping, or</text>
+      <text class="ts" x="355" y="124" text-anchor="middle">build your way over</text>
+      <text class="tt" x="530" y="98">a hex you</text>
+      <text class="tt" x="530" y="118">cannot have yet</text>
+    </svg>
+    <figcaption>Fig. 2: the good hex three spaces away is not yours. It belongs to whoever is already next to it.</figcaption>
+  </figure>
+
+  <p>So the map asks a question every round that the rules never state out loud: <em>which direction am I growing, and who is growing towards me?</em> A player who builds in a tidy blob is easy to cut off. A player who reaches out along a line keeps options but pays more spades. Both are defensible. Building with no plan at all is not.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Look at the hex you want two rounds before you need it. <strong>If a rival can reach it before you can, it is already theirs, and you should want a different hex.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>6</b> Power is not produced, it circulates</p>
+  <h2>The strangest rule in the game, and the one worth learning first.</h2>
+
+  <p>You have twelve power tokens spread across <strong>three bowls</strong>. They start mostly in bowl I. Power is never created or destroyed, it only moves: bowl I to bowl II to bowl III, always in that direction.</p>
+
+  <p>When you "gain power", nothing new arrives. You move that many tokens one bowl to the right. When you <strong>spend</strong> power, you take tokens out of bowl III and drop them all the way back to bowl I, where they have to walk round again.</p>
+
+  <figure>
+    <svg viewBox="0 0 680 200" role="img" xmlns="http://www.w3.org/2000/svg">
+      <title>The three power bowls</title>
+      <desc>Tokens move from bowl one to bowl two to bowl three when you gain power; spending power takes tokens out of bowl three and returns them to bowl one.</desc>
+      <circle class="f-panel s-dim" cx="130" cy="90" r="52"/>
+      <circle class="f-panel s-dim" cx="330" cy="90" r="52"/>
+      <circle class="f-panel s-clay" cx="530" cy="90" r="52"/>
+      <text class="tt" x="130" y="86" text-anchor="middle">bowl I</text>
+      <text class="ts" x="130" y="108" text-anchor="middle">dormant</text>
+      <text class="tt" x="330" y="86" text-anchor="middle">bowl II</text>
+      <text class="ts" x="330" y="108" text-anchor="middle">warming</text>
+      <text class="tt" x="530" y="86" text-anchor="middle">bowl III</text>
+      <text class="ts" x="530" y="108" text-anchor="middle">spendable</text>
+      <path class="f-none s-moss" d="M188 90 h84" stroke-width="2" marker-end=""/>
+      <path class="f-moss" d="M272 90 l-10 -5 v10 z"/>
+      <path class="f-none s-moss" d="M388 90 h84" stroke-width="2"/>
+      <path class="f-moss" d="M472 90 l-10 -5 v10 z"/>
+      <text class="ts" x="230" y="76" text-anchor="middle">gain power</text>
+      <text class="ts" x="430" y="76" text-anchor="middle">gain power</text>
+      <path class="f-none s-clay" d="M530 146 q-200 42 -400 0" stroke-width="2" stroke-dasharray="6 5"/>
+      <path class="f-clay" d="M130 146 l10 8 l-10 2 z"/>
+      <text class="ts" x="330" y="180" text-anchor="middle">spending sends them all the way back</text>
+    </svg>
+    <figcaption>Fig. 3: two power gained on a token in bowl I gets you one token in bowl III. That is the exchange rate nobody quotes at you.</figcaption>
+  </figure>
+
+  <p>The consequence is easy to say and hard to feel: <strong>every point of power you spend costs you two points of power gained.</strong> A token has to make two hops to become useful. When somebody offers you four power it is not four actions of fuel, it is more like two.</p>
+
+  <p>What is power for? Power actions on the main board: extra spades, a free bridge, a lump of coins or workers or a priest. They are shared, so the first player to reach for one each round gets it. Power is also the number your buildings are measured in for towns and for what your neighbours receive, which is the next point.</p>
+
+  <p>You may also <strong>burn</strong> power: throw away one token from bowl II to move another from II to III. It is a real cost, and it is also how you reach a power action one turn earlier than anybody expects.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Power is a queue, not a pile. <strong>Counting how much you have means counting what is in bowl III, not what is on the table.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>7</b> Your neighbours pay you, and you pay for it</p>
+  <h2>The only real conversation in the game is: do you want this, and is it worth a point?</h2>
+
+  <p>When a player builds or upgrades a structure, every <em>other</em> player with structures adjacent to that hex is offered power equal to the total power value of their adjacent buildings. You may take all of it or none of it. And if you take it, <strong>you pay one victory point for every power gained beyond the first</strong>. Three power costs two points.</p>
+
+  <p>This single rule does most of the work of making Terra Mystica a game rather than a puzzle. It means:</p>
+
+  <ul class="clean">
+    <li><strong>Building next to a rival is a real decision.</strong> You get a cheaper trading house when you do it, and you hand them fuel. Both are true at once.</li>
+    <li><strong>Points are a currency you can buy with.</strong> Early on, power is worth more than points, because power taken in round one gets spent five more times. Late on, the reverse.</li>
+    <li><strong>Sitting alone is not safe, it is quiet.</strong> A player in an empty corner of the map gets no offers at all, and has to generate everything themselves.</li>
+  </ul>
+
+  <div class="eg">
+    <b>How it actually plays</b>
+    <p>Round one, a neighbour upgrades a dwelling next to your two structures. You are offered three power for two points.</p>
+    <p>Take it. Three power is well over half a power action, and a power action in round one is worth a great deal more than two points. Now round six: the same offer costs the same two points, and the power will never be spent.</p>
+    <p class="out">Early: almost always take it. Late: almost always decline.</p>
+  </div>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>The question is never "can I afford the points". <strong>It is "will I spend this power before the game ends".</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>8</b> The cults</p>
+  <h2>Four ladders on the side of the board that pay you twice.</h2>
+
+  <p>Fire, water, earth and air each have a track running from zero up to ten. Climbing them does two things: passing certain steps hands you power immediately, and at the end of the game the players highest on each track score victory points, eight for first place down to two for third.</p>
+
+  <p>There are two ways up. <strong>Favour tiles</strong>, taken whenever you build a temple or sanctuary, move you up a track straight away and often keep paying for the rest of the game. And you can <strong>send a priest</strong> to a cult, which is a whole action and costs you a priest you will not see again for a long while.</p>
+
+  <p>Priests are the scarcest resource in the game. You have seven of them ever, your income gives them out slowly, and every one you post to a cult is one not spent on something else. That is the tension: cults are real points, and they are paid for in the thing you have least of.</p>
+
+  <div class="trap">
+    <b>The step you cannot take</b>
+    <p>You can never move to space 10 on a cult without spending a <strong>town key</strong>, and keys come almost exclusively from founding towns. Players who plan a cult win without a town in sight find themselves stuck on 9 with nowhere to go.</p>
+  </div>
+
+  <p>The healthy way to hold cults in your head: they are not a strategy on their own, they are a <strong>tiebreaker with an income attached</strong>. Getting to the top of one track you were already climbing is excellent. Fighting for all four is how you finish with a beautiful cult board and eleven buildings on the map.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Cult points are cheap when they fall out of buildings you wanted anyway. <strong>They are expensive when you buy them with priests.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>9</b> Towns</p>
+  <h2>The one moment in the game where a normal build turns into a windfall.</h2>
+
+  <p>Look at a connected group of your own structures. Add up their power values, one per dwelling, two per trading house or temple, three per stronghold or sanctuary. When a connected group reaches <strong>seven power value and at least four buildings</strong>, you found a town and immediately take a town tile.</p>
+
+  <figure>
+    <svg viewBox="0 0 680 180" role="img" xmlns="http://www.w3.org/2000/svg">
+      <title>Founding a town</title>
+      <desc>Four connected structures whose power values add to seven, which founds a town and earns a town tile.</desc>
+      <g>
+        <polygon class="f-moss" points="90,40 120,57 120,91 90,108 60,91 60,57"/>
+        <text class="ts" x="90" y="79" text-anchor="middle">1</text>
+        <polygon class="f-moss" points="150,40 180,57 180,91 150,108 120,91 120,57"/>
+        <text class="ts" x="150" y="79" text-anchor="middle">2</text>
+        <polygon class="f-moss" points="120,92 150,109 150,143 120,160 90,143 90,109"/>
+        <text class="ts" x="120" y="131" text-anchor="middle">1</text>
+        <polygon class="f-clay" points="180,92 210,109 210,143 180,160 150,143 150,109"/>
+        <text class="ts" x="180" y="131" text-anchor="middle">3</text>
+        <text class="tt" x="255" y="100">1 + 2 + 1 + 3 = 7</text>
+        <text class="ts" x="255" y="122">four buildings, seven power</text>
+      </g>
+      <path class="f-none s-dim" d="M430 40 v110" stroke-dasharray="3 5"/>
+      <text class="tt" x="466" y="56">the tile pays you</text>
+      <text class="ts" x="466" y="82">victory points, and</text>
+      <text class="ts" x="466" y="102">coins or power or a priest,</text>
+      <text class="ts" x="466" y="122">and one town key</text>
+    </svg>
+    <figcaption>Fig. 4: the fourth building in that cluster was worth its own cost plus a whole tile. Which is why the order you build in matters as much as what you build.</figcaption>
+  </figure>
+
+  <p>A town tile is a large one-off payment: points plus a resource lump, and crucially a <strong>town key</strong>, the thing that unlocks the top step of a cult track. Most winning games contain two or three towns. Most first games contain none, because the player never counted.</p>
+
+  <p>So towns reward a specific habit: before you place a dwelling, ask whether there is a placement that does the same job while completing a cluster. Often there is, and it is worth several turns of income. <strong>The stronghold and sanctuary carry three power each, which is why building one so often turns a quiet corner into a town on the spot.</strong>
+  </p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Count your clusters every single round. <strong>Seven power and four buildings is the number that turns an ordinary turn into your best turn.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>10</b> The six scoring tiles</p>
+  <h2>Read all six before you take your first action. This is the habit that wins games.</h2>
+
+  <p>Six scoring tiles are laid out at setup, one per round, face up. Each says what earns bonus points in that round: two points per dwelling built, three per trading house, five per town founded, points for spades or for priests sent to cults. And each one also pays a resource at the end of that round for standing on a particular cult track.</p>
+
+  <p>Those tiles are not decoration. Over a game they are worth twenty to thirty points, and they are <strong>the only part of the game that tells you when to do things</strong>. The map tells you where and the wheel tells you how much. The tiles tell you when.</p>
+
+  <div class="eg">
+    <b>What planning around them looks like</b>
+    <p>The round four tile pays five points per town. So in round three you build up to six power value in two different clusters and stop, leaving each one build short.</p>
+    <p>In round four you complete both. The buildings were on your list anyway, and you have collected ten bonus points for doing them on a Thursday instead of a Wednesday.</p>
+    <p class="out">Same buildings, same cost, ten more points.</p>
+  </div>
+
+  <p>The flip side is just as real: if round two pays for trading houses and you spend round two terraforming, you did not lose points exactly, but everyone who read the tiles gained them. In a game decided by single digits that is the whole margin.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Everyone builds roughly the same things over six rounds. <strong>The winner built them in the order the tiles were paying for.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>11</b> Bonus cards and passing</p>
+  <h2>A small decision at the end of every round that quietly sets up the next one.</h2>
+
+  <p>When you pass, you hand back the bonus card you were holding and take a new one from the small face-up row. Each card gives a modest income, sometimes a special action, sometimes end-of-round points for building a particular thing. There is always exactly one more card than there are players, so the last player to pass has no choice at all.</p>
+
+  <p>That turns passing into a three-part decision, and new players usually only see the first part.</p>
+
+  <ul class="clean">
+    <li><strong>Have I run out of useful actions?</strong> The obvious one.</li>
+    <li><strong>Which card do I want for next round?</strong> Cards that pay for the coming scoring tile are worth passing a turn early to secure.</li>
+    <li><strong>Where do I want to be in turn order?</strong> First to pass is first to act next round, which is how you get the hex or the power action you are worried about losing.</li>
+  </ul>
+
+  <p>Passing first when you still have resources feels like quitting. It is not: it is buying first pick of the map and first pick of the cards, and paying for it with the tail end of a round where everyone else is also out of money.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Passing is a move, not the absence of one. <strong>Decide what you are buying with it before you do it.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>12</b> Your faction is a plan, not a paint job</p>
+  <h2>Fourteen peoples, and each one is genuinely trying to do something different.</h2>
+
+  <p>Every faction has its own income, its own starting position on the cult tracks, its own costs, and a stronghold ability that changes what its good turns look like. A short sample gives the range:</p>
+
+  <div class="scroll"><table>
+    <tr><th>Faction</th><th>The idea</th><th>What it makes you do</th></tr>
+    <tr><td>Witches</td><td>A free dwelling on any forest hex once the stronghold is up</td><td>Sprawl fast and far, take towns other people cannot reach</td></tr>
+    <tr><td>Nomads</td><td>Turn a neighbouring hex into desert without spades</td><td>Expand sideways for nothing, early and often</td></tr>
+    <tr><td>Chaos Magicians</td><td>Start with one dwelling instead of two; double-action stronghold</td><td>Begin slow, then take huge turns nobody can match</td></tr>
+    <tr><td>Engineers</td><td>Cheap everything, and bridges</td><td>Grind out a small tidy network and score cults and towns</td></tr>
+    <tr><td>Swarmlings</td><td>Expensive buildings, enormous town bonuses</td><td>Build few, big, connected clusters and cash them in</td></tr>
+  </table></div>
+
+  <p>Two things follow. First, <strong>your stronghold is usually the most important build in your game</strong>, because it is the moment your faction starts playing its own game instead of a generic one, and every round after it is a round it pays. Getting it up in round two or three rather than round four is often the whole difference.</p>
+
+  <p>Second, a faction tells you which of the systems in this briefing you should care about most. The Witches care about the map. The Engineers care about cults and towns. <strong>Nobody does everything well, and trying to is the most expensive mistake available.</strong></p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Read your faction board as an instruction, not a bonus. <strong>It is telling you what your cheap moves are, and cheap moves are the game.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>13</b> How the game ends, and what it counts</p>
+  <h2>Round six is not a round. It is a controlled demolition.</h2>
+
+  <p>After the sixth round, three things score, and only one of them is the one people watch:</p>
+
+  <ul class="clean">
+    <li><strong>The largest connected network.</strong> Eighteen, twelve and six points for the biggest connected chain of your structures. This is enormous and it is decided by hexes you placed in rounds two and three.</li>
+    <li><strong>The cult tracks.</strong> Eight, four and two on each of four tracks, with ties splitting.</li>
+    <li><strong>Leftover resources.</strong> Every three coins is a point, and workers and priests convert to coins first.</li>
+  </ul>
+
+  <p>That last line is why the final round looks so strange to a newcomer. Everyone spends everything. Resources left in hand are worth a third of a point each at best, so the correct round six is to convert every worker, coin, priest and drop of power into buildings, spades and cult steps, and end the game with an empty board. <strong>Holding six workers at the end is throwing away two points for no reason.</strong></p>
+
+  <p>The network score in particular deserves attention early. It rewards a single chain, not a total count, so a player with nine buildings in two separate groups scores worse than one with seven in a row. Bridges and shipping join groups together, and joining two groups in round six with one build is one of the classic large swings.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Spend to zero. <strong>And know by round four whether your buildings form one chain or two, because you can still fix it then.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>14</b> How not to lose your first game</p>
+  <h2>The five instincts that cost beginners the most.</h2>
+
+  <p>Nothing in Terra Mystica punishes you loudly. There is no attack, no bankruptcy, no moment where the table tells you it went wrong. You simply find, somewhere in round four, that you have nothing to do and no money to do it with. These are the five reasons.</p>
+
+  <h3>You upgraded too early</h3>
+  <p>Trading houses and temples are satisfying and they stop your workers coming in. A round-one dwelling pays you for five rounds; the trading house it becomes pays coins you have nothing to spend on. Build wide first, upgrade when you have the workers to burn.</p>
+
+  <h3>You declined power because it cost points</h3>
+  <p>In round one, three power for two points is a bargain, and beginners turn it down all day because points feel precious and power feels abstract. Points are the score, but power taken early gets spent four or five times. Take it early, refuse it late.</p>
+
+  <h3>You never read the scoring tiles</h3>
+  <p>Twenty-plus points sit in those six tiles and they are face up from the start. Doing the same work in the round that pays for it is free money, and it is the clearest gap between a first game and a fifth one.</p>
+
+  <h3>You never counted to seven</h3>
+  <p>Four buildings, seven power value, a town tile and a key. Players go entire games without noticing they were one dwelling away, twice. Count your clusters before every build.</p>
+
+  <h3>You saved your resources</h3>
+  <p>There is no prize for a tidy supply. Workers in hand do nothing, priests in hand do nothing, and power in bowl III at the end of round six is worth exactly zero. If you cannot see what you are saving for, you are not saving, you are losing slowly.</p>
+
+  <div class="note">
+    <span class="lab">The whole game in one line</span>
+    <p>Six rounds, one action at a time, on a map that runs out before the rounds do. <strong>Build wide early, take the power, count to seven, and do each thing in the round that pays for it.</strong></p>
+  </div>
+</article>
+
+<footer>A teaching walkthrough of Terra Mystica by Helge Ostertag &amp; Jens Dr&ouml;gem&uuml;ller (Feuerland Spiele, 2012). This page teaches what the game is and how it thinks; the rulebook in the box has the exact costs, faction boards and edge cases. <a href="../">Back to the shelf</a>.</footer>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var pts = Array.prototype.slice.call(document.querySelectorAll('.pt'));
+  var l1 = document.getElementById('l1');
+  var l2 = document.getElementById('l2');
+  var l3 = document.getElementById('l3');
+  var fill = document.getElementById('fill');
+  var count = document.getElementById('count');
+  var bowls = document.getElementById('bowls');
+  var at = 0;
+
+  /* rect is 22 tall over a bowl spanning y 5..25, so y = 25 - 20 * level */
+  function lvl(el, v){ el.setAttribute('y', (25 - 20 * Math.max(0, Math.min(1, v))).toFixed(1)); }
+
+  function paint(n){
+    if(n === at) return;
+    at = n;
+    var p = n / pts.length;
+    lvl(l1, 1 - p);
+    lvl(l2, 4 * p * (1 - p));
+    lvl(l3, p * p);
+    fill.style.width = (p * 100).toFixed(1) + '%';
+    count.textContent = n + ' / ' + pts.length;
+    bowls.setAttribute('aria-label', 'Point ' + n + ' of ' + pts.length);
+  }
+
+  var ticking = false;
+  function measure(){
+    ticking = false;
+    var mark = window.innerHeight * 0.45, n = 1;
+    for(var i = 0; i < pts.length; i++){
+      if(pts[i].getBoundingClientRect().top <= mark){ n = i + 1; }
+    }
+    paint(n);
+  }
+  window.addEventListener('scroll', function(){
+    if(!ticking){ ticking = true; window.requestAnimationFrame(measure); }
+  }, {passive:true});
+  window.addEventListener('resize', measure);
+  paint(1);
+  measure();
+})();
+</script>
+</body>
+</html>

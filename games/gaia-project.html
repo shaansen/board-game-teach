@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gaia Project: Learn It Properly</title>
+<meta name="description" content="Learn what Gaia Project actually is: fourteen points on the planet wheel, the range that decides where you are allowed to exist, six research tracks that are engine and score at once, federations, and the two final scoring tiles that quietly aim the whole game.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --void:#080B16;
+  --deep:#0E1324;
+  --panel:#171E36;
+  --bone:#E8ECF7;
+  --dim:#94A0BC;
+  --cyan:#49C6D6;
+  --violet:#9A6BE0;
+  --amber:#E9A94A;
+  --rose:#E0607A;
+  --green:#5FBE85;
+  --line:rgba(232,236,247,.15);
+  --display:"Space Grotesk",system-ui,sans-serif;
+  --body:"IBM Plex Sans",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;color:var(--bone);font-family:var(--body);font-size:18px;line-height:1.66;
+  -webkit-font-smoothing:antialiased;
+  background:
+    radial-gradient(900px 560px at 86% -8%, rgba(154,107,224,.16), transparent 62%),
+    radial-gradient(760px 470px at 6% 12%, rgba(73,198,214,.12), transparent 60%),
+    linear-gradient(180deg,var(--void),var(--deep) 78%);
+  background-attachment:fixed;
+}
+.wrap{max-width:800px;margin:0 auto;padding:0 22px 90px}
+
+/* ---------- the research rail ---------- */
+.rail{
+  position:sticky;top:0;z-index:20;background:rgba(8,11,22,.94);
+  backdrop-filter:blur(6px);border-bottom:1px solid var(--line);padding:8px 22px;
+}
+.rail-in{max-width:800px;margin:0 auto;display:flex;align-items:center;gap:14px}
+.rail-lab{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);white-space:nowrap}
+#tracks{flex:0 0 auto;width:92px;height:30px}
+#tracks .slot{fill:rgba(232,236,247,.10)}
+#tracks .lit{fill:var(--cyan);transition:opacity .3s ease;opacity:0}
+#tracks .lit.on{opacity:1}
+#tracks .lit.top{fill:var(--amber)}
+.track{flex:1;height:3px;background:rgba(232,236,247,.14);border-radius:99px;overflow:hidden;min-width:40px}
+.track i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--cyan),var(--violet));transition:width .25s ease}
+.rail-count{font-family:var(--mono);font-size:12px;color:var(--amber);white-space:nowrap}
+
+.backlink{
+  display:inline-block;margin-top:26px;font-family:var(--mono);font-size:11px;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--dim);text-decoration:none;
+  border-bottom:1px solid transparent;
+}
+.backlink:hover{color:var(--cyan);border-bottom-color:var(--cyan)}
+
+header.top{padding:28px 0 42px;border-bottom:1px solid var(--line)}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--cyan);margin:22px 0 14px}
+h1{
+  font-family:var(--display);font-weight:700;font-size:clamp(42px,8.6vw,76px);
+  line-height:1.0;letter-spacing:-.02em;margin:0 0 8px;color:#FFFFFF;
+}
+h1 small{display:block;font-family:var(--body);font-size:.18em;font-weight:700;letter-spacing:.22em;
+  color:var(--violet);margin-bottom:16px;text-transform:uppercase}
+.lede{font-size:20px;color:var(--dim);max-width:54ch;margin:18px 0 0}
+
+.pt{border-top:1px solid var(--line);padding:44px 0 8px;scroll-margin-top:56px}
+.pt:first-of-type{border-top:none}
+.num{
+  display:inline-flex;align-items:center;gap:12px;margin-bottom:12px;
+  font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--violet);
+}
+.num b{
+  width:34px;height:34px;display:grid;place-items:center;border-radius:5px;
+  background:var(--cyan);color:#071018;font-family:var(--display);font-weight:700;font-size:17px;
+}
+h2{
+  font-family:var(--display);font-weight:700;font-size:clamp(25px,4.6vw,36px);
+  line-height:1.16;margin:0 0 16px;max-width:27ch;color:#FFFFFF;letter-spacing:-.01em;
+}
+h3{font-family:var(--display);font-weight:700;font-size:21px;margin:30px 0 6px;color:var(--bone)}
+.pt p{max-width:62ch;margin:0 0 16px}
+strong{font-weight:700;color:#FFFFFF}
+em.t{font-style:normal;font-family:var(--mono);font-size:.84em;background:rgba(232,236,247,.10);
+  padding:2px 6px;border-radius:3px}
+.aside{
+  border-left:3px solid var(--violet);padding:2px 0 2px 18px;margin:24px 0;
+  font-style:italic;color:var(--dim);max-width:58ch;
+}
+.trap{
+  margin:26px 0;border:1px solid rgba(224,96,122,.6);background:rgba(224,96,122,.13);
+  padding:16px 20px;max-width:62ch;border-radius:4px;
+}
+.trap b{
+  display:block;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:#F08AA0;margin-bottom:8px;
+}
+.trap p{margin:0}
+.note{
+  margin:30px 0 0;padding:18px 22px;max-width:62ch;border-radius:4px;
+  background:rgba(73,198,214,.12);border:1px solid rgba(73,198,214,.55);
+}
+.note .lab{
+  display:block;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:#7FDCE8;margin-bottom:8px;
+}
+.note p{margin:0}
+ul.clean{list-style:none;padding:0;margin:0 0 16px;max-width:62ch}
+ul.clean li{padding:8px 0 8px 26px;position:relative;border-bottom:1px solid rgba(232,236,247,.10)}
+ul.clean li:last-child{border-bottom:none}
+ul.clean li::before{
+  content:"";position:absolute;left:4px;top:18px;width:9px;height:9px;border-radius:50%;
+  background:var(--violet);
+}
+.eg{
+  margin:26px 0;max-width:62ch;border-left:3px solid var(--amber);
+  background:rgba(233,169,74,.10);padding:16px 20px 16px 18px;border-radius:0 4px 4px 0;
+}
+.eg b{
+  display:block;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--amber);margin-bottom:8px;
+}
+.eg p{margin:0 0 10px}
+.eg p:last-child{margin:0}
+.eg .out{font-family:var(--mono);font-size:.9em;color:var(--green)}
+figure{margin:28px 0;padding:18px;background:rgba(232,236,247,.045);border:1px solid var(--line);border-radius:6px}
+figure svg{display:block;width:100%;height:auto}
+figcaption{font-family:var(--mono);font-size:11px;color:var(--dim);margin-top:12px;text-align:center;line-height:1.6}
+.scroll{overflow-x:auto;margin:24px 0}
+table{border-collapse:collapse;width:100%;min-width:460px;font-size:16px}
+th,td{text-align:left;padding:9px 14px 9px 0;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);font-weight:600}
+td.n{font-family:var(--mono);color:var(--cyan)}
+/* figure ink */
+.f-bone{fill:var(--bone)}.f-cyan{fill:var(--cyan)}.f-violet{fill:var(--violet)}
+.f-amber{fill:var(--amber)}.f-rose{fill:var(--rose)}.f-green{fill:var(--green)}
+.f-panel{fill:var(--panel)}.f-none{fill:none}.f-dim{fill:var(--dim)}
+.s-bone{stroke:var(--bone)}.s-dim{stroke:var(--dim)}.s-cyan{stroke:var(--cyan)}
+.s-violet{stroke:var(--violet)}.s-amber{stroke:var(--amber)}.s-green{stroke:var(--green)}
+.tt{font-family:"IBM Plex Sans",sans-serif;font-size:13px;fill:var(--bone)}
+.ts{font-family:"IBM Plex Mono",monospace;font-size:10.5px;fill:var(--dim);letter-spacing:.06em}
+footer{margin:64px 0 0;padding-top:24px;border-top:1px solid var(--line);color:var(--dim);font-size:15px}
+a{color:var(--cyan)}
+@media(max-width:620px){body{font-size:17px}.rail-lab{display:none}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+@media print{.rail{display:none}}
+</style>
+</head>
+<body>
+
+<div class="rail">
+  <div class="rail-in">
+    <span class="rail-lab">research advances</span>
+    <svg id="tracks" viewBox="0 0 92 30" role="img" aria-label="Progress through the briefing"></svg>
+    <span class="track"><i id="fill"></i></span>
+    <span class="rail-count" id="count">1 / 14</span>
+  </div>
+</div>
+
+<div class="wrap">
+
+<a class="backlink" href="../">&larr; the shelf</a>
+
+<header class="top">
+  <p class="eyebrow">Learn it properly &middot; 14 points</p>
+  <h1><small>Fourteen species, ten kinds of planet, six rounds and no war</small>Gaia Project</h1>
+  <p class="lede">Gaia Project looks like a space game and plays like a logistics problem. You are not conquering anything. You are trying to reach planets you can live on, before the person whose home world is two colours away from yours reaches them first, and to fund the research that makes reaching them cheap.</p>
+</header>
+
+<article class="pt">
+  <p class="num"><b>1</b> The big picture</p>
+  <h2>You are a species that can breathe one atmosphere, in a galaxy of nine others.</h2>
+
+  <p>One to four players each take one of fourteen species. Each lives on one of seven basic planet types, and your buildings can only stand on your own type. Any other planet has to be <strong>terraformed</strong>, which means changing its atmosphere step by step until it matches you.</p>
+
+  <p>The galaxy is built at setup out of hexagonal sectors, so the map is different every game, but the shape of the problem never is: <strong>the planets you can afford are scattered, and the planets near you are mostly the wrong colour.</strong></p>
+
+  <p>The game runs <strong>six rounds</strong>. Each round you take income, then players alternate single actions until everyone has passed. Scores land somewhere around 130 to 160 points in a decent game, and they come from six things at once: the round scoring tiles, six research tracks, federations, tech tiles, two final scoring conditions, and your leftover resources.</p>
+
+  <p>There is no attacking. The interaction is exactly two things, the same two as in its ancestor <em>Terra Mystica</em>: the good planets run out, and your neighbours hand you power every time they build near you. Everything else is you against your own economy.</p>
+
+  <div class="aside">If you already know Terra Mystica, the structure will feel familiar within ten minutes. The genuinely new parts are range, the six research tracks, and the two final scoring tiles. Those three are what make it a different game rather than a reskin.</div>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Nobody can stop you doing anything. <strong>They can only get to the planet first, and make everything you do afterwards cost more.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>2</b> The planet wheel</p>
+  <h2>Every planet has a price for you, and a different price for the player opposite.</h2>
+
+  <p>The seven basic planet types sit in a fixed circle. Terraforming moves a planet around that circle one step at a time, and <strong>each step costs ore</strong>. One step is cheap, three steps is a serious investment, and the distance is decided entirely by which species you happen to be.</p>
+
+  <figure>
+    <svg viewBox="0 0 680 220" role="img" xmlns="http://www.w3.org/2000/svg">
+      <title>The planet wheel and terraforming cost</title>
+      <desc>Seven basic planet types in a circle; the number of steps from your home type to a target type is the number of terraforming steps, each paid in ore.</desc>
+      <circle class="f-none s-dim" cx="185" cy="110" r="74" stroke-dasharray="3 5"/>
+      <circle class="f-cyan" cx="185" cy="36" r="14"/>
+      <circle class="f-panel" cx="243" cy="73" r="14"/>
+      <circle class="f-amber" cx="243" cy="147" r="14"/>
+      <circle class="f-rose" cx="185" cy="184" r="14"/>
+      <circle class="f-green" cx="127" cy="147" r="14"/>
+      <circle class="f-bone" cx="127" cy="73" r="14"/>
+      <text class="ts" x="185" y="16" text-anchor="middle">your home type</text>
+      <text class="ts" x="185" y="208" text-anchor="middle">three steps away</text>
+      <text class="tt" x="185" y="108" text-anchor="middle">one step</text>
+      <text class="tt" x="185" y="126" text-anchor="middle">each way</text>
+
+      <text class="tt" x="360" y="46">the cost per step falls as you research</text>
+      <rect class="f-panel" x="360" y="64" width="270" height="34" rx="4"/>
+      <text class="ts" x="374" y="86">start</text>
+      <text class="tt" x="616" y="86" text-anchor="end">3 ore per step</text>
+      <rect class="f-panel" x="360" y="106" width="270" height="34" rx="4"/>
+      <text class="ts" x="374" y="128">one upgrade</text>
+      <text class="tt" x="616" y="128" text-anchor="end">2 ore per step</text>
+      <rect class="f-panel" x="360" y="148" width="270" height="34" rx="4"/>
+      <text class="ts" x="374" y="170">two upgrades</text>
+      <text class="tt" x="616" y="170" text-anchor="end">1 ore per step</text>
+      <text class="ts" x="360" y="202">the same planet, a third of the price</text>
+    </svg>
+    <figcaption>Fig. 1: the terraforming research track is not a bonus. It is a permanent discount on the single thing you do most.</figcaption>
+  </figure>
+
+  <p>Two planet types sit outside the wheel and cannot be terraformed at all. <strong>Gaia planets</strong> are green and anyone may settle one by paying a unit of the game's rare currency instead of terraforming. <strong>Transdim planets</strong> are purple and are not planets yet; they have to be converted first, which is point 9.</p>
+
+  <p>As in every game of this family, the wheel also tells you who your real rival is. The species one or two steps from you wants the same hexes you do. The species on the far side of the circle is playing a different game on the same board.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Look at the galaxy through your own colour. <strong>Half the planets on the table are not really available to you, and knowing which half is most of your opening plan.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>3</b> Range: the rule that has no equivalent anywhere else</p>
+  <h2>You may only build within reach, and reach starts at almost nothing.</h2>
+
+  <p>Terraforming a planet is not enough. You have to be able to <strong>get there</strong>. Every build measures the distance in hexes from your nearest existing building to the target planet, and that distance must be within your current <strong>navigation range</strong>, which starts at one hex.</p>
+
+  <p>One hex is very short. It means your opening position dictates your first several builds, and it means the galaxy is not an open board: it is a slowly expanding bubble around wherever you started.</p>
+
+  <figure>
+    <svg viewBox="0 0 680 190" role="img" xmlns="http://www.w3.org/2000/svg">
+      <title>Navigation range</title>
+      <desc>Your building at the centre, the ring of hexes within range one, and a planet further out that needs either a navigation upgrade or a spent Q.I.C. to reach.</desc>
+      <circle class="f-cyan" cx="150" cy="95" r="13"/>
+      <text class="ts" x="150" y="128" text-anchor="middle">you</text>
+      <circle class="f-none s-cyan" cx="150" cy="95" r="52" stroke-dasharray="4 4"/>
+      <text class="ts" x="150" y="30" text-anchor="middle">range 1</text>
+      <circle class="f-none s-violet" cx="150" cy="95" r="86" stroke-dasharray="4 4"/>
+      <text class="ts" x="150" y="186" text-anchor="middle">range 2, after one upgrade</text>
+      <circle class="f-amber" cx="330" cy="95" r="12"/>
+      <text class="ts" x="330" y="128" text-anchor="middle">the planet you want</text>
+      <path class="f-none s-dim" d="M400 60 v70" stroke-dasharray="3 5"/>
+      <text class="tt" x="430" y="70">three ways to reach it</text>
+      <text class="ts" x="430" y="98">climb the navigation track</text>
+      <text class="ts" x="430" y="120">spend a Q.I.C. for this build only</text>
+      <text class="ts" x="430" y="142">or build something in between first</text>
+    </svg>
+    <figcaption>Fig. 2: distance is measured from your nearest building, so every building you place is also a new place to measure from.</figcaption>
+  </figure>
+
+  <p>Range is bought in two ways. The <strong>navigation research track</strong> raises it permanently, which is why that track feels less like science and more like infrastructure. Or you spend a <strong>Q.I.C.</strong>, the game's scarce fourth currency, to stretch your range for a single build and no longer.</p>
+
+  <p>This changes the texture of the whole game compared to its ancestor. Space is not just contested, it is <strong>gated</strong>. A planet nobody else wants can be unreachable for you until round four, and a planet three players want may be reachable by only one of them right now. <strong>Before you covet a hex, measure it.</strong></p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Where you are allowed to build is a resource like ore or credits. <strong>Spending your whole game at range one is the quietest way to lose.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>4</b> The shape of a round</p>
+  <h2>Income, then one action at a time until everybody has stopped.</h2>
+
+  <p>Each round runs the same four steps, and they take about as long to learn as to read.</p>
+
+  <ul class="clean">
+    <li><strong>Income.</strong> Everything your buildings, your booster and your tech tiles produce arrives at once. This is the only moment resources appear.</li>
+    <li><strong>Gaia phase.</strong> Power you committed to gaia-forming comes back, and transdim planets you were working on finish turning green. Point 9.</li>
+    <li><strong>Actions.</strong> Players alternate, one action each, until all have passed. Build, upgrade, research, form a federation, take a power action, take a special action.</li>
+    <li><strong>Cleanup.</strong> The round scoring tile is discarded and the next one is exposed.</li>
+  </ul>
+
+  <p>Passing does the same triple duty it does in every game of this family. It ends your round, it lets you swap your <strong>booster tile</strong> for one of the face-up alternatives, and <strong>the first player to pass goes first next round</strong>. There is exactly one more booster than there are players, so the last player to pass takes whatever is left.</p>
+
+  <p>The thing worth internalising is that resources are turns. A player who collects more income than you simply acts more times this round, and the actions they take after you have passed are the ones that take the planets you were saving.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Everything arrives in income and nothing arrives during the round. <strong>Your income sheet is your turn count.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>5</b> The buildings, and what each one is really for</p>
+  <h2>Five structures, and every one of them is a different job.</h2>
+
+  <p>Your buildings sit on your player board covering printed income. Building one takes it off the board and reveals what it pays, every round, from then on.</p>
+
+  <div class="scroll"><table>
+    <tr><th>Structure</th><th>How you get it</th><th>What it is for</th></tr>
+    <tr><td>Mine</td><td>Terraform and settle a planet</td><td>Ore, and a foothold to measure range from</td></tr>
+    <tr><td>Trading station</td><td>Upgrade a mine</td><td>Credits and power; cheaper to build next to a rival</td></tr>
+    <tr><td>Research lab</td><td>Upgrade a trading station</td><td>Knowledge, and a tech tile</td></tr>
+    <tr><td>Academy</td><td>Upgrade a research lab</td><td>Knowledge or a repeatable special action, plus a tech tile</td></tr>
+    <tr><td>Planetary institute</td><td>Upgrade a trading station</td><td>Your species' signature ability</td></tr>
+  </table></div>
+
+  <p>Three things deserve saying out loud. First, upgrading <strong>replaces</strong> income rather than adding to it: the mine goes back onto your board and stops paying ore. A tableau of trading stations is a player with credits and no ore to build with.</p>
+
+  <p>Second, a trading station costs less to build if the planet is <strong>next to another player</strong>. The game actively pays you to move in beside someone, and then charges you for the power they collect when you do.</p>
+
+  <p>Third, <strong>research labs and academies are how tech tiles enter your game</strong>, and tech tiles are how you climb the research tracks at any speed. That connection is the spine of the whole thing, and it is point 8.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Mines make the ore that makes more mines. <strong>Build wide before you build tall, or round four arrives with nothing to spend.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>6</b> Power cycles, it does not accumulate</p>
+  <h2>Three bowls, one direction of travel, and a bill your neighbours pay in points.</h2>
+
+  <p>Your power tokens live in three areas. Gaining power moves tokens one area to the right, from 1 to 2 to 3. Spending power takes tokens out of area 3 and returns them all the way to area 1. Nothing is ever created. <strong>It takes two power gained to make one power spendable.</strong></p>
+
+  <p>Power pays for the shared <strong>power actions</strong> on the main board: a lump of knowledge, ore, credits, victory points, a terraforming step, a Q.I.C. Each is available once per round and goes to whoever reaches for it first. Power also runs the special abilities of several species and several tech tiles.</p>
+
+  <p>Then there is charging. When a player builds or upgrades next to your buildings, you are offered power equal to the power value of your adjacent structures, and <strong>you pay one victory point for every power taken beyond the first</strong>. Three power costs two points.</p>
+
+  <div class="eg">
+    <b>The decision that comes up twenty times a game</b>
+    <p>Round one: three power for two points. Take it. That power becomes a power action, and a power action in round one gets its value back several times over.</p>
+    <p>Round six: the same three power for the same two points, and you will pass before you can spend it. Decline.</p>
+    <p class="out">Early power is cheap at the price. Late power is a donation.</p>
+  </div>
+
+  <p>There is a fourth area, the <strong>gaia area</strong>, which is where power goes when you commit it to gaia-forming. It comes back, but only after a round out of circulation, which is exactly what makes gaia-forming an investment rather than a move.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Count area 3, not your whole supply. <strong>The rest is power you own and cannot use yet.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>7</b> The six research tracks</p>
+  <h2>This is the part that makes it Gaia Project. It is engine and scoreboard at the same time.</h2>
+
+  <p>Six tracks run up the board, each five steps tall. You climb one step at a time by spending <strong>knowledge</strong>, and each step you pass pays you something as you go. At the end of the game, your position on some of them scores directly.</p>
+
+  <div class="scroll"><table>
+    <tr><th>Track</th><th>What climbing it buys</th><th>Who it is for</th></tr>
+    <tr><td>Terraforming</td><td>Each step of atmosphere costs less ore</td><td>Anyone planning to settle awkward planets, which is everyone</td></tr>
+    <tr><td>Navigation</td><td>Permanent range, so more of the map exists for you</td><td>Cramped starts and sprawling plans</td></tr>
+    <tr><td>Artificial intelligence</td><td>Q.I.C., the currency that buys range, tech and planets</td><td>Flexible play, and the Gaia planet route</td></tr>
+    <tr><td>Gaia project</td><td>Gaiaformers, and cheaper gaia-forming</td><td>Maps with a lot of purple in reach</td></tr>
+    <tr><td>Economy</td><td>More income of everything, every round</td><td>Long games and early investment</td></tr>
+    <tr><td>Science</td><td>More knowledge, which is more research</td><td>Climbing faster, in order to climb faster</td></tr>
+  </table></div>
+
+  <p>Knowledge is the tightest resource in the game. It arrives slowly, mostly from research labs and academies, and there is no way to convert much of anything else into it. So the tracks are not a menu you browse, they are <strong>a small number of ladders you can actually afford to climb, chosen in the first two rounds</strong>.</p>
+
+  <p>The top step of each track is special: only one player may ever stand there, it costs a federation token to unlock, and it hands over the largest single effects in the game. That makes the tracks quietly competitive. If two players are climbing the same one, the second one arrives to find the door locked.</p>
+
+  <div class="trap">
+    <b>The spread that loses</b>
+    <p>Level one on five different tracks feels like progress and buys almost nothing. Level three or four on two tracks changes what your turns cost for the rest of the game. <strong>Depth beats breadth, and it is not close.</strong></p>
+  </div>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Pick your two or three tracks in round one and commit. <strong>Every step is a permanent discount, and discounts compound over six rounds.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>8</b> Tech tiles</p>
+  <h2>Research is not something you buy. It is something you are handed, with a condition attached.</h2>
+
+  <p>You cannot simply spend knowledge and walk up a track. To advance, you take a <strong>tech tile</strong> from the display above the tracks, and taking one both gives you its printed bonus and moves you one step up a track of your choice. Tech tiles come from building research labs, academies and your planetary institute, and from a few boosters and federations.</p>
+
+  <p>This is the join that makes the whole machine hang together, and it is the part new players see last:</p>
+
+  <ul class="clean">
+    <li>Mines make <strong>ore</strong>, which builds more mines and upgrades them.</li>
+    <li>Upgrades make research labs, which make <strong>knowledge</strong> and hand you <strong>tech tiles</strong>.</li>
+    <li>Tech tiles move you up <strong>research tracks</strong>, which make terraforming cheaper and range longer.</li>
+    <li>Cheaper terraforming and longer range mean <strong>more mines</strong>, further out, on better planets.</li>
+  </ul>
+
+  <p>Some tiles are <strong>advanced</strong>: they sit above the standard ones, they are worth considerably more, and taking one costs a federation token and covers up a standard tile you already own. That is the late-game upgrade path, and it is the second job federations do.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Research labs are not a luxury. <strong>They are the valve the whole engine runs through, and a game with none of them is a game with no second half.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>9</b> Gaia planets and the purple ones</p>
+  <h2>A slow route to planets nobody can take from you.</h2>
+
+  <p>Scattered through the galaxy are <strong>transdim planets</strong>, purple and uninhabitable. They are not on the wheel and no amount of terraforming touches them. To use one you send a <strong>gaiaformer</strong>, a piece you only get by climbing the gaia project track, and you commit power tokens into the gaia area to run it.</p>
+
+  <p>At the start of the next round the planet turns green: it becomes a <strong>Gaia planet</strong>, your gaiaformer comes home, and your power tokens come back into circulation. A Gaia planet can then be settled by paying a Q.I.C., without terraforming at all.</p>
+
+  <figure>
+    <svg viewBox="0 0 680 160" role="img" xmlns="http://www.w3.org/2000/svg">
+      <title>Gaia-forming a transdim planet</title>
+      <desc>A purple transdim planet, a gaiaformer sent with power committed to the gaia area, then the planet becoming a green Gaia planet next round and being settled for a Q.I.C.</desc>
+      <circle class="f-violet" cx="90" cy="80" r="26"/>
+      <text class="ts" x="90" y="128" text-anchor="middle">transdim</text>
+      <path class="f-none s-dim" d="M132 80 h86" stroke-width="1.6"/>
+      <path class="f-dim" d="M218 80 l-10 -5 v10 z"/>
+      <text class="ts" x="175" y="62" text-anchor="middle">gaiaformer</text>
+      <text class="ts" x="175" y="104" text-anchor="middle">+ power set aside</text>
+      <circle class="f-none s-green" cx="262" cy="80" r="26" stroke-dasharray="4 4"/>
+      <text class="ts" x="262" y="128" text-anchor="middle">one round later</text>
+      <path class="f-none s-dim" d="M304 80 h86" stroke-width="1.6"/>
+      <path class="f-dim" d="M390 80 l-10 -5 v10 z"/>
+      <circle class="f-green" cx="434" cy="80" r="26"/>
+      <text class="ts" x="434" y="128" text-anchor="middle">Gaia planet</text>
+      <path class="f-none s-dim" d="M476 80 h86" stroke-width="1.6"/>
+      <path class="f-dim" d="M562 80 l-10 -5 v10 z"/>
+      <circle class="f-cyan" cx="606" cy="80" r="26"/>
+      <text class="ts" x="606" y="128" text-anchor="middle">settled for a Q.I.C.</text>
+    </svg>
+    <figcaption>Fig. 3: three steps, spread over two rounds, for one planet. Worth it when the map hands you a cluster of purple, wasteful when it does not.</figcaption>
+  </figure>
+
+  <p>Two honest things about this route. It is <strong>slow</strong>: a planet takes a round of waiting and locks up power while it waits. And it is <strong>safe</strong>: nobody else can take a transdim planet without doing the same work, and several scoring tiles and species reward Gaia planets specifically.</p>
+
+  <p>So gaia-forming is a map-reading decision, not a taste. Look at what is in range of your start. If two or three purple planets sit within reach, the gaia track is a strategy. If there is one on the far side of the galaxy, it is a distraction with a nice colour.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Gaia-forming buys planets with time instead of ore. <strong>Time is the resource you have least of in a six round game, so only pay it where the map is generous.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>10</b> Federations</p>
+  <h2>The biggest single payout in the game, and it needs planning three turns out.</h2>
+
+  <p>Look at a connected group of your own buildings. Add up their power values: one for a mine, two for a trading station or research lab, three for an academy or planetary institute, four for the planetary institute of some species. When a connected group reaches <strong>seven power value</strong>, you may declare it a federation and take a federation token.</p>
+
+  <p>Connected means adjacent, and where your buildings are not adjacent you may link them with <strong>satellites</strong>, small markers dropped onto empty space, each paid for with a power token that leaves your economy for good. So a spread-out empire can still federate, it just pays for the privilege.</p>
+
+  <p>A federation token is worth a great deal. It pays victory points and a lump of resources immediately, and afterwards it is the key that unlocks two things nothing else unlocks: <strong>the top step of a research track</strong> and <strong>advanced tech tiles</strong>. Most winning games contain two or three federations. Most first games contain one, formed by accident in round five.</p>
+
+  <div class="eg">
+    <b>What planning one looks like</b>
+    <p>You have a mine, a mine and a trading station in one corner: 1 + 1 + 2 = 4. An academy upgrade on the trading station would make it 1 + 1 + 3 = 5, still short.</p>
+    <p>A fourth mine two hexes away, plus one satellite to bridge the gap, takes it to 6, and the upgrade you wanted anyway takes it to 7.</p>
+    <p class="out">Three moves you had already planned, arranged in an order that also pays out a federation.</p>
+  </div>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Seven power value, connected. <strong>Count your clusters before every build, because the same buildings in a different order are worth a federation more.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>11</b> The scoring tiles aim the whole game</p>
+  <h2>Six round tiles tell you when. Two final tiles tell you what for.</h2>
+
+  <p>Six <strong>round scoring tiles</strong> are laid out at setup, face up, one per round. Each says what earns bonus points that round: points per mine built, per trading station, per research step, per Gaia planet settled, per federation formed. They are worth twenty to thirty points over a game, and they are the only part of Gaia Project that tells you <em>when</em> to do the things you were going to do anyway.</p>
+
+  <p>Then there are <strong>two final scoring tiles</strong>, also face up from the start, and they are the ones new players walk straight past. Each ranks all players on some measure at the end of the game, for a large chunk of points: most buildings in a single sector, most planet types settled, most satellites, most buildings on Gaia planets. First place scores a lot, and every place scores something.</p>
+
+  <p>Those two tiles should be shaping decisions from your very first build. If the game will count <strong>planet types</strong>, then settling your sixth planet of the same colour is worth less than settling an awkward one you have never touched. If it counts <strong>buildings in one sector</strong>, then sprawling across four sectors is actively wrong.</p>
+
+  <div class="trap">
+    <b>The most expensive thing you can ignore</b>
+    <p>The two final tiles are usually worth more than any single research track. Players who read them in round five discover that the game they have been playing for five rounds scores badly in the game that is actually being scored.</p>
+  </div>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Read all eight tiles before your first action. <strong>The round tiles set your calendar and the final two set your destination.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>12</b> Your species is the plan</p>
+  <h2>Fourteen of them, and they disagree about what a good turn looks like.</h2>
+
+  <p>Each species has its own home planet type, its own starting income and research positions, its own costs, and a <strong>planetary institute</strong> ability that is the reason to play it. A sample of the range:</p>
+
+  <div class="scroll"><table>
+    <tr><th>Species</th><th>The idea</th><th>What it makes you do</th></tr>
+    <tr><td>Terrans</td><td>Power committed to gaia-forming comes back as any resource</td><td>Gaia-form constantly; the purple planets are your economy</td></tr>
+    <tr><td>Xenos</td><td>An extra mine, and cheap federations</td><td>Sprawl early, federate more often than anyone else</td></tr>
+    <tr><td>Hadsch Hallas</td><td>Turn credits into anything</td><td>Build trading stations and run on cash</td></tr>
+    <tr><td>Taklons</td><td>A brainstone that counts as three power, and generous charging</td><td>Snuggle up to rivals and take every power offer</td></tr>
+    <tr><td>Bal T'aks</td><td>Cannot advance navigation normally, but trades Q.I.C. aggressively</td><td>Play cramped and deep instead of wide</td></tr>
+  </table></div>
+
+  <p>The practical reading is the same as with the research tracks. Your species board is telling you <strong>which of the systems in this briefing is cheap for you</strong>, and the cheap system is the one you should be doing more of than anyone at the table. The planetary institute is usually the build that turns your species on, which is a strong argument for getting it up in round two or three rather than admiring it until round five.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Nobody in Gaia Project does everything. <strong>Find the thing you do more cheaply than the table, and do it far more often than feels reasonable.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>13</b> Round six, and the count</p>
+  <h2>The last round is not played like a round. It is played like a liquidation.</h2>
+
+  <p>When the sixth round ends, four things are counted:</p>
+
+  <ul class="clean">
+    <li><strong>The two final scoring tiles</strong>, ranking everyone on whatever they measure. Large.</li>
+    <li><strong>The research tracks</strong>, which pay out for the heights you reached.</li>
+    <li><strong>Federation tokens and tech tiles</strong> that carry end-game points.</li>
+    <li><strong>Leftover resources</strong>, at a poor rate: every few credits is a single point, and ore and knowledge convert to credits first.</li>
+  </ul>
+
+  <p>That last line is why the final round looks so frantic. Anything you are still holding is worth a fraction of what it is worth spent, so the correct round six converts every scrap of knowledge into research, every scrap of ore into buildings, and every spendable power into a power action. <strong>Ending the game with a full supply is handing back points you had already earned.</strong></p>
+
+  <p>The other round six habit is arithmetic. The final scoring tiles rank players, and the difference between first and second on one of them is often larger than anything else you can do with your last two actions. Work out what those two tiles will say before you decide what your last turns are for, because a single cheap mine on a planet type you have never settled can be worth more than a research step.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>In round six, stop building an engine and start cashing it. <strong>Count the two final tiles first, then spend down to nothing.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>14</b> How not to lose your first game</p>
+  <h2>The five habits that cost beginners the most.</h2>
+
+  <p>Gaia Project will never tell you that you are losing. There is no attack, no bankruptcy, no disaster. You simply arrive at round four with four credits, one ore, nowhere in range and nothing to do. These are the reasons.</p>
+
+  <h3>You spread your research thin</h3>
+  <p>One step on four tracks is four small bonuses. Three steps on terraforming is every planet you ever settle costing a third less. Choose two tracks in round one, and keep choosing them.</p>
+
+  <h3>You ignored range</h3>
+  <p>Range one is a cage, and the map does not open up on its own. If you have not climbed navigation and have no Q.I.C. saved, the good planets in round four are simply not addressable by you, whatever you can afford.</p>
+
+  <h3>You built tall before you built wide</h3>
+  <p>Mines are the ore, and ore is everything else. Upgrading your only two mines into trading stations in round two produces a player with money, no ore and nothing to do with either. Get four or five mines down first.</p>
+
+  <h3>You declined power because it cost points</h3>
+  <p>Two points for three power in round one is one of the best trades on the table, and beginners refuse it because the score is right there on the board. Take it early, decline it in round six. The only question is whether you will spend the power before the game ends.</p>
+
+  <h3>You did not read the two final tiles</h3>
+  <p>They are face up from the very start and they are worth more than most research tracks. Playing a beautiful sprawling game when the tile rewards a single dense sector is the most common way a good-looking first game finishes last.</p>
+
+  <div class="note">
+    <span class="lab">The whole game in one line</span>
+    <p>Six rounds, one action at a time, on planets you can only settle if you can both afford them and reach them. <strong>Build wide, dig deep into two research tracks, take the power, count to seven, and play towards the two tiles that were face up all along.</strong></p>
+  </div>
+</article>
+
+<footer>A teaching walkthrough of Gaia Project by Jens Dr&ouml;gem&uuml;ller &amp; Helge Ostertag (Feuerland Spiele, 2017). This page teaches what the game is and how it thinks; the rulebook in the box has the exact costs, species boards and edge cases. <a href="../">Back to the shelf</a>.</footer>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var pts = Array.prototype.slice.call(document.querySelectorAll('.pt'));
+  var svg = document.getElementById('tracks');
+  var fill = document.getElementById('fill');
+  var count = document.getElementById('count');
+  var at = 0;
+
+  /* six research tracks, five steps each, drawn bottom up */
+  var COLS = 6, ROWS = 5, cells = [];
+  var NS = 'http://www.w3.org/2000/svg';
+  for(var c = 0; c < COLS; c++){
+    for(var r = 0; r < ROWS; r++){
+      var x = 2 + c * 15, y = 26 - r * 5;
+      var bg = document.createElementNS(NS, 'rect');
+      bg.setAttribute('class', 'slot');
+      bg.setAttribute('x', x); bg.setAttribute('y', y);
+      bg.setAttribute('width', 11); bg.setAttribute('height', 3.4);
+      bg.setAttribute('rx', 1.2);
+      svg.appendChild(bg);
+      var on = document.createElementNS(NS, 'rect');
+      on.setAttribute('class', r === ROWS - 1 ? 'lit top' : 'lit');
+      on.setAttribute('x', x); on.setAttribute('y', y);
+      on.setAttribute('width', 11); on.setAttribute('height', 3.4);
+      on.setAttribute('rx', 1.2);
+      svg.appendChild(on);
+      cells.push(on);
+    }
+  }
+
+  function paint(n){
+    if(n === at) return;
+    at = n;
+    var p = n / pts.length;
+    var lit = Math.round(p * cells.length);
+    for(var i = 0; i < cells.length; i++){
+      cells[i].classList.toggle('on', i < lit);
+    }
+    fill.style.width = (p * 100).toFixed(1) + '%';
+    count.textContent = n + ' / ' + pts.length;
+    svg.setAttribute('aria-label', 'Point ' + n + ' of ' + pts.length);
+  }
+
+  var ticking = false;
+  function measure(){
+    ticking = false;
+    var mark = window.innerHeight * 0.45, n = 1;
+    for(var i = 0; i < pts.length; i++){
+      if(pts[i].getBoundingClientRect().top <= mark){ n = i + 1; }
+    }
+    paint(n);
+  }
+  window.addEventListener('scroll', function(){
+    if(!ticking){ ticking = true; window.requestAnimationFrame(measure); }
+  }, {passive:true});
+  window.addEventListener('resize', measure);
+  paint(1);
+  measure();
+})();
+</script>
+</body>
+</html>
