@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Death on the Cards: Learn It Properly</title>
+<meta name="description" content="Learn what Agatha Christie's Death on the Cards actually is: fourteen points on the hidden murderer, three face-down secrets each, the draw pile that is really a clock, detective sets, and why the player discarding the most is the one to watch.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Limelight&family=Crimson+Pro:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --night:#111013;
+  --deep:#19161B;
+  --panel:#231E24;
+  --cream:#F1E7D3;
+  --dim:#ADA294;
+  --brass:#C9A45C;
+  --blood:#C2312E;
+  --teal:#4D9C98;
+  --violet:#8C6BB8;
+  --line:rgba(241,231,211,.15);
+  --display:"Limelight","Didot",Georgia,serif;
+  --body:"Crimson Pro",Georgia,serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;color:var(--cream);font-family:var(--body);font-size:19px;line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+  background:
+    radial-gradient(860px 520px at 88% -8%, rgba(194,49,46,.16), transparent 62%),
+    radial-gradient(700px 480px at 2% 6%, rgba(201,164,92,.09), transparent 60%),
+    linear-gradient(180deg,var(--night),var(--deep) 80%);
+  background-attachment:fixed;
+}
+.wrap{max-width:800px;margin:0 auto;padding:0 22px 90px}
+
+/* ---------- the draw pile rail ---------- */
+.rail{
+  position:sticky;top:0;z-index:20;background:rgba(17,16,19,.95);
+  backdrop-filter:blur(6px);border-bottom:1px solid var(--line);padding:8px 22px;
+}
+.rail-in{max-width:800px;margin:0 auto;display:flex;align-items:center;gap:14px}
+.rail-lab{
+  font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--brass);white-space:nowrap;min-width:11.5em;transition:color .4s ease;
+}
+.rail-lab.gone{color:var(--blood)}
+.pile{position:relative;flex:1;height:30px;min-width:80px;display:flex;align-items:center;gap:3px}
+.pile .c{
+  flex:1;max-width:22px;height:28px;border-radius:2px;
+  background:linear-gradient(135deg,#3A2A30,#251B21);
+  border:1px solid rgba(201,164,92,.55);
+  transition:opacity .35s ease,transform .35s ease;
+}
+.pile .c.burnt{opacity:.12;transform:translateY(5px)}
+.pile .esc{
+  flex:0 0 auto;margin-left:8px;height:28px;padding:0 8px;display:grid;place-items:center;border-radius:2px;
+  font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;
+  border:1px dashed rgba(194,49,46,.5);color:rgba(194,49,46,.6);white-space:nowrap;
+  transition:background .4s ease,color .4s ease;
+}
+.pile .esc.on{background:var(--blood);color:var(--cream);border-style:solid}
+.rail-count{font-family:var(--mono);font-size:12px;color:var(--dim);white-space:nowrap}
+
+.backlink{
+  display:inline-block;margin-top:26px;font-family:var(--mono);font-size:11px;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--dim);text-decoration:none;
+  border-bottom:1px solid transparent;
+}
+.backlink:hover{color:var(--brass);border-bottom-color:var(--brass)}
+
+header.top{padding:28px 0 42px;border-bottom:1px solid var(--line)}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--brass);margin:22px 0 14px}
+h1{
+  font-family:var(--display);font-weight:400;font-size:clamp(46px,10.5vw,92px);
+  line-height:.98;margin:0 0 8px;color:#FBF3E2;
+}
+h1 small{display:block;font-family:var(--mono);font-size:.14em;font-weight:500;letter-spacing:.2em;
+  color:var(--blood);margin-bottom:18px;text-transform:uppercase;line-height:1.5}
+.lede{font-size:21px;color:var(--dim);max-width:54ch;margin:18px 0 0}
+.rule{display:flex;align-items:center;gap:12px;margin-top:26px;color:var(--brass)}
+.rule::before,.rule::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(201,164,92,.6),transparent)}
+.rule span{font-family:var(--mono);font-size:10px;letter-spacing:.3em}
+
+.pt{border-top:1px solid var(--line);padding:44px 0 8px;scroll-margin-top:58px}
+.pt:first-of-type{border-top:none}
+.num{
+  display:inline-flex;align-items:center;gap:12px;margin-bottom:12px;
+  font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);
+}
+.num b{
+  width:28px;height:38px;display:grid;place-items:center;border-radius:3px;
+  background:var(--cream);color:var(--blood);font-family:var(--display);font-weight:400;font-size:17px;
+  border:1px solid var(--brass);
+}
+h2{
+  font-family:var(--body);font-weight:700;font-size:clamp(27px,5vw,39px);
+  line-height:1.14;margin:0 0 16px;max-width:26ch;color:#FBF3E2;
+}
+h3{font-family:var(--body);font-weight:700;font-size:23px;margin:30px 0 6px;color:var(--cream)}
+.pt p{max-width:62ch;margin:0 0 16px}
+strong{font-weight:700;color:#FBF3E2}
+.aside{
+  border-left:3px solid var(--brass);padding:2px 0 2px 18px;margin:24px 0;
+  font-style:italic;color:var(--dim);max-width:58ch;
+}
+.trap{
+  margin:26px 0;border:1px solid rgba(194,49,46,.6);background:rgba(194,49,46,.12);
+  padding:16px 20px;max-width:62ch;border-radius:3px;
+}
+.trap b{
+  display:block;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:#E5706C;margin-bottom:8px;
+}
+.trap p{margin:0}
+.note{
+  margin:30px 0 0;padding:18px 22px;max-width:62ch;border-radius:3px;
+  background:rgba(201,164,92,.11);border:1px solid rgba(201,164,92,.5);
+}
+.note .lab{
+  display:block;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--brass);margin-bottom:8px;
+}
+.note p{margin:0}
+ul.clean{list-style:none;padding:0;margin:0 0 16px;max-width:62ch}
+ul.clean li{padding:8px 0 8px 26px;position:relative;border-bottom:1px solid rgba(241,231,211,.10)}
+ul.clean li:last-child{border-bottom:none}
+ul.clean li::before{
+  content:"";position:absolute;left:5px;top:17px;width:8px;height:11px;border-radius:1px;
+  background:var(--blood);
+}
+.eg{
+  margin:26px 0;max-width:62ch;border-left:3px solid var(--teal);
+  background:rgba(77,156,152,.10);padding:16px 20px 16px 18px;border-radius:0 3px 3px 0;
+}
+.eg b{
+  display:block;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:#7CC2BE;margin-bottom:8px;
+}
+.eg p{margin:0 0 10px}
+.eg p:last-child{margin:0}
+.eg .out{font-family:var(--mono);font-size:.82em;color:var(--brass)}
+figure{margin:28px 0;padding:18px;background:rgba(241,231,211,.045);border:1px solid var(--line);border-radius:4px}
+figure svg{display:block;width:100%;height:auto}
+figcaption{font-family:var(--mono);font-size:11px;color:var(--dim);margin-top:12px;text-align:center;line-height:1.6}
+.scroll{overflow-x:auto;margin:24px 0}
+table{border-collapse:collapse;width:100%;min-width:460px;font-size:17px}
+th,td{text-align:left;padding:9px 14px 9px 0;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);font-weight:500}
+td.n{font-family:var(--mono);font-size:.86em;color:var(--brass)}
+/* figure ink */
+.f-cream{fill:var(--cream)}.f-brass{fill:var(--brass)}.f-blood{fill:var(--blood)}.f-teal{fill:var(--teal)}
+.f-violet{fill:var(--violet)}.f-panel{fill:var(--panel)}.f-none{fill:none}.f-dim{fill:var(--dim)}
+.f-back{fill:#33252B}
+.s-cream{stroke:var(--cream)}.s-dim{stroke:var(--dim)}.s-brass{stroke:var(--brass)}.s-blood{stroke:var(--blood)}.s-teal{stroke:var(--teal)}
+.tt{font-family:"Crimson Pro",serif;font-size:15px;fill:var(--cream)}
+.ts{font-family:"IBM Plex Mono",monospace;font-size:10px;fill:var(--dim);letter-spacing:.06em}
+footer{margin:64px 0 0;padding-top:24px;border-top:1px solid var(--line);color:var(--dim);font-size:16px}
+a{color:var(--brass)}
+@media(max-width:620px){body{font-size:18px}.rail-lab{display:none}.pile .esc{font-size:0;padding:0 5px}.pile .esc::after{content:"\2020";font-size:13px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+@media print{.rail{display:none}}
+</style>
+</head>
+<body>
+
+<div class="rail">
+  <div class="rail-in">
+    <span class="rail-lab" id="lab">14 cards left</span>
+    <span class="pile" id="pile" role="img" aria-label="The draw pile, one card burnt per point read">
+      <span class="esc" id="esc">murderer escapes!</span>
+    </span>
+    <span class="rail-count" id="count">1 / 14</span>
+  </div>
+</div>
+
+<div class="wrap">
+
+<a class="backlink" href="../">&larr; the shelf</a>
+
+<header class="top">
+  <p class="eyebrow">Learn it properly &middot; 14 points &middot; Agatha Christie's</p>
+  <h1><small>Everyone has something to hide. One of you has a body.</small>Death on the Cards</h1>
+  <p class="lede">A murder has been committed and every suspect is sitting at this table, holding three secrets face down. Most of the secrets are merely embarrassing. One of them is a confession. The rest of you have until the draw pile runs out to find it.</p>
+  <div class="rule" aria-hidden="true"><span>&#9670; &#9670; &#9670;</span></div>
+</header>
+
+<article class="pt">
+  <p class="num"><b>1</b> The big picture</p>
+  <h2>A hidden murderer, a table of suspects, and a deck that is running out.</h2>
+
+  <p>Death on the Cards is a small-box card game for two to six people, about half an hour long. Everybody is dealt <strong>three secret cards</strong>, face down in front of them. Shuffled in among those secrets is one card that says <strong>you're the murderer</strong>. Whoever gets it knows, and nobody else does.</p>
+
+  <p>Everyone else is on the same side. You are not trying to beat the other innocent players; you are trying, together, to <strong>turn the murderer's card face up</strong>. The moment that happens, every innocent player wins at once.</p>
+
+  <p>The murderer wins by running out the clock. Underneath the draw pile sits a card called <strong>Murderer Escapes!</strong>, and if the pile is ever exhausted and that card comes to light, the killer walks free.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>It is a team game with a traitor in the team. <strong>Every innocent player wants the same card turned over, and one player wants time to pass.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>2</b> The secrets</p>
+  <h2>Three face-down cards each, and only one of them on the whole table matters.</h2>
+
+  <p>The secret cards are little scandals in the Christie manner: a hidden past, a disreputable hobby, a debt. Turning one face up is a mark of shame, and revealed secrets stay on the table for everyone to see.</p>
+
+  <p>Here is the thing new players miss. For the innocent side, <strong>every embarrassing secret revealed is a wasted shot</strong>. Nobody wins anything by learning that the colonel once ran away with a circus. The only reveal that helps is the murderer's, and every other reveal spends a turn and brings an innocent player one step closer to disgrace (point 12).</p>
+
+  <p>So investigation is a hunt for one card among many, and the game is about <strong>narrowing the search</strong>: which player, and which of their three cards.</p>
+
+  <figure>
+    <svg viewBox="0 0 700 200" role="img" aria-labelledby="sc-t sc-d">
+      <title id="sc-t">Three players, nine secrets, one murderer</title>
+      <desc id="sc-d">Three rows of three face-down cards, one row per player. Two cards have already been revealed as harmless embarrassing secrets. One face-down card in the middle row is outlined in red, the murderer's card, though nobody but its owner knows which it is.</desc>
+      <g class="ts" text-anchor="end"><text x="96" y="48">ALICE</text><text x="96" y="108">BEN</text><text x="96" y="168">CARA</text></g>
+      <g class="s-brass" stroke-width="1.2">
+        <rect x="120" y="22" width="38" height="50" rx="3" class="f-back"/>
+        <rect x="170" y="22" width="38" height="50" rx="3" class="f-cream"/>
+        <rect x="220" y="22" width="38" height="50" rx="3" class="f-back"/>
+        <rect x="120" y="82" width="38" height="50" rx="3" class="f-back"/>
+        <rect x="170" y="82" width="38" height="50" rx="3" class="f-back"/>
+        <rect x="120" y="142" width="38" height="50" rx="3" class="f-back"/>
+        <rect x="170" y="142" width="38" height="50" rx="3" class="f-back"/>
+        <rect x="220" y="142" width="38" height="50" rx="3" class="f-cream"/>
+      </g>
+      <rect x="220" y="82" width="38" height="50" rx="3" class="f-back s-blood" stroke-width="2.4" stroke-dasharray="4 3"/>
+      <text x="189" y="52" class="ts" text-anchor="middle" fill="#C2312E">!</text>
+      <text x="239" y="172" class="ts" text-anchor="middle" fill="#C2312E">!</text>
+      <g class="f-none s-dim" stroke-width="1.2"><path d="M270 108h60"/></g>
+      <text x="340" y="96" class="tt">the only card that ends the game</text>
+      <text x="340" y="116" class="ts">AND ONLY BEN KNOWS IT IS THERE</text>
+      <text x="340" y="40" class="ts">REVEALED: EMBARRASSING, USELESS</text>
+      <g class="f-none s-dim" stroke-width="1.2"><path d="M212 40h120"/></g>
+    </svg>
+    <figcaption>Two shots fired, two scandals uncovered, and the murderer is no closer to being caught.</figcaption>
+  </figure>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>A secret revealed is only progress if it narrows the search. <strong>You are not collecting scandals; you are eliminating places the confession could be.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>3</b> The clock</p>
+  <h2>The draw pile is not a supply. It is the murderer's countdown.</h2>
+
+  <p>In most card games the deck is just where new cards come from. Here it is the game's timer. Every card that leaves the draw pile brings <strong>Murderer Escapes!</strong> one card closer to the surface, and nothing about that timer is hidden: everyone can see roughly how thick the pile is.</p>
+
+  <p>That gives the whole table a shared sense of pace. Early on, there is a fat deck and room to be patient. As the pile thins, the innocent players need to start taking riskier shots, and the murderer needs only to keep things slow and muddled for a few more rounds.</p>
+
+  <div class="aside">The rail at the top of this page is the same clock. Every point you read burns a card. Read slowly enough and the murderer gets away.</div>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Watch the draw pile, not just the players. <strong>The deck is the murderer's best friend, and it is on the table in plain sight.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>4</b> Your turn</p>
+  <h2>Play one thing, then throw away what you like and draw back up to six.</h2>
+
+  <p>A turn has two halves. First you may make one play: <strong>one event card</strong>, or <strong>one set of detective cards</strong>, or <strong>one detective added to a set</strong> you already have on the table. If you play nothing, you must discard at least one card instead.</p>
+
+  <p>Then comes the half that looks like housekeeping: you may <strong>discard as many cards as you like and draw back up to six</strong>. You can draw blind from the pile or take from a row of three face-up cards beside it, the <strong>card draft</strong>, which is refilled from the pile as it is taken.</p>
+
+  <p>That refill is where the clock actually ticks. A player who plays one card and draws one burns one card off the deck. A player who throws away four cards and draws four has burnt four. Same turn, four times the damage to the timer.</p>
+
+  <figure>
+    <svg viewBox="0 0 700 180" role="img" aria-labelledby="tn-t tn-d">
+      <title id="tn-t">Two turns, two very different costs to the deck</title>
+      <desc id="tn-d">Two players each end their turn by refilling to six. The first discarded nothing extra after one play and draws one card from the pile. The second discarded four and draws four. Beneath, the draw pile is shown shrinking by one and by four, with Murderer Escapes at its base.</desc>
+      <text x="40" y="34" class="tt">plays one card, draws one</text>
+      <text x="40" y="104" class="tt">discards four, draws four</text>
+      <g class="s-brass" stroke-width="1"><rect x="300" y="16" width="24" height="32" rx="2" class="f-back"/></g>
+      <g class="s-blood" stroke-width="1.2">
+        <rect x="300" y="86" width="24" height="32" rx="2" class="f-back"/><rect x="330" y="86" width="24" height="32" rx="2" class="f-back"/>
+        <rect x="360" y="86" width="24" height="32" rx="2" class="f-back"/><rect x="390" y="86" width="24" height="32" rx="2" class="f-back"/>
+      </g>
+      <text x="440" y="38" class="ts">DECK &minus;1</text>
+      <text x="440" y="108" class="ts" fill="#C2312E">DECK &minus;4</text>
+      <g class="f-none s-dim" stroke-width="1"><path d="M40 146h560"/></g>
+      <rect x="560" y="132" width="90" height="28" rx="2" class="f-blood"/>
+      <text x="605" y="150" class="ts" text-anchor="middle" fill="#F1E7D3">ESCAPES!</text>
+      <text x="40" y="172" class="ts">every card drawn moves this card closer to the top</text>
+    </svg>
+    <figcaption>Discarding is free, legal and invisible as a strategy. It is also how the murderer wins.</figcaption>
+  </figure>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>The end-of-turn refill is the most important rule in the game. <strong>How many cards a player draws tells you how hard they are pushing the clock.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>5</b> Reading the table</p>
+  <h2>The murderer cannot hide their goal, only their reasons.</h2>
+
+  <p>Put points 3 and 4 together and you have the game's central tell. The murderer wants the pile gone. The cheapest way to make it go is to discard heavily and draw a lot. So <strong>a player who keeps churning through cards is a player worth looking at</strong>.</p>
+
+  <p>The murderer knows this, of course, and has excuses ready. "I'm digging for a third Poirot." "I had nothing useful." Both are perfectly true things an innocent player might say. That is what makes the game work: every suspicious action has an innocent explanation, and you have to decide whose explanations you believe.</p>
+
+  <p>Innocent players have the opposite discipline. If you are not the murderer, <strong>every unnecessary discard helps the person you are hunting</strong>. Keep your hand, draw little, and you are both slowing the clock and sending a quiet signal about which side you are on.</p>
+
+  <div class="trap">
+    <b>The instinct to unlearn</b>
+    <p>In most card games, cycling through the deck to find what you need is simply good play. Here, as an innocent, it is helping the killer. Dig only when the card you are digging for will actually reveal something.</p>
+  </div>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Count draws. <strong>The player burning the most cards is either the murderer or doing the murderer's work for them.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>6</b> Detectives come in sets</p>
+  <h2>One Poirot does nothing. Enough Poirots open a case.</h2>
+
+  <p>Most of the useful cards in your hand are <strong>detectives</strong>: Poirot, Miss Marple, Tommy and Tuppence, and a handful of Christie's less famous sleuths. A single detective card cannot be played. Each one shows a <strong>number in its corner</strong>, and you need that many matching cards to lay the set down in front of you and use its ability.</p>
+
+  <p>The famous detectives tend to need bigger sets and do more; the minor ones come together more cheaply. And there is a <strong>wildcard</strong>, Harley Quin, who can fill a gap in any set. He cannot form a set on his own, and the ability always belongs to the real detective in the set, never to him.</p>
+
+  <p>So your hand is a small set-collection puzzle. Do you sit on two Poirots waiting for a third, or lay down the cheap pair you already have? Waiting costs turns, and turns are cards off the deck.</p>
+
+  <figure>
+    <svg viewBox="0 0 700 170" role="img" aria-labelledby="ds-t ds-d">
+      <title id="ds-t">Making a detective set with a wildcard</title>
+      <desc id="ds-d">A set needs three matching detective cards, shown by a 3 in the corner. Two real detective cards and one wildcard make the set. A card underneath notes that the action comes from the real detective, never the wildcard.</desc>
+      <g stroke-width="1.4">
+        <rect x="60" y="30" width="80" height="110" rx="5" class="f-cream s-brass"/>
+        <rect x="150" y="30" width="80" height="110" rx="5" class="f-cream s-brass"/>
+        <rect x="240" y="30" width="80" height="110" rx="5" class="f-violet s-brass"/>
+      </g>
+      <g><circle cx="78" cy="48" r="11" class="f-blood"/><circle cx="168" cy="48" r="11" class="f-blood"/><circle cx="258" cy="48" r="11" class="f-brass"/></g>
+      <g class="ts" text-anchor="middle" fill="#F1E7D3"><text x="78" y="52">3</text><text x="168" y="52">3</text><text x="258" y="52">&#9670;</text></g>
+      <g class="ts" text-anchor="middle"><text x="100" y="100" fill="#19161B">DETECTIVE</text><text x="190" y="100" fill="#19161B">DETECTIVE</text><text x="280" y="100" fill="#F1E7D3">WILDCARD</text></g>
+      <text x="370" y="70" class="tt">a set of three: two real, one wild</text>
+      <text x="370" y="94" class="ts">THE ABILITY COMES FROM THE REAL CARDS</text>
+      <text x="370" y="114" class="ts">A WILDCARD ALONE IS NEVER A SET</text>
+    </svg>
+    <figcaption>The corner number is the price of the ability. Wildcards lower the price but never pay all of it.</figcaption>
+  </figure>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Your hand is a partly built set, not a list of options. <strong>Know which detective you are building towards and what it costs.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>7</b> Who chooses the card</p>
+  <h2>The most important word on a detective is who picks which secret flips.</h2>
+
+  <p>Detectives investigate a player, and broadly they do it in one of two ways. Some let <strong>you choose</strong> which of the target's face-down secrets is revealed. Others make the target reveal <strong>a secret of their own choosing</strong>.</p>
+
+  <p>That difference is enormous, and it is worth reading every detective card with it in mind. If the target chooses, the murderer will never choose the murder card while they have an embarrassing alternative. Asking a suspect to "show you a secret" is asking them to show you the one they don't mind you seeing. If you choose, you might hit the confession.</p>
+
+  <p>So the cheap, target-chooses investigations are best used to <strong>strip a suspect down</strong>: take away their harmless options one by one, so that when a you-choose detective finally arrives, there are fewer places left to look. A suspect with one face-down card left has, in effect, nowhere to hide it.</p>
+
+  <div class="eg">
+    <b>What it looks like at the table</b>
+    <p>Ben has three secrets face down. You lay a cheap pair that makes him reveal one of his choice. He flips a debt. Next round, someone else's pair makes him reveal another: a forged letter.</p>
+    <p class="out">Ben now has one face-down card. Any investigation at all, of either kind, now reveals exactly that card.</p>
+  </div>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>When the target chooses, they pick the harmless one. <strong>Use those detectives to shrink a suspect's options, and save the ones where you choose for the kill.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>8</b> Sets on the table keep working</p>
+  <h2>A set you have laid down can be fed one card at a time, and fires again.</h2>
+
+  <p>Once a detective set is face up in front of you, it is not finished. On a later turn, adding <strong>one more matching detective</strong> to it counts as your play and repeats its ability. That turns a set into a slow, recurring investigation: one card, one more look.</p>
+
+  <p>That changes how you value spare detective cards. A lone Poirot in your hand is dead weight until you have a set, but once your Poirot set is on the table, every Poirot that turns up is a full investigation for a single card.</p>
+
+  <p>There is a sly twist with <strong>Ariadne Oliver</strong>, Christie's crime novelist, who can be added to a set that belongs to <strong>someone else</strong>. Christie fans will recognise the joke: the meddling novelist muscling into another detective's case.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>A set on the table is a tool you own. <strong>Hold matching detectives for your existing sets; they are the cheapest investigations in the game.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>9</b> Not so fast</p>
+  <h2>Anyone can cancel anything, and the cancellations can be cancelled.</h2>
+
+  <p>Every player starts with one card called <strong>Not so Fast...</strong>, and a few more are shuffled into the deck. It is the only card you can play outside your own turn. When somebody plays an action, anyone may slap down a Not so Fast to cancel it. Somebody else can answer with another, cancelling the cancel, and so on until nobody has one left to play.</p>
+
+  <p>Think about who wants these most. The innocents want them to protect against harmless reveals and to keep their own detective sets working. The murderer wants them <strong>desperately</strong>, because one well-timed cancel can stop the investigation that would have hit the confession. A player who hoards Not so Fast cards and uses them only when one particular secret is threatened is telling you something.</p>
+
+  <p>Equally, an innocent player who sees an investigation aimed at a likely suspect should keep their Not so Fast cards to <strong>cancel the cancel</strong>. The chain is a little auction of trust played out in cards.</p>
+
+  <div class="aside">One detail worth knowing: a set played with Tommy and Tuppence standing in for one another cannot be stopped by Not so Fast. The couple, in Christie as here, are hard to put off a case.</div>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Watch who cancels what. <strong>The investigation someone most wants stopped is usually the one pointed at the right card.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>10</b> Events and the whole table</p>
+  <h2>Some cards stir the room instead of investigating one player.</h2>
+
+  <p>Event cards are one-shot actions, played and then discarded. Their names are puns on Christie titles, and what they do is mostly <strong>move cards between players</strong> or <strong>shift the group</strong>: trading a card with someone, making everyone pass a card along, getting at the discard pile, putting cards back under the deck to delay the escape, or pushing the whole table to point a finger at once.</p>
+
+  <p>The table-wide ones are where the social game happens. When everybody has to commit to a suspicion at the same moment, you learn as much from <strong>who points at whom</strong> as from the result. The murderer has to point somewhere too, and blending in means pointing like an innocent would.</p>
+
+  <p>The card that slips cards back under the deck deserves special mention for innocents. It is one of the few things in the game that <strong>winds the clock back</strong>, and it is worth far more late, when the pile is thin, than early.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Events are about everyone, not just a target. <strong>Watch how each player behaves when the whole table has to act at once.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>11</b> Devious cards</p>
+  <h2>A handful of cards you never play. You can only pass them on.</h2>
+
+  <p>Mixed into the deck are a few <strong>devious cards</strong>. You cannot lay them on the table. They only move when an event makes players trade or pass cards, and whoever ends up holding one has to <strong>carry out what it says</strong>, usually something unpleasant for them, before discarding it.</p>
+
+  <p>That makes them a poisoned gift. Drawing one is not a disaster; it is a card sitting in your hand waiting for the next trade, when you can hand it to somebody you suspect. And it makes every trading event a little tense, because the card coming towards you might be one of them.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>A devious card in your hand is ammunition, not bad luck. <strong>Keep it until a trade lets you aim it.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>12</b> Social disgrace</p>
+  <h2>Lose all three secrets and you are out of polite society, but still in the game.</h2>
+
+  <p>When all of an innocent player's secrets have been revealed, they fall into <strong>social disgrace</strong>. A disgraced player stops making ordinary plays. Each turn they simply discard a card and draw one, though they can still throw in Not so Fast cards and join in when an event drags the whole table in.</p>
+
+  <p>Look at what that does to the clock. A disgraced player is a turn that burns a card and investigates nothing. The more innocents fall into disgrace, the faster the pile shrinks and the fewer players are left actually hunting.</p>
+
+  <p>And it is the murderer's second way to win. If every other player is in disgrace, so that only the murderer still has secrets face down, the murderer wins outright. Which is why reckless investigation of innocent players is not just wasted; it is <strong>actively working for the killer</strong>.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Every innocent you disgrace is a detective the team has lost. <strong>Investigate to find the murderer, not to clear the table.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>13</b> How many at the table</p>
+  <h2>Two players is a duel. Five and six bring an accomplice.</h2>
+
+  <p>The standard game is three or four players: one hidden murderer and everyone else hunting. The other counts change the shape of it:</p>
+
+  <ul class="clean">
+    <li><strong>Two players:</strong> the mystery is gone. One of you is the murderer and both of you know it, so the game becomes a straight race between uncovering the confession and running out the deck.</li>
+    <li><strong>Five or six players:</strong> an <strong>accomplice</strong> card joins the secrets. Murderer and accomplice quietly learn who each other are at the start, and the accomplice wins or loses with the murderer. Now there are two people slowing things down, and one of them can be caught red-handed without the game ending.</li>
+  </ul>
+
+  <p>With an accomplice in play, the reading of the table from point 5 gets harder. Two players are now burning cards and cancelling investigations, and they can cover for each other by pointing at an innocent.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Play it at three to six for the mystery. <strong>At five or six, assume the player defending your prime suspect most loudly might be on their side.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>14</b> How not to lose your first game</p>
+  <h2>Five instincts card games gave you, and what they cost here.</h2>
+
+  <h3>You cycled your hand for better cards</h3>
+  <p>Discarding to dig is good play almost everywhere else. Here, as an innocent, every card you burn is a gift to the murderer. Draw only what you need.</p>
+
+  <h3>You investigated whoever was nearest</h3>
+  <p>Every revealed innocent secret is a wasted turn and a step towards someone's disgrace. Pick a suspect with a reason, usually the player burning cards or cancelling investigations, and work on them.</p>
+
+  <h3>You asked a suspect to choose</h3>
+  <p>A target who chooses which secret to reveal will never show you the murder. Use those detectives to shrink their options, then hit them with one where you choose.</p>
+
+  <h3>You spent your Not so Fast on yourself</h3>
+  <p>Protecting your own embarrassing secrets saves you a little dignity. Saving the card to cancel the murderer's cancellation can win the game for everyone.</p>
+
+  <h3>As the murderer, you were too quiet</h3>
+  <p>The murderer who never investigates and discards five cards a turn is the easiest player at the table to read. Investigate innocents, cheerfully, and let the deck run down at a pace that looks natural.</p>
+
+  <div class="note">
+    <span class="lab">The whole game in one line</span>
+    <p>One confession, a pile of scandals, and a deck that is a clock. <strong>Watch who burns cards and who cancels what, shrink a suspect's options, and save the investigation where you choose for the card that matters.</strong></p>
+  </div>
+</article>
+
+<footer>A teaching walkthrough of Agatha Christie's Death on the Cards by Thomas Rawlings (Modiphius Entertainment, 2019). This page teaches what the game is and how it thinks; the rules sheet and the cards themselves have the exact detective abilities, event effects and set-up counts. <a href="../">Back to the shelf</a>.</footer>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var pts = Array.prototype.slice.call(document.querySelectorAll('.pt'));
+  var pile = document.getElementById('pile');
+  var esc = document.getElementById('esc');
+  var lab = document.getElementById('lab');
+  var count = document.getElementById('count');
+  var cards = [];
+  for(var i = 0; i < pts.length; i++){
+    var c = document.createElement('span');
+    c.className = 'c';
+    pile.insertBefore(c, esc);
+    cards.push(c);
+  }
+
+  var at = 0;
+  function paint(n){
+    if(n === at) return;
+    at = n;
+    /* point 1 burns nothing; the last point burns the last card */
+    var burnt = Math.round((n - 1) * pts.length / (pts.length - 1));
+    var left = pts.length - burnt;
+    cards.forEach(function(c, i){ c.classList.toggle('burnt', i < burnt); });
+    esc.classList.toggle('on', left === 0);
+    lab.classList.toggle('gone', left === 0);
+    lab.textContent = left === 0 ? 'the pile is empty' : left + (left === 1 ? ' card left' : ' cards left');
+    count.textContent = n + ' / ' + pts.length;
+    pile.setAttribute('aria-label', 'Point ' + n + ' of ' + pts.length + '; ' + left + ' cards left in the draw pile');
+  }
+
+  var ticking = false;
+  function measure(){
+    ticking = false;
+    var mark = window.innerHeight * 0.45, n = 1;
+    for(var i = 0; i < pts.length; i++){
+      if(pts[i].getBoundingClientRect().top <= mark){ n = i + 1; }
+    }
+    paint(n);
+  }
+  window.addEventListener('scroll', function(){
+    if(!ticking){ ticking = true; window.requestAnimationFrame(measure); }
+  }, {passive:true});
+  window.addEventListener('resize', measure);
+  paint(1);
+  measure();
+})();
+</script>
+</body>
+</html>

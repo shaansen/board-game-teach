@@ -34,6 +34,7 @@ your first game.
 | `games/sleeping-gods-distant-skies.html` | Sleeping Gods: Distant Skies, 14 points, complete |
 | `games/camel-up.html` | Camel Up (second edition), 14 points, complete |
 | `games/castles-of-burgundy.html` | The Castles of Burgundy, 14 points, complete |
+| `games/death-on-the-cards.html` | Agatha Christie's Death on the Cards, 14 points, complete |
 | `games/wyrmspan.html` | Wyrmspan, 14 points, complete |
 | `games/lost-ruins-of-arnak.html` | Lost Ruins of Arnak, 14 points, complete |
 | `games/the-manhattan-project.html` | The Manhattan Project, 14 points, complete |
@@ -119,6 +120,7 @@ estate in the rail, one hex per point;
 `architects-of-the-west-kingdom.html` sends a worker out of the crew in the rail for
 every point;
 `camel-up.html` races five camels down the rail, one die per point, stacking as they go;
+`death-on-the-cards.html` burns one card off the draw pile per point until the murderer escapes;
 `patchwork.html` sews one quilt square into the rail per point;
 `parks.html` walks a hiker along a trail that turns through the four seasons as you read;
 `wyrmspan.html` lights one cave chamber per point and walks an adventurer along them;
