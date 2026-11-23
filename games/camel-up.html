@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Camel Up: Learn It Properly</title>
+<meta name="description" content="Learn what Camel Up (second edition) actually is: fourteen points on betting instead of racing, the pyramid that runs out of dice, camels that ride each other, two crazy camels running the wrong way, and why the early bet is the cheap one.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bowlby+One+SC&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --night:#170F0A;
+  --deep:#21160E;
+  --panel:#2C1E13;
+  --sand:#F3E6CC;
+  --dim:#B6A387;
+  --gold:#E7B347;
+  --dune:#D98E3A;
+  --c-blue:#4A8FD8;
+  --c-yellow:#EBCB3F;
+  --c-green:#55AE5E;
+  --c-red:#D9503F;
+  --c-purple:#9A6AD0;
+  --c-black:#141414;
+  --c-white:#F4F1EA;
+  --accent:#E7B347;
+  --line:rgba(243,230,204,.15);
+  --display:"Bowlby One SC",Impact,sans-serif;
+  --body:"Source Serif 4",Georgia,serif;
+  --mono:"DM Mono",ui-monospace,Menlo,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;color:var(--sand);font-family:var(--body);font-size:18px;line-height:1.66;
+  -webkit-font-smoothing:antialiased;
+  background:
+    radial-gradient(900px 520px at 86% -10%, rgba(231,179,71,.16), transparent 62%),
+    radial-gradient(720px 480px at 0% 6%, rgba(217,142,58,.10), transparent 60%),
+    linear-gradient(180deg,var(--night),var(--deep) 78%);
+  background-attachment:fixed;
+}
+.wrap{max-width:800px;margin:0 auto;padding:0 22px 90px}
+
+/* ---------- the race rail ---------- */
+.rail{
+  position:sticky;top:0;z-index:20;background:rgba(23,15,10,.94);
+  backdrop-filter:blur(6px);border-bottom:1px solid var(--line);padding:8px 22px;
+}
+.rail-in{max-width:800px;margin:0 auto;display:flex;align-items:center;gap:14px}
+.rail-lab{
+  font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--gold);white-space:nowrap;min-width:10.5em;
+}
+.rail-lab i{font-style:normal;display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:6px;vertical-align:0;background:var(--gold)}
+.track{position:relative;flex:1;height:34px;min-width:80px}
+.track .sand{
+  position:absolute;left:0;right:0;bottom:3px;height:4px;border-radius:99px;
+  background-image:linear-gradient(90deg, rgba(243,230,204,.22) 0 calc(100% - 3px), transparent 0);
+  background-size:calc(100% / 16) 4px;
+}
+.track .finish{
+  position:absolute;right:-2px;bottom:0;width:3px;height:30px;
+  background:repeating-linear-gradient(180deg,var(--sand) 0 4px,var(--night) 4px 8px);
+}
+.camel{
+  position:absolute;width:calc(100% / 16 - 3px);max-width:16px;height:6px;border-radius:2px;
+  transform:translateX(-50%);transition:left .35s ease,bottom .35s ease;
+  box-shadow:0 0 0 1px rgba(0,0,0,.45);
+}
+.rail-count{font-family:var(--mono);font-size:12px;color:var(--dim);white-space:nowrap}
+
+.backlink{
+  display:inline-block;margin-top:26px;font-family:var(--mono);font-size:11px;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--dim);text-decoration:none;
+  border-bottom:1px solid transparent;
+}
+.backlink:hover{color:var(--gold);border-bottom-color:var(--gold)}
+
+header.top{padding:28px 0 42px;border-bottom:1px solid var(--line)}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin:22px 0 14px}
+h1{
+  font-family:var(--display);font-weight:400;font-size:clamp(52px,12vw,104px);
+  line-height:.92;letter-spacing:.01em;margin:0 0 8px;color:#FFF4DC;
+}
+h1 small{display:block;font-family:var(--mono);font-size:.13em;font-weight:500;letter-spacing:.2em;
+  color:var(--dune);margin-bottom:18px;text-transform:uppercase;line-height:1.5}
+.lede{font-size:20px;color:var(--dim);max-width:54ch;margin:18px 0 0}
+.herd{display:flex;gap:6px;margin-top:24px}
+.herd span{width:30px;height:12px;border-radius:3px;box-shadow:0 0 0 1px rgba(0,0,0,.4)}
+
+.pt{border-top:1px solid var(--line);padding:44px 0 8px;scroll-margin-top:60px}
+.pt:first-of-type{border-top:none}
+.num{
+  display:inline-flex;align-items:center;gap:12px;margin-bottom:12px;
+  font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);
+}
+.num b{
+  width:34px;height:34px;display:grid;place-items:center;border-radius:5px;
+  background:var(--gold);color:var(--night);font-family:var(--display);font-weight:400;font-size:16px;
+  box-shadow:inset 0 -3px 0 rgba(0,0,0,.18);
+}
+h2{
+  font-family:var(--body);font-weight:700;font-size:clamp(26px,4.8vw,38px);
+  line-height:1.16;margin:0 0 16px;max-width:26ch;color:#FFF4DC;
+}
+h3{font-family:var(--body);font-weight:700;font-size:21px;margin:30px 0 6px;color:var(--sand)}
+.pt p{max-width:62ch;margin:0 0 16px}
+strong{font-weight:700;color:#FFF4DC}
+.aside{
+  border-left:3px solid var(--dune);padding:2px 0 2px 18px;margin:24px 0;
+  font-style:italic;color:var(--dim);max-width:58ch;
+}
+.trap{
+  margin:26px 0;border:1px solid rgba(217,80,63,.6);background:rgba(217,80,63,.12);
+  padding:16px 20px;max-width:62ch;border-radius:4px;
+}
+.trap b{
+  display:block;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:#F08A7B;margin-bottom:8px;
+}
+.trap p{margin:0}
+.note{
+  margin:30px 0 0;padding:18px 22px;max-width:62ch;border-radius:4px;
+  background:rgba(231,179,71,.12);border:1px solid rgba(231,179,71,.5);
+}
+.note .lab{
+  display:block;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:8px;
+}
+.note p{margin:0}
+ul.clean{list-style:none;padding:0;margin:0 0 16px;max-width:62ch}
+ul.clean li{padding:8px 0 8px 26px;position:relative;border-bottom:1px solid rgba(243,230,204,.10)}
+ul.clean li:last-child{border-bottom:none}
+ul.clean li::before{
+  content:"";position:absolute;left:4px;top:19px;width:10px;height:7px;border-radius:2px;
+  background:var(--dune);
+}
+.eg{
+  margin:26px 0;max-width:62ch;border-left:3px solid var(--c-blue);
+  background:rgba(74,143,216,.10);padding:16px 20px 16px 18px;border-radius:0 4px 4px 0;
+}
+.eg b{
+  display:block;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:#86B6E8;margin-bottom:8px;
+}
+.eg p{margin:0 0 10px}
+.eg p:last-child{margin:0}
+.eg .out{font-family:var(--mono);font-size:.86em;color:var(--gold)}
+figure{margin:28px 0;padding:18px;background:rgba(243,230,204,.045);border:1px solid var(--line);border-radius:6px}
+figure svg{display:block;width:100%;height:auto}
+figcaption{font-family:var(--mono);font-size:11px;color:var(--dim);margin-top:12px;text-align:center;line-height:1.6}
+.scroll{overflow-x:auto;margin:24px 0}
+table{border-collapse:collapse;width:100%;min-width:460px;font-size:16px}
+th,td{text-align:left;padding:9px 14px 9px 0;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);font-weight:500}
+td.n{font-family:var(--mono);color:var(--gold);white-space:nowrap}
+/* figure ink */
+.f-sand{fill:var(--sand)}.f-gold{fill:var(--gold)}.f-dune{fill:var(--dune)}.f-panel{fill:var(--panel)}
+.f-none{fill:none}.f-dim{fill:var(--dim)}
+.f-blue{fill:var(--c-blue)}.f-yellow{fill:var(--c-yellow)}.f-green{fill:var(--c-green)}
+.f-red{fill:var(--c-red)}.f-purple{fill:var(--c-purple)}.f-black{fill:var(--c-black)}.f-white{fill:var(--c-white)}
+.s-sand{stroke:var(--sand)}.s-dim{stroke:var(--dim)}.s-gold{stroke:var(--gold)}.s-red{stroke:var(--c-red)}
+.s-ink{stroke:rgba(0,0,0,.5)}
+.tt{font-family:"Source Serif 4",serif;font-size:14px;fill:var(--sand)}
+.ts{font-family:"DM Mono",monospace;font-size:10.5px;fill:var(--dim);letter-spacing:.06em}
+footer{margin:64px 0 0;padding-top:24px;border-top:1px solid var(--line);color:var(--dim);font-size:15px}
+a{color:var(--gold)}
+@media(max-width:620px){body{font-size:17px}.rail-lab{display:none}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+@media print{.rail{display:none}}
+</style>
+</head>
+<body>
+
+<div class="rail">
+  <div class="rail-in">
+    <span class="rail-lab" id="roll"><i></i>leg 1 &middot; start</span>
+    <span class="track" id="track" role="img" aria-label="A camel race that moves one die per point read">
+      <span class="sand"></span>
+      <span class="finish"></span>
+    </span>
+    <span class="rail-count" id="count">1 / 14</span>
+  </div>
+</div>
+
+<div class="wrap">
+
+<a class="backlink" href="../">&larr; the shelf</a>
+
+<header class="top">
+  <p class="eyebrow">Learn it properly &middot; 14 points &middot; second edition</p>
+  <h1><small>Five camels, one pyramid of dice, and nobody owns a camel</small>Camel Up</h1>
+  <p class="lede">It looks like a racing game, and the camels are what everyone watches. But you never ride one. You are in the stands with a fistful of betting slips, and the whole game is deciding how much you trust a race that a pyramid full of dice is running.</p>
+  <div class="herd" aria-hidden="true">
+    <span style="background:var(--c-blue)"></span><span style="background:var(--c-yellow)"></span><span style="background:var(--c-green)"></span><span style="background:var(--c-red)"></span><span style="background:var(--c-purple)"></span>
+  </div>
+</header>
+
+<article class="pt">
+  <p class="num"><b>1</b> The big picture</p>
+  <h2>You are not a camel. You are a gambler at the track.</h2>
+
+  <p>Camel Up is for three to eight people and takes about forty-five minutes. Five racing camels run once around a desert track. None of them belongs to anyone. Everybody at the table is a spectator, and the only thing you own is <strong>money</strong>, a small pile of Egyptian pounds that grows or shrinks depending on how well you bet.</p>
+
+  <p>At the end, the richest player wins. The camel that crossed the line first is irrelevant to you unless you put money on it.</p>
+
+  <p>That framing changes how you should watch every turn. A camel pulling ahead is not good news or bad news in itself. It is good news <strong>for whoever holds slips on that camel</strong>, and your job is to be holding the right slips at the moment the money is paid out.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Cheer for your bets, not for a colour. <strong>The race is just the thing your money is riding on.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>2</b> Nobody steers</p>
+  <h2>The camels move by dice, and nobody chooses which die comes out.</h2>
+
+  <p>There is no "move the red camel two spaces" decision in this game. Camels move only when somebody rolls, and a roll means shaking the <strong>pyramid</strong>, a plastic dice tower that holds one die per camel, and letting exactly one die drop out. Whatever colour falls out, that camel moves; whatever number it shows, one to three, is how far.</p>
+
+  <p>So the race itself is random, deliberately and completely. What is not random is <strong>what you know</strong>. You can see every camel's position, you can see which dice have already come out this round, and that is enough to reason about who is likely to be in front a few rolls from now.</p>
+
+  <div class="aside">This is the honest shape of the game: you cannot control the race, so you control your exposure to it. Every decision in Camel Up is a decision about which bet to make and when.</div>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>You have no influence over which camel moves. <strong>Your skill is in reading the race, not running it.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>3</b> The legs</p>
+  <h2>Each die comes out once per leg, and that is where the information lives.</h2>
+
+  <p>The race is cut into short rounds called <strong>legs</strong>. At the start of a leg, every die is back inside the pyramid. Each roll takes one die out and leaves it out. When all but one of the dice have come out, the leg ends, bets on that leg are paid, and everything goes back in for the next one.</p>
+
+  <p>Read that again, because it is the most important rule for the gambler in you: <strong>within a leg, a camel moves at most once</strong>. If the blue die has already been rolled this leg, blue is not moving again until the next leg, no matter how many more rolls happen. Its position is locked.</p>
+
+  <p>That means the race gets more predictable as a leg goes on. At the start, any camel could jump forward. Near the end, only two or three dice are left in the pyramid, and you can very nearly count out the possible finishes in your head.</p>
+
+  <figure>
+    <svg viewBox="0 0 700 220" role="img" aria-labelledby="py-t py-d">
+      <title id="py-t">The pyramid empties during a leg</title>
+      <desc id="py-d">Three pyramids from left to right. The first, labelled start of leg, holds six dice: blue, yellow, green, red, purple and a grey die for the crazy camels. The second, labelled middle, holds three. The third, labelled end of leg, holds a single die, because one die always stays inside. An arrow beneath reads: fewer dice left, fewer possible futures.</desc>
+      <g class="f-panel s-dim" stroke-width="1.6">
+        <path d="M30 170 115 40l85 130Z"/>
+        <path d="M260 170 345 40l85 130Z"/>
+        <path d="M490 170 575 40l85 130Z"/>
+      </g>
+      <g class="s-ink" stroke-width="1">
+        <rect x="72" y="130" width="22" height="22" rx="4" class="f-blue"/>
+        <rect x="104" y="130" width="22" height="22" rx="4" class="f-yellow"/>
+        <rect x="136" y="130" width="22" height="22" rx="4" class="f-green"/>
+        <rect x="88" y="100" width="22" height="22" rx="4" class="f-red"/>
+        <rect x="120" y="100" width="22" height="22" rx="4" class="f-purple"/>
+        <rect x="104" y="70" width="22" height="22" rx="4" fill="#8E8A84"/>
+        <rect x="318" y="130" width="22" height="22" rx="4" class="f-green"/>
+        <rect x="350" y="130" width="22" height="22" rx="4" class="f-purple"/>
+        <rect x="334" y="100" width="22" height="22" rx="4" fill="#8E8A84"/>
+        <rect x="564" y="130" width="22" height="22" rx="4" class="f-purple"/>
+      </g>
+      <g class="ts" text-anchor="middle">
+        <text x="115" y="192">START OF LEG</text>
+        <text x="345" y="192">MIDDLE</text>
+        <text x="575" y="192">END OF LEG</text>
+      </g>
+      <g class="f-none s-gold" stroke-width="1.6"><path d="M80 210h540"/></g>
+      <path d="M616 205l10 5-10 5z" class="f-gold"/>
+      <text x="350" y="24" class="tt" text-anchor="middle" fill="#E7B347">fewer dice left, fewer possible futures</text>
+    </svg>
+    <figcaption>One die always stays in the pyramid, so even the last roll of a leg leaves one camel that never moved.</figcaption>
+  </figure>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Watch which dice are already out. <strong>A camel whose die has been rolled is frozen until the next leg.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>4</b> Riding on top</p>
+  <h2>Camels stack, and the one on top is carried for free.</h2>
+
+  <p>This is the rule that makes Camel Up wild. When a camel lands on a space that already has camels on it, it does not share the space politely. It climbs <strong>on top</strong> of them. And when a camel moves, it carries <strong>everything stacked above it</strong> along for the ride.</p>
+
+  <p>Two consequences follow, and they run against every racing instinct you have:</p>
+
+  <ul class="clean">
+    <li><strong>On the same space, the camel on top is ahead.</strong> Of a stack, the top camel counts as the leader and the bottom one as the last.</li>
+    <li><strong>A camel at the bottom of a stack is a delivery service.</strong> When it rolls, the whole tower moves, and the camel sitting on top arrives in front without its own die ever coming out.</li>
+  </ul>
+
+  <figure>
+    <svg viewBox="0 0 700 220" role="img" aria-labelledby="st-t st-d">
+      <title id="st-t">A stack moving together</title>
+      <desc id="st-d">Left: a track space holding a stack of three camels, green at the bottom, red in the middle, yellow on top. The green die is rolled showing two. Right: two spaces further on, the same three camels arrive together, still in the same order. Yellow, sitting on top, is the leader of the race even though its own die never came out.</desc>
+      <g class="f-none s-dim" stroke-width="1.4">
+        <rect x="40" y="160" width="96" height="30" rx="3"/>
+        <rect x="140" y="160" width="96" height="30" rx="3"/>
+        <rect x="240" y="160" width="96" height="30" rx="3"/>
+        <rect x="340" y="160" width="96" height="30" rx="3"/>
+        <rect x="440" y="160" width="96" height="30" rx="3"/>
+      </g>
+      <g class="s-ink" stroke-width="1" opacity=".35">
+        <rect x="58" y="134" width="60" height="22" rx="4" class="f-green"/>
+        <rect x="58" y="110" width="60" height="22" rx="4" class="f-red"/>
+        <rect x="58" y="86" width="60" height="22" rx="4" class="f-yellow"/>
+      </g>
+      <g class="s-ink" stroke-width="1">
+        <rect x="258" y="134" width="60" height="22" rx="4" class="f-green"/>
+        <rect x="258" y="110" width="60" height="22" rx="4" class="f-red"/>
+        <rect x="258" y="86" width="60" height="22" rx="4" class="f-yellow"/>
+      </g>
+      <g class="f-none s-gold" stroke-width="1.8"><path d="M124 100q64-50 124 0"/></g>
+      <path d="M244 92l10 9-13 3z" class="f-gold"/>
+      <rect x="170" y="36" width="30" height="30" rx="5" class="f-green s-ink"/>
+      <g class="f-black"><circle cx="179" cy="45" r="2.6"/><circle cx="191" cy="57" r="2.6"/></g>
+      <text x="216" y="56" class="ts">GREEN ROLLS 2</text>
+      <text x="350" y="94" class="tt" fill="#EBCB3F">yellow: now leading,</text>
+      <text x="350" y="112" class="tt" fill="#EBCB3F">its die never moved</text>
+      <text x="350" y="146" class="ts">green carries the tower</text>
+      <text x="88" y="210" class="ts" text-anchor="middle">BEFORE</text>
+      <text x="288" y="210" class="ts" text-anchor="middle">AFTER</text>
+    </svg>
+    <figcaption>The order inside a stack never changes when it moves. Only the camel doing the rolling decides where it goes.</figcaption>
+  </figure>
+
+  <p>Stacks are why the race lurches. A camel that looks hopelessly behind can jump on top of the pack with one roll and be leading, then be carried two more spaces by somebody else's die before its own comes out.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Position is not just which space; it is how high up. <strong>A camel on top of a stack has every die beneath it working for it.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>5</b> One thing per turn</p>
+  <h2>On your turn you do exactly one thing, and three of the four are ways to bet.</h2>
+
+  <p>Turns are fast. You choose one of four actions and then it is the next player's go:</p>
+
+  <ul class="clean">
+    <li><strong>Take a leg bet:</strong> grab a betting tile for a camel you think will be in front when this leg ends.</li>
+    <li><strong>Place your spectator tile</strong> on the track, so you earn a coin whenever a camel lands on it.</li>
+    <li><strong>Bet on the whole race:</strong> secretly back a camel to win, or to come last, overall.</li>
+    <li><strong>Roll the pyramid:</strong> move a camel, and take a ticket that pays one coin.</li>
+  </ul>
+
+  <p>Notice what is missing: there is no way to spend money, no shop, no building. Coins only come in through bets paying out, the spectator tile, and rolling. Every one of these is a small wager of a single turn, and turns are the thing you are actually short of.</p>
+
+  <p>The next several points take these actions one at a time, because each one is good at a different moment in a leg.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Each turn is one decision about risk. <strong>The question is never "what can I do?" but "which of these four is worth most right now?"</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>6</b> Leg bets</p>
+  <h2>The first slip on a camel pays the most. That is the race within the race.</h2>
+
+  <p>For each camel there is a small stack of <strong>leg betting tiles</strong>, and they shrink as they are taken. The first player to back a camel this leg takes a tile worth 5; the next takes a 3; after that only 2s remain. When the leg ends, each tile is settled:</p>
+
+  <div class="scroll">
+    <table>
+      <thead><tr><th>Your camel at the end of the leg</th><th>What the tile does</th></tr></thead>
+      <tbody>
+        <tr><td>In first place</td><td class="n">pays its printed value (5, 3 or 2)</td></tr>
+        <tr><td>In second place</td><td class="n">pays 1</td></tr>
+        <tr><td>Anywhere else</td><td class="n">costs you 1</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>So there is a tension built into every leg. Bet early and you get the fat 5 tile, but the race is wide open and you are guessing. Wait for a few dice to come out and you can bet almost safely, but somebody else will already have taken the good tile and you are left with a 2.</p>
+
+  <p>The best leg bets sit in the middle: the moment the race has given away enough information to make one camel a clear favourite, but before everybody else has noticed. Spotting that moment a turn sooner than the player to your left is most of what a good Camel Up player does.</p>
+
+  <div class="trap">
+    <b>The instinct to unlearn</b>
+    <p>"Wait until I'm sure" feels prudent. In this game, by the time you are sure, so is everyone else, and the tile is gone. A 5 at decent odds beats a 2 at certainty.</p>
+  </div>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>The tile shrinks while the odds improve. <strong>Bet at the moment the camel becomes a favourite, not the moment it becomes a sure thing.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>7</b> A bet is a price</p>
+  <h2>Do the sum once, roughly, and most turns become obvious.</h2>
+
+  <p>You do not need to be good at probability to play Camel Up. You do need one habit: before you take a betting tile, give the camel a rough chance of winning the leg and see what the tile is worth at that chance. Compare it with rolling, which always pays exactly 1.</p>
+
+  <div class="eg">
+    <b>What it looks like at the table</b>
+    <p>Red is sitting on top of a stack, one space ahead. You reckon red wins this leg half the time, comes second three times in ten, and is worse than second the other two times in ten.</p>
+    <p>The <strong>5 tile</strong>: half of 5 is 2.5, plus 0.3 for second places, minus 0.2 for the misses. About <strong>2.6 coins</strong>.</p>
+    <p>The <strong>2 tile</strong> on the same camel: 1.0 plus 0.3 minus 0.2. About <strong>1.1 coins</strong>.</p>
+    <p class="out">Rolling is worth 1. So the 5 tile is a great turn, the 2 tile is barely better than a roll, and a 2 tile on a weaker camel is worse than rolling.</p>
+  </div>
+
+  <p>That last line is the lesson. Late in a leg, when only 2s are left, rolling the pyramid and taking the sure coin is often the better action, even though it feels like doing nothing.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>A roll is a guaranteed 1. <strong>A bet has to beat that on average, and the small tiles on unlikely camels never do.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>8</b> Rolling is a move too</p>
+  <h2>Rolling pays a coin, but it also spends everyone's information.</h2>
+
+  <p>Rolling looks like the passive action, the one you take when nothing better is on offer. It is more pointed than that. Every roll takes a die out of the pyramid, which makes the rest of the leg <strong>easier to predict</strong>, and the next player gets to bet on that clearer picture before you do.</p>
+
+  <p>So a roll is a gift to whoever goes after you, unless the roll lands in your favour. Good players roll for one of two reasons: either no bet is worth more than the coin, or they are holding slips and want to push the leg towards its end while their camel is in front.</p>
+
+  <p>The last roll of a leg is the purest version. If your camel leads and only one die is left to come out of the pyramid before scoring, rolling ends the leg and locks your payout in. Somebody else rolling might be the die that ruins it.</p>
+
+  <div class="aside">Rolling is also the only action that is always available. If every tile on the favourite has gone and the spectator tile is already out, the pyramid is still there, still paying one coin.</div>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Before you roll, ask who benefits from the clearer picture. <strong>If it is the next player, find something else to do.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>9</b> Your spectator tile</p>
+  <h2>A tile on the sand that pays you rent and nudges the race.</h2>
+
+  <p>Each player has one <strong>spectator tile</strong>, a little crowd in the desert. You place it on an empty stretch of track, cheering side up or booing side up. Every time a camel lands on it, you collect a coin, and the camel is pushed one extra space forward (cheering) or one space back (booing).</p>
+
+  <p>That makes the tile two things at once. It is <strong>an income</strong>: put it where the pack is likely to land in the next few rolls and it can pay out more than once in a leg. And it is <strong>a lever</strong>: a cheering tile just in front of your camel gives it an extra step, and a booing tile in front of a rival's camel drags it back.</p>
+
+  <p>A camel pushed back by a booing tile slides in <strong>underneath</strong> any camels already on the space behind, rather than on top. A small detail with a big effect, because the bottom of a stack is last place on that space.</p>
+
+  <figure>
+    <svg viewBox="0 0 700 180" role="img" aria-labelledby="sp-t sp-d">
+      <title id="sp-t">Cheering and booing spectator tiles</title>
+      <desc id="sp-d">Two short lengths of track. On the first, a camel lands on a cheering tile and moves one more space forward, landing on top. The owner of the tile gains one coin. On the second, a camel lands on a booing tile and moves one space back, sliding underneath the camel already there. The owner again gains one coin.</desc>
+      <g class="f-none s-dim" stroke-width="1.4">
+        <rect x="30" y="100" width="90" height="28" rx="3"/><rect x="124" y="100" width="90" height="28" rx="3"/><rect x="218" y="100" width="90" height="28" rx="3"/>
+        <rect x="390" y="100" width="90" height="28" rx="3"/><rect x="484" y="100" width="90" height="28" rx="3"/><rect x="578" y="100" width="90" height="28" rx="3"/>
+      </g>
+      <rect x="132" y="104" width="74" height="20" rx="3" fill="rgba(85,174,94,.35)" stroke="#55AE5E"/>
+      <text x="169" y="118" class="ts" text-anchor="middle" fill="#55AE5E">CHEER +1</text>
+      <rect x="586" y="104" width="74" height="20" rx="3" fill="rgba(217,80,63,.32)" stroke="#D9503F"/>
+      <text x="623" y="118" class="ts" text-anchor="middle" fill="#D9503F">BOO &minus;1</text>
+      <g class="s-ink" stroke-width="1">
+        <rect x="236" y="74" width="54" height="20" rx="4" class="f-blue"/>
+        <rect x="236" y="52" width="54" height="20" rx="4" class="f-red"/>
+        <rect x="502" y="74" width="54" height="20" rx="4" class="f-purple"/>
+        <rect x="502" y="52" width="54" height="20" rx="4" class="f-yellow"/>
+      </g>
+      <g class="f-none s-gold" stroke-width="1.6">
+        <path d="M90 92q40-40 76 0"/><path d="M170 92q40-50 90-40"/>
+        <path d="M600 92q-30-40-48 -4"/>
+      </g>
+      <text x="263" y="44" class="ts" text-anchor="middle">LANDS ON TOP</text>
+      <text x="529" y="160" class="ts" text-anchor="middle">PURPLE SLIDES IN UNDER YELLOW</text>
+      <text x="169" y="160" class="ts" text-anchor="middle">RED WAS ROLLED, LANDS ON CHEER</text>
+      <text x="350" y="22" class="tt" text-anchor="middle" fill="#E7B347">either way, the tile's owner takes a coin</text>
+    </svg>
+    <figcaption>Cheering puts the camel on top of whoever is there. Booing tucks it underneath.</figcaption>
+  </figure>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Put your tile where camels will land, and on the side that helps your slips. <strong>The best spectator tile is income and sabotage in the same turn.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>10</b> The crazy camels</p>
+  <h2>Two more camels run the course backwards, carrying anyone foolish enough to sit on them.</h2>
+
+  <p>The second edition adds two <strong>crazy camels</strong>, one black and one white, that nobody bets on and that run the track in the wrong direction. They share a single grey die in the pyramid. When it comes out, its face says which of the two moves, and that camel walks backwards.</p>
+
+  <p>Crazy camels obey the stacking rule like everyone else, and that is the whole point of them. If racing camels are sitting on top of a crazy camel when it moves, they get <strong>carried backwards</strong> with it. A favourite that climbed onto the wrong stack can lose two or three spaces on a die that had nothing to do with its colour.</p>
+
+  <p>They also put a crack in the reasoning from point 3. You can count out the five racing dice, but as long as the grey die is still in the pyramid, any stack with a crazy camel in it is a stack that might suddenly run the wrong way.</p>
+
+  <figure>
+    <svg viewBox="0 0 700 170" role="img" aria-labelledby="cz-t cz-d">
+      <title id="cz-t">A crazy camel carrying a racing camel backwards</title>
+      <desc id="cz-d">A stack on one space: the black crazy camel at the bottom, blue on top. The grey die shows black two. The black camel moves two spaces backwards, carrying blue with it.</desc>
+      <g class="f-none s-dim" stroke-width="1.4">
+        <rect x="70" y="110" width="100" height="28" rx="3"/><rect x="174" y="110" width="100" height="28" rx="3"/>
+        <rect x="278" y="110" width="100" height="28" rx="3"/><rect x="382" y="110" width="100" height="28" rx="3"/>
+      </g>
+      <g class="s-ink" stroke-width="1" opacity=".35">
+        <rect x="400" y="86" width="64" height="20" rx="4" fill="#3A3A3A"/>
+        <rect x="400" y="64" width="64" height="20" rx="4" class="f-blue"/>
+      </g>
+      <g stroke-width="1">
+        <rect x="192" y="86" width="64" height="20" rx="4" fill="#3A3A3A" stroke="#F3E6CC"/>
+        <rect x="192" y="64" width="64" height="20" rx="4" class="f-blue s-ink"/>
+      </g>
+      <g class="f-none" stroke="#D9503F" stroke-width="1.8"><path d="M420 56q-96-56-196 0"/></g>
+      <path d="M230 50l-10 9 13 3z" fill="#D9503F"/>
+      <rect x="560" y="60" width="34" height="34" rx="5" fill="#8E8A84" stroke="rgba(0,0,0,.5)"/>
+      <g class="f-black"><circle cx="570" cy="70" r="3"/><circle cx="584" cy="84" r="3"/></g>
+      <text x="577" y="114" class="ts" text-anchor="middle">GREY DIE: BLACK, 2</text>
+      <text x="320" y="24" class="tt" text-anchor="middle" fill="#D9503F">blue goes backwards on someone else's die</text>
+      <text x="224" y="160" class="ts" text-anchor="middle">AFTER</text>
+      <text x="432" y="160" class="ts" text-anchor="middle">BEFORE</text>
+    </svg>
+    <figcaption>The racing camel's die is not involved at all. What it is sitting on is.</figcaption>
+  </figure>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Check what your favourite is standing on. <strong>A camel riding a crazy camel is one grey die away from going the wrong way.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>11</b> The long bets</p>
+  <h2>Back the overall winner, or the overall loser, early and in secret.</h2>
+
+  <p>Besides the leg bets, you hold a hand of cards, one per camel colour. Spending a turn, you can place one face down on the <strong>overall winner</strong> pile or the <strong>overall loser</strong> pile. Nobody knows which camel you backed until the race ends.</p>
+
+  <p>The piles pay out in the order cards were played. The first correct card on the winner pile collects 8, the next correct one 5, then 3, then less and less. Every wrong card costs a coin. The loser pile works the same way for the camel that finishes last.</p>
+
+  <p>That ordering is the same tension as leg bets, stretched across the whole game. A long bet placed in the first leg is a long shot but pays 8 if you are right. A long bet placed when one camel is three spaces from the finish is nearly safe, but the 8 and the 5 are probably already in somebody else's card.</p>
+
+  <p>The loser bet is the one new players forget. Picking a winner means guessing the top of a lurching race; picking a loser is often easier, because one camel stuck at the back with nothing to ride on tends to stay there.</p>
+
+  <div class="trap">
+    <b>The instinct to unlearn</b>
+    <p>A hidden card feels like information you are keeping safe. It is also information you are giving away by timing: when an experienced player suddenly makes a long bet, everyone else starts looking at which camel just took the lead.</p>
+  </div>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Long bets reward courage, and the loser pile is half the market. <strong>Commit to at least one long bet before the race looks settled.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>12</b> Scoring and the finish</p>
+  <h2>Money changes hands at the end of every leg, and once more at the line.</h2>
+
+  <p>Scoring in Camel Up is not saved up for the end. At the end of every leg, the leg bets are settled, the pyramid tickets each pay a coin, and the tiles go back for the next leg. Your money goes up and down all game, in full view.</p>
+
+  <p>The race ends the moment any camel <strong>crosses the finish line</strong>, even in the middle of a leg. That leg is scored as normal, and then the two long-bet piles are turned over and paid out in order. Then you count coins, and the richest player wins.</p>
+
+  <p>Two things worth knowing before your first finish:</p>
+
+  <ul class="clean">
+    <li><strong>The finish can come suddenly.</strong> A stack ridden by the right camel can jump several spaces in one roll. If the leaders are close to the line, every roll might be the last.</li>
+    <li><strong>The long-bet piles are often the biggest swing of the night.</strong> A player who looked behind all game can turn up an 8 and a 5 and take the lead in the last minute.</li>
+  </ul>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>The race ends without warning. <strong>When camels are near the line, the last leg bet you place may be your last chance to bet at all.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>13</b> The table is the game</p>
+  <h2>It is loud, it is quick, and the other players are your real competition.</h2>
+
+  <p>Every bet you can make is also a bet somebody else can take first. There is only one 5 tile per camel each leg, and only one 8 on the winner pile. So the player who hurts you most is rarely the dice; it is the player one seat ahead of you, who saw the same favourite you did and took its tile.</p>
+
+  <p>This is also why Camel Up plays so well at a crowd. With more people, each leg sees fewer turns per player, the good tiles vanish quicker, and timing gets sharper. At the largest player counts the second edition lets players pair up for a leg and share a bet, which is as much a social move as a mathematical one.</p>
+
+  <div class="aside">Camel Up won the Spiel des Jahres in its first edition for exactly this reason: it is a game where the most fun moment is groaning at a die together, and nobody needs to understand much to share it.</div>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Watch the bets, not just the camels. <strong>What other players have backed tells you which tiles are gone and which ones they will grab next.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>14</b> How not to lose your first game</p>
+  <h2>Five instincts that other games gave you, and all five cost money here.</h2>
+
+  <h3>You picked a favourite colour</h3>
+  <p>It is natural to adopt a camel and back it all game. The camels do not care. Each leg is a fresh market, and the best bet this leg is often on a camel you bet against last leg.</p>
+
+  <h3>You waited until you were sure</h3>
+  <p>Certainty arrives about a turn after the 5 tile is gone. Take the big tile when a camel becomes the likely leader, not when it is the only possible one.</p>
+
+  <h3>You took every small bet going</h3>
+  <p>A 2 tile on a camel with a modest chance of winning loses money on average. If no bet beats the sure coin from rolling, roll.</p>
+
+  <h3>You forgot the stacks</h3>
+  <p>Counting spaces is not enough. A camel two spaces behind but sitting at the bottom of a tall stack, or one in front but standing on a crazy camel, is not where it looks.</p>
+
+  <h3>You never made a long bet</h3>
+  <p>The winner and loser piles hold the biggest single payouts in the game, and they reward going in early. A first-time player who skips them is giving the rest of the table the 8s.</p>
+
+  <div class="note">
+    <span class="lab">The whole game in one line</span>
+    <p>Nobody steers, so everybody bets. <strong>Read which dice are left and what each camel is standing on, take the big tile one turn before everyone else, and roll when no bet beats a sure coin.</strong></p>
+  </div>
+</article>
+
+<footer>A teaching walkthrough of Camel Up by Steffen Bogen, second edition (2018). This page teaches what the game is and how it thinks; the rulebook in the box has the exact payouts, the crazy camel details and the large-group rules. <a href="../">Back to the shelf</a>.</footer>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var pts = Array.prototype.slice.call(document.querySelectorAll('.pt'));
+  var track = document.getElementById('track');
+  var count = document.getElementById('count');
+  var lab = document.getElementById('roll');
+  var colours = {blue:'#4A8FD8', yellow:'#EBCB3F', green:'#55AE5E', red:'#D9503F', purple:'#9A6AD0'};
+  var SPACES = 16;
+
+  /* One die per point, played out with the real stacking rule.
+     Each leg rolls the five racing dice once; the grey die stays in. */
+  var start = {1:['red','green'], 2:['blue','purple'], 3:['yellow']};
+  var rolls = [['red',2],['yellow',1],['blue',3],['green',2],['purple',1],
+               ['yellow',3],['purple',2],['red',1],['green',3],['blue',2],
+               ['red',3],['blue',3],['green',3]];
+
+  function clone(s){ var o = {}; for(var k in s){ o[k] = s[k].slice(); } return o; }
+  var states = [clone(start)];
+  rolls.forEach(function(r){
+    var s = clone(states[states.length - 1]);
+    for(var k in s){
+      var j = s[k].indexOf(r[0]);
+      if(j >= 0){
+        var moving = s[k].splice(j);
+        var to = +k + r[1];
+        s[to] = (s[to] || []).concat(moving);
+        break;
+      }
+    }
+    states.push(s);
+  });
+
+  var els = {};
+  Object.keys(colours).forEach(function(c){
+    var e = document.createElement('span');
+    e.className = 'camel';
+    e.style.background = colours[c];
+    track.appendChild(e);
+    els[c] = e;
+  });
+
+  function leader(s){
+    var best = 0;
+    for(var k in s){ if(s[k].length && +k > best){ best = +k; } }
+    return s[best][s[best].length - 1];
+  }
+
+  var at = 0;
+  function paint(n){
+    if(n === at) return;
+    at = n;
+    var s = states[Math.min(n, states.length) - 1];
+    for(var k in s){
+      s[k].forEach(function(c, h){
+        els[c].style.left = (((+k - 0.5) / SPACES) * 100).toFixed(2) + '%';
+        els[c].style.bottom = (9 + h * 7) + 'px';
+      });
+    }
+    var leg = n === 1 ? 1 : Math.floor((n - 2) / 5) + 1;
+    var lead = leader(s);
+    var swatch = '<i style="background:' + colours[lead] + '"></i>';
+    lab.innerHTML = swatch + 'leg ' + leg + ' &middot; ' +
+      (n === 1 ? 'start' : rolls[n - 2][0] + ' +' + rolls[n - 2][1]);
+    count.textContent = n + ' / ' + pts.length;
+    track.setAttribute('aria-label', 'Point ' + n + ' of ' + pts.length + '; ' + lead + ' leads the race');
+  }
+
+  var ticking = false;
+  function measure(){
+    ticking = false;
+    var mark = window.innerHeight * 0.45, n = 1;
+    for(var i = 0; i < pts.length; i++){
+      if(pts[i].getBoundingClientRect().top <= mark){ n = i + 1; }
+    }
+    paint(n);
+  }
+  window.addEventListener('scroll', function(){
+    if(!ticking){ ticking = true; window.requestAnimationFrame(measure); }
+  }, {passive:true});
+  window.addEventListener('resize', measure);
+  paint(1);
+  measure();
+})();
+</script>
+</body>
+</html>

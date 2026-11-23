@@ -32,6 +32,7 @@ your first game.
 | `games/parks.html` | PARKS (first edition), 14 points, complete |
 | `games/root.html` | Root, 16 points, complete |
 | `games/sleeping-gods-distant-skies.html` | Sleeping Gods: Distant Skies, 14 points, complete |
+| `games/camel-up.html` | Camel Up (second edition), 14 points, complete |
 | `games/castles-of-burgundy.html` | The Castles of Burgundy, 14 points, complete |
 | `games/wyrmspan.html` | Wyrmspan, 14 points, complete |
 | `games/lost-ruins-of-arnak.html` | Lost Ruins of Arnak, 14 points, complete |
@@ -117,6 +118,7 @@ point with the faction it belongs to; `castles-of-burgundy.html` fills a honeyco
 estate in the rail, one hex per point;
 `architects-of-the-west-kingdom.html` sends a worker out of the crew in the rail for
 every point;
+`camel-up.html` races five camels down the rail, one die per point, stacking as they go;
 `patchwork.html` sews one quilt square into the rail per point;
 `parks.html` walks a hiker along a trail that turns through the four seasons as you read;
 `wyrmspan.html` lights one cave chamber per point and walks an adventurer along them;
