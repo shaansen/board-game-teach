@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ra: Learn It Properly</title>
+<meta name="description" content="Learn what Reiner Knizia's Ra actually is: fourteen points on bidding with sun tiles you can only spend once, the bag that keeps adding to the lot, the Ra tiles that end every epoch early, and which tiles last while others vanish.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --night:#0D1220;
+  --deep:#131A2C;
+  --panel:#1B2338;
+  --papyrus:#EFE2C0;
+  --dim:#A7A592;
+  --gold:#E2B13C;
+  --lapis:#3E64C4;
+  --turq:#33B0A6;
+  --clay:#C4612F;
+  --line:rgba(239,226,192,.15);
+  --sky:#3E64C4;
+  --display:"Marcellus",Georgia,serif;
+  --body:"Lora",Georgia,serif;
+  --mono:"Space Mono",ui-monospace,Menlo,monospace;
+}
+body[data-epoch="1"]{--sky:#C4612F}
+body[data-epoch="2"]{--sky:#E2B13C}
+body[data-epoch="3"]{--sky:#8C5AB8}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;color:var(--papyrus);font-family:var(--body);font-size:18px;line-height:1.66;
+  -webkit-font-smoothing:antialiased;
+  background:
+    radial-gradient(900px 520px at 84% -10%, rgba(226,177,60,.15), transparent 62%),
+    radial-gradient(760px 500px at 0% 8%, rgba(62,100,196,.14), transparent 60%),
+    linear-gradient(180deg,var(--night),var(--deep) 78%);
+  background-attachment:fixed;
+}
+.wrap{max-width:800px;margin:0 auto;padding:0 22px 90px}
+
+/* ---------- the sun rail ---------- */
+.rail{
+  position:sticky;top:0;z-index:20;background:rgba(13,18,32,.94);
+  backdrop-filter:blur(6px);border-bottom:1px solid var(--line);padding:6px 22px;
+}
+.rail-in{max-width:800px;margin:0 auto;display:flex;align-items:center;gap:14px}
+.rail-lab{
+  font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--sky);white-space:nowrap;min-width:6.4em;transition:color .5s ease;
+}
+.skybox{position:relative;flex:1;height:34px;min-width:90px}
+#sky{position:absolute;inset:0;width:100%;height:34px;display:block;overflow:visible}
+#sky .arc{fill:none;stroke:rgba(239,226,192,.22);stroke-width:1.4;stroke-dasharray:3 4;vector-effect:non-scaling-stroke}
+#sky .arc.done{stroke:var(--gold);stroke-dasharray:none;opacity:.7}
+#sky .ground{stroke:rgba(239,226,192,.25);stroke-width:1;vector-effect:non-scaling-stroke}
+#sun{position:absolute;width:9px;height:9px;margin:-4.5px 0 0 -4.5px;border-radius:99px;background:var(--gold);
+  box-shadow:0 0 0 5px color-mix(in srgb,var(--sky) 30%,transparent);transition:left .35s ease,top .35s ease,box-shadow .5s ease}
+.rail-count{font-family:var(--mono);font-size:12px;color:var(--dim);white-space:nowrap}
+
+.backlink{
+  display:inline-block;margin-top:26px;font-family:var(--mono);font-size:11px;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--dim);text-decoration:none;
+  border-bottom:1px solid transparent;
+}
+.backlink:hover{color:var(--gold);border-bottom-color:var(--gold)}
+
+header.top{padding:28px 0 42px;border-bottom:1px solid var(--line)}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin:22px 0 14px}
+h1{
+  font-family:var(--display);font-weight:400;font-size:clamp(80px,20vw,170px);
+  line-height:.9;letter-spacing:.04em;margin:0 0 8px;color:#FFF3D2;
+}
+h1 small{display:block;font-family:var(--mono);font-size:.075em;font-weight:400;letter-spacing:.2em;
+  color:var(--turq);margin-bottom:18px;text-transform:uppercase;line-height:1.5}
+.lede{font-size:20px;color:var(--dim);max-width:54ch;margin:18px 0 0}
+.frieze{display:flex;gap:8px;margin-top:26px}
+.frieze span{
+  width:38px;height:38px;border-radius:99px;display:grid;place-items:center;
+  font-family:var(--mono);font-size:13px;font-weight:700;color:var(--night);background:var(--gold);
+  box-shadow:inset 0 -3px 0 rgba(0,0,0,.18);
+}
+
+.pt{border-top:1px solid var(--line);padding:44px 0 8px;scroll-margin-top:56px}
+.pt:first-of-type{border-top:none}
+.num{
+  display:inline-flex;align-items:center;gap:12px;margin-bottom:12px;
+  font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);
+}
+.num b{
+  width:34px;height:34px;display:grid;place-items:center;border-radius:99px;
+  background:var(--gold);color:var(--night);font-family:var(--mono);font-weight:700;font-size:14px;
+  box-shadow:0 0 0 3px rgba(226,177,60,.22);
+}
+h2{
+  font-family:var(--display);font-weight:400;font-size:clamp(27px,5vw,40px);
+  line-height:1.14;margin:0 0 16px;max-width:26ch;color:#FFF3D2;
+}
+h3{font-family:var(--body);font-weight:700;font-size:21px;margin:30px 0 6px;color:var(--papyrus)}
+.pt p{max-width:62ch;margin:0 0 16px}
+strong{font-weight:700;color:#FFF3D2}
+.aside{
+  border-left:3px solid var(--turq);padding:2px 0 2px 18px;margin:24px 0;
+  font-style:italic;color:var(--dim);max-width:58ch;
+}
+.trap{
+  margin:26px 0;border:1px solid rgba(196,97,47,.6);background:rgba(196,97,47,.13);
+  padding:16px 20px;max-width:62ch;border-radius:4px;
+}
+.trap b{
+  display:block;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:#E8885A;margin-bottom:8px;
+}
+.trap p{margin:0}
+.note{
+  margin:30px 0 0;padding:18px 22px;max-width:62ch;border-radius:4px;
+  background:rgba(226,177,60,.11);border:1px solid rgba(226,177,60,.5);
+}
+.note .lab{
+  display:block;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:8px;
+}
+.note p{margin:0}
+ul.clean{list-style:none;padding:0;margin:0 0 16px;max-width:62ch}
+ul.clean li{padding:8px 0 8px 26px;position:relative;border-bottom:1px solid rgba(239,226,192,.10)}
+ul.clean li:last-child{border-bottom:none}
+ul.clean li::before{
+  content:"";position:absolute;left:4px;top:17px;width:10px;height:10px;border-radius:99px;
+  background:var(--gold);
+}
+.eg{
+  margin:26px 0;max-width:62ch;border-left:3px solid var(--lapis);
+  background:rgba(62,100,196,.13);padding:16px 20px 16px 18px;border-radius:0 4px 4px 0;
+}
+.eg b{
+  display:block;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:#8FA9E8;margin-bottom:8px;
+}
+.eg p{margin:0 0 10px}
+.eg p:last-child{margin:0}
+.eg .out{font-family:var(--mono);font-size:.84em;color:var(--gold)}
+figure{margin:28px 0;padding:18px;background:rgba(239,226,192,.045);border:1px solid var(--line);border-radius:6px}
+figure svg{display:block;width:100%;height:auto}
+figcaption{font-family:var(--mono);font-size:11px;color:var(--dim);margin-top:12px;text-align:center;line-height:1.6}
+.scroll{overflow-x:auto;margin:24px 0}
+table{border-collapse:collapse;width:100%;min-width:480px;font-size:16px}
+th,td{text-align:left;padding:9px 14px 9px 0;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);font-weight:400}
+td.n{font-family:var(--mono);font-size:.9em;color:var(--gold)}
+td.k{font-family:var(--mono);font-size:.84em;white-space:nowrap}
+td.k.last{color:var(--turq)}
+td.k.gone{color:#E8885A}
+/* figure ink */
+.f-papyrus{fill:var(--papyrus)}.f-gold{fill:var(--gold)}.f-lapis{fill:var(--lapis)}.f-turq{fill:var(--turq)}
+.f-clay{fill:var(--clay)}.f-panel{fill:var(--panel)}.f-none{fill:none}.f-dim{fill:var(--dim)}.f-night{fill:var(--night)}
+.s-papyrus{stroke:var(--papyrus)}.s-dim{stroke:var(--dim)}.s-gold{stroke:var(--gold)}.s-turq{stroke:var(--turq)}.s-clay{stroke:var(--clay)}
+.tt{font-family:"Lora",serif;font-size:14px;fill:var(--papyrus)}
+.ts{font-family:"Space Mono",monospace;font-size:10px;fill:var(--dim);letter-spacing:.06em}
+.tn{font-family:"Space Mono",monospace;font-size:14px;font-weight:700;fill:var(--night)}
+footer{margin:64px 0 0;padding-top:24px;border-top:1px solid var(--line);color:var(--dim);font-size:15px}
+a{color:var(--gold)}
+@media(max-width:620px){body{font-size:17px}.rail-lab{display:none}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+@media print{.rail{display:none}}
+</style>
+</head>
+<body data-epoch="1">
+
+<div class="rail">
+  <div class="rail-in">
+    <span class="rail-lab" id="epoch">epoch I</span>
+    <span class="skybox" id="skybox" role="img" aria-label="The sun crossing the sky once per epoch as you read">
+    <svg id="sky" viewBox="0 0 300 34" preserveAspectRatio="none" aria-hidden="true">
+      <path class="arc" d="M6 30Q50 -6 94 30"/>
+      <path class="arc" d="M106 30Q150 -6 194 30"/>
+      <path class="arc" d="M206 30Q250 -6 294 30"/>
+      <line class="ground" x1="0" y1="30.5" x2="300" y2="30.5"/>
+    </svg>
+    <span id="sun"></span>
+    </span>
+    <span class="rail-count" id="count">1 / 14</span>
+  </div>
+</div>
+
+<div class="wrap">
+
+<a class="backlink" href="../">&larr; the shelf</a>
+
+<header class="top">
+  <p class="eyebrow">Learn it properly &middot; 14 points &middot; Reiner Knizia</p>
+  <h1><small>Three epochs of Egypt, bought with a handful of suns</small>Ra</h1>
+  <p class="lede">Nothing in Ra is complicated. You draw a tile, or you call an auction. That is nearly the whole rulebook. And yet it is one of the hardest auction games ever made, because every bid you will ever make this epoch is sitting in front of you, face up, and you only get to use each one once.</p>
+  <div class="frieze" aria-hidden="true"><span>3</span><span>7</span><span>11</span><span>14</span></div>
+</header>
+
+<article class="pt">
+  <p class="num"><b>1</b> The big picture</p>
+  <h2>An auction game where the money is a few numbered suns.</h2>
+
+  <p>Ra is for two to five players and lasts <strong>three epochs</strong> of ancient Egypt. Through each epoch, tiles come out of a bag one at a time and pile up into a lot: pharaohs, the Nile, monuments, gold, gods, pieces of civilisation, and the occasional disaster. Every so often somebody calls an auction, everyone gets one chance to bid on the whole lot, and the winner takes all of it.</p>
+
+  <p>At the end of each epoch you score what you won. At the end of the third, the most points wins.</p>
+
+  <p>What makes Ra unlike other auction games is the money. There are no coins. You hold a few <strong>sun tiles</strong>, each with a number on it, and a bid is simply putting one of those suns forward. No change, no top-ups: a 9 bids 9.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Every lot goes to one player, and every bid is one sun. <strong>Ra is a game about which lot is worth which sun.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>2</b> Your suns</p>
+  <h2>A few suns per epoch, each spent once. That is your whole budget.</h2>
+
+  <p>Depending on the player count, you start with three, four or five suns. They are all different: one player might hold 2, 5, 6 and 9 while another holds 3, 4, 7 and 10. The sets are balanced so that nobody starts ahead.</p>
+
+  <p>When you win an auction, the sun you bid with is <strong>gone for the rest of this epoch</strong>. So your suns are two things at once. They are your money, telling you how strong each bid can be. And they are your <strong>count of auctions</strong>: four suns means you can win at most four lots this epoch, however cheap they are.</p>
+
+  <p>Once you have spent all your suns, you sit out the rest of the epoch. Everyone else keeps playing, and keeps winning tiles, without you.</p>
+
+  <figure>
+    <svg viewBox="0 0 700 170" role="img" aria-labelledby="su-t su-d">
+      <title id="su-t">A hand of four suns, two of them spent</title>
+      <desc id="su-d">Four round sun tiles numbered 2, 5, 6 and 9. The 5 and the 9 have been flipped face down because they won auctions earlier this epoch. Only the 2 and the 6 remain, meaning this player can win at most two more lots and can never bid higher than 6.</desc>
+      <g>
+        <circle cx="90" cy="80" r="34" class="f-gold"/><text x="90" y="86" class="tn" text-anchor="middle">2</text>
+        <circle cx="190" cy="80" r="34" class="f-panel s-dim" stroke-width="1.4"/><text x="190" y="85" class="ts" text-anchor="middle">SPENT</text>
+        <circle cx="290" cy="80" r="34" class="f-gold"/><text x="290" y="86" class="tn" text-anchor="middle">6</text>
+        <circle cx="390" cy="80" r="34" class="f-panel s-dim" stroke-width="1.4"/><text x="390" y="85" class="ts" text-anchor="middle">SPENT</text>
+      </g>
+      <text x="460" y="66" class="tt">two auctions left this epoch</text>
+      <text x="460" y="88" class="tt">and the best bid left is a 6</text>
+      <text x="460" y="112" class="ts">THE OTHERS CAN SEE THIS TOO</text>
+      <text x="240" y="150" class="ts" text-anchor="middle">EVERY SUN IS FACE UP UNTIL IT IS USED</text>
+    </svg>
+    <figcaption>Everyone's suns are public. You always know exactly what each rival can bid, and how many more lots they can take.</figcaption>
+  </figure>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>A sun is a bid and a turn at the trough. <strong>Spending one on a small lot is not cheap; it is one of only a few lots you will get all epoch.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>3</b> Your turn</p>
+  <h2>Draw a tile, or call for an auction. Almost nothing else.</h2>
+
+  <p>On your turn you usually do one of two things:</p>
+
+  <ul class="clean">
+    <li><strong>Draw a tile</strong> from the bag and add it to the row of tiles waiting to be auctioned. The lot gets bigger, and the turn passes.</li>
+    <li><strong>Invoke Ra</strong>: call an auction for everything in the row right now.</li>
+  </ul>
+
+  <p>(There is a third, rarer option with god tiles; point 10 covers it.)</p>
+
+  <p>So the rhythm of Ra is a slow build and a sudden sale. Tiles pile up a turn at a time, everyone watching the lot become more tempting to somebody, until a player decides the moment has come and calls the auction. The row cannot grow forever, either; once it holds eight tiles, the next player has to call it.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Drawing is a decision too. <strong>Every tile you add improves the lot for whoever is best placed to win it, which is not always you.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>4</b> The auction</p>
+  <h2>Once around the table, one chance each, and the caller bids last.</h2>
+
+  <p>An auction in Ra goes round the table exactly once, starting to the left of the player who called it. Each player either bids one of their suns, which must beat the highest sun bid so far, or passes. There is no going back for a second round and no raising your own bid. The player who called the auction bids last.</p>
+
+  <p>Bidding last is a real advantage. The caller sees every bid before deciding, and can win with the smallest sun that beats the best offer, or happily pass and let somebody else overpay. That is the reward for calling at the right moment.</p>
+
+  <p>There is a catch: if you <strong>chose</strong> to call the auction and every other player passes, you must bid. You cannot call an auction just to see what happens.</p>
+
+  <figure>
+    <svg viewBox="0 0 700 220" role="img" aria-labelledby="au-t au-d">
+      <title id="au-t">One round of bidding</title>
+      <desc id="au-d">Four players around a table. The caller is at the bottom. Bidding goes clockwise from the caller's left: the first player bids 5, the second passes, the third bids 9. The caller, last to act, can see all of this and decides whether to beat 9 with one of their own suns or to pass.</desc>
+      <circle cx="350" cy="110" r="62" class="f-panel s-dim" stroke-width="1.2"/>
+      <text x="350" y="106" class="ts" text-anchor="middle">THE LOT</text>
+      <text x="350" y="122" class="ts" text-anchor="middle">7 TILES</text>
+      <g>
+        <circle cx="180" cy="110" r="24" class="f-gold"/><text x="180" y="115" class="tn" text-anchor="middle">5</text>
+        <text x="180" y="156" class="ts" text-anchor="middle">1st: BIDS 5</text>
+        <circle cx="350" cy="28" r="22" class="f-none s-dim" stroke-width="1.4" stroke-dasharray="3 3"/>
+        <text x="350" y="32" class="ts" text-anchor="middle">pass</text>
+        <text x="420" y="30" class="ts">2nd: PASSES</text>
+        <circle cx="520" cy="110" r="24" class="f-gold"/><text x="520" y="115" class="tn" text-anchor="middle">9</text>
+        <text x="520" y="156" class="ts" text-anchor="middle">3rd: BIDS 9</text>
+        <circle cx="350" cy="194" r="22" class="f-lapis"/>
+        <text x="350" y="198" class="ts" text-anchor="middle" fill="#EFE2C0">?</text>
+        <text x="390" y="198" class="ts" fill="#8FA9E8">CALLER: DECIDES LAST</text>
+      </g>
+      <g class="f-none s-gold" stroke-width="1.4">
+        <path d="M206 92q40-56 120-66"/><path d="M374 26q90 6 136 60"/><path d="M510 132q-40 56-136 62"/>
+      </g>
+    </svg>
+    <figcaption>No second chances: you bid once, knowing what came before you, and hoping nobody after you wants it more.</figcaption>
+  </figure>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Each auction is a single lap. <strong>Bid what the lot is worth to you now, because you will not get to answer whoever comes after you.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>5</b> The sun in the middle</p>
+  <h2>Win an auction and you trade your sun for the one on the table.</h2>
+
+  <p>One sun sits in the middle of the table, belonging to nobody. When you win an auction, you <strong>take that middle sun</strong> along with the tiles, and your winning sun goes into the middle in its place. The sun you take arrives face down: it is yours, but only from the next epoch on.</p>
+
+  <p>So every auction is quietly also a <strong>currency exchange</strong>. Win with a 13 and pick up a 1, and you have made your future hand weaker. Win with a 2 and pick up a 12, and next epoch you have a much stronger bid than you started with.</p>
+
+  <p>Look at the middle sun before every auction. A small lot with a big sun in the middle is worth more than it appears, and a fine lot with a tiny sun in the middle is worth a little less, especially to a player who would have to bid high.</p>
+
+  <figure>
+    <svg viewBox="0 0 700 170" role="img" aria-labelledby="sw-t sw-d">
+      <title id="sw-t">The winning sun swaps with the middle sun</title>
+      <desc id="sw-d">A player wins an auction with a sun numbered 4. The 4 goes into the middle of the table. The sun that was in the middle, numbered 12, goes to the winner face down, to be used from the next epoch.</desc>
+      <circle cx="140" cy="80" r="32" class="f-gold"/><text x="140" y="86" class="tn" text-anchor="middle">4</text>
+      <text x="140" y="138" class="ts" text-anchor="middle">YOUR WINNING BID</text>
+      <circle cx="350" cy="80" r="40" class="f-none s-turq" stroke-width="1.6" stroke-dasharray="5 4"/>
+      <circle cx="350" cy="80" r="30" class="f-gold"/><text x="350" y="86" class="tn" text-anchor="middle">12</text>
+      <text x="350" y="138" class="ts" text-anchor="middle">THE MIDDLE SUN</text>
+      <circle cx="560" cy="80" r="32" class="f-panel s-gold" stroke-width="1.6"/><text x="560" y="78" class="ts" text-anchor="middle">12</text><text x="560" y="92" class="ts" text-anchor="middle">NEXT EPOCH</text>
+      <text x="560" y="138" class="ts" text-anchor="middle">NOW YOURS, FACE DOWN</text>
+      <g class="f-none s-gold" stroke-width="1.6"><path d="M174 64q90-40 140 0"/><path d="M386 64q90-40 140 0"/></g>
+      <path d="M310 58l10 8-12 3z" class="f-gold"/><path d="M522 58l10 8-12 3z" class="f-gold"/>
+      <text x="350" y="20" class="tt" text-anchor="middle" fill="#33B0A6">a cheap win that upgrades your money</text>
+    </svg>
+    <figcaption>Your bid becomes the prize for the next auction. Their bid becomes yours.</figcaption>
+  </figure>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>The middle sun is part of every lot. <strong>Low bids that win high suns are how strong hands are built for later epochs.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>6</b> The Ra tiles</p>
+  <h2>Some tiles in the bag are Ra himself, and each one is a tick of the clock.</h2>
+
+  <p>Mixed into the bag are <strong>Ra tiles</strong>. When you draw one, it does not join the lot. It goes onto the <strong>Ra track</strong>, and it forces an auction immediately, whether anyone wanted one or not. In a forced auction nobody is obliged to bid; if everyone passes, the tiles in the row are simply thrown away.</p>
+
+  <p>The Ra track has only a few spaces, and when the last one is filled, <strong>the epoch ends at once</strong>. Whatever was in the row is lost, unsold. Any suns you did not spend this epoch are wasted: they flip back up for next time, but the chance to win something with them is gone.</p>
+
+  <p>That is the tension running through every draw. You might pull a pharaoh you want. You might pull the Ra tile that starts an auction before you were ready, or ends the epoch while you still had three suns in hand.</p>
+
+  <figure>
+    <svg viewBox="0 0 700 160" role="img" aria-labelledby="rt-t rt-d">
+      <title id="rt-t">The Ra track filling up</title>
+      <desc id="rt-d">A track of eight spaces. Six are filled with Ra tiles. Two remain empty. A label reads: two more Ra tiles and this epoch is over, unspent suns and all.</desc>
+      <g class="s-dim" stroke-width="1.2">
+        <rect x="60" y="56" width="56" height="56" rx="5" class="f-clay"/>
+        <rect x="126" y="56" width="56" height="56" rx="5" class="f-clay"/>
+        <rect x="192" y="56" width="56" height="56" rx="5" class="f-clay"/>
+        <rect x="258" y="56" width="56" height="56" rx="5" class="f-clay"/>
+        <rect x="324" y="56" width="56" height="56" rx="5" class="f-clay"/>
+        <rect x="390" y="56" width="56" height="56" rx="5" class="f-clay"/>
+        <rect x="456" y="56" width="56" height="56" rx="5" class="f-panel" stroke-dasharray="4 3"/>
+        <rect x="522" y="56" width="56" height="56" rx="5" class="f-panel" stroke-dasharray="4 3"/>
+      </g>
+      <g class="ts" text-anchor="middle" fill="#0D1220">
+        <text x="88" y="88">RA</text><text x="154" y="88">RA</text><text x="220" y="88">RA</text>
+        <text x="286" y="88">RA</text><text x="352" y="88">RA</text><text x="418" y="88">RA</text>
+      </g>
+      <text x="517" y="134" class="ts" text-anchor="middle" fill="#E8885A">TWO MORE AND THE EPOCH ENDS</text>
+      <text x="350" y="34" class="tt" text-anchor="middle">every Ra drawn forces a sale and brings the end closer</text>
+    </svg>
+    <figcaption>The track is shorter with fewer players, but always short enough that some suns go unspent.</figcaption>
+  </figure>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Count the empty spaces on the Ra track. <strong>An unspent sun at the end of an epoch is a lot you could have had and didn't.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>7</b> When to call it</p>
+  <h2>Call the auction when the lot is right for you and wrong for them.</h2>
+
+  <p>Points 3 to 6 combine into the one real judgement in Ra: <strong>when to invoke Ra</strong>. It is the push-your-luck decision at the heart of the game.</p>
+
+  <p>Wait, and the lot grows richer, but every draw risks a Ra tile that forces a sale on someone else's terms, and the row may grow into something a rival wants more than you do. Call, and you get to bid last on exactly the lot in front of you, but it may be small, and you might have to bid on it.</p>
+
+  <p>The best moments to call are when the lot is <strong>much more valuable to you than to anyone else</strong>, for example a pharaoh that would give you the lead, or the civilisation tile that completes your set, or when the players who could outbid you have already spent their high suns.</p>
+
+  <div class="eg">
+    <b>What it looks like at the table</b>
+    <p>The row holds a pharaoh, a Nile and a gold. You hold 3, 8 and 11. The only player still holding a sun higher than 8 has been collecting monuments and has shown no interest in pharaohs.</p>
+    <p class="out">Call it now. Bidding last, you will probably win with your 8, keep the 11 for something bigger, and nobody else gets to add a disaster to the pile first.</p>
+  </div>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Calling an auction is choosing the battlefield. <strong>Call when the lot suits you, and when the players who could outbid you either can't or don't want to.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>8</b> What lasts and what vanishes</p>
+  <h2>Some tiles score once and are thrown away. Others stay all game.</h2>
+
+  <p>Here is the scoring idea that shapes every bid. At the end of each epoch, you score your tiles, and then <strong>most of them are discarded</strong>. Gold, gods, civilisations and floods score that once and are gone. But <strong>pharaohs, the Nile and monuments stay</strong> in front of you, and keep counting in later epochs.</p>
+
+  <div class="scroll">
+    <table>
+      <thead><tr><th>Tile</th><th>How it scores</th><th>After scoring</th></tr></thead>
+      <tbody>
+        <tr><td>Gold</td><td class="n">3 points each</td><td class="k gone">discarded</td></tr>
+        <tr><td>Gods</td><td class="n">2 points each, if still unused</td><td class="k gone">discarded</td></tr>
+        <tr><td>Civilisation</td><td class="n">points for how many different kinds; a penalty for none</td><td class="k gone">discarded</td></tr>
+        <tr><td>Flood</td><td class="n">1 point each, and switches your Niles on</td><td class="k gone">discarded</td></tr>
+        <tr><td>Nile</td><td class="n">1 point each, but only if you have a flood</td><td class="k last">stays</td></tr>
+        <tr><td>Pharaoh</td><td class="n">bonus for the most, penalty for the fewest</td><td class="k last">stays</td></tr>
+        <tr><td>Monument</td><td class="n">only at the very end, for variety and for matching sets</td><td class="k last">stays</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>The consequence is timing. A pharaoh bought in the first epoch counts in all three. A monument bought in the first epoch waits patiently for the final count. Gold is worth exactly the same whenever you buy it, so there is no hurry. And the stay-forever tiles are worth <strong>the most early</strong>.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Early in the game, buy what stays. <strong>Pharaohs, Niles and monuments bought in epoch one go on paying; gold and gods pay once whenever you get them.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>9</b> The scoring families</p>
+  <h2>Pharaohs are a race, civilisations are a set, and the Nile needs a flood.</h2>
+
+  <p>Each kind of tile wants to be collected in its own way, and knowing the shape of each tells you what a lot is really worth to each player.</p>
+
+  <ul class="clean">
+    <li><strong>Pharaohs are a race.</strong> The player with the most gets a bonus every epoch; the player with the fewest takes a penalty. Because they stay, one pharaoh can swing that race for the rest of the game, and everyone is in it whether they like it or not.</li>
+    <li><strong>Civilisations are a set.</strong> There are several kinds, and you score for how many different kinds you hold, with a penalty if you hold none at all. A duplicate is worth nothing; a new kind can be worth five points on its own.</li>
+    <li><strong>The Nile needs a flood.</strong> Nile tiles are permanent but score only in an epoch where you also won a flood. A long row of Niles and no flood scores nothing.</li>
+    <li><strong>Monuments are a long game.</strong> They only score at the end: some points for having many different kinds, more for having several of the same kind. Patient and big.</li>
+  </ul>
+
+  <p>The interesting part is that the same tile is worth wildly different amounts to different players. A third civilisation kind might be five points to you and nothing to a player who already has it. That difference is the whole basis of good bidding.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Price each lot separately for each player. <strong>The winning bid usually comes from whoever needs this particular lot most.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>10</b> Gods</p>
+  <h2>A god tile lets you skip the auction and simply take what you want.</h2>
+
+  <p>God tiles score a couple of points at the end of the epoch, but that is not their real job. On your turn, instead of drawing or calling, you can <strong>give up a god</strong> to take any one tile straight out of the row, with no auction and no sun spent. (Disasters cannot be taken this way.)</p>
+
+  <p>That makes gods the one way around the sun budget. The pharaoh everyone is fighting for, the civilisation kind that finishes your set, the gold before someone else grabs the lot: a god takes it quietly, and the rest of the row stays for everyone else.</p>
+
+  <p>So a god in hand has two prices: the two points it would score if you keep it, and whatever single tile it could pick off later. Most of the time the second is worth more.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>A god is a free win without spending a sun. <strong>Save it for the tile that matters, not for the points.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>11</b> Disasters</p>
+  <h2>Some lots carry a curse, and the winner has to pay it.</h2>
+
+  <p>Among the tiles in the bag are <strong>disasters</strong>: a funeral, a drought, an earthquake, unrest. Each one sits in the row like any other tile, and whoever wins the lot has to take it, and lose two tiles of the matching kind. A funeral costs you pharaohs; a drought takes your floods and Niles; an earthquake knocks down monuments; unrest tears up civilisation.</p>
+
+  <p>That changes who wants a lot. A row with a pharaoh and a funeral in it is worth little to the player with the most pharaohs and plenty to a player who has none. Disasters do not just cost the winner; they <strong>redirect a lot to the player it cannot hurt</strong>.</p>
+
+  <p>And they give you a quieter weapon. Drawing tiles adds disasters to the row too, and a lot that suddenly holds an earthquake is a lot the monument collector no longer dares to win.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Read every lot for its disasters before you price it. <strong>A curse in the row is free to the player with nothing for it to destroy.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>12</b> Running out</p>
+  <h2>When rivals are out of suns, the last player standing has the table to themselves.</h2>
+
+  <p>Players run out of suns at different times, and once you are out, you sit the rest of the epoch out. That opens up a strange and powerful end to many epochs: <strong>one player is left with suns</strong> and everyone else is watching.</p>
+
+  <p>That player draws in peace, building a lot nobody else can bid on, and calls the auction when it suits them. The only thing threatening them is the bag, and the chance of drawing the last Ra tile before they have spent their suns.</p>
+
+  <p>This is why a few low suns held back can be a strong position. The player who blew all their big suns early may have won the best lots, but the player who kept a 2 and a 3 might get to buy a whole row of tiles at the end of the epoch for almost nothing.</p>
+
+  <div class="trap">
+    <b>The instinct to unlearn</b>
+    <p>In most auction games, money left over at the end is wasted, so you spend freely. Here, holding the last sun at the table can be the best deal of the epoch. Spending fast is not the same as spending well.</p>
+  </div>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Watch who will be left holding suns. <strong>The last player with a bid buys at whatever price they like.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>13</b> The end of the game</p>
+  <h2>Three epochs, a monument count, and a last word about your suns.</h2>
+
+  <p>After the third epoch is scored, two final things are counted. Your <strong>monuments</strong> score, rewarding both variety and matching sets. And the players compare the <strong>total value of their suns</strong>: the highest total gains points, the lowest loses some.</p>
+
+  <p>That last rule closes the loop on point 5. Every swap with the middle sun moved a little value into or out of your hand, and at the end it counts once more. A player who kept winning with big suns and picking up small ones can be quietly penalised for it at the very end.</p>
+
+  <p>The final scores in Ra tend to be close, and spread across several categories. Rarely does one player win on a single plan; the winner is usually the one who never wasted a sun on a lot that was worth more to somebody else.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Your suns are scored at the end too. <strong>Trading down for a big lot is fine; doing it every time is a penalty waiting to happen.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>14</b> How not to lose your first game</p>
+  <h2>Five instincts other auction games gave you, and what they cost here.</h2>
+
+  <h3>You bid on everything</h3>
+  <p>You have a handful of suns per epoch and each wins one lot. Spending a sun on a dull lot is not a small win; it is one of your few wins this epoch gone.</p>
+
+  <h3>You waited for a perfect lot</h3>
+  <p>The Ra tiles end the epoch whether you are ready or not. A player still holding three suns when the track fills has thrown away three lots.</p>
+
+  <h3>You ignored the middle sun</h3>
+  <p>Every auction is also a swap. Win with a big sun and take a small one, again and again, and you will start the next epoch weak and finish the game penalised.</p>
+
+  <h3>You collected gold in epoch one and pharaohs in epoch three</h3>
+  <p>Gold scores the same whenever you buy it. Pharaohs, Niles and monuments keep scoring. Buy what stays early, and pick up what vanishes later.</p>
+
+  <h3>You priced the lot for yourself only</h3>
+  <p>The question is never just what a lot is worth to you; it is what it is worth to the player who bids after you. A disaster or a duplicate can make a lot cheap for one player and expensive for another.</p>
+
+  <div class="note">
+    <span class="lab">The whole game in one line</span>
+    <p>A few suns, each spent once, and a bag that keeps adding to the lot until Ra says stop. <strong>Buy what stays early, call auctions that suit you more than anyone else, and never be the player holding unspent suns when the epoch ends.</strong></p>
+  </div>
+</article>
+
+<footer>A teaching walkthrough of Ra by Reiner Knizia, first published by alea in 1999 and reissued several times since. This page teaches what the game is and how it thinks; the rulebook in the box has the sun sets for each player count, the exact scoring numbers and the edge cases. <a href="../">Back to the shelf</a>.</footer>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var pts = Array.prototype.slice.call(document.querySelectorAll('.pt'));
+  var sun = document.getElementById('sun');
+  var arcs = document.querySelectorAll('#sky .arc');
+  var count = document.getElementById('count');
+  var lab = document.getElementById('epoch');
+  /* points per epoch: 5, 5, 4 */
+  var epochOf = [1,1,1,1,1,2,2,2,2,2,3,3,3,3];
+  var sizes = {1:5, 2:5, 3:4};
+  var firstOf = {1:1, 2:6, 3:11};
+  var names = {1:'epoch I', 2:'epoch II', 3:'epoch III'};
+  var at = 0;
+
+  function paint(n){
+    if(n === at) return;
+    at = n;
+    var e = epochOf[n - 1] || 3;
+    var t = (n - firstOf[e] + 0.5) / sizes[e];
+    var x0 = (e - 1) * 100 + 6, x1 = x0 + 88;
+    /* point on the quadratic arc from (x0,30) through control (mid,-6) to (x1,30) */
+    var x = (1 - t) * (1 - t) * x0 + 2 * (1 - t) * t * (x0 + 44) + t * t * x1;
+    var y = (1 - t) * (1 - t) * 30 + 2 * (1 - t) * t * -6 + t * t * 30;
+    /* the svg stretches horizontally only, so x maps to a percentage and y stays in px */
+    sun.style.left = (x / 300 * 100).toFixed(2) + '%';
+    sun.style.top = y.toFixed(1) + 'px';
+    for(var i = 0; i < arcs.length; i++){ arcs[i].classList.toggle('done', i < e - 1); }
+    document.body.setAttribute('data-epoch', String(e));
+    lab.textContent = names[e];
+    count.textContent = n + ' / ' + pts.length;
+    document.getElementById('skybox').setAttribute('aria-label', 'Point ' + n + ' of ' + pts.length + ', ' + names[e]);
+  }
+
+  var ticking = false;
+  function measure(){
+    ticking = false;
+    var mark = window.innerHeight * 0.45, n = 1;
+    for(var i = 0; i < pts.length; i++){
+      if(pts[i].getBoundingClientRect().top <= mark){ n = i + 1; }
+    }
+    paint(n);
+  }
+  window.addEventListener('scroll', function(){
+    if(!ticking){ ticking = true; window.requestAnimationFrame(measure); }
+  }, {passive:true});
+  window.addEventListener('resize', measure);
+  paint(1);
+  measure();
+})();
+</script>
+</body>
+</html>
