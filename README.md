@@ -30,6 +30,7 @@ your first game.
 | `games/taverns-of-tiefenthal.html` | The Taverns of Tiefenthal, 14 points, complete, with the exact rules folded in |
 | `games/patchwork.html` | Patchwork, 12 points, complete |
 | `games/parks.html` | PARKS (first edition), 14 points, complete |
+| `games/power-grid.html` | Power Grid, 14 points, complete |
 | `games/ra.html` | Ra, 14 points, complete |
 | `games/root.html` | Root, 16 points, complete |
 | `games/sleeping-gods-distant-skies.html` | Sleeping Gods: Distant Skies, 14 points, complete |
@@ -122,6 +123,7 @@ estate in the rail, one hex per point;
 every point;
 `camel-up.html` races five camels down the rail, one die per point, stacking as they go;
 `death-on-the-cards.html` burns one card off the draw pile per point until the murderer escapes;
+`power-grid.html` wires up and lights one city per point, through all three steps;
 `ra.html` sends the sun across the sky once per epoch as you read;
 `patchwork.html` sews one quilt square into the rail per point;
 `parks.html` walks a hiker along a trail that turns through the four seasons as you read;

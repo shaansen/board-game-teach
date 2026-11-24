@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Power Grid: Learn It Properly</title>
+<meta name="description" content="Learn what Power Grid actually is: fourteen points on auctions for power plants, a fuel market that punishes whoever buys first, a map that fills up, the turn order that taxes the leader, and why the winner is whoever powers the most cities on the very last turn.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --night:#0F1113;
+  --deep:#16191C;
+  --panel:#1F2327;
+  --paper:#ECE8DF;
+  --dim:#9EA3A3;
+  --volt:#F0C53C;
+  --cable:#3FA7C9;
+  --coal:#8A5A36;
+  --oil:#4A4E55;
+  --trash:#D9C34A;
+  --uranium:#D2413A;
+  --green:#58B56A;
+  --line:rgba(236,232,223,.15);
+  --display:"Barlow Condensed","Arial Narrow",sans-serif;
+  --body:"IBM Plex Sans",system-ui,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;color:var(--paper);font-family:var(--body);font-size:17.5px;line-height:1.66;
+  -webkit-font-smoothing:antialiased;
+  background:
+    radial-gradient(880px 520px at 86% -10%, rgba(240,197,60,.12), transparent 62%),
+    radial-gradient(720px 480px at 0% 8%, rgba(63,167,201,.10), transparent 60%),
+    linear-gradient(180deg,var(--night),var(--deep) 78%);
+  background-attachment:fixed;
+}
+.wrap{max-width:800px;margin:0 auto;padding:0 22px 90px}
+
+/* ---------- the grid rail ---------- */
+.rail{
+  position:sticky;top:0;z-index:20;background:rgba(15,17,19,.95);
+  backdrop-filter:blur(6px);border-bottom:1px solid var(--line);padding:9px 22px;
+}
+.rail-in{max-width:800px;margin:0 auto;display:flex;align-items:center;gap:14px}
+.rail-lab{
+  font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--volt);white-space:nowrap;min-width:9.2em;
+}
+.grid{position:relative;flex:1;height:22px;min-width:90px;display:flex;align-items:center;justify-content:space-between}
+.grid::before{
+  content:"";position:absolute;left:5px;right:5px;top:50%;height:2px;margin-top:-1px;
+  background:rgba(236,232,223,.16);
+}
+.grid .wire{
+  position:absolute;left:5px;top:50%;height:2px;margin-top:-1px;width:0;
+  background:var(--cable);box-shadow:0 0 6px rgba(63,167,201,.7);transition:width .3s ease;
+}
+.grid .city{
+  position:relative;z-index:1;width:11px;height:11px;border-radius:2px;
+  background:var(--panel);border:1.5px solid rgba(236,232,223,.35);
+  transition:background .3s ease,border-color .3s ease,box-shadow .3s ease;
+}
+.grid .city.lit{background:var(--volt);border-color:var(--volt);box-shadow:0 0 8px rgba(240,197,60,.8)}
+.rail-count{font-family:var(--mono);font-size:12px;color:var(--dim);white-space:nowrap}
+
+.backlink{
+  display:inline-block;margin-top:26px;font-family:var(--mono);font-size:11px;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--dim);text-decoration:none;
+  border-bottom:1px solid transparent;
+}
+.backlink:hover{color:var(--volt);border-bottom-color:var(--volt)}
+
+header.top{padding:28px 0 42px;border-bottom:1px solid var(--line)}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--volt);margin:22px 0 14px}
+h1{
+  font-family:var(--display);font-weight:700;font-size:clamp(60px,13vw,116px);
+  line-height:.9;letter-spacing:.01em;margin:0 0 8px;color:#FFFBEF;text-transform:uppercase;
+}
+h1 small{display:block;font-family:var(--mono);font-size:.11em;font-weight:600;letter-spacing:.2em;
+  color:var(--cable);margin-bottom:18px;line-height:1.5}
+.lede{font-size:20px;color:var(--dim);max-width:54ch;margin:18px 0 0}
+.fuels{display:flex;gap:8px;margin-top:24px;align-items:center}
+.fuels span{width:16px;height:16px;border-radius:3px;box-shadow:0 0 0 1px rgba(0,0,0,.5)}
+
+.pt{border-top:1px solid var(--line);padding:44px 0 8px;scroll-margin-top:56px}
+.pt:first-of-type{border-top:none}
+.num{
+  display:inline-flex;align-items:center;gap:12px;margin-bottom:12px;
+  font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);
+}
+.num b{
+  min-width:38px;height:30px;padding:0 6px;display:grid;place-items:center;border-radius:3px;
+  background:var(--volt);color:var(--night);font-family:var(--display);font-weight:700;font-size:19px;
+}
+h2{
+  font-family:var(--display);font-weight:600;font-size:clamp(30px,5.4vw,44px);
+  line-height:1.06;margin:0 0 16px;max-width:24ch;color:#FFFBEF;
+}
+h3{font-family:var(--display);font-weight:600;font-size:25px;margin:30px 0 6px;color:var(--paper)}
+.pt p{max-width:62ch;margin:0 0 16px}
+strong{font-weight:700;color:#FFFBEF}
+.aside{
+  border-left:3px solid var(--cable);padding:2px 0 2px 18px;margin:24px 0;
+  font-style:italic;color:var(--dim);max-width:58ch;
+}
+.trap{
+  margin:26px 0;border:1px solid rgba(210,65,58,.6);background:rgba(210,65,58,.12);
+  padding:16px 20px;max-width:62ch;border-radius:3px;
+}
+.trap b{
+  display:block;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:#EE7C75;margin-bottom:8px;
+}
+.trap p{margin:0}
+.note{
+  margin:30px 0 0;padding:18px 22px;max-width:62ch;border-radius:3px;
+  background:rgba(240,197,60,.10);border:1px solid rgba(240,197,60,.5);
+}
+.note .lab{
+  display:block;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--volt);margin-bottom:8px;
+}
+.note p{margin:0}
+ul.clean{list-style:none;padding:0;margin:0 0 16px;max-width:62ch}
+ul.clean li{padding:8px 0 8px 26px;position:relative;border-bottom:1px solid rgba(236,232,223,.10)}
+ul.clean li:last-child{border-bottom:none}
+ul.clean li::before{
+  content:"";position:absolute;left:4px;top:18px;width:9px;height:9px;border-radius:2px;
+  background:var(--volt);
+}
+.eg{
+  margin:26px 0;max-width:62ch;border-left:3px solid var(--cable);
+  background:rgba(63,167,201,.10);padding:16px 20px 16px 18px;border-radius:0 3px 3px 0;
+}
+.eg b{
+  display:block;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:#7FC6DE;margin-bottom:8px;
+}
+.eg p{margin:0 0 10px}
+.eg p:last-child{margin:0}
+.eg .out{font-family:var(--mono);font-size:.84em;color:var(--volt)}
+figure{margin:28px 0;padding:18px;background:rgba(236,232,223,.045);border:1px solid var(--line);border-radius:4px}
+figure svg{display:block;width:100%;height:auto}
+figcaption{font-family:var(--mono);font-size:11px;color:var(--dim);margin-top:12px;text-align:center;line-height:1.6}
+.scroll{overflow-x:auto;margin:24px 0}
+table{border-collapse:collapse;width:100%;min-width:460px;font-size:16px}
+th,td{text-align:left;padding:9px 14px 9px 0;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);font-weight:600}
+td.n{font-family:var(--mono);color:var(--volt);white-space:nowrap}
+/* figure ink */
+.f-paper{fill:var(--paper)}.f-volt{fill:var(--volt)}.f-cable{fill:var(--cable)}.f-panel{fill:var(--panel)}
+.f-coal{fill:var(--coal)}.f-oil{fill:var(--oil)}.f-trash{fill:var(--trash)}.f-uranium{fill:var(--uranium)}.f-green{fill:var(--green)}
+.f-none{fill:none}.f-dim{fill:var(--dim)}.f-night{fill:var(--night)}
+.s-paper{stroke:var(--paper)}.s-dim{stroke:var(--dim)}.s-volt{stroke:var(--volt)}.s-cable{stroke:var(--cable)}.s-uranium{stroke:var(--uranium)}
+.tt{font-family:"IBM Plex Sans",sans-serif;font-size:13.5px;fill:var(--paper)}
+.ts{font-family:"JetBrains Mono",monospace;font-size:10px;fill:var(--dim);letter-spacing:.05em}
+.tn{font-family:"Barlow Condensed",sans-serif;font-weight:700;font-size:22px;fill:var(--night)}
+footer{margin:64px 0 0;padding-top:24px;border-top:1px solid var(--line);color:var(--dim);font-size:15px}
+a{color:var(--volt)}
+@media(max-width:620px){body{font-size:17px}.rail-lab{display:none}.grid .city{width:8px;height:8px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+@media print{.rail{display:none}}
+</style>
+</head>
+<body>
+
+<div class="rail">
+  <div class="rail-in">
+    <span class="rail-lab" id="lab">step 1 &middot; 1 city</span>
+    <span class="grid" id="grid" role="img" aria-label="A network of fourteen cities, one lit per point read">
+      <span class="wire" id="wire"></span>
+    </span>
+    <span class="rail-count" id="count">1 / 14</span>
+  </div>
+</div>
+
+<div class="wrap">
+
+<a class="backlink" href="../">&larr; the shelf</a>
+
+<header class="top">
+  <p class="eyebrow">Learn it properly &middot; 14 points &middot; Friedemann Friese</p>
+  <h1><small>Buy the plants, buy the fuel, wire the cities, and never be first</small>Power Grid</h1>
+  <p class="lede">You run an electricity company. You bid for power stations, buy coal and oil and uranium off a market everyone shares, and string cables across a map that gets more crowded every round. It is an economic game about efficiency, and about the very odd fact that being in the lead is a handicap.</p>
+  <div class="fuels" aria-hidden="true">
+    <span style="background:var(--coal)"></span><span style="background:var(--oil)"></span><span style="background:var(--trash)"></span><span style="background:var(--uranium)"></span><span style="background:var(--green)"></span>
+  </div>
+</header>
+
+<article class="pt">
+  <p class="num"><b>1</b> The big picture</p>
+  <h2>The winner is whoever powers the most cities on the last turn.</h2>
+
+  <p>Power Grid is for two to six players and runs about two hours. Each of you starts with a pile of money, called <strong>Elektro</strong>, and nothing else. Over the game you buy <strong>power plants</strong> at auction, buy <strong>fuel</strong> to run them, and build into <strong>cities</strong> on a map of a real country, connecting them into your own network.</p>
+
+  <p>Every round, each city you can power earns you money, which pays for more plants, more fuel and more cities. When somebody's network reaches a set size, the game ends, and the winner is the player who can <strong>power the most cities</strong> in that final round. Not the richest, not the biggest network: the most cities actually lit.</p>
+
+  <p>So money is never the goal. It is the engine. Points are cities, and the only cities that count are the ones you have the plants and the fuel to light at the very end.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Three things have to line up: cities built, plant capacity, and fuel. <strong>The winner is limited by whichever of the three they have least of.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>2</b> The round</p>
+  <h2>Five phases, the same every round, and the order is the strategy.</h2>
+
+  <p>Each round runs through the same sequence:</p>
+
+  <ul class="clean">
+    <li><strong>Turn order</strong> is set: whoever has the most cities goes first.</li>
+    <li><strong>Auction</strong>: power plants are bid for, in turn order.</li>
+    <li><strong>Buy fuel</strong>, in <em>reverse</em> turn order.</li>
+    <li><strong>Build</strong> into cities, in reverse turn order.</li>
+    <li><strong>Bureaucracy</strong>: fire your plants, power cities, collect money, and the markets restock.</li>
+  </ul>
+
+  <p>Look at that list again. The player in the lead acts <strong>first</strong> in the auction, where going first is a disadvantage, and <strong>last</strong> for fuel and building, where going last is a disadvantage. That is not an accident. It is the central balancing idea of the whole game, and the next two points are about it.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Turn order is recalculated every round from the map. <strong>Leading the city count is a cost you pay in every phase that follows.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>3</b> The leader's tax</p>
+  <h2>First in the auction, last to the shops. Being ahead costs you.</h2>
+
+  <p>Why is going first bad in the auction? Because the first player has to <strong>open the bidding</strong> without knowing what anyone else wants, and everyone behind can wait and see which plants are left and how much money was spent.</p>
+
+  <p>Why is going last bad for fuel and building? Because the fuel market gets <strong>more expensive</strong> as it is bought (point 8), so the last player pays the highest prices. And the map gets <strong>more crowded</strong> with every city built (point 10), so the last builder finds the cheap spots taken.</p>
+
+  <figure>
+    <svg viewBox="0 0 700 200" role="img" aria-labelledby="to-t to-d">
+      <title id="to-t">Turn order flips between phases</title>
+      <desc id="to-d">Three players labelled A, B and C, with A having the most cities. In the auction, A acts first, which is a disadvantage. For fuel and for building, the order is reversed: C acts first and A acts last, paying the highest fuel prices and getting the worst building spots.</desc>
+      <g class="ts" text-anchor="start">
+        <text x="20" y="56">AUCTION</text><text x="20" y="116">FUEL</text><text x="20" y="176">BUILD</text>
+      </g>
+      <g>
+        <rect x="140" y="36" width="70" height="30" rx="3" class="f-volt"/><text x="175" y="57" class="tn" text-anchor="middle" font-size="16">A</text>
+        <rect x="230" y="36" width="70" height="30" rx="3" class="f-panel s-dim"/><text x="265" y="57" class="tt" text-anchor="middle">B</text>
+        <rect x="320" y="36" width="70" height="30" rx="3" class="f-panel s-dim"/><text x="355" y="57" class="tt" text-anchor="middle">C</text>
+        <rect x="140" y="96" width="70" height="30" rx="3" class="f-panel s-dim"/><text x="175" y="117" class="tt" text-anchor="middle">C</text>
+        <rect x="230" y="96" width="70" height="30" rx="3" class="f-panel s-dim"/><text x="265" y="117" class="tt" text-anchor="middle">B</text>
+        <rect x="320" y="96" width="70" height="30" rx="3" class="f-volt"/><text x="355" y="117" class="tn" text-anchor="middle" font-size="16">A</text>
+        <rect x="140" y="156" width="70" height="30" rx="3" class="f-panel s-dim"/><text x="175" y="177" class="tt" text-anchor="middle">C</text>
+        <rect x="230" y="156" width="70" height="30" rx="3" class="f-panel s-dim"/><text x="265" y="177" class="tt" text-anchor="middle">B</text>
+        <rect x="320" y="156" width="70" height="30" rx="3" class="f-volt"/><text x="355" y="177" class="tn" text-anchor="middle" font-size="16">A</text>
+      </g>
+      <text x="420" y="56" class="tt">A opens the bidding blind</text>
+      <text x="420" y="116" class="tt">A pays the highest fuel prices</text>
+      <text x="420" y="176" class="tt">A gets the leftover building spots</text>
+      <text x="140" y="20" class="ts" fill="#F0C53C">A LEADS THE CITY COUNT</text>
+    </svg>
+    <figcaption>Each phase hands the leader the worst seat at the table.</figcaption>
+  </figure>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>The game taxes the leader in every phase. <strong>Leading early is usually paying that tax for nothing.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>4</b> Hang back</p>
+  <h2>A slow start is not a mistake. It is often the plan.</h2>
+
+  <p>Put point 1 and point 3 together and the strategy appears. Only the <strong>last round</strong> decides the winner, and every round before that, the player with the most cities is paying a tax. So good players often deliberately stay <strong>one or two cities behind</strong> for most of the game, saving money, buying cheaply, picking their building spots first, and then sprinting at the end.</p>
+
+  <p>This is the single most surprising thing about Power Grid for new players, who naturally build as much as they can afford every round. That player usually leads for an hour, pays top price for fuel the whole time, and loses to someone who looked a little behind until the final two rounds.</p>
+
+  <p>The trick is that hanging back must be <strong>deliberate</strong>. You still need the money and the plants to make the sprint; you just choose not to spend it on cities until the cities matter.</p>
+
+  <div class="trap">
+    <b>The instinct to unlearn</b>
+    <p>Most games reward being ahead. Here the scoreboard is the map, and the map punishes whoever is in front. Build when it earns you money or blocks a rival, not just because you can.</p>
+  </div>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Second place is a fine place to be all game. <strong>Just be ready to be first on the last turn.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>5</b> Power plants</p>
+  <h2>A plant is three numbers: its price, its fuel, and how many cities it lights.</h2>
+
+  <p>Every power plant card shows a number, which is its <strong>minimum price</strong> and also a rough measure of how advanced it is. Then it shows what it burns and how much (say, two coal) and how many <strong>cities</strong> it can power when it runs (say, three).</p>
+
+  <p>Higher-numbered plants are more efficient: more cities for the same fuel, or even <strong>no fuel at all</strong>, in the case of wind and solar plants. Lower plants are cheap now and inefficient forever.</p>
+
+  <p>You can own only <strong>three</strong> plants at a time (four in a two-player game). Buying a fourth means scrapping one. So your plant line-up is a tiny portfolio, and every upgrade is also a replacement.</p>
+
+  <figure>
+    <svg viewBox="0 0 700 200" role="img" aria-labelledby="pp-t pp-d">
+      <title id="pp-t">Reading a power plant card</title>
+      <desc id="pp-d">Two plant cards side by side. The first, number 4, burns two coal to power one city. The second, number 25, burns two coal to power five cities. The higher number costs more but produces much more for the same fuel.</desc>
+      <g>
+        <rect x="80" y="20" width="160" height="150" rx="6" class="f-panel s-dim" stroke-width="1.4"/>
+        <rect x="92" y="32" width="46" height="34" rx="3" class="f-volt"/><text x="115" y="57" class="tn" text-anchor="middle">4</text>
+        <rect x="104" y="96" width="20" height="20" rx="3" class="f-coal"/><rect x="130" y="96" width="20" height="20" rx="3" class="f-coal"/>
+        <text x="160" y="112" class="tt">&rarr; 1</text>
+        <text x="160" y="150" class="ts" text-anchor="middle">2 COAL, 1 CITY</text>
+      </g>
+      <g>
+        <rect x="300" y="20" width="160" height="150" rx="6" class="f-panel s-volt" stroke-width="1.4"/>
+        <rect x="312" y="32" width="46" height="34" rx="3" class="f-volt"/><text x="335" y="57" class="tn" text-anchor="middle">25</text>
+        <rect x="324" y="96" width="20" height="20" rx="3" class="f-coal"/><rect x="350" y="96" width="20" height="20" rx="3" class="f-coal"/>
+        <text x="380" y="112" class="tt">&rarr; 5</text>
+        <text x="380" y="150" class="ts" text-anchor="middle">2 COAL, 5 CITIES</text>
+      </g>
+      <text x="500" y="70" class="tt">same fuel,</text>
+      <text x="500" y="90" class="tt">five times the cities</text>
+      <text x="500" y="118" class="ts">THE NUMBER IS THE STARTING PRICE</text>
+    </svg>
+    <figcaption>The numbers on these examples are illustrative; the shape is real. Bigger plants turn the same fuel into far more cities.</figcaption>
+  </figure>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Judge a plant by cities per fuel and cities per slot. <strong>With only three slots, a cheap plant is an expensive use of space.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>6</b> The plant market</p>
+  <h2>Eight plants on display, and you can only buy from the cheaper half.</h2>
+
+  <p>Plants are laid out in two rows of four, sorted by number. The lower four are the <strong>current market</strong>: these are the only ones you can bid for. The upper four are the <strong>future market</strong>: visible, waiting, sliding down into the current row as cheaper ones are bought.</p>
+
+  <p>That gives the market a visible future. You can see the plant you want sitting in the upper row, and work out how many purchases have to happen before it drops down to where someone can buy it. You can also see when nobody will buy, because every plant on offer is bad, and the market stalls.</p>
+
+  <p>Plants enter from a deck that runs roughly from small to large across the game, so the plants on offer get better as the game goes on. Small plants that nobody wants are cleared out of the market over time, too.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Read the future row every round. <strong>Buying a plant changes which plant drops into reach for the next bidder.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>7</b> The auction</p>
+  <h2>One plant each per round at most, and the money spent here is money not spent on cities.</h2>
+
+  <p>In turn order, each player may put up one plant from the current market for auction, opening at its printed number at least. Everyone still interested bids up in turn; drop out and you are out of that auction. The winner pays and takes the plant. You can win <strong>at most one plant per round</strong>, so once you have bought, you sit out the rest of the auctions.</p>
+
+  <p>That last rule creates the quiet tactics of the phase. A player who has already bought is out; the players still waiting have fewer rivals for each plant. A player who passes on starting an auction might get a plant cheaper later, or might get nothing.</p>
+
+  <p>And every Elektro you spend over a plant's printed price is money not going into fuel or cities. Winning a bidding war for a plant you wanted by three Elektro might be fine. Winning it by twenty can cost you two cities.</p>
+
+  <div class="eg">
+    <b>What it looks like at the table</b>
+    <p>You want the 20 and so does the player who opened it. The bidding reaches 30. You stop and look at the future row: a 21 that does nearly the same job is next to drop in.</p>
+    <p class="out">You drop out. Your rival pays 30, sits out the rest of the phase, and the 21 slides into the current row for you to open at its minimum.</p>
+  </div>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Know your top price before the bidding starts. <strong>A plant is worth what it earns you, not what someone else is willing to pay for it.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>8</b> The fuel market</p>
+  <h2>Every unit bought makes the next one more expensive.</h2>
+
+  <p>Coal, oil, garbage and uranium sit on a shared market track, with the cheapest spaces filled last and emptied first. Buy two coal and you take the two cheapest; the next player's coal costs more. The market <strong>refills a little each round</strong>, but only a set amount, so heavy demand drives prices up and keeps them there.</p>
+
+  <p>This is the most direct interaction in the game. If three players all run coal plants, coal becomes painfully expensive, and the player who buys last (the leader, remember) pays the most. If you are the only oil player at the table, oil stays cheap and plentiful for you.</p>
+
+  <figure>
+    <svg viewBox="0 0 700 190" role="img" aria-labelledby="fm-t fm-d">
+      <title id="fm-t">The fuel market</title>
+      <desc id="fm-d">A row of price boxes from 1 to 8, with three coal cubes in each box. The cheapest boxes on the left have been emptied by earlier buyers, so the next buyer must pay from box 4 upward. An arrow notes: the market only partly refills each round.</desc>
+      <g class="ts" text-anchor="middle">
+        <text x="75" y="160">1</text><text x="145" y="160">2</text><text x="215" y="160">3</text><text x="285" y="160">4</text>
+        <text x="355" y="160">5</text><text x="425" y="160">6</text><text x="495" y="160">7</text><text x="565" y="160">8</text>
+      </g>
+      <g class="f-none s-dim" stroke-width="1.2">
+        <rect x="45" y="80" width="60" height="62" rx="3" stroke-dasharray="3 3"/>
+        <rect x="115" y="80" width="60" height="62" rx="3" stroke-dasharray="3 3"/>
+        <rect x="185" y="80" width="60" height="62" rx="3" stroke-dasharray="3 3"/>
+        <rect x="255" y="80" width="60" height="62" rx="3"/><rect x="325" y="80" width="60" height="62" rx="3"/>
+        <rect x="395" y="80" width="60" height="62" rx="3"/><rect x="465" y="80" width="60" height="62" rx="3"/>
+        <rect x="535" y="80" width="60" height="62" rx="3"/>
+      </g>
+      <g class="f-coal">
+        <rect x="262" y="104" width="14" height="14"/><rect x="280" y="104" width="14" height="14"/><rect x="298" y="104" width="14" height="14"/>
+        <rect x="332" y="104" width="14" height="14"/><rect x="350" y="104" width="14" height="14"/><rect x="368" y="104" width="14" height="14"/>
+        <rect x="402" y="104" width="14" height="14"/><rect x="420" y="104" width="14" height="14"/><rect x="438" y="104" width="14" height="14"/>
+        <rect x="472" y="104" width="14" height="14"/><rect x="490" y="104" width="14" height="14"/><rect x="508" y="104" width="14" height="14"/>
+        <rect x="542" y="104" width="14" height="14"/><rect x="560" y="104" width="14" height="14"/><rect x="578" y="104" width="14" height="14"/>
+      </g>
+      <text x="145" y="68" class="ts" text-anchor="middle" fill="#D2413A">ALREADY BOUGHT</text>
+      <text x="285" y="68" class="ts" text-anchor="middle" fill="#F0C53C">YOU START HERE</text>
+      <text x="350" y="28" class="tt" text-anchor="middle">the cheap fuel goes to whoever buys first</text>
+      <text x="610" y="182" class="ts" text-anchor="end">PRICES SHOWN ARE ILLUSTRATIVE</text>
+    </svg>
+    <figcaption>Fuel is bought in reverse turn order, so the player furthest behind gets the cheap cubes.</figcaption>
+  </figure>
+
+  <p>A plant can also store up to <strong>twice</strong> its fuel need. Buying extra is a way to secure next round's supply, and a way to make a fuel scarce for a rival who depends on it.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Look at which fuels the other players burn before you buy a plant. <strong>The cheapest fuel is the one nobody else needs.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>9</b> Five kinds of power</p>
+  <h2>Coal, oil, garbage, uranium, and the wind that costs nothing to run.</h2>
+
+  <p>Each fuel has its own personality, and the shape of the fuel market follows from how many cubes come back each round and who is competing for them.</p>
+
+  <ul class="clean">
+    <li><strong>Coal</strong> is plentiful and cheap early, and the fuel most players start on. That popularity is its problem.</li>
+    <li><strong>Oil</strong> is a little scarcer. Some plants burn either coal or oil, which gives you a choice each round and protects you from a price spike in one of them.</li>
+    <li><strong>Garbage</strong> arrives later and in smaller amounts. Few plants use it early, so it can be a cheap niche.</li>
+    <li><strong>Uranium</strong> is rare and expensive, but uranium plants are efficient, and few rivals are competing with you for it.</li>
+    <li><strong>Ecological plants</strong> (wind and solar) need no fuel at all. Pricey to win at auction, but free to run forever and immune to every market squeeze.</li>
+  </ul>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Diversify away from your neighbours' fuel. <strong>A plant that burns what nobody else burns is cheaper every single round.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>10</b> Building the network</p>
+  <h2>Cities cost a fee to enter and a toll to reach, and the map fills up.</h2>
+
+  <p>To build, you pay two things: the <strong>connection cost</strong> along the lines on the map from your existing network to the new city, and a <strong>fee for the slot</strong> in the city itself. The first company into a city pays the cheapest slot; the second, when allowed, pays more; the third pays more again.</p>
+
+  <p>Early on, each city has room for <strong>only one company</strong>. That makes the opening a land grab. If a rival builds into the cities around you first, the only way forward for you is a long, expensive connection through someone else's territory, or into a far corner of the map.</p>
+
+  <p>Geography matters a great deal. Some regions have clusters of cities joined by cheap links; others are sparse with expensive connections. A compact network in a cheap region can outbuild a sprawling one twice its size, simply because each new city costs less.</p>
+
+  <figure>
+    <svg viewBox="0 0 700 220" role="img" aria-labelledby="mp-t mp-d">
+      <title id="mp-t">Getting boxed in</title>
+      <desc id="mp-d">A small map of seven cities joined by lines with connection costs. Your network, in blue, holds two cities. A rival, in yellow, has taken the two cheap neighbouring cities. Your only way out is a costly connection of 18 to a distant city.</desc>
+      <g class="f-none s-dim" stroke-width="1.6">
+        <path d="M120 110L240 60M120 110L240 160M240 60L360 60M240 160L360 160M360 60L480 110M360 160L480 110M120 110L60 200M480 110L620 110"/>
+      </g>
+      <path d="M120 110L60 200" class="f-none s-cable" stroke-width="3"/>
+      <g class="ts" text-anchor="middle">
+        <text x="172" y="76">6</text><text x="172" y="152">7</text><text x="300" y="52">10</text><text x="300" y="176">8</text>
+        <text x="74" y="150" fill="#3FA7C9">5</text><text x="550" y="100" fill="#D2413A">18</text>
+      </g>
+      <g stroke-width="2">
+        <rect x="104" y="94" width="32" height="32" rx="4" class="f-cable"/>
+        <rect x="44" y="184" width="32" height="32" rx="4" class="f-cable"/>
+        <rect x="224" y="44" width="32" height="32" rx="4" class="f-volt"/>
+        <rect x="224" y="144" width="32" height="32" rx="4" class="f-volt"/>
+        <rect x="344" y="44" width="32" height="32" rx="4" class="f-panel s-dim"/>
+        <rect x="344" y="144" width="32" height="32" rx="4" class="f-panel s-dim"/>
+        <rect x="464" y="94" width="32" height="32" rx="4" class="f-panel s-dim"/>
+        <rect x="604" y="94" width="32" height="32" rx="4" class="f-panel s-dim"/>
+      </g>
+      <text x="120" y="24" class="ts" fill="#3FA7C9">YOU</text>
+      <text x="240" y="24" class="ts" fill="#F0C53C">RIVAL TOOK THE CHEAP NEIGHBOURS</text>
+      <text x="620" y="150" class="ts" text-anchor="middle" fill="#D2413A">FAR AND COSTLY</text>
+    </svg>
+    <figcaption>When each city holds only one company, the first few builds decide who gets the cheap part of the map.</figcaption>
+  </figure>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Build where the connections are cheap, and do not let yourself be walled in. <strong>Early cities are as much about claiming space as about income.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>11</b> The three steps</p>
+  <h2>The game changes gear twice, and the map opens up each time.</h2>
+
+  <p>Power Grid runs in three <strong>steps</strong>. In step 1, a city holds only one company. Once somebody's network reaches a certain size, <strong>step 2</strong> begins, and every city opens a second slot. Later, when a special card turns up in the plant deck, <strong>step 3</strong> begins, and a third slot opens.</p>
+
+  <p>Each step also changes the economy around it: the markets restock differently, the smallest plants get cleared away, and the plant market itself shifts. The effect is that the game feels like three different games stacked on top of each other: a cramped land grab, a long middle of steady growth, and an open final sprint.</p>
+
+  <p>Step 2 is worth watching. A player who triggers it opens second slots in every city, including the ones they had all to themselves. If you have walled off a region, you may not want to be the player who unlocks it.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Each step unlocks more room on the map. <strong>Plan for the space that will open up, not just the space you have now.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>12</b> Income</p>
+  <h2>Each extra city powered pays a little less than the last.</h2>
+
+  <p>In bureaucracy, you count the cities you can power and collect money from a table. Even powering nothing pays a little. Powering one city pays a good deal more. But the table flattens as it goes: going from four cities to five adds less than going from one to two, and powering fifteen cities earns only somewhat more than powering ten.</p>
+
+  <div class="scroll">
+    <table>
+      <thead><tr><th>Cities powered</th><th>Roughly what you collect</th><th>What one more city adds</th></tr></thead>
+      <tbody>
+        <tr><td>0</td><td class="n">10</td><td>a starting stipend</td></tr>
+        <tr><td>1</td><td class="n">22</td><td>a big jump</td></tr>
+        <tr><td>5</td><td class="n">64</td><td>about 10 each</td></tr>
+        <tr><td>10</td><td class="n">105</td><td>about 7 each</td></tr>
+        <tr><td>15</td><td class="n">134</td><td>about 5 each</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>Two things follow. First, the income gap between leader and follower is <strong>smaller than the city gap</strong>, so hanging back (point 4) costs less money than it looks. Second, a city you build mid-game only pays for itself slowly. Late in the game, many cities are worth building only because of what they score at the end, not what they earn.</p>
+
+  <p>And you only collect for cities you actually <strong>power</strong>. A big network with too few plants or too little fuel earns from the part that runs.</p>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>Income flattens as you grow. <strong>Extra cities in the middle game are bought for position, not for the money they bring in.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>13</b> The finish</p>
+  <h2>Somebody reaches the target, and the last round is a count of lights.</h2>
+
+  <p>When any player's network reaches the end-game size (seventeen cities in a three- or four-player game, different at other counts), the game ends after that round. Then everyone powers what they can, one last time, and <strong>the most cities powered wins</strong>. Money only breaks ties.</p>
+
+  <p>That last round is where the sprint from point 4 pays off. The player who saved money can buy a big plant, fill it with fuel and build five or six cities in one go, while the early leader may have the cities but not quite the capacity or the cash to light them all.</p>
+
+  <p>Think backwards from it. In the final round you need three things to agree: enough cities, enough plant capacity, enough fuel. Whichever is smallest is your score. Spending the last of your money on a city you cannot power gains you nothing.</p>
+
+  <div class="eg">
+    <b>What it looks like at the table</b>
+    <p>It is clearly the final round: a rival will reach seventeen this turn. You have fourteen cities, plants that can power fifteen, and money for three more cities.</p>
+    <p class="out">Build one city, not three. Fifteen powered is your ceiling this round, and the money from the other two might buy the fuel that keeps all fifteen lit.</p>
+  </div>
+
+  <div class="note">
+    <span class="lab">Remember this</span>
+    <p>The final score is the smallest of cities, capacity and fuel. <strong>Balance all three on the last turn; surplus in any one of them is wasted.</strong></p>
+  </div>
+</article>
+
+<article class="pt">
+  <p class="num"><b>14</b> How not to lose your first game</p>
+  <h2>Five instincts other games gave you, and what they cost here.</h2>
+
+  <h3>You raced to the lead</h3>
+  <p>Leading the city count puts you first in the auction and last to buy fuel and build. Do it in the last round, not the first five.</p>
+
+  <h3>You won every bidding war</h3>
+  <p>Every Elektro over a plant's printed price is money not spent on cities and fuel. Let rivals overpay; the next plant is often almost as good.</p>
+
+  <h3>You burned the same fuel as everyone else</h3>
+  <p>Shared fuel gets expensive, and the leader buys last. A plant on an unpopular fuel or no fuel at all saves you money every round.</p>
+
+  <h3>You built wherever was nearest</h3>
+  <p>Cheap connections matter, and so does space. A cramped corner surrounded by rivals means expensive building for the rest of the game.</p>
+
+  <h3>You ended with cities you could not power</h3>
+  <p>The winner is decided by cities powered, not owned. In the last round, match cities, plant capacity and fuel; a surplus in one is wasted.</p>
+
+  <div class="note">
+    <span class="lab">The whole game in one line</span>
+    <p>Plants, fuel and cities, bought in an order that taxes the leader. <strong>Stay just behind, burn what nobody else burns, and make sure that on the last turn your cities, capacity and fuel all line up.</strong></p>
+  </div>
+</article>
+
+<footer>A teaching walkthrough of Power Grid by Friedemann Friese (2F-Spiele, 2004; also published as Funkenschlag, and in a Recharged edition). This page teaches what the game is and how it thinks; the rulebook in the box has the exact market refills, step triggers, income table and player-count adjustments. <a href="../">Back to the shelf</a>.</footer>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var pts = Array.prototype.slice.call(document.querySelectorAll('.pt'));
+  var grid = document.getElementById('grid');
+  var wire = document.getElementById('wire');
+  var lab = document.getElementById('lab');
+  var count = document.getElementById('count');
+  var cities = [];
+  for(var i = 0; i < pts.length; i++){
+    var c = document.createElement('span');
+    c.className = 'city';
+    grid.appendChild(c);
+    cities.push(c);
+  }
+  /* step 1 for points 1-5, step 2 for 6-10, step 3 for 11-14 */
+  function stepOf(n){ return n <= 5 ? 1 : (n <= 10 ? 2 : 3); }
+
+  var at = 0;
+  function paint(n){
+    if(n === at) return;
+    at = n;
+    cities.forEach(function(c, i){ c.classList.toggle('lit', i < n); });
+    var last = cities[n - 1];
+    wire.style.width = Math.max(0, last.offsetLeft + last.offsetWidth / 2 - 5) + 'px';
+    lab.textContent = 'step ' + stepOf(n) + ' · ' + n + (n === 1 ? ' city' : ' cities');
+    count.textContent = n + ' / ' + pts.length;
+    grid.setAttribute('aria-label', 'Point ' + n + ' of ' + pts.length + ', ' + n + ' cities powered');
+  }
+
+  var ticking = false;
+  function measure(){
+    ticking = false;
+    var mark = window.innerHeight * 0.45, n = 1;
+    for(var i = 0; i < pts.length; i++){
+      if(pts[i].getBoundingClientRect().top <= mark){ n = i + 1; }
+    }
+    paint(n);
+  }
+  window.addEventListener('scroll', function(){
+    if(!ticking){ ticking = true; window.requestAnimationFrame(measure); }
+  }, {passive:true});
+  window.addEventListener('resize', function(){ at = 0; measure(); });
+  paint(1);
+  measure();
+})();
+</script>
+</body>
+</html>
